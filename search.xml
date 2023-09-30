@@ -30,7 +30,7 @@
       <link href="/about/index.html"/>
       <url>/about/index.html</url>
       
-        <content type="html"><![CDATA[<p>Hi! I am QIngyang(Eric) Bao. I am currently a second-year undergraduate student at the University of Toronto. My main fields of study are Pure and Applied Mathematics. I am currently interested in Analysis, PDEs, and Computer Graphics.<br>Personally I am interested in:</p><ul><li>Reading books (literary works)</li><li>watching soccer games.I am a fan of     Atlético Madrid</li><li>Anime</li><li>Making vedio games</li></ul><p>Recently, I have attended a reading course supervised by Prof. Elliott on Abstract Harmonic Analysis.</p><p>My CV is available here.</p>]]></content>
+        <content type="html"><![CDATA[<p>Hi! I am QIngyang(Eric) Bao. I am currently a second-year undergraduate student at the University of Toronto. My main fields of study are Pure and Applied Mathematics. I am currently interested in Analysis, PDEs, and Computer Graphics.<br>Personally I am interested in:</p><ul><li>Reading books (literary works)</li><li>watching soccer games.I am a fan of     Atlético Madrid</li><li>Anime</li><li>Making video games</li></ul><p>Recently, I have attended a reading course supervised by Prof. Elliott on Abstract Harmonic Analysis.</p><p>My CV is available here.</p>]]></content>
       
     </entry>
     
@@ -59,9 +59,9 @@
     
     
     <entry>
-      <title>Tags</title>
-      <link href="/tags/index.html"/>
-      <url>/tags/index.html</url>
+      <title>link</title>
+      <link href="/link/index.html"/>
+      <url>/link/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -70,9 +70,9 @@
     
     
     <entry>
-      <title>link</title>
-      <link href="/link/index.html"/>
-      <url>/link/index.html</url>
+      <title>Tags</title>
+      <link href="/tags/index.html"/>
+      <url>/tags/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
