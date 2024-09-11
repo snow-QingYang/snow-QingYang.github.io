@@ -4,25 +4,6 @@
   
     
     <entry>
-      <title>Diffusion系列学习日记（DDPM篇）</title>
-      <link href="/2024/08/31/diffusion(1)/"/>
-      <url>/2024/08/31/diffusion(1)/</url>
-      
-        <content type="html"><![CDATA[<p>test</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> technical blog </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>安娜堡之旅</title>
       <link href="/2023/11/06/trip-to-ann-arbor/"/>
       <url>/2023/11/06/trip-to-ann-arbor/</url>
@@ -64,17 +45,6 @@
     
     
     <entry>
-      <title>Categories</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>About me</title>
       <link href="/about/index.html"/>
       <url>/about/index.html</url>
@@ -97,9 +67,9 @@
     
     
     <entry>
-      <title>Tags</title>
-      <link href="/tags/index.html"/>
-      <url>/tags/index.html</url>
+      <title>Categories</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -111,6 +81,17 @@
       <title>link</title>
       <link href="/link/index.html"/>
       <url>/link/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Tags</title>
+      <link href="/tags/index.html"/>
+      <url>/tags/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
