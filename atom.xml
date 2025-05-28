@@ -1,51 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Qingyang&#39;s Blog</title>
+  <title>清扬的博客</title>
   
-  
+  <subtitle>世界的意义必定存在于世界之外</subtitle>
   <link href="http://snow-qingang.github.io/atom.xml" rel="self"/>
   
   <link href="http://snow-qingang.github.io/"/>
-  <updated>2025-05-20T03:14:37.047Z</updated>
+  <updated>2025-05-28T03:28:57.119Z</updated>
   <id>http://snow-qingang.github.io/</id>
   
   <author>
-    <name>清扬</name>
+    <name>Clear清扬</name>
     
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>欢迎来到清扬的博客！</title>
-    <link href="http://snow-qingang.github.io/2025/05/19/hello-world/"/>
-    <id>http://snow-qingang.github.io/2025/05/19/hello-world/</id>
-    <published>2025-05-20T03:14:37.047Z</published>
-    <updated>2025-05-20T03:14:37.047Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="hello-world"><a class="markdownIt-Anchor" href="#hello-world"></a> Hello World!</h1><p>美东时间8月31日，也就是北京时间9月1日，我的博客总算是开始运行了</p><p>这个博客是用hexo-butterfly搭建，详细可以参考官方文档。</p><p>这个博客将更新我平时的一些日常，包括学习，生活，番剧，电影等等</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;hello-world&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#hello-world&quot;&gt;&lt;/a&gt; Hello World!&lt;/h1&gt;
-&lt;p&gt;美东时间8月31日，也就是北京时间9月1日，我的博客总算是开始运行了&lt;/p&gt;
-&lt;p&gt;这个</summary>
-      
-    
-    
-    
-    
-    <category term="Journal" scheme="http://snow-qingang.github.io/tags/Journal/"/>
-    
-  </entry>
-  
-  <entry>
     <title>文学与写作</title>
-    <link href="http://snow-qingang.github.io/2025/05/19/Literature%20and%20Writing/"/>
-    <id>http://snow-qingang.github.io/2025/05/19/Literature%20and%20Writing/</id>
-    <published>2025-05-20T03:14:37.046Z</published>
-    <updated>2025-05-20T03:14:37.046Z</updated>
+    <link href="http://snow-qingang.github.io/2025/01/15/literature%20and%20writing/"/>
+    <id>http://snow-qingang.github.io/2025/01/15/literature%20and%20writing/</id>
+    <published>2025-01-16T01:59:00.000Z</published>
+    <updated>2025-05-28T03:28:57.119Z</updated>
     
     <content type="html"><![CDATA[<p>前几天看到，一位读者请教一位博主，怎么样才能提高自己的写作技巧。这位博主给出的建议朴实无华：每天写够1000字。</p><p>这样的说法平平无奇，看起来很容易实现。不过越朴实的道理，反而越为精妙，正所谓重剑无锋，大巧无工。我觉得除了写够一定的字数，也需要阅读足够的有意义的文字，这样才能有更深刻的感悟。</p><p>突然有兴致写这样一篇关于文学的随笔，其实是之前看到了一篇知乎的回答,对于文学写作的点评，其中这么一段我非常的认同：</p><blockquote><p>白描是且永远是最高级的写作手法。无脑用修辞永远是最低级的文笔。<br />比如余华写的:<br />我从来没有主动去和她说话，只是愉快地感受着她就在近旁的身影和气息，这是隐藏在心里的愉快，没有人会知道，她也不会知道。我以正常的目光注视她，认真听完她的话，做出自己的回答。我很享受这样的时刻，可以大大方方欣赏她的美丽容貌。</p><p>美吗？不美。</p><p>但是这段话会不会把你带回那个永远无法再触及的初三（一）班，前排的女生一转头，发丝划过你的脸颊，闻到一股好闻的洗发水香味。然后她把作业本递给你，突然笑了一下，你看见她笑你也开始笑，然后你们就对着傻笑了好一会儿。接着她忽然脸有点红，捂住嘴转了回去，你怔怔的拿着那个作业本，时间仿佛变得很慢很慢……</p><p>这才是文学啊。它记录的是人类的情感，从短短几行文字里投射出的是沉重而深厚的感情。</p><p>悲欢苦乐就这么被记录下来，让翻开书的人从文字中重新经历自己和他人的人生，这才是文学的魅力。</p><p><strong>而不是用几十个形容词去形容樱花多么美.</strong></p></blockquote><p>看到这里让我深有感触，文学的核心其实是人类最真实的情感。中学的时候老师们上写作课，除了教给我们最基本的写作技巧，最后总是要说一句，写文章要有真情实感。但可惜的是，不管是作业还是考试，为了获得更高的分数，很少有人真正理解这样的话。再加上高考的改革也是向着套路化，八股化的方向去命题，同学们的写作技巧也容易点在了错误的地方…</p><p>回忆起当年2020年参加最后一届江苏高考，题目现在我还记得，讲的是在智能互联网时代,关于志同道合的人相遇（当然主流的写法是去辩证的思考信息茧房和独立思考）不过当时看了太多小说，实在是不太想写议论文，就有感而发去写了一篇记叙文，现在看来也算是在自己人生“最关键的”节点上任性了一把。但最后分数也还不错考了有123分，看来自己写的文章还是不错滴。 要不是高考卷子没法看，我是真的很想去看一下当时写的内容了。</p><p>到了大学，虽然每天的学习工作很繁忙，但还是保留着看小说，写文字的习惯(视觉小说也是小说x)，既然想要继续维护自己文学的爱好，不如正好，就像那位博主一样，每天去写一点东西，看一些文章,正所谓不积跬步,无以至千里.不积小流,无以成江海。希望热爱文学的大家共勉。<br />——2025.1.15于大雪纷飞的多伦多</p>]]></content>
     
@@ -64,11 +40,56 @@
   </entry>
   
   <entry>
+    <title>Literature and writing</title>
+    <link href="http://snow-qingang.github.io/2025/01/15/literature%20and%20writing/"/>
+    <id>http://snow-qingang.github.io/2025/01/15/literature%20and%20writing/</id>
+    <published>2025-01-16T01:59:00.000Z</published>
+    <updated>2025-05-28T03:29:05.319Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="a-little-reflection-on-writing"><a class="markdownIt-Anchor" href="#a-little-reflection-on-writing"></a> A Little Reflection on Writing</h1><p>A few days ago, I came across a reader asking a blogger how to improve their writing. The blogger gave a simple, unpretentious answer: write 1,000 words every day.</p><p>At first glance, this advice seems ordinary and easy to follow. But in truth, the more straightforward the principle, the more profound it often is. As the saying goes, “A great sword has no edge; true mastery hides its brilliance.” I believe that in addition to writing a certain amount every day, it’s equally important to read meaningful texts. Only then can one gain deeper insights and emotional resonance.</p><p>I suddenly felt inspired to write this essay on literature after reading a Zhihu post the other day. It offered a reflection on literary writing that I truly agreed with. One particular passage stood out:</p><blockquote><p>Plain description is, and will always be, the highest form of writing. Mindless use of rhetoric is the lowest.<br />For example, Yu Hua once wrote:<br />“I never took the initiative to speak to her, but I happily basked in her presence and aura. It was a joy I kept hidden in my heart, known to no one—not even her. I looked at her with a normal gaze, listened carefully to what she said, and responded accordingly. I savored these moments, moments where I could openly admire her beautiful face.”</p><p>Beautiful? Not really.</p><p>But doesn’t this passage bring you back to your forever unreachable 9th grade classroom? That moment when the girl in the front row turned around, her hair brushing your cheek, and you caught the scent of her shampoo. She handed you a notebook, smiled, and you smiled back like fools for a long while. Then she blushed, covered her mouth, and turned away. You sat there, dazed, holding the notebook as time seemed to slow to a crawl…</p><p>That is literature. It captures human emotions. From just a few lines, it evokes something heavy and profound.</p><p>Literature preserves joy, sorrow, bitterness, and happiness—allowing readers to relive their own and others’ lives through words. That’s the true magic of writing.</p><p><strong>Not piling dozens of adjectives to describe how beautiful the cherry blossoms are.</strong></p></blockquote><p>Reading this struck a chord deep within me. The heart of literature lies in capturing genuine human emotion. Back in middle and high school, teachers often emphasized the importance of “real emotion” in writing, in addition to the basic skills. But unfortunately, most of us didn’t fully grasp what that meant. Especially with the exam system gradually favoring structured, formulaic essays, students were more likely to chase “technique” in the wrong direction…</p><p>I still remember my own experience taking the last traditional version of the Jiangsu college entrance exam in 2020. The essay prompt was about “meeting kindred spirits in the age of intelligent internet” (most wrote about filter bubbles and independent thinking, of course). But having read too many novels at the time, I didn’t feel like writing another argument. So I let my emotions guide me and wrote a narrative essay instead.</p><p>Looking back, it was probably one of the boldest things I did at a “critical moment” in life. Surprisingly, it turned out pretty well—I scored 123 out of 140. Not bad, huh? If only I could read that essay again… but sadly, national exams don’t let you see your paper.</p><p>Now that I’m in university, though life is busy with classes and research, I’ve held on to the habit of reading fiction and writing (and yes, visual novels count as literature too!). Since I want to continue nurturing this love for words, maybe it’s time to take that blogger’s advice seriously—write a little each day, read a little each day. As the saying goes, “A journey of a thousand miles begins with a single step. A mighty river begins as a trickle.”</p><p>To everyone who loves literature—let’s keep going, together.</p><p><em>— Written on January 15, 2025, in snowy Toronto.</em></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;a-little-reflection-on-writing&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#a-little-reflection-on-writing&quot;&gt;&lt;/a&gt; A Little Reflection on Writ</summary>
+      
+    
+    
+    
+    
+    <category term="Journal" scheme="http://snow-qingang.github.io/tags/Journal/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2023 Reflection(from Zhihu)</title>
+    <link href="http://snow-qingang.github.io/2023/12/31/2023-Reflection/"/>
+    <id>http://snow-qingang.github.io/2023/12/31/2023-Reflection/</id>
+    <published>2024-01-01T04:59:00.000Z</published>
+    <updated>2025-05-28T02:51:29.722Z</updated>
+    
+    <content type="html"><![CDATA[<p>still working on this</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;still working on this&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    
+    <category term="Journal" scheme="http://snow-qingang.github.io/tags/Journal/"/>
+    
+  </entry>
+  
+  <entry>
     <title>2023年终总结(转载自知乎)</title>
-    <link href="http://snow-qingang.github.io/2025/05/19/2023-year-summary/"/>
-    <id>http://snow-qingang.github.io/2025/05/19/2023-year-summary/</id>
-    <published>2025-05-20T03:14:37.046Z</published>
-    <updated>2025-05-20T03:14:37.046Z</updated>
+    <link href="http://snow-qingang.github.io/2023/12/31/2023-Reflection/"/>
+    <id>http://snow-qingang.github.io/2023/12/31/2023-Reflection/</id>
+    <published>2024-01-01T04:59:00.000Z</published>
+    <updated>2025-05-28T02:47:50.710Z</updated>
     
     <content type="html"><![CDATA[<p>又是一年冬天，其实我平时很少会用文字记录，但今年实在是我人生里面不平淡的一年。然而思绪万千，可总是不知从何说起，就像Ithaca室外飘散的雪花，即使用多么精确的模型，也无法预测出它们将飘散何方。那么我就顺着我的思绪，如同随意飘落的雪花一般，记录下今年的经历。</p><p>今年是我独自一人在北美生活的第一年（虽然初中去玩过，但显然不属于生活的范畴），从我2021年做出转学出国的决定，到真正的自己一个人在外国生存，其实这个决定并不简单。但在国内学着我不热爱的专业，背着无聊的政治课，卷着毫无意义的绩点时，我对出国读书的想法就愈加坚定。虽然有些舍不得大学的朋友和友善的老师，校内琳琅满目的小吃，以及轻松愉快的大学生活，但我心里清楚，我并不想过着这种看似“岁月静好”的日子。为了理想和目标，我选择了前往遥远的多伦多，开启了我人生新的旅途。</p><p>我初次前往北美是非常无感的，当时就觉得美国就是一个大农村，好山好水好无聊，所以我高中三年都没有过出国的想法，一直想着通过自主招生前往南大/中科大学习物理学。但命运的安排总是出人意料，各种因素导致我前往华科去读外语系（这段故事可以之后再写一篇文章）。再次前往北美的时候，我的想法并未改变，主要目的还是去学习热爱的专业，去实现我一直以来的理想。</p><p>然而，来到多伦多后，我惊讶地发现这里的生活远超我的预期。中国的美食基本都能吃上，KTV/剧本杀什么的也都有，还认识了非常多的好朋友。这些经历极大地提升了我对北美生活的评价。上半年，我和朋友们一起做年夜饭，庆祝春节，观看《流浪地球2》，并没有感到一个人出门在外的孤单。对家乡的思念也缓解了许多。</p><p>学习上，数学方面学过的内容我总结在了另外一个回答里面，然而过程却还是值得记录一下。国外的学习压力远超国内（也许是专业不一样？），课程进度快，作业多，经常熬到深夜，在图书馆，在教学楼，甚至在同学家楼下通宵。在许多留学生出现在酒吧舞厅的时候，我只是默默地对着电脑屏幕，看着厚厚的书本。</p><p>今年下半年学习上算是比较顺利，但人际关系却遇到了一些困难。两个关系不错的朋友分手了，大闹了一场，让我陷入了两难。本来和睦的大家庭分崩离析，我只能尽量避免触碰他们敏感的话题，多花点时间在学习和打游戏上，让我也变的越来越宅。不过也不失为一种应对的手段吧。</p><p>现在是Ithaca的凌晨两点多，夜已深沉，我也该去睡了。希望新的一年一切顺利，能够找到暑假的research机会。新年快乐，愿大家万事如意！</p><p>再补充点关于科研的碎碎念：</p><p>本来在中学我一直都对物理非常感兴趣。然而真正去了解到实验物理学的科研（比如石墨烯是用胶带粘出来的），让我对这个领域的看法发生了改变。后来转向了数学，对公理化体系和高屋建瓴的理论深深折服。然而深入了解到数学界很多前沿的工作，只在自己的圈子里有影响力，成为了小圈子的盛宴，感觉也不是自己想要做的方向。</p><p>有段时间也对图形学感兴趣过，特别是物理模拟方向。但这些应用学科的理论性又明显不足，无法满足我的学术审美，这让我感到非常迷茫。有时候很羡慕18-19世纪的科学家，他们在数学上的工作能够立即在应用领域产生影响。但现在，理论和实践似乎被割裂开来。纯数学的研究很少有人关注，数学家们似乎也不太关心应用学科的进展。这种现状实在是让人遗憾。</p><p>不过现实就是得先找到今年暑期的科研，等自己真正参与到科学研究，再做出决定。</p>]]></content>
     
@@ -87,19 +108,43 @@
   </entry>
   
   <entry>
-    <title>安娜堡之旅</title>
-    <link href="http://snow-qingang.github.io/2023/11/01/trip-to-ann-arbor/"/>
-    <id>http://snow-qingang.github.io/2023/11/01/trip-to-ann-arbor/</id>
-    <published>2023-11-01T04:00:00.000Z</published>
-    <updated>2025-05-20T03:14:37.047Z</updated>
+    <title>Welcome to Qingyang&#39;s Blog!</title>
+    <link href="http://snow-qingang.github.io/2023/09/01/hello%20word/"/>
+    <id>http://snow-qingang.github.io/2023/09/01/hello%20word/</id>
+    <published>2023-09-02T03:59:00.000Z</published>
+    <updated>2025-05-28T03:23:03.348Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="reading-week之安娜堡之旅"><a class="markdownIt-Anchor" href="#reading-week之安娜堡之旅"></a> Reading Week之安娜堡之旅</h1><p>又是到了一年的reading week，总算是放了一周的长假，让过度疲惫的学生们短暂的休息一阵子。</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="hello-world"><a class="markdownIt-Anchor" href="#hello-world"></a> Hello World!</h1><p>On August 31, 2023 (Eastern Time), which is September 1 in Beijing Time, my blog finally went live.</p><p>This blog was originally built using the Hexo-Butterfly theme. For more details, you can refer to the official documentation.</p><p>It will be a place where I update my daily life, including study, everyday moments, anime, movies, and more.</p><hr /><p>On May 27, 2025, I migrated the blog to the Reimu theme. From now on, I will publish blog posts in both English and Chinese.</p>]]></content>
     
     
       
       
-    <summary type="html">&lt;h1 id=&quot;reading-week之安娜堡之旅&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#reading-week之安娜堡之旅&quot;&gt;&lt;/a&gt; Reading Week之安娜堡之旅&lt;/h1&gt;
-&lt;p&gt;又是到了一年的reading week，总算是放</summary>
+    <summary type="html">&lt;h1 id=&quot;hello-world&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#hello-world&quot;&gt;&lt;/a&gt; Hello World!&lt;/h1&gt;
+&lt;p&gt;On August 31, 2023 (Eastern Time), which is </summary>
+      
+    
+    
+    
+    
+    <category term="Journal" scheme="http://snow-qingang.github.io/tags/Journal/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>欢迎来到清扬的博客！</title>
+    <link href="http://snow-qingang.github.io/2023/09/01/hello%20word/"/>
+    <id>http://snow-qingang.github.io/2023/09/01/hello%20word/</id>
+    <published>2023-09-02T03:59:00.000Z</published>
+    <updated>2025-05-28T03:20:19.064Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="hello-world"><a class="markdownIt-Anchor" href="#hello-world"></a> Hello World!</h1><p>美东时间2023年8月31日，也就是北京时间9月1日，我的博客总算是开始运行了</p><p>这个博客是用hexo-butterfly搭建，详细可以参考官方文档。</p><p>这个博客将更新我平时的一些日常，包括学习，生活，番剧，电影等等</p><hr /><p>2025年5月27日我把这个博客迁移到了Reimu主题上，后面会更新中英文两版博文</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;hello-world&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#hello-world&quot;&gt;&lt;/a&gt; Hello World!&lt;/h1&gt;
+&lt;p&gt;美东时间2023年8月31日，也就是北京时间9月1日，我的博客总算是开始运行了&lt;/p&gt;
+</summary>
       
     
     
