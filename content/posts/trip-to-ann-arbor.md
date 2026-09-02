@@ -3,7 +3,7 @@ title: 安娜堡之旅
 tags: Journal
 date: 2023-11-01
 cover: images/ann arbor.jpg
-listed: false
+published: false
 ---
 # Reading Week之安娜堡之旅
 

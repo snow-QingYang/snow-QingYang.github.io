@@ -340,8 +340,7 @@ function readEntries(inputDir) {
       const coverList = normalizeCover(data.cover, "..");
       const coverPage = normalizeCover(data.cover);
       const published = data.published !== false;
-      const listed = data.listed !== false;
-      return { slug, title, tag, date, excerpt, status, coverIndex, coverList, coverPage, body, published, listed };
+      return { slug, title, tag, date, excerpt, status, coverIndex, coverList, coverPage, body, published };
     });
 }
 
@@ -366,7 +365,6 @@ function buildSection(section) {
   const posts = sourcePosts
     .filter((post) => post.published)
     .sort((a, b) => String(b.date).localeCompare(String(a.date)));
-  const listedPosts = posts.filter((post) => post.listed);
 
   for (const post of posts) {
     const dir = path.join(section.outDir, post.slug);
@@ -374,9 +372,9 @@ function buildSection(section) {
     fs.writeFileSync(path.join(dir, "index.html"), pageTemplate(post, markdownToHtml(post.body), section), "utf8");
   }
 
-  fs.writeFileSync(path.join(section.outDir, "index.html"), listPageTemplate(section, listedPosts), "utf8");
+  fs.writeFileSync(path.join(section.outDir, "index.html"), listPageTemplate(section, posts), "utf8");
 
-  const indexData = listedPosts.map((post) => ({
+  const indexData = posts.map((post) => ({
     slug: post.slug,
     title: post.title,
     tag: post.tag,

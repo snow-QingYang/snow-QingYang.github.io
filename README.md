@@ -84,7 +84,7 @@ powershell -ExecutionPolicy Bypass -File .\build.ps1
 
 This creates `blog/index.html` for the Blog list and `blog/<slug>/index.html` for each post. The URL is served as `/blog/<slug>/`, matching Hexo-style pretty URLs.
 
-Set `listed: false` in a post's frontmatter to keep its page available by direct URL while hiding it from the Blog list.
+Set `published: false` in a post's frontmatter to keep the Markdown as a draft. The next build removes its generated page and excludes it from the list.
 
 ## Writing Research Notes
 
