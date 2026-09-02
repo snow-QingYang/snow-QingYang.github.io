@@ -3,6 +3,7 @@ title: Diffusion Model from Scratch
 date: 2024-12-20
 tags: Research
 published: true
+listed: false
 cover: images/murasame.webp
 ---
 
