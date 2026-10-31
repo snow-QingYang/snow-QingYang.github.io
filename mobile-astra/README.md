@@ -2,7 +2,7 @@
 
 Direct URL: https://snow-qingyang.github.io/mobile-astra/
 
-This directory is only a deployment location. Do not add links to it from the main website navigation, Home, Research, Blog, or generated-page templates.
+This directory is only a deployment location. Its pages must use their own standalone work interface, with no personal-site avatar, name, background, navigation, footer, CSS, or JavaScript. Do not add links to it from the main website navigation, Home, Research, Blog, or generated-page templates.
 
 - `index.html`: direct-link landing page.
 - `methods.html`: self-contained tool-call reference.
