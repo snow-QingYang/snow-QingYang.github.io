@@ -193,6 +193,7 @@ function navTemplate(activeView, depth) {
         <a class="nav__item${activeView === "home" ? " is-active" : ""}" href="${depth}/">Home</a>
         <a class="nav__item${activeView === "research" ? " is-active" : ""}" href="${depth}/research/">Research</a>
         <a class="nav__item${activeView === "blog" ? " is-active" : ""}" href="${depth}/blog/">Blog</a>
+        <a class="nav__item" href="${depth}/mobile-astra/">Mobile Astra</a>
       </nav>
     </header>`;
 }

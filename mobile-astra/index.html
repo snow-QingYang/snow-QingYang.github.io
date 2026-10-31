@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mobile Astra | Qingyang Bao</title>
+    <meta name="description" content="Mobile Astra: RoboCasa task replays and agent tool reference." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet" />
+    <link rel="icon" href="../assets/images/front.jpg" />
+    <link rel="stylesheet" href="../styles.css" />
+  <style>.ma{max-width:1050px;margin:35px auto 70px}.ma-label,.ma-number{font-size:11px;letter-spacing:1.5px;color:#61816d}.ma h1{font-size:44px;margin:18px 0}.ma-intro{line-height:1.9;color:#627369;max-width:760px}.ma-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:34px}.ma-card{display:block;padding:30px;border:1px solid #dbe4d8;border-radius:14px;background:#ffffffeb;text-decoration:none;color:#203a2b;box-shadow:0 8px 35px #203a2b07}.ma-card:hover{border-color:#729b7b;transform:translateY(-2px)}.ma-card h2{font-size:24px;margin:24px 0 15px}.ma-card p{font-size:14px;line-height:1.9;color:#68776b}.ma-tags{display:flex;gap:7px;flex-wrap:wrap;margin:24px 0}.ma-tags span{font-size:11px;background:#edf3e9;padding:5px 8px;border-radius:5px}.ma-card strong{font-size:13px;color:#367952}.ma-foot{font-size:12px;color:#7f8e7f;line-height:1.9;margin-top:28px}@media(max-width:700px){.ma-grid{grid-template-columns:1fr}.ma h1{font-size:34px}.ma-card{padding:23px}.nav{flex-wrap:wrap}}</style></head>
+  <body data-view="mobile-astra">
+    <div class="site-bg" aria-hidden="true">
+      <img src="../assets/images/background.jpg" alt="" />
+      <div class="site-bg__wash"></div>
+    </div>
+
+    <header class="topbar">
+      <a class="brand" href="../" aria-label="Qingyang Bao home">
+        <img class="brand__mark" src="../assets/images/front.jpg" alt="" />
+        <span>Qingyang Bao</span>
+      </a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="nav__item" href="../">Home</a>
+        <a class="nav__item" href="../research/">Research</a>
+        <a class="nav__item" href="../blog/">Blog</a>
+        <a class="nav__item is-active" href="/mobile-astra/">Mobile Astra</a>
+      </nav>
+    </header>
+
+<main class="shell"><section class="ma"><span class="ma-label">EMBODIED AI / EXPERIMENT NOTES</span><h1>Mobile Astra</h1><p class="ma-intro">机器人任务回放与 Agent 工具调用参考。把执行过程、模型反馈和控制接口放在一起，方便查看与比较。</p><div class="ma-grid"><a class="ma-card" href="pan-transfer/"><span class="ma-number">01 / EPISODE REPLAY</span><h2>倒出食物，把锅放回。</h2><p>GPT-6-Astra 在 PanTransfer 任务中，从 VLA 尝试转向解析控制，完成倾倒，并恢复滑落的锅。</p><div class="ma-tags"><span>79 次工具调用</span><span>44 次解析动作</span><span>115.55 秒视频</span></div><strong>观看规划与恢复回放 ↗</strong></a><a class="ma-card" href="methods.html"><span class="ma-number">02 / METHOD REFERENCE</span><h2>Agent 方法调用手册</h2><p>RoboCasa 全部 19 个工具接口：用途、完整参数、默认值、返回结果、调用示例与使用限制。</p><div class="ma-tags"><span>搜索与分类</span><span>JSON 示例</span><span>离线 HTML</span></div><strong>查看完整方法手册 ↗</strong></a></div><p class="ma-foot">基于 HarnessVLA / RPent · RoboCasa365 · RLDX-1<br>单次回放展示执行过程；任务是否成功由环境判定。</p></section></main>
+
+    <footer class="footer">
+      <span>&copy; 2026 Qingyang Bao</span>
+      <span id="lastUpdated">Last updated</span>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>
