@@ -1,16 +1,13 @@
-# Mobile Astra section
+# Mobile Astra deployment
 
-Public entry: https://snow-qingyang.github.io/mobile-astra/
+Direct URL: https://snow-qingyang.github.io/mobile-astra/
 
-- `index.html`: section landing page.
+This directory is only a deployment location. Do not add links to it from the main website navigation, Home, Research, Blog, or generated-page templates.
+
+- `index.html`: direct-link landing page.
 - `methods.html`: self-contained tool-call reference.
-- `pan-transfer/`: replay page and all its videos, JSON, and images.
+- `pan-transfer/`: replay page with all videos, JSON, and images.
 
-These are published copies, independent of the local experiment directories or any running server. Removing local runs does not remove this website.
+These published copies do not depend on local experiment directories or running servers. To remove this deployment later, delete `mobile-astra/`, commit, and push. No shared navigation, styles, or assets need to be removed.
 
-To remove this section later:
-1. Remove `mobile-astra/` from the site repository.
-2. Remove the Mobile Astra navigation link from the existing HTML pages and `tools/build-blog.js` (the generated-page navigation template).
-3. Commit and push. No shared styles or shared assets were added for this section.
-
-The older `snow-QingYang/astra-robocasa-replay` repository is separate and remains unchanged; removing this section will not remove that older deployment.
+The URL is publicly accessible to anyone who has it; absence of navigation is not access control. The older `snow-QingYang/astra-robocasa-replay` repository is separate and unchanged.
