@@ -78,6 +78,7 @@ function selectItem(index, mediaIndex=0, play=false, writeUrl=true) {
   $("#next").disabled=position===current.items.length-1;
   $("#copy-link").textContent="复制当前记录链接";
   renderTimeline();
+  revealRecord(item.id);
   renderMedia(play);
   if(writeUrl) updateUrl();
 }
@@ -149,11 +150,16 @@ function renderTimeline() {
   }));
 }
 
+function revealRecord(id) {
+  const record=$(`#record-${id}`);
+  if(!record) return;
+  const panel=$("#timeline"), box=panel.getBoundingClientRect(), row=record.getBoundingClientRect();
+  if(row.top<box.top || row.top+70>box.bottom) panel.scrollTop+=row.top-box.top-8;
+}
+
 function jump(id) {
   filter="all";
   selectItem(current.items.findIndex(item=>item.id===id));
-  const record=$(`#record-${id}`);
-  if(record) $("#timeline").scrollTop=record.offsetTop-$("#timeline").offsetTop-8;
 }
 
 document.addEventListener("click",event=>{
