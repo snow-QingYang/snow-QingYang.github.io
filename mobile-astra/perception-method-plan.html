@@ -6,6 +6,7 @@
 <title>RPent 感知与真值 · 精简总结</title>
 <style>
 :root{color-scheme:light;--ink:#233345;--muted:#657586;--line:#dce4ec;--blue:#315f9b}*{box-sizing:border-box}body{margin:0;background:#f7f9fb;color:var(--ink);font:15px/1.75 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}main{max-width:1000px;margin:36px auto;padding:28px 32px;background:#fff;border:1px solid var(--line);border-radius:6px}header{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:12px;color:var(--muted)}a{color:var(--blue)}button{font:inherit;color:var(--blue);background:#fff;border:1px solid #bfcede;border-radius:4px;padding:4px 10px;cursor:pointer}h1{font-size:28px;line-height:1.4;margin:25px 0 12px}h2{font-size:18px;margin:25px 0 10px}p{margin:0 0 12px}.lead{padding:13px 16px;background:#f0f5fb;border-left:3px solid var(--blue)}.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:4px;margin:20px 0}table{border-collapse:collapse;width:100%;font-size:14px;text-align:left}th,td{padding:13px 15px;border-bottom:1px solid var(--line);vertical-align:top}th{background:#f3f6f9;font-size:12px;color:var(--muted)}tr:last-child td{border-bottom:0}td:first-child{white-space:nowrap;font-weight:600}td:nth-child(2){min-width:230px}code{font:12px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace;color:#315779;overflow-wrap:anywhere}.sub{color:var(--muted);font-size:12px;display:block;margin-top:4px}.p{color:#3268d7}.s{color:#0d8290}.g{color:#8058bb}.i{color:#bf6829}.flow{padding:13px 16px;border:1px solid var(--line);background:#fafcfe;border-radius:4px}.note{color:var(--muted);font-size:13px}footer{margin-top:22px;padding-top:12px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}a:focus-visible,button:focus-visible{outline:3px solid #8bb8df;outline-offset:3px}@media(max-width:680px){main{margin:0;padding:20px 16px;border:0;border-radius:0}h1{font-size:25px}th,td{padding:10px}table{font-size:13px}header{flex-wrap:wrap}}@media print{body{background:white}main{max-width:none;margin:0;padding:0;border:0}button{display:none}h1{font-size:24px}table{font-size:12px}th,td{padding:10px}tr{break-inside:avoid}.table-wrap{overflow:visible}}
+@media screen and (max-width:680px){.table-wrap{overflow:visible}table,tbody{display:block}thead{display:none}tbody tr{display:block;padding:12px;border-bottom:1px solid var(--line)}tbody tr:last-child{border-bottom:0}tbody td{display:block;border:0;padding:3px 0;min-width:0!important}tbody td:first-child{font-size:14px}tbody td:nth-child(2){margin-bottom:5px}}
 </style>
 </head>
 <body><main>
@@ -15,15 +16,17 @@
 <div class="table-wrap"><table><thead><tr><th>信息类别</th><th>接口 / 字段</th><th>提供什么</th></tr></thead><tbody>
 <tr><td class="p">本体状态</td><td><code>view_env_state().state</code></td><td>末端位姿、夹爪开度、底盘位姿。<span class="sub">来自模拟器机器人状态。</span></td></tr>
 <tr><td class="s">视觉语义</td><td><code>view_env_state()</code> 的 RGB 图像</td><td>Agent 看图判断物体身份、外观与关系。<span class="sub">当前没有独立的 segment / locate 工具。</span></td></tr>
-<tr><td class="g" rowspan="2">几何</td><td><code>back_project_batch</code></td><td>Agent 选图像像素 → 查询对应三维坐标。</td></tr>
-<tr><td><code>query_world_map</code></td><td>按高度、XY 范围 → 查询三维点簇及其范围。<span class="sub">两者均使用模拟器深度与相机标定。点簇不一定对应一个完整物体。</span></td></tr>
-<tr><td class="i">交互反馈</td><td><code>rldx_skill / rldx_arm</code><br><code>move_to / navigate_to</code></td><td>抓取接触、夹爪受阻、到位距离、底盘卡住等。<span class="sub">grasp_contact 来自模拟器抓取判定；held_apart / stuck 是启发式。没有通用全身碰撞查询。</span></td></tr>
-<tr><td>任务判定真值</td><td><code>success / task_progress</code><span class="sub">由 view_env_state 和动作后的观测返回。</span></td><td><strong>success：</strong>最终是否成功。<br><strong>task_progress：</strong>子条件、状态、计数和距离，例如 <code>pan_on_stove</code>、<code>door_closed</code>、<code>washed_time</code>、<code>dist</code>。<span class="sub">来自环境成功判定代码的内部变量，字段随任务变化；属于任务真值，不是 Agent 的视觉判断。</span></td></tr>
+<tr><td class="g">几何</td><td><code>back_project_batch</code></td><td>Agent 选图像像素 → 查询对应三维坐标。</td></tr>
+<tr><td class="g">几何</td><td><code>query_world_map</code></td><td>按高度、XY 范围 → 查询三维点簇及其范围。<span class="sub">两者均使用模拟器深度与相机标定。点簇不一定对应一个完整物体。</span></td></tr>
+<tr><td class="i">抓持反馈</td><td><code>rldx_skill / rldx_arm</code><br><code>grasp_contact / grasp_obj</code></td><td><strong>grasp_contact：</strong>调用结束时的模拟器抓取判定。<br><strong>grasp_obj：</strong>本次调用最近识别到的任务物体名，结束时可能已经放开。<span class="sub">held_apart 是夹爪受阻的启发式判断。没有通用全身碰撞查询。</span></td></tr>
+<tr><td class="i">运动反馈</td><td><code>move_to / move_delta</code><br><code>navigate_to</code><br><code>rldx_skill / rldx_arm</code></td><td><strong>final_dist：</strong>末端距指定 XYZ，或底盘距指定 XY 的距离。<br><strong>moved：</strong>navigate_to 前后底盘的平面直线位移。<br><strong>base_drift：</strong>VLA 调用前后底盘的平面位移。<span class="sub">距离单位为米，来自机器人真实位姿；位移不是累计路程。stuck 是启发式，base_drift 不一定代表异常。</span></td></tr>
+<tr><td>任务判定真值</td><td><code>success / task_progress</code><span class="sub">由 view_env_state 和动作后的观测返回。</span></td><td><strong>success：</strong>最终是否成功。<br><strong>task_progress：</strong>子条件、状态、计数和距离，例如 <code>pan_on_stove</code>、<code>door_closed</code>、<code>washed_time</code>、<code>dist</code>。<span class="sub">来自环境成功判定代码的内部变量；字段随任务变化，部分任务返回空字典。</span></td></tr>
+<tr><td>成功判定规则</td><td><code>read_text_file</code><br>读取本次运行的<br><code>success_criteria.md</code></td><td>任务的 <code>_check_success()</code> 及部分辅助函数源码：条件组合、代码中的阈值与计数要求。<span class="sub">规则说明怎样才算成功；task_progress 提供当前进度。</span></td></tr>
 </tbody></table></div>
-<h2>运动之后，也会返回感知吗？</h2>
-<p><strong>会。</strong>框架在动作后自动附带最新 RGB 图像、机器人状态、动作结果和任务进度，所以不必每次额外调用 <code>view_env_state</code>。</p>
-<p>物体三维点和点簇仍需调用 <code>back_project_batch</code> 或 <code>query_world_map</code> 查询；运动不会自动返回这些结果。</p>
-<p class="flow"><strong>看图认物体 → 查询几何位置 → 执行动作 → 检查新图像、执行反馈与任务进度。</strong></p>
+<h2>怎么读取动作反馈？</h2>
+<p>动作返回自动附带 RGB 图像、机器人状态、任务进度；具体动作字段在 <code>log.result</code> 中，例如 <code>log.result.final_dist</code>。也可用 <code>view_env_state()</code> 查看最近一次动作结果。</p>
+<p class="flow"><strong>“目标”是 Agent 传入的坐标。</strong>Agent 看图选像素 → 用 <code>back_project_batch</code> 查三维表面点 → 选择目标并调用 <code>move_to(xyz)</code>。<code>final_dist</code> 衡量末端距这个坐标有多远；<code>navigate_to(xy)</code> 对底盘同理。动作方法不会自动查询目标物体的真实位置。<strong>选错坐标，也可以准确到达；距离小不代表抓对了。</strong></p>
+<p>物体三维点和点簇仍需通过几何查询获取。<code>moved</code>、<code>base_drift</code> 只比较底盘起终点，不需要物体位置或目标坐标，也不能说明碰到了什么。</p>
 <p class="note">工具的 <code>ok=true</code> 不统一表示“抓到了”或“任务成功”；任务是否完成以环境的 <code>success</code> 为准。</p>
 <footer>范围：当前 RPent RoboCasa 实现 · 2026-11-02 · <a href="methods.html">完整 method 手册</a></footer>
 </main></body></html>
