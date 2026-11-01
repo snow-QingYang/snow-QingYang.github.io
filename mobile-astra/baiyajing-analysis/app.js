@@ -13,6 +13,7 @@ const badge = (category) => `<span class="badge ${category}">${labels[category]}
 const pageSize = 20;
 let data, episodeMap, page = 0, selectedId = null;
 const detailCache = new Map();
+const replays = {"GetToastedBread--5":"success", "GetToastedBread--3":"failure"};
 
 const examples = [
   {id:"ScrubCuttingBoard--1", title:"首次整任务 VLA 完成刷洗", text:"只有一个固定的完整任务步骤，没有调用 Planner。58 个 chunks（464 控制步）后出现 env_success；最终接触计时为 6，横向刷洗范围为 0.2408，夹爪也已撤离。"},
@@ -51,7 +52,7 @@ function renderOverview() {
   $("#time-table").innerHTML = table(["路径", "中位数", "样本数"], ["initial","planned","mixed","failure"].map(category=>[badge(category),seconds(s.median_elapsed[category]),s.categories[category]]));
   $("#example-grid").innerHTML = examples.map(ex=>{
     const e = episodeMap.get(ex.id);
-    return `<article class="example"><div class="example-head"><span>${e.split === "seen"?"Seen":"Unseen"}</span>${badge(e.category)}</div><h3>${ex.title}</h3><div class="mini-stats">${e.task} · seed ${e.seed}<br>${e.llm_calls} 次 Planner · ${e.steps_executed} 个程序步骤 · ${seconds(e.elapsed_s)}</div><p>${ex.text}</p><div class="example-foot"><button class="text-button" data-case="${e.id}">查看程序与执行证据 →</button></div></article>`;
+    return `<article class="example"><div class="example-head"><span>${e.split === "seen"?"Seen":"Unseen"}</span>${badge(e.category)}</div><h3>${ex.title}</h3><div class="mini-stats">${e.task} · seed ${e.seed}<br>${e.llm_calls} 次 Planner · ${e.steps_executed} 个程序步骤 · ${seconds(e.elapsed_s)}</div><p>${ex.text}</p><div class="example-foot"><button class="text-button" data-case="${e.id}">查看程序与执行证据 →</button>${replays[e.id]?`<a href="../baiyajing-replay/?case=${replays[e.id]}">视频与 Planning 回放 →</a>`:""}</div></article>`;
   }).join("");
   $("#generated").textContent = `统计生成于 ${new Date(data.generated_utc).toLocaleString("zh-CN",{timeZone:"Asia/Hong_Kong",hour12:false})} UTC+8`;
 }
@@ -133,7 +134,7 @@ async function loadCase(id) {
       <div class="task-instruction">${esc(e.task_language)}</div>
       <div class="detail-stats"><div><b>${e.llm_calls}</b><span>Planner 调用</span></div><div><b>${e.steps_executed}</b><span>已执行程序步骤</span></div><div><b>${e.actual_vla_attempts}</b><span>实际 VLA attempts</span></div><div><b>${seconds(e.elapsed_s)}</b><span>episode 墙钟耗时</span></div></div>
       <div class="evidence"><p><strong>归类依据：</strong>${attribution(e)}</p>${ex?`<p><strong>案例解读：</strong>${ex.text}</p>`:""}<p class="note">累计 ${e.vla_chunks.toLocaleString()} 个 VLA chunks = ${e.vla_env_steps.toLocaleString()} 个 VLA 控制步；不包含导航、调整手臂等执行器控制步。</p></div>
-      <div class="detail-links"><a href="cases/${encodeURIComponent(id)}.json" download>下载本例完整证据 JSON</a></div>
+      <div class="detail-links"><a href="cases/${encodeURIComponent(id)}.json" download>下载本例完整证据 JSON</a>${replays[id]?`<a href="../baiyajing-replay/?case=${replays[id]}">观看视频、计划与观测回放 →</a>`:""}</div>
       ${d.alerts.length?`<details class="alert-box"><summary>物体丢失 / 执行异常事件 · ${d.alerts.length} 条</summary><pre>${json(d.alerts)}</pre></details>`:""}
       <section class="programs"><h3>Planner 输出的程序 <span class="subtle">${d.plans.length} 次调用</span></h3><p class="note">展示实际输出的 steps 和 unrecoverable 字段。计划中的步骤不保证全部执行；每张卡片列出它实际执行到的步骤。时间为本 episode 开始后的秒数。</p>${d.plans.map(plan=>{
         const executed = d.trace.filter(step=>step.plan_index===plan.index);
@@ -142,7 +143,7 @@ async function loadCase(id) {
       <div class="trace-tools"><h3>实际执行步骤 <span class="subtle">${d.trace.length} 步</span></h3><label class="subtle" for="trace-filter">显示</label><select id="trace-filter"><option value="all">全部步骤</option><option value="vla">vla / pick 程序</option><option value="explicit">显式非 VLA 程序</option><option value="fallback">自动 fallback</option><option value="changes">判据变化 / 环境成功</option></select><button id="expand-trace">展开全部参数</button></div>
       <div class="trace-summary" aria-label="程序步骤顺序">${d.trace.map(step=>`<span class="trace-dot ${step.origin === "initial"?"initial":isVla(step)?"planned":"mixed"}" title="#${step.index} ${esc(step.command.op)} · ${origins[step.origin]}">${step.index}</span>`).join("")}</div>
       <p class="note"># 是程序步骤编号，不是仿真步。蓝色是初次整任务，绿色是后续 vla/pick，紫色是显式控制。标为 fallback 的步骤来自执行器。参数、attempt 返回、步骤结果与任务判据均可展开。</p>
-      <p class="result-note">原始 attempt 的 checks 是当时保存的快照，env_success 可能先于 checks 更新，因此两者可能同时出现 env_success 和 checks['success']=false。整局以 result.json 的 success 为准。视频 / 图片文件名仅作为原始记录标识，本分析页不提供这些素材。</p>
+      <p class="result-note">原始 attempt 的 checks 是当时保存的快照，env_success 可能先于 checks 更新，因此两者可能同时出现 env_success 和 checks['success']=false。整局以 result.json 的 success 为准。${replays[id]?"本例已提供视频与观测回放，入口在上方；未录像的执行器步骤单独标明。":"视频 / 图片文件名仅作为原始记录标识，本例未部署这些素材。"}</p>
       <div id="trace-list"></div>
       <details class="source-details"><summary>初末任务判据、计数与来源校验</summary><h4>初始任务判据</h4><pre>${json(d.initial_progress)}</pre><h4>最终任务判据</h4><pre>${json(d.final_progress)}</pre><h4>实际执行方法计数</h4><pre>${json(e.methods)}</pre><p>终止标签：${esc(e.stop)} · 环境 success=${e.success}<br>attempt 事件 ${e.attempt_events} 条，其中 ${e.actual_vla_attempts} 次 chunks &gt; 0；其余包括靠近失败、条件已满足或零 chunk 截止等记录。</p><h4>原始来源及 SHA-256</h4><pre>${json(d.source)}</pre></details>`;
     renderTrace();
