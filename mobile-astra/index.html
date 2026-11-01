@@ -9,6 +9,7 @@
 <title>Mobile Astra</title>
 <style>
 *{box-sizing:border-box}body{margin:0;color:#222b35;background:#f7f8fa;font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif}header{border-bottom:1px solid #dfe3e8;background:#fff;padding:17px 28px;display:flex;align-items:center;gap:14px}header strong{font-size:18px;font-weight:600}header span{font-size:12px;color:#78828c}main{max-width:1100px;margin:32px auto;padding:0 24px}h1{font-size:17px;font-weight:600;margin:0 0 12px}section{margin-bottom:30px}.table{border:1px solid #dfe3e8;border-radius:6px;overflow:auto;background:#fff}table{border-collapse:collapse;width:100%;text-align:left;white-space:nowrap}th{background:#f1f3f5;color:#626d78;font-size:12px;font-weight:500}th,td{padding:13px 17px;border-bottom:1px solid #e8ebee}tbody tr:last-child td{border-bottom:0}td small{display:block;color:#7a8490;font-size:12px}.badge{background:#eaf4ed;color:#357245;font-size:12px;padding:3px 8px;border-radius:4px}a{color:#2563a8;text-decoration:none}a:hover{text-decoration:underline}.open{display:inline-block;border:1px solid #c6d7e8;background:#f4f8fc;padding:5px 12px;border-radius:4px;font-size:12px;white-space:nowrap}.description{font-size:12px;color:#74808b;margin:10px 0}.doc{display:flex;justify-content:space-between;align-items:center;gap:20px;background:#fff;border:1px solid #dfe3e8;padding:18px;border-radius:6px}.doc strong{font-size:14px;font-weight:500}.doc p{font-size:12px;color:#74808b;margin:5px 0 0}.links{display:flex;gap:18px;align-items:center}.download{font-size:12px;white-space:nowrap}@media(max-width:600px){header{padding:15px 18px}main{padding:0 16px;margin-top:24px}.doc{align-items:flex-start;flex-direction:column}th,td{padding:11px 13px}}
+.badge.failure{background:#f6e9e5;color:#9b4a3f}
 </style>
 </head>
 <body>
@@ -22,8 +23,8 @@
 </section>
 <section aria-labelledby="runs-title">
 <h1 id="runs-title">实验回放</h1>
-<div class="table"><table><thead><tr><th>任务</th><th>模型</th><th>结果</th><th>调用</th><th></th></tr></thead><tbody><tr><td>PanTransfer<small>RoboCasa · seed 2</small></td><td>GPT-6-Astra<small>xhigh</small></td><td><span class="badge">成功</span></td><td>79 次工具调用<small>44 次解析动作 · 4 次 VLA</small></td><td><a class="open" href="pan-transfer/">打开回放 →</a></td></tr></tbody></table></div>
-<p class="description">包含执行视频、完整工具参数与返回结果。此案例展示 VLA 尝试后，Agent 通过解析控制和失败恢复完成任务。</p>
+<div class="table"><table><thead><tr><th>任务</th><th>模型</th><th>结果</th><th>调用</th><th></th></tr></thead><tbody><tr><td>PanTransfer<small>RoboCasa · seed 2</small></td><td>GPT-6-Astra<small>xhigh</small></td><td><span class="badge">成功</span></td><td>79 次工具调用<small>44 次解析动作 · 4 次 VLA</small></td><td><a class="open" href="pan-transfer/">打开回放 →</a></td></tr><tr><td>PanTransfer<small>RoboCasa · seed 1 · 食物洒落后未恢复</small></td><td>GPT-6-Astra<small>xhigh</small></td><td><span class="badge failure">失败 · stuck</span></td><td>34 次工具调用<small>4 次解析动作 · 12 次 VLA</small></td><td><a class="open" href="pan-transfer-failure/">查看失败回放 →</a></td></tr></tbody></table></div>
+<p class="description">同一任务的成功与失败案例，均包含视频、完整工具参数与返回结果。seed 2 由解析控制完成倾倒并恢复滑落的锅；seed 1 在食物洒落后调整手臂、切换全身 VLA，仍未完成。</p>
 </section>
 <section aria-labelledby="docs-title">
 <h1 id="docs-title">方法调用文档</h1>

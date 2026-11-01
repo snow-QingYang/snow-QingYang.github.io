@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:,">
+<title>PanTransfer seed 1 · 失败回放 · Mobile Astra</title>
+<link rel="stylesheet" href="style.css"><script src="app.js" defer></script>
+</head>
+<body>
+<header><a href="../">← Mobile Astra</a><span>失败案例回放</span><a href="../pan-transfer/">对照：seed 2 成功回放 →</a></header>
+<div class="container">
+  <div class="title"><h1>PanTransfer · seed 1</h1><span class="badge failure">环境未成功 · finish=stuck</span></div>
+  <p class="subtitle">GPT-6-Astra / xhigh · Composite unseen · 34 次工具调用 · 12 次 VLA + 4 次解析动作</p>
+  <p class="task">任务：拿起锅，将蔬菜倒入盘子，再把锅放回炉灶。VLA 搬运时食物洒落到炉面；Planner 调整后继续尝试，最终没有恢复。</p>
+  <main>
+    <section>
+      <div class="player"><div class="panel-head"><strong>执行视频</strong><span>AGENTVIEW · 原始 256 × 256 · 20 FPS</span></div><div class="screen"><video id="video" src="episode.mp4" controls playsinline preload="metadata" aria-label="PanTransfer seed 1 失败案例执行视频"></video></div>
+        <div class="player-controls"><div id="phase-label" aria-live="polite">定位与准备</div><div class="chapters" id="chapters"></div><div class="milestones"><button data-seek="34.7">观看洒落所在动作 #6</button><button data-seek="114.7" id="intervention">Planner 调整 #11</button><button data-seek="179.85">最后一次 VLA #16</button></div><div class="controls-row"><label>播放速度 <select id="speed" aria-label="播放速度"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="1.5">1.5×</option><option value="2">2×</option></select></label><a href="episode.mp4" download>下载视频</a></div><p class="note">视频 195.85 秒，仅包含仿真动作；完整 episode 耗时 871.2 秒。动作 #2 还包含 9 步控制器校准，已计入视频对齐。</p></div>
+      </div>
+      <section class="analysis"><h2>哪里失败了</h2>
+        <ol><li><strong>动作 #1–3：准备视角。</strong>两次 <code>move_base</code> 转动底盘，一次 <code>move_delta</code> 抬手，让盘子和锅进入视野。</li>
+        <li><strong>动作 #4–6：VLA 尝试抓锅并搬运。</strong>第三次 <code>rldx_arm</code> 返回后，Agent 报告蔬菜已洒在炉面；<code>vegetable_on_plate=false</code>，<code>pan_on_stove=false</code>。</li>
+        <li><strong>动作 #7–10：续跑未恢复。</strong>四次相同任务的 <code>rldx_arm</code> 调用仍未把食物放入盘子；最后两次没有检测到抓取接触。</li>
+        <li><strong>动作 #11–16：调整后重新尝试。</strong>重新定位后，用一次 <code>move_to</code> 将空手移到锅柄上方，再调用五次全身 <code>rldx_skill</code>，两个放置判据始终未恢复。</li>
+        <li><strong>最后报告 stuck。</strong>Agent 保存记录后结束。所有工具调用都正常返回，但环境的任务成功标记始终是 <code>false</code>。</li></ol>
+        <p class="note">4 次解析动作中有 3 次初始准备、1 次 VLA 后的介入。此例展示“调整后交回 VLA，但未修复成功”；不属于解析控制全面接管。洒落位置的描述来自当时的 Agent 执行说明与画面，成功 / 失败以环境判定为准。</p>
+      </section>
+      <section class="criteria"><h2>最终环境判据</h2><table><thead><tr><th>条件</th><th>实际</th><th>完成任务需要</th></tr></thead><tbody><tr><td>食物进入盘子</td><td class="bad">false</td><td>true</td></tr><tr><td>锅放回炉灶</td><td class="bad">false</td><td>true</td></tr><tr><td>夹爪远离锅</td><td>true</td><td>true</td></tr><tr><td>机器人直接碰过食物</td><td>false</td><td>false</td></tr><tr><td><strong>success</strong></td><td class="bad"><strong>false</strong></td><td>true</td></tr></tbody></table><p class="note">本例没有触发“机器人直接碰食物”的约束；失败由尚未完成的放置条件确认，不是因为到达 100 响应或 3600 秒上限。</p></section>
+      <div class="links"><a href="../analysis/#case=astra--PanTransfer--1">查看统计归类与同 seed 模型对比</a><a href="replay.json" download>下载调用数据 JSON</a></div>
+    </section>
+    <aside class="timeline-panel"><div class="timeline-head"><div class="timeline-title"><h2>Agent 执行的全部方法</h2><span id="count">加载中…</span></div><p class="note">按实际调用顺序排列；+时间为规划会话内耗时。展开查看输入参数、返回结果、相机画面和当时的公开执行说明。</p><input id="search" type="search" placeholder="搜索 method 或执行说明…" aria-label="搜索方法或执行说明"><div class="filters"><button data-filter="all" aria-pressed="true">全部</button><button data-filter="manual" aria-pressed="false">解析动作</button><button data-filter="vla" aria-pressed="false">VLA</button><button data-filter="perception" aria-pressed="false">观测 / 定位</button><button data-filter="other" aria-pressed="false">记忆 / 记录</button><button id="expand">全部展开</button></div></div><div id="timeline" class="timeline" aria-live="polite"><p>正在加载执行记录…</p></div></aside>
+  </main>
+  <footer>数据来源：composite_main / PanTransfer_s1 · 环境动作边界已与全部 16 组返回画面核对 · 3917 帧</footer>
+</div>
+</body></html>

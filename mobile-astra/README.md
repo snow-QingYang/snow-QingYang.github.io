@@ -8,6 +8,7 @@ This directory is only a deployment location. Its pages must use their own stand
 - `analysis/`: two-run RoboCasa report, 320 manifest episodes, per-case action evidence, CSV, Markdown, and reproducible extraction script. Read only canonical result/states/transcript files; do not count archived attempts or substitute the reference screenshot's Baiyajing statistics. Attribution is observational and must retain the memory-profile caveat.
 - `methods.html`: self-contained tool-call reference.
 - `pan-transfer/`: replay page with all videos, JSON, and images.
+- `pan-transfer-failure/`: Astra PanTransfer seed 1 failure, 34 tool calls, 12 VLA calls, 4 analytic actions (3 preparation, 1 after VLA), original video and camera images. The task remains unsuccessful throughout; do not label completed tool calls as task success.
 
 These published copies do not depend on local experiment directories or running servers. To remove this deployment later, delete `mobile-astra/`, commit, and push. No shared navigation, styles, or assets need to be removed.
 
