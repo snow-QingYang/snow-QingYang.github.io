@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<meta name="description" content="Mobile Astra 工作页：RoboCasa 两组实验分析、执行回放与方法调用文档。">
+<meta name="description" content="Mobile Astra 工作页：RoboCasa 官方 RPent 与 Baiyajing 实验分析、执行回放与方法调用文档。">
 <link rel="icon" href="data:,">
 <title>Mobile Astra</title>
 <style>
@@ -16,10 +16,16 @@
 <header><strong>Mobile Astra</strong><span>实验分析、回放与工具文档</span></header>
 <main>
 <section aria-labelledby="analysis-title">
-<h1 id="analysis-title">RoboCasa 两组实验分析</h1>
+<h1 id="analysis-title">官方 RPent · RoboCasa 两组实验分析</h1>
 <div class="table"><table><thead><tr><th>模型 · xhigh</th><th>总成功</th><th>VLA 直接完成</th><th>准备后 VLA 完成</th><th>Planner 介入后成功</th></tr></thead><tbody><tr><td>GPT-6-Astra</td><td><strong>53 / 160 · 33.1%</strong></td><td>17</td><td>2</td><td>34</td></tr><tr><td>GPT-5.6-Sol</td><td><strong>45 / 160 · 28.1%</strong></td><td>18</td><td>0</td><td>27</td></tr></tbody></table></div>
 <p class="description">32 个任务 × seeds 1–5，共 320 个有效 episode。包含 Seen / Unseen、逐 seed 矩阵、成功路径、代表案例，以及每个案例的动作参数和判据变化。两组使用不同任务记忆；介入后的成功按实际轨迹分类。</p>
 <div class="links"><a class="open" href="analysis/">查看完整分析 →</a><a class="download" href="analysis/episodes.csv" download>下载 320 条记录 CSV</a></div>
+</section>
+<section aria-labelledby="baiyajing-title">
+<h1 id="baiyajing-title">Baiyajing 版本 · 实验分析</h1>
+<div class="table"><table><thead><tr><th>Planner</th><th>Seen</th><th>Unseen</th><th>总成功</th><th>初始整任务 VLA</th><th>Planner 修复</th></tr></thead><tbody><tr><td>GPT-6-Sol<small>medium · hybrid</small></td><td>39 / 80</td><td>22 / 80</td><td><strong>61 / 160 · 38.1%</strong></td><td>28</td><td>33 / 132<small>20 个 vla/pick 程序 · 13 个含显式控制</small></td></tr></tbody></table></div>
+<p class="description">32 个任务 × seeds 1–5。先运行完整任务 VLA，未完成再由 Planner 输出程序；报告包含逐 seed 结果、计划 JSON、实际执行与重试、6 个成功 / 失败案例。此版本的 pick 也由 VLA 执行；实现、模型、记忆和预算与上面两组不同。</p>
+<div class="links"><a class="open" href="baiyajing-analysis/">查看 Baiyajing 完整分析 →</a><a class="download" href="baiyajing-analysis/episodes.csv" download>下载 160 条记录 CSV</a></div>
 </section>
 <section aria-labelledby="runs-title">
 <h1 id="runs-title">实验回放</h1>
