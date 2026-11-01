@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="HarnessVLA Codex 每次运行的 token 用量、费用、成功与失败记录实施计划。">
+<link rel="icon" href="data:,">
+<title>Codex Token Cost · 记录计划</title>
+<style>
+:root{color-scheme:light;--ink:#22303d;--muted:#617182;--line:#dce3e9;--blue:#245c91;--pale:#eff5fa}*{box-sizing:border-box}body{margin:0;background:#f6f8fa;color:var(--ink);font:14px/1.75 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}html{scroll-padding-top:20px}a{color:var(--blue)}header{background:white;border-bottom:1px solid var(--line)}.bar{max-width:1280px;margin:auto;padding:15px 26px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}.muted,.help{color:var(--muted);font-size:12px}.shell{display:grid;grid-template-columns:185px minmax(0,1fr);gap:28px;max-width:1280px;margin:auto;padding:28px 26px 60px}aside{position:sticky;top:22px;align-self:start}nav a{display:block;padding:8px 10px;text-decoration:none;border-left:2px solid var(--line);font-size:13px}nav a:hover{background:var(--pale);border-color:var(--blue)}aside p{padding:10px;font-size:12px;color:var(--muted)}main{min-width:0}h1{font-size:30px;line-height:1.4;margin:6px 0 13px}h2{font-size:19px;line-height:1.5;margin:0 0 15px}h3{font-size:14px;margin:0 0 6px}p{margin:0 0 12px}.lead{font-size:15px}.section{padding:24px;background:#fff;border:1px solid var(--line);border-radius:5px;margin-top:24px;scroll-margin-top:20px}.tags,.actions{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.tag{font-size:11px;border:1px solid var(--line);border-radius:3px;padding:3px 8px;background:white}.pending{color:#805c1c;background:#fff9ed;border-color:#e2d3ad}.notice{padding:13px 16px;background:var(--pale);border-left:3px solid #5689b5;margin:16px 0}.notice p:last-child{margin:0}button,.button{font:inherit;font-size:12px;line-height:1.6;border:1px solid #b9cbdc;border-radius:4px;background:white;color:var(--blue);padding:8px 12px;cursor:pointer;text-decoration:none}button:hover,.button:hover{background:var(--pale)}button:focus-visible,a:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #86b4de;outline-offset:3px}.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:4px;margin:14px 0}table{border-collapse:collapse;width:100%;font-size:12px;text-align:left}th,td{padding:11px 13px;border-bottom:1px solid var(--line);vertical-align:top}th{background:#f1f5f8;color:#4d6072}tbody tr:last-child td{border:0}.numbers td:not(:first-child){font-variant-numeric:tabular-nums;white-space:nowrap}.files td:first-child{min-width:225px;width:34%}code,pre{font:12px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace}code{color:#315779;overflow-wrap:anywhere}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f7fa;padding:16px;border:1px solid var(--line);border-radius:4px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}.card{padding:16px;border:1px solid var(--line);border-radius:4px}.card p:last-child{margin-bottom:0}.flow{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:16px 0}.flow span{padding:8px 12px;border:1px solid #c5d7e6;background:#f4f8fc;border-radius:4px;font-size:12px}.flow b{color:#8a9aa8}ol,ul{padding-left:22px}li{margin:8px 0}details{margin-top:16px;border:1px solid var(--line);border-radius:4px}summary{padding:12px 14px;cursor:pointer;font-weight:600}details .inside{padding:0 14px 14px}.review-item{padding:16px 0;border-top:1px solid var(--line)}.review-top{display:flex;gap:16px;justify-content:space-between;align-items:center}.review-top h3{flex:1;margin:0}.review-item p{font-size:12px;color:var(--muted);margin:7px 0}.review-item select{font:inherit;font-size:12px;border:1px solid #bacbda;padding:5px;border-radius:4px;background:white}.review-item label{display:block;font-size:12px;color:var(--muted)}textarea{width:100%;min-height:60px;resize:vertical;border:1px solid #ced9e3;border-radius:4px;padding:9px;font:inherit;font-size:13px;line-height:1.6;margin-top:5px}.status{min-height:24px;font-size:12px;color:var(--muted)}footer{margin:22px 0;color:var(--muted);font-size:12px}.skip{position:absolute;left:-9999px}.skip:focus{left:16px;top:12px;background:white;padding:10px;z-index:10}
+@media(max-width:850px){.shell{grid-template-columns:1fr;padding:20px 16px;gap:8px}aside{position:static}nav{display:flex;flex-wrap:wrap;gap:4px}nav a{border:1px solid var(--line);padding:6px 9px}aside p{display:none}.bar{padding:12px 16px}.section{padding:18px}h1{font-size:26px}.grid{grid-template-columns:1fr}.review-top{align-items:start}.files td:first-child{min-width:180px}}
+@media print{body{background:white;font-size:11px}aside,.actions,.no-print,header{display:none}.shell{display:block;padding:0;max-width:none}.section{padding:16px 0;border:0;border-top:1px solid #bbb;border-radius:0}h1{font-size:24px}h2{font-size:17px}.table-scroll{overflow:visible}table{font-size:10px}th,td{padding:7px}tr,.review-item,.card{break-inside:avoid}a{color:#222}pre{font-size:10px}.grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<a class="skip" href="#overview">跳到正文</a>
+<header><div class="bar"><strong>Mobile Astra · 工作文档</strong><span class="muted">方案 v1.0 · 2026-11-01</span></div></header>
+<div class="shell">
+<aside><nav aria-label="目录"><a href="#overview">01 · 目标与现状</a><a href="#records">02 · 每次保存什么</a><a href="#collection">03 · 采集与异常处理</a><a href="#files">04 · 代码改动</a><a href="#pricing">05 · 费用与汇总</a><a href="#delivery">06 · 实施与验收</a><a href="#review">07 · 审阅与导出</a></nav><p>独立工作页面。<br>单文件，可离线打开。<br>审阅意见保存在当前浏览器。</p></aside>
+<main>
+<section id="overview">
+<div class="muted">HarnessVLA-RPent / Codex / RoboCasa</div>
+<h1>每次 Codex 运行，记录 Token 与费用</h1>
+<p class="lead">每次启动 Codex 都留下一条可核查的用量记录，关联任务、模型、seed 和最终结果。成功、任务失败、超时、报错及重试都进入统计，实验结束后能直接比较“花了多少 token、估算多少钱、哪些花费没有带来成功”。</p>
+<div class="tags"><span class="tag pending">实施计划 · 尚未接入运行代码</span><span class="tag">Token 用量 + 费用估算</span><span class="tag">成功与失败全部记录</span><span class="tag">旧日志可补提取</span></div>
+<div class="actions"><a class="button" href="#files">查看代码改动</a><a class="button" href="#delivery">查看验收标准</a><button id="download-html" type="button">下载 HTML</button><button id="print" type="button">打印 / 保存 PDF</button></div>
+<div class="notice"><p><strong>已有基础：</strong><code>rpent/planner/codex.py</code> 已读取 <code>thread/tokenUsage/updated</code>，把用量放进 <code>PlannerResult.stats</code>；CLI 已写入 transcript，并传给结果收尾函数。当前 RoboCasa 的 <code>result.json</code> 尚未收录这些字段，也没有独立的费用记录。计划复用现有链路。</p></div>
+<div class="table-scroll"><table><thead><tr><th>本次只读检查</th><th>episode 目录数</th><th>包含用量事件</th><th>结论</th></tr></thead><tbody><tr><td><code>composite_main</code> / GPT-6-Astra</td><td>160</td><td>160 / 160</td><td>可从现有日志提取 token，无需重跑。</td></tr><tr><td><code>composite_main_gpt56_sol</code> / GPT-5.6-Sol</td><td>160</td><td>160 / 160</td><td>同样覆盖成功与失败目录。</td></tr></tbody></table></div>
+<p class="help">检查的是已存在的 <code>result.json</code> 与同目录 <code>*.stream.jsonl</code>。有用量事件不等于账单已完整对齐；日志尾部丢失、隐藏重试、实际计费费率仍需核查。本计划首期覆盖 RPent 的 Codex 后端；Baiyajing 的直接 LLM 调用需要独立适配，不能套用 Codex 事件解析。</p>
+<h3>现有日志中的两个实际例子</h3>
+<div class="table-scroll"><table class="numbers"><thead><tr><th>GPT-6-Astra · PanTransfer</th><th>seed 2 · 成功</th><th>seed 1 · 失败</th></tr></thead><tbody><tr><td>累计 input tokens</td><td>5,021,612</td><td>2,333,536</td></tr><tr><td>其中 cached input</td><td>4,937,344</td><td>2,237,824</td></tr><tr><td>未命中缓存的 input（差值）</td><td>84,268</td><td>95,712</td></tr><tr><td>累计 output tokens</td><td>18,995</td><td>7,830</td></tr><tr><td>其中 reasoning output</td><td>9,130</td><td>2,460</td></tr><tr><td>input + output</td><td>5,040,607</td><td>2,341,366</td></tr><tr><td>估算费用</td><td>待匹配运行时实际费率</td><td>待匹配运行时实际费率</td></tr></tbody></table></div>
+<p class="help">上述数字是各自日志最后一条累计用量；两条日志分别有 77 / 49 条用量通知，不能把这些累计值逐条相加。成功与失败来自环境结果，不能由 token 数或 Codex 正常退出推断。</p>
+</section>
+
+<section class="section" id="records">
+<h2>02 · 记录单位与字段</h2>
+<p><strong>一条记录对应一次 Codex 调用尝试（attempt）。</strong>一次 episode 可以包含多个 attempt；重启、重试和继续执行分别留记录，并通过同一个 <code>episode_id</code> 汇总。一个 method 调用不等于一次模型请求，不按工具调用次数估算 token。</p>
+<div class="table-scroll"><table><thead><tr><th>字段组</th><th>保存内容</th><th>约定</th></tr></thead><tbody>
+<tr><td>身份与来源</td><td><code>schema_version, run_id, episode_id, attempt_id, retry_of, thread_id, turn_id</code>；实验批次、task、split、seed、代码提交、SDK 版本、日志相对路径与哈希。</td><td>启动前生成 attempt ID；重跑同一个 seed 也不能覆盖上一条记录。</td></tr>
+<tr><td>模型配置</td><td>请求模型、实际返回模型（若可得）、provider 标识、service tier、reasoning effort、启动与结束时间、耗时。</td><td>未知字段保存 <code>null</code>；只存白名单元数据，不导出 key、完整配置或 prompt。</td></tr>
+<tr><td>Token</td><td><code>input_tokens, cached_input_tokens, cache_write_input_tokens, output_tokens, reasoning_output_tokens, total_tokens</code>，及服务端提供的缓存写入时长分类。</td><td>cached 是 input 的子集；reasoning 是 output 的子集。保留原始计数及来源，不从字符数推算。</td></tr>
+<tr><td>执行与任务结果</td><td><code>execution_status</code>：running / completed / timeout / error / cancelled / interrupted；<code>task_success</code>：true / false / null；<code>evaluation_valid</code>、终止原因。</td><td>Codex 正常完成仍可能任务失败；环境没给结果时用 null，不伪装成有效失败。中间 attempt 的任务结果在有对应环境证据时填写。</td></tr>
+<tr><td>完整性</td><td><code>usage_status</code>：observed_complete / partial / missing / not_invoked；最后观测时间、终止事件、异常说明。</td><td>observed_complete 仅指本地观测链完整；不表示已对账。没收到用量是 missing，不是 0。确认未启动 Codex 才是 not_invoked。</td></tr>
+<tr><td>费用</td><td><code>estimated_cost_usd, billed_cost_usd, cost_status, rate_card_id, rate_source, rate_effective_at</code>，适用费率快照和分项金额。</td><td>估算和账单分开；未知价格或缺少必要计数时为 null，并写原因。金额用 Decimal 计算。</td></tr>
+</tbody></table></div>
+<details><summary>预期输出目录与记录示例（设计草案）</summary><div class="inside"><pre>episode_dir/
+  result.json                         # 增加 codex_usage 摘要与相对路径
+  codex_usage/
+    summary.json                      # episode 总用量，含全部 attempts
+    attempt_&lt;uuid&gt;/
+      usage.events.jsonl              # 仅计数和必要身份信息，追加写入
+      usage.json                      # 原子更新的最近快照 / 最终记录
+
+experiment_dir/
+  codex_costs.json                     # 可由各 episode 重新生成
+  codex_costs.csv                      # 一行一个 attempt
+  codex_cost_summary.json              # 按模型、结果、任务分组</pre><pre>{
+  "schema_version": 1,
+  "episode_id": "batch/task/seed",
+  "attempt_id": "generated-uuid",
+  "execution_status": "timeout",
+  "task_success": false,
+  "evaluation_valid": true,
+  "usage_status": "partial",
+  "tokens": {
+    "input_tokens": 10000,
+    "cached_input_tokens": 8000,
+    "cache_write_input_tokens": null,
+    "output_tokens": 500,
+    "reasoning_output_tokens": 300,
+    "total_tokens": 10500
+  },
+  "estimated_cost_usd": null,
+  "billed_cost_usd": null,
+  "cost_status": "missing_rate",
+  "rate_card_id": null
+}</pre><p class="help">这里的 JSON 是结构示例，数字是示意值。任务是否失败仍需环境证据；timeout 本身不足以填写 task_success=false。</p></div></details>
+</section>
+
+<section class="section" id="collection">
+<h2>03 · 怎么采集，失败时怎么保留</h2>
+<div class="flow" aria-label="记录流程"><span>启动：创建 attempt</span><b>→</b><span>收到 usage：追加事件 + 更新快照</span><b>→</b><span>结束：写终止原因与任务结果</span><b>→</b><span>汇总：成功 / 失败 / 未知</span></div>
+<ol>
+<li><strong>从现有 Codex 事件接入。</strong>复用 <code>_Recorder.observe()</code>，增加独立的用量落盘通道；保存 SDK 实际返回的 <code>total</code>、<code>last</code>、thread/turn ID 和时间戳。支持当前 SDK 的 snake_case 结构，协议变体在入口显式适配。</li>
+<li><strong>累计值去重，按运行边界算增量。</strong>同一 thread 的累计通知不求和；重复通知不增加用量。恢复旧 thread 时记录启动基线，只计本次新增部分。不同 thread 分开计；计数倒退或边界不明确时保留事件并标注异常，不自动当成新开销。验证乱序、compaction、重连行为后再认定有效累计值。</li>
+<li><strong>每次更新都保存。</strong>事件文件追加并 flush，快照复用原子替换写入。事件用于恢复、核查与重新计价；金额聚合不会依赖终端输出。会话包含子线程时需验证其用量是否已计入父线程，防止漏记或重复计算。</li>
+<li><strong>所有退出路径统一收尾。</strong>普通完成、任务失败、超时、SDK 报错和用户取消都写 usage；不挂在 <code>if success</code> 分支下。CLI 与 Dashboard 使用同一记录逻辑。一次 episode 多次 solve 的费用累计保留，不只留下最后一次 stats。</li>
+<li><strong>硬中断保留已观测部分。</strong>进程被 kill 或机器掉电时无法保证收到最后一笔用量。下次汇总检查遗留 running attempt，结合进程退出证据标记 interrupted / partial；从完整 JSONL 前缀恢复。漏掉的服务端用量只能后续对账，不能补成零。</li>
+</ol>
+<p class="help">日志中的 provider 内部重试、未回传用量的失败请求，可能未被本地观测覆盖。费用报告始终携带完整性状态；不把本地估算标成实际扣费。</p>
+</section>
+
+<section class="section" id="files">
+<h2>04 · 具体改哪些代码</h2>
+<p>以下路径均相对于 <code>HarnessVLA-RPent/</code>。本页是改动清单，运行代码尚未修改。</p>
+<div class="table-scroll"><table class="files"><thead><tr><th>文件 / 位置</th><th>计划改动</th><th>交付结果</th></tr></thead><tbody>
+<tr><td><code>rpent/planner/codex.py</code><br><span class="tag">修改</span></td><td>在启动、<code>_Recorder.observe()</code>、正常/异常收尾接入记录器；保留 cache-write、thread、turn、模型等信息；给 <code>PlannerResult.stats</code> 加记录路径和完整性摘要。保持 planner 的轮数限制逻辑独立。</td><td>每次 Codex 调用都有独立 attempt 记录；收到用量即落盘。</td></tr>
+<tr><td><code>rpent/evaluation/codex_usage.py</code><br><span class="tag">新增</span></td><td>事件规范化、按 thread 去重和边界管理、增量核算、JSONL 写入、快照恢复、attempt / episode 汇总；复用 <code>write_json_atomic</code>。</td><td>在线记录与历史补提取共用一套解析和计算逻辑。</td></tr>
+<tr><td><code>rpent/evaluation/token_cost.py</code><br><code>rpent/evaluation/token_rates.json</code><br><span class="tag">新增</span></td><td>Decimal 费用计算；费率按 provider / model / tier / 生效日期 / 上下文档位选择并保存快照。默认没有匹配费率时返回 null，不猜价。</td><td>分项估算金额、价格来源和可复算记录。</td></tr>
+<tr><td><code>rpent/cli/main.py</code><br><code>rpent/cli/dashboard.py</code><br><span class="tag">修改</span></td><td>提供 episode/run/attempt 身份，收集所有 solve 记录，在退出路径写结果关联。现有 <code>RunFinalizationContext.stats</code> 已能传递统计，优先复用，避免新增一套传参接口。</td><td>两种入口行为一致；重试开销不会被最后一次调用覆盖。</td></tr>
+<tr><td><code>robots/robocasa/eval/result.py</code><br><span class="tag">修改</span></td><td><code>build_cell_result()</code> / <code>finalize_cell_result()</code> 读取统计摘要，添加 <code>codex_usage</code> 字段与明细相对路径。兼容无新字段的旧结果。</td><td>result.json 能同时看到环境结果、token 和估算费用。</td></tr>
+<tr><td><code>rpent/evaluation/codex_cost_report.py</code><br><span class="tag">新增</span></td><td>离线命令：扫描 episode、补提取旧 stream/transcript、验证计数、恢复异常尾部、输出 JSON/CSV 与分组统计。按 attempt 去重；历史输出写到独立目录。</td><td>不运行 Codex、不加载 GPU 模型，也能生成旧实验用量报告。</td></tr>
+<tr><td><code>tests/unit_tests/rpent/planner/test_codex_contracts.py</code><br><code>tests/unit_tests/robots/robocasa/test_target50_protocol_contracts.py</code><br>CLI / Dashboard 合约测试<br><span class="tag">扩展</span></td><td>复用已有用量事件 fixture，检查落盘、结果关联和失败退出；新增 <code>tests/unit_tests/rpent/evaluation/test_codex_usage.py</code> 与 <code>test_token_cost.py</code>。</td><td>重复/乱序/中断/重试与费率计算均有可执行检查。</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="section" id="pricing">
+<h2>05 · 怎么算钱，报告里怎么看</h2>
+<p>先保存服务端返回的 token，再用<strong>与这次运行匹配的费率</strong>估算金额。费率记录 provider、模型、服务档位、生效日期、币种、上下文档位和来源；使用代理时核对代理计费，不能直接把官网价格当成实际账单。官方价格存在不同服务档位与缓存类别，见 <a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener">OpenAI API Pricing</a>。</p>
+<div class="grid"><div class="card"><h3>普通输入 / 缓存读取 / 输出</h3><pre>当 cache-write 已确认不适用或为 0：
+费用 = ((input − cached) × 输入单价
+       + cached × 缓存读取单价
+       + output × 输出单价) / 1,000,000</pre><p class="help">reasoning 已含在 output 里，不再加一次。cached 已含在 input 里，也不再加一次。参见 <a href="https://developers.openai.com/api/docs/guides/agents-api/observability" target="_blank" rel="noopener">官方 token 字段口径</a>；Codex 具体字段由当前 SDK 事件适配。</p></div><div class="card"><h3>有缓存写入费率时</h3><pre>普通输入 = input − cached − cache_write
+费用 = (普通输入 × 输入单价
+       + cached × 缓存读取单价
+       + 各类 cache_write × 对应写入单价
+       + output × 输出单价) / 1,000,000</pre><p class="help">缓存写入按对应费率替代普通输入费率，不能重复叠加。写入数量或类别缺失且会影响价格时，标记不可精确估算。参见 <a href="https://developers.openai.com/api/docs/guides/prompt-caching" target="_blank" rel="noopener">官方缓存计费说明</a>。</p></div></div>
+<p>每段模型调用按适用费率计算后再求和。不能拿整次 episode 的累计 input 判断单次请求是否进入长上下文档位；需要每次请求的输入长度和实际模型/档位证据。证据不足时先记录 token，将费用标为缺少计价信息。模型重路由或费率变化也按段保留。</p>
+<div class="table-scroll"><table><thead><tr><th>报告层级</th><th>展示内容</th></tr></thead><tbody><tr><td>每次 attempt 明细</td><td>任务、seed、模型、开始时间、耗时、执行状态、环境结果、各类 token、完整性、估算金额、费率来源。可筛选成功、失败、未知、超时、重试。</td></tr><tr><td>每个 episode</td><td>最终环境结果、attempt 数、所有 attempts 的 token 与费用之和；单独标记有效性和未知金额数。</td></tr><tr><td>每个模型 / 每类任务</td><td>成功和失败分别列：数量、token 总量、已知费用总额、平均 / 中位数 / P90；另列结果未知、用量缺失和费用未知的记录数。</td></tr><tr><td>比较投入产出</td><td>“成功组平均费用” = 成功 episode 费用 / 成功数；“每获得一次成功的成本” = 全部 attempts 的总费用 / 成功 episode 数（包含失败和重试）。没有成功时显示 N/A；有未知费用时显示已知部分与覆盖率，不能称为完整总成本。</td></tr></tbody></table></div>
+<p class="help">首期统计 Codex 模型 token 费用；RLDX 本地推理、GPU 时长和工具服务费用需另有数据来源。本页实际案例的金额留空，实施时再匹配对应运行日期与供应方费率。</p>
+</section>
+
+<section class="section" id="delivery">
+<h2>06 · 实施顺序与验收标准</h2>
+<ol><li><strong>先做历史补提取。</strong>以两套共 320 个已有 episode 目录为样本，生成逐条 token 表、失败表与覆盖率；抽查成功、失败、超时样本，对照 stream 和 transcript。保留来源路径与哈希，不更改历史任务判定。</li><li><strong>再接入在线记录。</strong>在 Codex adapter、CLI / Dashboard 和 RoboCasa 结果收尾接入统一记录器，覆盖每次启动及异常退出。</li><li><strong>最后接费用和报告。</strong>配置经过核对的费率快照，输出 JSON/CSV；将模型和任务汇总加入 Mobile Astra 工作页面，并链接每条运行明细。</li></ol>
+<div class="table-scroll"><table><thead><tr><th>验收场景</th><th>必须看到的结果</th><th>当前</th></tr></thead><tbody>
+<tr><td>任务成功 / 任务失败</td><td>各跑一个离线事件 fixture，均有独立 usage 记录并关联环境结果；两者都进入总用量。</td><td>待实现验证</td></tr>
+<tr><td>超时 / SDK 报错 / 取消</td><td>保留已收到的用量和明确终止原因；未获得环境判定时为未知。</td><td>待实现验证</td></tr>
+<tr><td>kill / JSONL 尾行截断</td><td>能读取最后完整事件或快照；已观测用量可恢复，状态为 partial，不报告完整账单。</td><td>待实现验证</td></tr>
+<tr><td>重复 / 乱序 / 重连 / compaction</td><td>同一累计值重复到达不增加 token；未见过的旧值也不会覆盖新总量；不明计数倒退进入异常标记。</td><td>待实现验证</td></tr>
+<tr><td>恢复旧 thread / 多次 solve</td><td>新 attempt 只统计新用量；失败后重试的两条记录都保留，episode 汇总等于各 attempt 之和。</td><td>待实现验证</td></tr>
+<tr><td>没有 usage / 没启动 Codex</td><td>前者 missing + null，后者 not_invoked + 已知零；报告能区分。</td><td>待实现验证</td></tr>
+<tr><td>缓存与 reasoning</td><td>cached、cache-write、reasoning 均不重复计算；输入子项超出 input 时拒绝计价并标异常。</td><td>待实现验证</td></tr>
+<tr><td>费用公式 / 未知费率</td><td>虚构测试费率下：input=1000、cached=800、output=100，单价 10/1/50 美元每百万，cache-write=0 时为 $0.007800；未知费率为 null。</td><td>待实现验证</td></tr>
+<tr><td>批量汇总 / 多进程</td><td>每个 attempt 独立文件；并行写入不串记录，重复执行汇总不重复记账，已知金额合计可与明细核对。</td><td>待实现验证</td></tr>
+<tr><td>历史 320 个目录</td><td>目录级覆盖清单包含全部已有结果；单独列异常、缺失与无法定价项，不因失败而跳过。</td><td>已确认 320 个目录均有 usage 事件；完整补提取待实现</td></tr>
+</tbody></table></div>
+<p class="help">大部分验收可通过真实旧日志和离线事件 fixture 完成，不需要重跑 RoboCasa。接入后再随下一次正常实验核对在线产物；浏览器里勾选方案不等于技术测试通过。</p>
+</section>
+
+<section class="section" id="review">
+<h2>07 · 方案审阅</h2>
+<p>逐项标记是否接受这个设计，可导出意见交付修改。意见仅存当前浏览器，不会自动提交，也不会启动实验。</p>
+<div id="review-items"></div>
+<div class="actions no-print"><button id="export-review" type="button">导出审阅 JSON</button></div>
+<p class="status" id="save-status" role="status" aria-live="polite"></p>
+</section>
+<footer>核对依据：RPent 提交 <code>a744bd5f128ebef3cb8c6736cf7cd98adff681f1</code>、本地两组实验 stream/result；OpenAI Docs 于 2026-11-01 核对。Codex usage 通知见 <a href="https://learn.chatgpt.com/docs/app-server" target="_blank" rel="noopener">App Server 文档</a>。本页描述拟实施改动，实际运行代码尚未接入。</footer>
+</main></div>
+<script>
+(()=>{'use strict';
+const key='mobile-astra:codex-token-cost-plan:review:v1';
+const checks=[['scope','记录粒度','每次 Codex attempt 独立记录，episode 汇总包含失败与重试。'],['fields','字段与完整性','保存 input / cached / cache-write / output / reasoning，以及来源和缺失状态。'],['failure','失败与中断','任务失败、超时、报错、取消、硬中断均留记录；未知用量不填零。'],['cost','费用口径','适用费率可追溯；估算与账单分开，未知价格留空。'],['backfill','旧实验补统计','从现有 320 个目录提取，不重跑、不覆盖历史结果。'],['report','报告与验收','逐条明细、成功/失败分组、失败开销、每次成功成本与覆盖率。']];
+let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}')||{}}catch(e){}
+const container=document.getElementById('review-items');
+for(const [id,title,desc] of checks){const item=document.createElement('div');item.className='review-item';item.innerHTML='<div class="review-top"><h3></h3><select aria-label="'+title+' 审阅状态"><option value="pending">待审阅</option><option value="accepted">接受方案</option><option value="changes">需要修改</option></select></div><p></p><label>修改意见<textarea placeholder="可选"></textarea></label>';item.dataset.id=id;item.querySelector('h3').textContent=title;item.querySelector('p').textContent=desc;const state=saved[id]||{};item.querySelector('select').value=['pending','accepted','changes'].includes(state.status)?state.status:'pending';item.querySelector('textarea').value=typeof state.note==='string'?state.note:'';container.append(item)}
+function read(){const result={};for(const item of container.children)result[item.dataset.id]={status:item.querySelector('select').value,note:item.querySelector('textarea').value};return result}
+function save(){try{localStorage.setItem(key,JSON.stringify(read()));document.getElementById('save-status').textContent='审阅意见已保存到当前浏览器。'}catch(e){document.getElementById('save-status').textContent='浏览器不允许本地保存，请使用导出审阅 JSON。'}}
+container.addEventListener('input',save);container.addEventListener('change',save);
+function download(name,body,type){const url=URL.createObjectURL(new Blob([body],{type}));const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000)}
+document.getElementById('export-review').addEventListener('click',()=>download('codex-token-cost-plan-review.json',JSON.stringify({plan:'codex-token-cost-plan',version:'1.0',exported_at:new Date().toISOString(),review:read()},null,2),'application/json'));
+document.getElementById('download-html').addEventListener('click',()=>{const clone=document.documentElement.cloneNode(true);clone.querySelector('#review-items').replaceChildren();clone.querySelector('#save-status').textContent='';download('codex-token-cost-plan.html','<!doctype html>\n'+clone.outerHTML,'text/html;charset=utf-8')});
+document.getElementById('print').addEventListener('click',()=>window.print());
+})();
+</script>
+</body>
+</html>
