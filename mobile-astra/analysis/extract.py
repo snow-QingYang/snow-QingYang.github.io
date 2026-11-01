@@ -189,7 +189,7 @@ def main():
               "manual_calls", "first_intervention_step", "first_success_step", "last_method",
               "completion_actor", "tool_calls", "turns", "elapsed_s", "stop"]
     with (out / "episodes.csv").open("w", newline="", encoding="utf-8-sig") as f:
-        writer = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
+        writer = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore", lineterminator="\n")
         writer.writeheader()
         writer.writerows(data["episodes"])
     lines = ["# RoboCasa composite：Astra 与 5.6-Sol", "", "320 个有效 episode；32 个任务 × seeds 1–5 × 2 模型。", "",
