@@ -11,6 +11,8 @@ import shutil
 import subprocess
 from pathlib import Path
 
+from compose import compose
+
 
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -145,11 +147,14 @@ def main():
     parser.add_argument("--run", type=Path, required=True)
     parser.add_argument("--analysis", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--skip-video", action="store_true", help="Validate and reuse existing composed videos")
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=True)
     cases = [build_case(seed, args.run, args.analysis, args.output) for seed in (5, 3)]
+    for case in cases:
+        compose(case, args.output, args.skip_video)
     (args.output / "data.json").write_text(json.dumps({"cases": cases}, ensure_ascii=False, indent=2) + "\n")
-    for name in ("index.html", "style.css", "app.js", "build.py"):
+    for name in ("index.html", "style.css", "app.js", "build.py", "compose.py"):
         path = Path(__file__).parent / name
         if path.exists():
             shutil.copy2(path, args.output / name)

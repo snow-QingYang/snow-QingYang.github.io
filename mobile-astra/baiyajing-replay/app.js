@@ -1,231 +1,143 @@
 "use strict";
+const $=selector=>document.querySelector(selector);
+const video=$("#video"),timeline=$("#timeline");
+const esc=value=>String(value ?? "").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
+const pretty=value=>esc(JSON.stringify(value,null,2));
+const sec=value=>`${Number(value).toFixed(1)} s`;
+const clock=value=>`${String(Math.floor(value/60)).padStart(2,"0")}:${String(Math.floor(value%60)).padStart(2,"0")}`;
+let current,filter="all",expanded=false,active=null,pendingTime=0,pendingPlay=false;
 
-const $ = selector => document.querySelector(selector);
-const esc = value => String(value ?? "").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
-const json = value => esc(JSON.stringify(value,null,2));
-const seconds = value => `${Number(value).toFixed(1)} s`;
-const policy = step => ["vla","pick"].includes(step.command.op);
-let data, current, position=0, attemptIndex=0, filter="all", mediaVersion=0;
-const expanded = new Set();
+function stepOf(item){return current.trace.find(step=>step.index===item.ref);}
+function planOf(item){return current.plans.find(plan=>plan.index===item.ref);}
+function kindOf(item){return item.type!=="step"?item.type:["vla","pick"].includes(stepOf(item).command.op)?"vla":"manual";}
+function methodOf(item){return item.type==="step"?stepOf(item).command.op:item.type==="plan"?planOf(item).kind:"result.success";}
+function titleOf(item){return item.type==="step"?`步骤 #${item.ref} · ${methodOf(item)}`:item.type==="plan"?`计划 #${item.ref} · ${methodOf(item)}`:"最终环境结果";}
+function timeOf(item){return item.type==="step"?stepOf(item).start:item.type==="plan"?planOf(item).time:current.elapsed_s;}
+function scrollToCard(card){timeline.scrollTop+=card.getBoundingClientRect().top-timeline.getBoundingClientRect().top-12;}
+function images(files,label){return files.length?`<div class="images panorama">${files.map(src=>`<a href="${src}" target="_blank" rel="noopener"><img src="${src}" alt="${esc(label)}" loading="lazy"></a>`).join("")}</div>`:"";}
 
-function stepOf(item) { return current.trace.find(step=>step.index===item.ref); }
-function planOf(item) { return current.plans.find(plan=>plan.index===item.ref); }
-function kindOf(item) { return item.type!=="step"?item.type:policy(stepOf(item))?"vla":"control"; }
-function itemLabel(item) {
-  if(item.type==="plan") return `计划 #${item.ref} · ${planOf(item).kind}`;
-  if(item.type==="result") return "最终环境判定与画面";
-  const step=stepOf(item);
-  return `步骤 #${step.index} · ${step.command.op}`;
+function bodyOf(item){
+  let outcome,args,result,extra="",photos=[];
+  if(item.type==="step"){
+    const step=stepOf(item);
+    outcome=`程序步骤 #${step.index} · 耗时 ${sec(step.duration)} · 子步骤 ok=${step.summary.ok}<br>${step.plan_index?`来自计划 #${step.plan_index}`:"固定的首次整任务 VLA"}${!item.media.length?" · 本段没有连续录像":""}`;
+    args=step.command;
+    result={...step.summary};delete result.step;
+    extra=step.attempt_events.map(attempt=>{
+      const media=item.media.find(m=>m.attempt===attempt.index);
+      return `<details class="attempt-detail"><summary>Attempt ${attempt.index+1} · ${esc(attempt.result.status)} · ${attempt.result.chunks} chunks</summary>${media?`<button class="jump" data-seek="${media.videoStart}">▶ 播放这次 attempt · ${sec(media.videoStart)}</button><a class="original" href="${media.src}" target="_blank" rel="noopener">原始视频 ↗</a>`:""}<pre>${pretty(attempt.result)}</pre></details>`;
+    }).join("");
+    if(step.alerts.length)extra+=`<div class="detail-heading">异常事件</div><pre>${pretty(step.alerts)}</pre>`;
+    photos=item.media.map(m=>m.snapshot).filter(Boolean);
+  }else if(item.type==="plan"){
+    const plan=planOf(item),executed=current.trace.filter(step=>step.plan_index===item.ref);
+    outcome=`Planner ${plan.kind} 输出 · ${plan.program.steps.length} 个计划步骤 / ${executed.length} 个实际执行${plan.program.unrecoverable?"<br><b>unrecoverable=true</b>":""}`;
+    args={after_step:plan.after_step,replan_trigger:plan.trigger};
+    result=plan.program;
+    extra=plan.program.steps.length?`<div class="detail-heading">计划中的步骤是否执行</div><ol class="planned-steps">${plan.program.steps.map((step,index)=>`<li><code>${esc(step.op)}</code> · ${index<executed.length?`已执行为步骤 #${executed[index].index}`:"未执行"}</li>`).join("")}</ol>`:"";
+    photos=item.media.map(m=>m.src);
+  }else{
+    outcome=`环境 success=${current.success} · ${current.stop}`;
+    args={task:current.task,seed:current.seed};
+    result={success:current.success,termination_reason:current.stop,elapsed_s:current.elapsed_s,llm_calls:current.llm_calls,steps_executed:current.steps_executed,final_progress:current.final_progress};
+    photos=item.media.map(m=>m.src);
+  }
+  const isVideo=item.media.some(m=>m.type==="video");
+  return `<div class="outcome">${outcome}</div><div class="detail-heading">回放注释</div><div class="intent">${esc(item.note)}</div><button class="jump" data-seek="${item.videoStart}">▶ ${isVideo?"播放":"查看说明画面"} ${item.videoStart.toFixed(1)}–${item.videoEnd.toFixed(1)}s</button><div class="detail-heading">${item.type==="plan"?"规划所处步骤 / 重规划触发反馈":"输入参数"}</div><pre>${pretty(args)}</pre><div class="detail-heading">${item.type==="plan"?"Planner 输出的完整程序":"返回结果"}</div><pre>${pretty(result)}</pre>${extra}${photos.length?`<div class="detail-heading">${item.type==="plan"?"本次 Planner 调用前的观测":item.type==="result"?"最终观测图":"各 attempt 结束后的观测（抬手 / 撤离前）"}</div>${images(photos,titleOf(item)+" 的相机观测")}<p class="note">从左到右为 agentview_left、agentview_right、wrist。图片是静态观测。</p>`:""}`;
 }
-function stamp(item) {
-  if(item.type==="plan") return `+${seconds(planOf(item).time)}`;
-  if(item.type==="result") return `+${seconds(current.elapsed_s)}`;
-  const step=stepOf(item);
-  return `+${step.start.toFixed(1)}–${step.end.toFixed(1)} s`;
+
+function render(){
+  const query=$("#search").value.toLowerCase().trim();
+  const items=current.items.filter(item=>(filter==="all"||kindOf(item)===filter)&&`${methodOf(item)} ${titleOf(item)} ${item.note} ${JSON.stringify(item.type==="step"?stepOf(item).command:item.type==="plan"?planOf(item).program:{})}`.toLowerCase().includes(query));
+  $("#count").textContent=`${items.length} / ${current.items.length} 条`;
+  timeline.innerHTML=items.map(item=>`<details class="call ${active===item.id?"active":""}" data-id="${item.id}" ${expanded?"open":""}><summary><span class="num">${String(current.items.indexOf(item)+1).padStart(2,"0")}</span><span class="call-main"><span class="method">${esc(methodOf(item))}</span><span class="kind ${kindOf(item)}">${{plan:"规划",manual:"显式控制",vla:"VLA",result:"结果"}[kindOf(item)]}</span><span class="call-label">${titleOf(item)}${item.type==="step"&&!item.media.length?" · 无连续录像":""}</span></span><span class="call-time">+${timeOf(item).toFixed(1)}s</span><span class="chevron">›</span></summary><div class="detail-content">${bodyOf(item)}</div></details>`).join("")||'<p class="empty">没有匹配的记录</p>';
 }
 
-function updateUrl(push=false) {
-  const url=new URL(location.href);
-  url.searchParams.set("case",current.key);
-  url.hash=new URLSearchParams({event:current.items[position].id,attempt:String(attemptIndex)}).toString();
-  history[push?"pushState":"replaceState"](null,"",url);
+function setFilterButtons(){document.querySelectorAll("[data-filter]").forEach(button=>button.setAttribute("aria-pressed",String(button.dataset.filter===filter)));}
+
+function update(t=video.currentTime){
+  if(!current)return;
+  const segment=current.replay.segments.find(s=>t>=s.start&&t<s.end)||current.replay.segments[current.replay.segments.length-1];
+  const item=current.items.find(i=>i.id===segment.item),ended=video.ended||t>=current.replay.duration-.02;
+  $("#phase-label").textContent=ended?`回放结束 · 环境${current.success?"成功":"未成功"} · ${current.stop}`:`${titleOf(item)} · ${segment.type==="video"?`VLA 录像 / attempt ${segment.attempt+1}`:item.type==="step"?"无连续录像 · 日志说明画面":"静态观测 · 4 秒说明画面"}`;
+  const changed=active!==item.id;active=item.id;
+  timeline.querySelectorAll(".call").forEach(card=>{
+    const on=card.dataset.id===active;card.classList.toggle("active",on);
+    if(on&&changed&&!video.paused)scrollToCard(card);
+  });
+  document.querySelectorAll(".chapters button").forEach(button=>button.classList.toggle("active",t>=Number(button.dataset.start)&&t<Number(button.dataset.end)));
 }
 
-function selectCase(key, eventId="step-1", mediaIndex=0, push=false) {
-  current=data.cases.find(c=>c.key===key) || data.cases[0];
-  filter="all";
-  expanded.clear();
-  document.querySelectorAll("[data-case]").forEach(button=>button.setAttribute("aria-pressed",String(button.dataset.case===current.key)));
+function seek(t,play=true,open=true,writeUrl=true){
+  if(!current)return;
+  t=Math.max(0,Math.min(Number(t)||0,current.replay.duration-.05));
+  pendingTime=t;pendingPlay=play;
+  if(video.readyState>=1){
+    video.currentTime=t;
+    if(play)video.play().catch(()=>{});else video.pause();
+    pendingPlay=false;
+  }
+  update(t);
+  let card=timeline.querySelector(`[data-id="${active}"]`);
+  if(!card){filter="all";$("#search").value="";setFilterButtons();render();card=timeline.querySelector(`[data-id="${active}"]`);}
+  if(card&&open){card.open=true;scrollToCard(card);}
+  if(writeUrl){const url=new URL(location.href);url.hash=`t=${t.toFixed(2)}`;history.replaceState(null,"",url);}
+}
+
+function loadHash(){
+  if(!current)return;
+  const hash=new URLSearchParams(location.hash.slice(1));
+  if(hash.has("t")){const t=Number(hash.get("t"));if(Number.isFinite(t))seek(t,false,true,false);return;}
+  const item=current.items.find(i=>i.id===hash.get("event"));
+  if(item){const media=item.media[Number(hash.get("attempt"))||0];seek(media?.videoStart??item.videoStart,false,true,false);}
+}
+
+fetch("data.json?v=unified-1").then(response=>{if(!response.ok)throw Error(`HTTP ${response.status}`);return response.json();}).then(data=>{
+  current=data.cases.find(c=>c.key===new URLSearchParams(location.search).get("case"))||data.cases[0];
+  document.title=`GetToastedBread seed ${current.seed} · ${current.success?"成功":"失败"}回放 · Mobile Astra`;
   $("#title").textContent=`GetToastedBread · seed ${current.seed}`;
-  document.title=`Baiyajing · seed ${current.seed} ${current.success?"成功":"失败"}回放 · Mobile Astra`;
-  $("#outcome").className=`badge ${current.key}`;
+  $("#outcome").className=`badge ${current.success?"success":"failure"}`;
   $("#outcome").textContent=`环境${current.success?"成功":"未成功"} · ${current.stop}`;
-  $("#subtitle").textContent=`GPT-6-Sol / medium · Seen · ${current.llm_calls} 次 Planner · ${current.steps_executed} 个程序步骤 · 完整 episode ${seconds(current.elapsed_s)}`;
+  $("#page-kind").textContent=`Baiyajing · ${current.success?"成功":"失败"}案例回放`;
+  $("#compare").href=`?case=${current.success?"failure":"success"}`;
+  $("#compare").textContent=`对照：seed ${current.success?"3 失败":"5 成功"}回放 →`;
+  $("#subtitle").textContent=`GPT-6-Sol / medium · Composite seen · ${current.llm_calls} 次 Planner 调用 · ${current.steps_executed} 个程序步骤 · ${current.actual_vla_attempts} 次 VLA attempts`;
   $("#task").textContent=`任务：启动烤面包机，待手柄弹起后，把面包送到餐桌上的盘子。${current.headline}。`;
+  $("#coverage").textContent=`统一回放 ${sec(current.replay.duration)}：原始 VLA 录像 ${sec(current.media_summary.duration)}，另插入规划观测、未录像步骤和最终结果的说明画面，每张固定 4 秒。carry / put_down 及准备动作没有连续录像。说明画面的时长不代表真实耗时；完整 episode ${sec(current.elapsed_s)}。`;
+  $("#end-label").textContent=`${clock(current.replay.duration)} · ${current.success?"成功":"未成功"}`;
+  $("#download-video").href=current.replay.src;
   $("#case-explanation").textContent=current.explanation;
   $("#lessons").innerHTML=current.lessons.map(note=>`<li>${esc(note)}</li>`).join("");
+  $("#analysis-title").textContent=current.success?"规划与恢复过程":"哪里失败了";
   $("#analysis-link").href=`../baiyajing-analysis/#case=${encodeURIComponent(current.id)}`;
-  $("#coverage").textContent=`全部 ${current.media_summary.clips} 段 VLA 录像，共 ${seconds(current.media_summary.duration)}。10 FPS，左侧 agentview / 右侧腕部相机；步骤 ${current.media_summary.unrecorded_steps.map(n=>"#"+n).join("、")} 没有连续录像。录像时长不包含 Planner 等待与执行器动作。`;
-  $("#record-count").textContent=`${current.llm_calls} 份计划输出 · ${current.steps_executed} 个实际步骤 · ${current.media_summary.clips} 段 VLA 视频 · 1 份最终结果`;
-  position=Math.max(0,current.items.findIndex(item=>item.id===eventId));
-  selectItem(position,mediaIndex,false,false);
-  updateUrl(push);
-}
+  $("#criteria-body").innerHTML=Object.entries(current.final_progress).map(([key,value])=>`<tr><td><code>${esc(key)}</code></td><td>${esc(value)}</td><td>局部任务状态</td></tr>`).join("")+`<tr><td><strong>success</strong></td><td class="${current.success?"good":"bad"}"><strong>${current.success}</strong></td><td>完整环境判定</td></tr>`;
+  $("#source").textContent=`数据来源：baiyajing_composite_8gpu_20261022 / GetToastedBread_s${current.seed} · ${current.replay.frames} 帧整理回放 · 原始素材和执行记录的 SHA-256 保存在 JSON 中`;
+  const firstPlan=current.items.find(item=>item.type==="plan");
+  $("#takeover").textContent=`▶ 从 ${clock(firstPlan.videoStart)} 看 Planner 介入`;
+  $("#takeover").dataset.seek=firstPlan.videoStart;
+  const milestones=[current.items.find(item=>item.id==="plan-2"),current.items.find(item=>item.type==="step"&&stepOf(item).command.op==="carry"),current.items[current.items.length-1]];
+  $("#milestones").innerHTML=milestones.map(item=>`<button data-seek="${item.videoStart}">${item.type==="plan"?"重规划":item.type==="result"?"最终结果":"搬运步骤"} · ${clock(item.videoStart)}</button>`).join("");
+  $("#chapters").innerHTML=current.items.map(item=>`<button class="${kindOf(item)}" title="${titleOf(item)}" aria-label="跳转：${titleOf(item)}" style="flex:${item.videoEnd-item.videoStart}" data-start="${item.videoStart}" data-end="${item.videoEnd}" data-seek="${item.videoStart}"></button>`).join("");
+  render();
+  $("#loading").hidden=true;$("#report").hidden=false;
+  video.src=current.replay.src;video.load();
+  update(0);loadHash();
+}).catch(error=>{$("#loading").className="error";$("#loading").textContent=`回放加载失败：${error.message}。请刷新重试。`;});
 
-function selectItem(index, mediaIndex=0, play=false, writeUrl=true) {
-  position=Math.max(0,Math.min(index,current.items.length-1));
-  const item=current.items[position];
-  attemptIndex=Math.max(0,Math.min(mediaIndex,Math.max(0,item.media.length-1)));
-  expanded.add(item.id);
-  $("#current-title").textContent=itemLabel(item);
-  $("#current-note").textContent=item.note;
-  const facts=[];
-  if(item.type==="step") {
-    const step=stepOf(item);
-    facts.push(`子步骤 ok=${step.summary.ok}`,step.plan_index?`来自计划 #${step.plan_index}`:"固定的首次整任务 VLA",`${seconds(step.duration)} 墙钟耗时`);
-    for(const [name,value] of Object.entries(step.changes)) facts.push(`${name}: ${value.before} → ${value.after}`);
-    if(step.summary.result) for(const name of ["still_grasped","released","final_dist","obj_height"]) {
-      if(name in step.summary.result) facts.push(`${name}=${step.summary.result[name]}`);
-    }
-  } else if(item.type==="plan") {
-    const plan=planOf(item), executed=current.trace.filter(step=>step.plan_index===plan.index).length;
-    facts.push(`${plan.program.steps.length} 个计划步骤`,`${executed} 个实际执行`);
-    if(plan.program.unrecoverable) facts.push("unrecoverable=true");
-  } else facts.push(`result.success=${current.success}`,`termination_reason=${current.stop}`);
-  $("#current-facts").innerHTML=`<div class="current-facts">${facts.map(fact=>`<span class="fact">${esc(fact)}</span>`).join("")}</div>`;
-  $("#position").textContent=`记录 ${position+1} / ${current.items.length}`;
-  $("#prev").disabled=position===0;
-  $("#next").disabled=position===current.items.length-1;
-  $("#copy-link").textContent="复制当前记录链接";
-  renderTimeline();
-  revealRecord(item.id);
-  renderMedia(play);
-  if(writeUrl) updateUrl();
-}
-
-function renderMedia(play=false) {
-  const item=current.items[position], media=item.media[attemptIndex], video=$("#video");
-  const version=++mediaVersion;
-  video.pause();
-  video.removeAttribute("src");
-  video.load();
-  video.hidden=true;
-  $("#observation").hidden=true;
-  $("#gap").hidden=true;
-  $("#media-link").hidden=!media;
-  $("#playback-status").textContent="";
-  $("#media-title").textContent=itemLabel(item);
-  $("#attempt-buttons").innerHTML=item.media.filter(m=>m.type==="video").map((m,index)=>`<button data-attempt="${index}" aria-pressed="${index===attemptIndex}">Attempt ${m.attempt+1} · ${esc(m.status)} · ${seconds(m.duration)}</button>`).join("");
-  if(media?.type==="video") {
-    video.hidden=false;
-    video.src=media.src;
-    video.playbackRate=Number($("#speed").value);
-    $("#media-type").textContent=`原始视频 · attempt ${media.attempt+1}`;
-    $("#media-caption").textContent=`左：agentview_left；右：wrist。${media.chunks} chunks / ${media.frames} 帧 / ${seconds(media.duration)}。attempt 状态 ${media.status}，不是整局成功标签。`;
-    if(play) video.play().catch(error=>{
-      if(version===mediaVersion && error.name!=="AbortError") $("#playback-status").textContent="请点击视频播放按钮继续。";
-    });
-  } else if(media?.type==="image") {
-    const image=$("#observation");
-    image.src=media.src;
-    image.alt=media.purpose==="planner"?`计划 #${item.ref} 的输入观测图`:`seed ${current.seed} 最终环境图像`;
-    image.hidden=false;
-    $("#media-type").textContent=media.purpose==="planner"?"Planner 输入观测 · 静态图":"最终观测 · 静态图";
-    $("#media-caption").textContent=`从左到右：agentview_left / agentview_right / wrist。${media.purpose==="planner"?"该图在本次 Planner 调用前拍摄；右侧为随后输出的程序。":"该图在整局结束时拍摄；完整任务结果来自环境 check_success()。"}这是一张静态观测图。`;
-  } else {
-    $("#gap").hidden=false;
-    $("#gap-text").textContent=`${stepOf(item).command.op} 是 Planner 安排的执行器步骤，原始记录未保存该段视频。`;
-    $("#media-type").textContent="执行日志 · 无连续录像";
-    $("#media-caption").textContent="这一步仅有执行日志。具体结果见下方解读与右侧记录，后续观测可通过“下一条”查看。";
-  }
-  if(media) $("#media-link").href=media.src;
-}
-
-function recordBody(item) {
-  if(item.type==="plan") {
-    const plan=planOf(item), executed=current.trace.filter(step=>step.plan_index===plan.index);
-    return `<p class="step-note">${esc(item.note)}</p><h3>计划步骤及执行情况</h3>${plan.program.steps.length?`<ol class="plan-steps">${plan.program.steps.map((step,index)=>`<li class="${index<executed.length?"executed":"unexecuted"}"><code>${esc(step.op)}</code> · ${index<executed.length?`已执行为步骤 #${executed[index].index}`:"未执行"}</li>`).join("")}</ol>`:'<p>steps=[]，没有后续动作。</p>'}${plan.trigger?`<details class="raw"><summary>触发重规划的执行反馈</summary><pre>${esc(plan.trigger)}</pre></details>`:""}<details class="raw"><summary>Planner 实际输出的完整程序 JSON</summary><pre>${json(plan.program)}</pre></details><p class="note">仅展示程序字段；右上时间是计划输出被记录的时刻。左侧图片是本次调用前的观测。</p><button class="record-action" data-view="${item.id}">查看规划输入图像</button>`;
-  }
-  if(item.type==="result") return `<p class="step-note">${esc(item.note)}</p><h3>最终环境结果</h3><pre>${json({success:current.success,termination_reason:current.stop,elapsed_s:current.elapsed_s,llm_calls:current.llm_calls,steps_executed:current.steps_executed})}</pre><h3>最终局部任务判据</h3><pre>${json(current.final_progress)}</pre><p class="note">这份 progress 不包含完整成功判据；两例的上述字段相同，环境 success 不同。</p><button class="record-action" data-view="result">查看最终画面</button>`;
-  const step=stepOf(item), result={...step.summary};
-  delete result.step;
-  delete result.progress_after;
-  return `<p class="step-note">${esc(item.note)}</p><details class="raw"><summary>实际执行参数 JSON</summary><pre>${json(step.command)}</pre></details>${step.attempt_events.map(attempt=>{
-    const media=item.media.find(m=>m.attempt===attempt.index), mediaIndex=item.media.indexOf(media);
-    return `<details class="attempt-result"><summary>Attempt ${attempt.index+1} · ${esc(attempt.result.status)} · ${attempt.result.chunks} chunks</summary>${media?`<button class="record-action" data-view="${item.id}" data-video="${mediaIndex}">播放这次 attempt</button>`:""}<pre>${json(attempt.result)}</pre>${media?.snapshot?`<a href="${media.snapshot}" target="_blank" rel="noopener"><img src="${media.snapshot}" alt="Attempt ${attempt.index+1} 的结束观测（抬手或撤离前）" loading="lazy"></a><p class="note">本图拍摄于 VLA 段结束后、抬手 / 撤离之前。三个视角依次为 left / right / wrist。</p>`:""}</details>`;
-  }).join("")}<details class="raw"><summary>步骤结果 JSON · ok 不等于整局 success</summary><pre>${json(result)}</pre></details>${step.alerts.length?`<h3>本步异常事件</h3><pre>${json(step.alerts)}</pre>`:""}<details class="raw"><summary>步骤后的局部任务判据</summary><pre>${json(step.summary.progress_after)}</pre></details>${Object.keys(step.changes).length?`<details class="raw"><summary>相对上一步的判据变化</summary><pre>${json(step.changes)}</pre></details>`:""}<button class="record-action" data-view="${item.id}">${item.media.length?"查看本步视频":"查看未录像步骤说明"}</button>`;
-}
-
-function renderTimeline() {
-  document.querySelectorAll("[data-filter]").forEach(button=>button.setAttribute("aria-pressed",String(button.dataset.filter===filter)));
-  const items=current.items.filter(item=>filter==="all" || kindOf(item)===filter);
-  $("#timeline").innerHTML=items.map(item=>{
-    const selected=item.id===current.items[position].id, kind=kindOf(item);
-    const description=item.type==="plan"?`${planOf(item).program.steps.length} 个计划步骤 · 点击看输入图像与程序`:item.type==="result"?`success=${current.success} · ${current.stop}`:`${stepOf(item).origin==="initial"?"首次整任务":`计划 #${stepOf(item).plan_index}`} · 子步骤 ok=${stepOf(item).summary.ok} · ${item.media.length?`${item.media.length} 段视频`:"无连续录像"}`;
-    return `<details class="record ${selected?"active":""}" id="record-${item.id}" data-record="${item.id}" ${expanded.has(item.id)?"open":""}><summary data-select="${item.id}"><div class="record-main"><div class="record-label">${itemLabel(item)}<span class="kind ${kind}">${{plan:"规划",vla:"VLA",control:"显式控制",result:"结果"}[kind]}</span></div><div class="record-info">${description}</div></div><span class="record-time">${stamp(item)}</span></summary><div class="record-body">${recordBody(item)}</div></details>`;
-  }).join("") || '<p class="empty">没有匹配的记录。</p>';
-  $("#expand").textContent=items.every(item=>expanded.has(item.id))?"收起全部":"展开全部";
-  document.querySelectorAll(".record").forEach(element=>element.addEventListener("toggle",()=>{
-    if(element.open) expanded.add(element.dataset.record); else expanded.delete(element.dataset.record);
-  }));
-}
-
-function revealRecord(id) {
-  const record=$(`#record-${id}`);
-  if(!record) return;
-  const panel=$("#timeline"), box=panel.getBoundingClientRect(), row=record.getBoundingClientRect();
-  if(row.top<box.top || row.top+70>box.bottom) panel.scrollTop+=row.top-box.top-8;
-}
-
-function jump(id) {
-  filter="all";
-  selectItem(current.items.findIndex(item=>item.id===id));
-}
-
-document.addEventListener("click",event=>{
-  if(!data) return;
-  const button=event.target.closest("[data-case],[data-filter],[data-attempt],[data-view],summary[data-select]");
-  if(!button) return;
-  if(button.dataset.case) return selectCase(button.dataset.case,"step-1",0,true);
-  if(button.dataset.filter) {filter=button.dataset.filter;renderTimeline();return;}
-  if(button.dataset.attempt) {selectItem(position,Number(button.dataset.attempt));return;}
-  const id=button.dataset.view || button.dataset.select;
-  if(id) {
-    event.preventDefault();
-    const same=current.items[position].id===id;
-    if(button.dataset.select && same) {
-      const record=$(`#record-${id}`);record.open=!record.open;
-      return;
-    }
-    selectItem(current.items.findIndex(item=>item.id===id),Number(button.dataset.video || 0));
-  }
+video.addEventListener("loadedmetadata",()=>{
+  video.currentTime=pendingTime;video.playbackRate=Number($("#speed").value);
+  if(pendingPlay)video.play().catch(()=>{});
+  pendingPlay=false;update();
 });
-
-$("#video").addEventListener("ended",()=>{
-  const item=current?.items[position];
-  if(!item || item.media[attemptIndex]?.type!=="video" || !$("#auto-next").checked) return;
-  if(attemptIndex+1<item.media.length) selectItem(position,attemptIndex+1,true);
-  else if(position+1<current.items.length) selectItem(position+1,0,true);
-});
-$("#video").addEventListener("error",()=>{
-  if(!$("#video").hidden && $("#video").hasAttribute("src")) $("#playback-status").textContent="视频加载失败，请使用“打开原始素材”或刷新重试。";
-});
-$("#observation").addEventListener("error",()=>{
-  if(!$("#observation").hidden) $("#playback-status").textContent="观测图加载失败，请刷新重试。";
-});
-$("#speed").addEventListener("change",()=>$("#video").playbackRate=Number($("#speed").value));
-$("#prev").addEventListener("click",()=>{if(current) selectItem(position-1);});
-$("#next").addEventListener("click",()=>{if(current) selectItem(position+1);});
-$("#jump-planner").addEventListener("click",()=>{if(current) jump("plan-1");});
-$("#jump-control").addEventListener("click",()=>{if(current) jump(`step-${current.trace.find(step=>step.command.op==="carry").index}`);});
-$("#jump-result").addEventListener("click",()=>{if(current) jump("result");});
-$("#expand").addEventListener("click",()=>{
-  const records=[...document.querySelectorAll(".record")], open=records.some(record=>!record.open);
-  records.forEach(record=>{record.open=open;if(open) expanded.add(record.dataset.record);else expanded.delete(record.dataset.record);});
-  $("#expand").textContent=open?"收起全部":"展开全部";
-});
+video.addEventListener("timeupdate",()=>update());video.addEventListener("seeked",()=>update());video.addEventListener("ended",()=>update());
+video.addEventListener("error",()=>{$("#playback-error").textContent="视频加载失败，请刷新或通过“下载完整回放”打开视频。";});
+$("#speed").addEventListener("change",()=>video.playbackRate=Number($("#speed").value));
+$("#search").addEventListener("input",()=>current&&render());
+document.querySelectorAll("[data-filter]").forEach(button=>button.addEventListener("click",()=>{filter=button.dataset.filter;setFilterButtons();if(current)render();}));
+$("#expand").addEventListener("click",()=>{expanded=!expanded;$("#expand").textContent=expanded?"全部收起":"全部展开";if(current)render();});
+document.addEventListener("click",event=>{const button=event.target.closest("[data-seek]");if(button)seek(button.dataset.seek);});
 $("#copy-link").addEventListener("click",async()=>{
-  try {await navigator.clipboard.writeText(location.href);$("#copy-link").textContent="已复制";}
-  catch {$("#copy-link").textContent="当前链接在地址栏";}
+  const url=new URL(location.href);url.searchParams.set("case",current.key);url.hash=`t=${video.currentTime.toFixed(2)}`;history.replaceState(null,"",url);
+  try{await navigator.clipboard.writeText(url.href);$("#copy-link").textContent="已复制";}catch{$("#copy-link").textContent="当前链接在地址栏";}
 });
-function readUrl() {
-  if(!data) return;
-  const query=new URLSearchParams(location.search), hash=new URLSearchParams(location.hash.slice(1));
-  const index=Number(hash.get("attempt"));
-  selectCase(query.get("case"),hash.get("event") || "step-1",Number.isInteger(index)?index:0);
-}
-window.addEventListener("popstate",readUrl);
-window.addEventListener("hashchange",readUrl);
-(async()=>{
-  try {
-    const response=await fetch("data.json");
-    if(!response.ok) throw new Error(`HTTP ${response.status}`);
-    data=await response.json();
-    readUrl();
-    $("#loading").hidden=true;
-    $("#report").hidden=false;
-  } catch(error) {
-    $("#loading").className="error";
-    $("#loading").textContent=`回放加载失败：${error.message}。请刷新重试。`;
-  }
-})();
+window.addEventListener("hashchange",loadHash);

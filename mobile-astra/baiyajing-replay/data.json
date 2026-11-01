@@ -697,10 +697,14 @@
               "frames": 180,
               "fps": 10,
               "width": 512,
-              "height": 256
+              "height": 256,
+              "videoStart": 0.0,
+              "videoEnd": 18.0
             }
           ],
-          "note": "完整任务 VLA 执行 45 个 chunks 后 idle。toaster_on=false，面包仍在烤面包机中；此时尚未调用 Planner。"
+          "note": "完整任务 VLA 执行 45 个 chunks 后 idle。toaster_on=false，面包仍在烤面包机中；此时尚未调用 Planner。",
+          "videoStart": 0.0,
+          "videoEnd": 18.0
         },
         {
           "id": "plan-1",
@@ -714,7 +718,9 @@
               "purpose": "planner"
             }
           ],
-          "note": "首次 VLA 停滞后，将剩余任务拆为 5 个步骤。实际只执行前两个；pick 失败后停止原队列并重规划。"
+          "note": "首次 VLA 停滞后，将剩余任务拆为 5 个步骤。实际只执行前两个；pick 失败后停止原队列并重规划。",
+          "videoStart": 18.0,
+          "videoEnd": 22.0
         },
         {
           "id": "step-2",
@@ -733,10 +739,14 @@
               "frames": 24,
               "fps": 10,
               "width": 512,
-              "height": 256
+              "height": 256,
+              "videoStart": 22.0,
+              "videoEnd": 24.4
             }
           ],
-          "note": "Planner 改写为启动手柄的子任务。6 个 chunks 后 done，toaster_on 从 false 变为 true；这里只完成了一个子目标。"
+          "note": "Planner 改写为启动手柄的子任务。6 个 chunks 后 done，toaster_on 从 false 变为 true；这里只完成了一个子目标。",
+          "videoStart": 22.0,
+          "videoEnd": 24.4
         },
         {
           "id": "step-3",
@@ -755,7 +765,9 @@
               "frames": 240,
               "fps": 10,
               "width": 512,
-              "height": 256
+              "height": 256,
+              "videoStart": 24.4,
+              "videoEnd": 48.4
             },
             {
               "type": "video",
@@ -768,10 +780,14 @@
               "frames": 60,
               "fps": 10,
               "width": 512,
-              "height": 256
+              "height": 256,
+              "videoStart": 48.4,
+              "videoEnd": 54.4
             }
           ],
-          "note": "第一次 pick 有两次 attempt：budget 60 chunks、grasped 15 chunks。但抬手后的持物检查未通过，整个步骤 ok=false，队列中后续搬运 / 放置被取消。"
+          "note": "第一次 pick 有两次 attempt：budget 60 chunks、grasped 15 chunks。但抬手后的持物检查未通过，整个步骤 ok=false，队列中后续搬运 / 放置被取消。",
+          "videoStart": 24.4,
+          "videoEnd": 54.4
         },
         {
           "id": "plan-2",
@@ -785,7 +801,9 @@
               "purpose": "planner"
             }
           ],
-          "note": "基于 pick 失败后的观测重新规划。实际执行 pick → carry → put_down 后成功，最后一个 VLA 步骤未执行。"
+          "note": "基于 pick 失败后的观测重新规划。实际执行 pick → carry → put_down 后成功，最后一个 VLA 步骤未执行。",
+          "videoStart": 54.4,
+          "videoEnd": 58.4
         },
         {
           "id": "step-4",
@@ -804,10 +822,14 @@
               "frames": 156,
               "fps": 10,
               "width": 512,
-              "height": 256
+              "height": 256,
+              "videoStart": 58.4,
+              "videoEnd": 74.0
             }
           ],
-          "note": "第二次计划再次安排 pick。39 个 chunks 后 grasped，步骤 ok=true、robot_holding=obj，toast_in_slot=false。"
+          "note": "第二次计划再次安排 pick。39 个 chunks 后 grasped，步骤 ok=true、robot_holding=obj，toast_in_slot=false。",
+          "videoStart": 58.4,
+          "videoEnd": 74.0
         },
         {
           "id": "step-5",
@@ -815,7 +837,9 @@
           "ref": 5,
           "event_number": 17,
           "media": [],
-          "note": "Planner 安排 carry 到 dining_counter、以 plate 为参考。执行器报告 still_grasped=true、final_dist=0.024；本段没有连续录像。"
+          "note": "Planner 安排 carry 到 dining_counter、以 plate 为参考。执行器报告 still_grasped=true、final_dist=0.024；本段没有连续录像。",
+          "videoStart": 74.0,
+          "videoEnd": 78.0
         },
         {
           "id": "step-6",
@@ -823,7 +847,9 @@
           "ref": 6,
           "event_number": 19,
           "media": [],
-          "note": "put_down 报告 released=true、obj_height=0.945。随后环境 check_success() 为 true，计划末尾额外的 VLA 入盘步骤未执行。最终图像可见面包在盘上。"
+          "note": "put_down 报告 released=true、obj_height=0.945。随后环境 check_success() 为 true，计划末尾额外的 VLA 入盘步骤未执行。最终图像可见面包在盘上。",
+          "videoStart": 78.0,
+          "videoEnd": 82.0
         },
         {
           "id": "result",
@@ -836,7 +862,9 @@
               "purpose": "final"
             }
           ],
-          "note": "环境最终 success=true，任务完成。"
+          "note": "环境最终 success=true，任务完成。",
+          "videoStart": 82.0,
+          "videoEnd": 86.0
         }
       ],
       "media_summary": {
@@ -863,6 +891,91 @@
         "frames/005.png": "b50a40cd787a74bde64bbbc33fa9d9693155fee7d7510d951ac5a665d0968594",
         "frames/007.png": "8cd5d9db2cc955cf3db44c09d5d0bac79fa6fc8a3b41448fa958ff7d210f85a7",
         "analysis-case.json": "e577cd9a365073e953b79fc829a7b654ac90d62bb2b73327f6c3c3fae3f488fe"
+      },
+      "replay": {
+        "src": "success/episode.mp4",
+        "duration": 86.0,
+        "frames": 860,
+        "fps": 10,
+        "segments": [
+          {
+            "item": "step-1",
+            "type": "video",
+            "attempt": 0,
+            "start": 0.0,
+            "end": 18.0,
+            "source": "success/videos/vla_000.mp4"
+          },
+          {
+            "item": "plan-1",
+            "type": "card",
+            "start": 18.0,
+            "end": 22.0,
+            "source": "success/frames/001.png"
+          },
+          {
+            "item": "step-2",
+            "type": "video",
+            "attempt": 0,
+            "start": 22.0,
+            "end": 24.4,
+            "source": "success/videos/vla_001.mp4"
+          },
+          {
+            "item": "step-3",
+            "type": "video",
+            "attempt": 0,
+            "start": 24.4,
+            "end": 48.4,
+            "source": "success/videos/vla_002.mp4"
+          },
+          {
+            "item": "step-3",
+            "type": "video",
+            "attempt": 1,
+            "start": 48.4,
+            "end": 54.4,
+            "source": "success/videos/vla_003.mp4"
+          },
+          {
+            "item": "plan-2",
+            "type": "card",
+            "start": 54.4,
+            "end": 58.4,
+            "source": "success/frames/005.png"
+          },
+          {
+            "item": "step-4",
+            "type": "video",
+            "attempt": 0,
+            "start": 58.4,
+            "end": 74.0,
+            "source": "success/videos/vla_004.mp4"
+          },
+          {
+            "item": "step-5",
+            "type": "card",
+            "start": 74.0,
+            "end": 78.0,
+            "source": null
+          },
+          {
+            "item": "step-6",
+            "type": "card",
+            "start": 78.0,
+            "end": 82.0,
+            "source": null
+          },
+          {
+            "item": "result",
+            "type": "card",
+            "start": 82.0,
+            "end": 86.0,
+            "source": "success/frames/007.png"
+          }
+        ],
+        "card_seconds": 4.0,
+        "sha256": "4ff8c1e938461a7b7bae0e3d75b46c5f8a044f4d93bb8a046d92b523afb625ac"
       }
     },
     {
@@ -1325,10 +1438,14 @@
               "frames": 516,
               "fps": 10,
               "width": 512,
-              "height": 256
+              "height": 256,
+              "videoStart": 0.0,
+              "videoEnd": 51.6
             }
           ],
-          "note": "完整任务 VLA 执行 129 个 chunks 后 idle。toaster_on=true，但 toast_in_slot=true，仍需要取出面包并送到盘子。"
+          "note": "完整任务 VLA 执行 129 个 chunks 后 idle。toaster_on=true，但 toast_in_slot=true，仍需要取出面包并送到盘子。",
+          "videoStart": 0.0,
+          "videoEnd": 51.6
         },
         {
           "id": "plan-1",
@@ -1342,7 +1459,9 @@
               "purpose": "planner"
             }
           ],
-          "note": "Planner 根据已启动烤面包机的状态，安排抓取、搬运、放下及必要的 VLA 入盘。实际只执行 pick 和 carry，后两步未执行。"
+          "note": "Planner 根据已启动烤面包机的状态，安排抓取、搬运、放下及必要的 VLA 入盘。实际只执行 pick 和 carry，后两步未执行。",
+          "videoStart": 51.6,
+          "videoEnd": 55.6
         },
         {
           "id": "step-2",
@@ -1361,7 +1480,9 @@
               "frames": 156,
               "fps": 10,
               "width": 512,
-              "height": 256
+              "height": 256,
+              "videoStart": 55.6,
+              "videoEnd": 71.2
             },
             {
               "type": "video",
@@ -1374,10 +1495,14 @@
               "frames": 60,
               "fps": 10,
               "width": 512,
-              "height": 256
+              "height": 256,
+              "videoStart": 71.2,
+              "videoEnd": 77.2
             }
           ],
-          "note": "Planner 的 pick 运行两次 attempt（39 + 15 chunks）。最终 ok=true、robot_holding=obj，面包已离开烤面包机。"
+          "note": "Planner 的 pick 运行两次 attempt（39 + 15 chunks）。最终 ok=true、robot_holding=obj，面包已离开烤面包机。",
+          "videoStart": 55.6,
+          "videoEnd": 77.2
         },
         {
           "id": "step-3",
@@ -1385,7 +1510,9 @@
           "ref": 3,
           "event_number": 10,
           "media": [],
-          "note": "carry 已到达目标附近（final_dist=0.023），但 still_grasped=false。步骤后检测到 obj 丢失，高度为 0.068 米，触发 object_fell。该段没有连续录像，无法从视频定位具体掉落时刻。"
+          "note": "carry 已到达目标附近（final_dist=0.023），但 still_grasped=false。步骤后检测到 obj 丢失，高度为 0.068 米，触发 object_fell。该段没有连续录像，无法从视频定位具体掉落时刻。",
+          "videoStart": 77.2,
+          "videoEnd": 81.2
         },
         {
           "id": "plan-2",
@@ -1399,7 +1526,9 @@
               "purpose": "planner"
             }
           ],
-          "note": "收到 carry 失败与物体丢失反馈后，Planner 输出 unrecoverable=true、steps=[]。随后整局以 object_on_floor 结束。"
+          "note": "收到 carry 失败与物体丢失反馈后，Planner 输出 unrecoverable=true、steps=[]。随后整局以 object_on_floor 结束。",
+          "videoStart": 81.2,
+          "videoEnd": 85.2
         },
         {
           "id": "result",
@@ -1412,7 +1541,9 @@
               "purpose": "final"
             }
           ],
-          "note": "环境最终 success=false；终止标签 object_on_floor。"
+          "note": "环境最终 success=false；终止标签 object_on_floor。",
+          "videoStart": 85.2,
+          "videoEnd": 89.2
         }
       ],
       "media_summary": {
@@ -1434,6 +1565,68 @@
         "frames/004.png": "a1ff08530ca6683aa01efa519c5b43b635c634ad3c2180d44cd9d2e39c793fae",
         "frames/005.png": "8220359b3e4a9a5474c3463774bec2d000570f308ce02c69ea932303068c0a02",
         "analysis-case.json": "941d1eded1f574297fc73f5dc01d3a1db32443da3f78c0307cadf6989e206528"
+      },
+      "replay": {
+        "src": "failure/episode.mp4",
+        "duration": 89.2,
+        "frames": 892,
+        "fps": 10,
+        "segments": [
+          {
+            "item": "step-1",
+            "type": "video",
+            "attempt": 0,
+            "start": 0.0,
+            "end": 51.6,
+            "source": "failure/videos/vla_000.mp4"
+          },
+          {
+            "item": "plan-1",
+            "type": "card",
+            "start": 51.6,
+            "end": 55.6,
+            "source": "failure/frames/001.png"
+          },
+          {
+            "item": "step-2",
+            "type": "video",
+            "attempt": 0,
+            "start": 55.6,
+            "end": 71.2,
+            "source": "failure/videos/vla_001.mp4"
+          },
+          {
+            "item": "step-2",
+            "type": "video",
+            "attempt": 1,
+            "start": 71.2,
+            "end": 77.2,
+            "source": "failure/videos/vla_002.mp4"
+          },
+          {
+            "item": "step-3",
+            "type": "card",
+            "start": 77.2,
+            "end": 81.2,
+            "source": null
+          },
+          {
+            "item": "plan-2",
+            "type": "card",
+            "start": 81.2,
+            "end": 85.2,
+            "source": "failure/frames/004.png"
+          },
+          {
+            "item": "result",
+            "type": "card",
+            "start": 85.2,
+            "end": 89.2,
+            "source": "failure/frames/005.png"
+          }
+        ],
+        "card_seconds": 4.0,
+        "sha256": "5eda8fc79bd3203cb10558b30f12b3e433575384353afd38050283ad2579093a"
       }
     }
   ]
