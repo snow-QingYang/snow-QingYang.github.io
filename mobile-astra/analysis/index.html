@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <meta name="description" content="GPT-6-Astra 与 GPT-5.6-Sol 的 320 次 RoboCasa composite 运行：VLA 完成、Planner 准备、Planner 修复与逐例动作证据。">
+  <meta name="description" content="按 Seen / Unseen 分析 GPT-6-Astra 与 GPT-5.6-Sol 的 320 次 RoboCasa composite 运行：VLA 完成、Planner 准备、Planner 修复与逐例动作证据。">
   <link rel="icon" href="data:,">
   <title>RoboCasa 实验分析 · Mobile Astra</title>
   <link rel="stylesheet" href="style.css">
@@ -20,7 +20,7 @@
     <div class="report-grid">
       <div class="summary-column">
         <section><h2>成功率</h2><div id="success-table"></div><p class="note">两个模型的 Seen 都为 32/80。Astra 的净增 8 个成功全部体现在 Unseen。</p></section>
-        <section><h2>成功路径 <span class="subtle">互斥分类</span></h2><div id="stage-table"></div><div id="stage-bars"></div><p class="note">点击数量可筛选案例。连续多次 VLA 调用仍计入“直接完成”；读取图像、地图或记忆不算动作介入。</p></section>
+        <section><h2>成功路径 <span class="subtle">按 Seen / Unseen</span></h2><div id="stage-table"></div><p class="note">三种成功路径互斥；百分比以对应任务组的 80 局为分母。点击数量或条形图可筛选该组案例。连续多次 VLA 调用仍计入“直接完成”；读取图像、地图或记忆不算动作介入。</p></section>
         <section><h2>Planner 介入成功的收尾方式</h2><div id="completion-table"></div><p class="note">根据首次 <code>success=true</code> 所在动作区分；“解析动作收尾”不代表前面的 VLA 没有贡献。</p></section>
       </div>
       <section class="matrix-section">
@@ -31,15 +31,15 @@
       </section>
     </div>
 
-    <section class="interpretation"><h2>这两批实验说明了什么</h2><div class="three-columns">
-      <article><h3>差距主要出现在介入后的成功</h3><p>Astra 的成功路径为 <strong>17 + 2 + 34</strong>，Sol 为 <strong>18 + 0 + 27</strong>。VLA 直接完成的数量接近；介入后成功多 7 个，准备后成功多 2 个，直接完成少 1 个，共净增 8 个。</p><p class="note">这是两批运行的路径构成差异；不是把同一次 VLA 失败交给两个 Planner 的配对修复实验。</p></article>
-      <article><h3>“直接 VLA”也常需要续跑</h3><p>两组的直接完成案例都使用了 <strong>至少 2 次 VLA 调用</strong>，没有单次 VLA 调用直接完成的案例。每次最多 320 仿真步，达到上限后 Planner 可以观察并继续调用。</p><p class="note">此类仍有 Planner 的观察、调用与模式选择；不能等同于独立、固定预算的 VLA-only 基线。</p></article>
-      <article><h3>实际介入的成功比例</h3><p>Astra 在 <strong>134</strong> 个 episode 中于 VLA 之后介入，成功 <strong>34（25.4%）</strong>；Sol 为 <strong>27/142（19.0%）</strong>。进入介入阶段的 episode 集合不同。</p><p class="note">没有“同种子持续只跑 VLA”的反事实对照，不能证明这些成功一定由介入带来。</p></article>
+    <section class="interpretation"><h2>分组结果与整体解释</h2><div class="three-columns">
+      <article><h3>差距来自 Unseen 介入后的成功</h3><p><strong>Seen：</strong>Astra 的成功路径为 <strong>12 + 2 + 18</strong>，Sol 为 <strong>13 + 0 + 19</strong>，两者均成功 32 局。</p><p><strong>Unseen：</strong>Astra 为 <strong>5 + 0 + 16</strong>，Sol 为 <strong>5 + 0 + 8</strong>；VLA 直接完成均为 5 局，介入后成功相差 8 局。</p><p class="note">顺序为 VLA 直接、准备后 VLA、Planner 介入后。这是路径构成差异；不是把同一次 VLA 失败交给两个 Planner 的配对修复实验。</p></article>
+      <article><h3>“直接 VLA”也常需要续跑 <span class="subtle">整体</span></h3><p>两个模型的直接完成案例都使用了 <strong>至少 2 次 VLA 调用</strong>，没有单次 VLA 调用直接完成的案例。每次最多 320 仿真步，达到上限后 Planner 可以观察并继续调用。</p><p class="note">此类仍有 Planner 的观察、调用与模式选择；不能等同于独立、固定预算的 VLA-only 基线。</p></article>
+      <article><h3>实际介入的成功比例 <span class="subtle">整体</span></h3><p>合并 Seen / Unseen 后，Astra 在 <strong>134</strong> 个 episode 中于 VLA 之后介入，成功 <strong>34（25.4%）</strong>；Sol 为 <strong>27/142（19.0%）</strong>。进入介入阶段的 episode 集合不同。</p><p class="note">没有“同种子持续只跑 VLA”的反事实对照，不能证明这些成功一定由介入带来。</p></article>
     </div></section>
 
     <div class="two-columns supporting">
-      <section><h2>同任务、同 seed 的配对结果</h2><div id="paired"></div><p class="note">相同 task 与 seed 对齐，共 160 对；点击数字查看对应案例。只比较最终环境成功，不要求成功路径相同。</p></section>
-      <section><h2>失败的停止方式</h2><div id="failure-table"></div><p class="note">按 transcript 的 <code>finish</code> 与模型响应计数分类。两批结果的 <code>termination_reason=completed</code> 只表示运行结束；不等于成功，也不能据此判为 3600 秒超时。</p></section>
+      <section><h2>同任务、同 seed 的配对结果 <span class="subtle">整体</span></h2><div id="paired"></div><p class="note">合并 Seen / Unseen，相同 task 与 seed 对齐，共 160 对；点击数字查看对应案例。只比较最终环境成功，不要求成功路径相同。</p></section>
+      <section><h2>失败的停止方式 <span class="subtle">整体</span></h2><div id="failure-table"></div><p class="note">合并 Seen / Unseen，按 transcript 的 <code>finish</code> 与模型响应计数分类。两批结果的 <code>termination_reason=completed</code> 只表示运行结束；不等于成功，也不能据此判为 3600 秒超时。</p></section>
     </div>
 
     <section id="examples"><div class="section-head"><h2>代表案例：从 VLA 续跑到解析控制</h2><span class="subtle">点击查看逐步证据</span></div><div id="example-grid" class="example-grid"></div></section>
@@ -59,8 +59,8 @@
     </section>
 
     <div class="two-columns supporting">
-      <section><h2>成功案例的耗时中位数</h2><div id="time-table"></div><p class="note">包含模型响应、观察、动作执行和收尾记录。各类样本数与任务不同，不能直接解释为模型推理速度差异。</p></section>
-      <section><h2>Planner 介入成功时使用的方法</h2><div id="method-table"></div><p class="note">每格为“出现该方法的成功 episode 数 / 调用数”；统计介入成功的整个 episode，包含首次 VLA 前的准备动作。点击方法可筛选。</p></section>
+      <section><h2>成功案例的耗时中位数 <span class="subtle">整体</span></h2><div id="time-table"></div><p class="note">合并 Seen / Unseen，包含模型响应、观察、动作执行和收尾记录。各类样本数与任务不同，不能直接解释为模型推理速度差异。</p></section>
+      <section><h2>Planner 介入成功时使用的方法 <span class="subtle">整体</span></h2><div id="method-table"></div><p class="note">合并 Seen / Unseen；每格为“出现该方法的成功 episode 数 / 调用数”。统计介入成功的整个 episode，包含首次 VLA 前的准备动作。点击方法可筛选。</p></section>
     </div>
 
     <section class="methodology" id="methodology"><h2>统计口径与实验配置</h2>

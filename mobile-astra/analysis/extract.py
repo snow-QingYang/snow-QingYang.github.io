@@ -192,11 +192,19 @@ def main():
         writer = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore", lineterminator="\n")
         writer.writeheader()
         writer.writerows(data["episodes"])
-    lines = ["# RoboCasa composite：Astra 与 5.6-Sol", "", "320 个有效 episode；32 个任务 × seeds 1–5 × 2 模型。", "",
-             "| 模型 | Seen | Unseen | 总成功 | VLA 直接 | 准备后 VLA | Planner 介入后 |", "|---|---|---|---|---|---|---|"]
-    for m in data["models"].values():
-        s = m["summary"]; c = s["categories"]
-        lines.append(f'| {m["name"]} | {s["by_split"]["seen"]["success"]}/80 | {s["by_split"]["unseen"]["success"]}/80 | {s["success"]}/160 | {c.get("vla",0)} | {c.get("setup",0)} | {c.get("repair",0)} |')
+    lines = ["# RoboCasa composite：Astra 与 5.6-Sol", "",
+             "320 个有效 episode；Seen / Unseen 各 16 个任务 × seeds 1–5 × 2 模型。", ""]
+    for split, label in (("seen", "Seen"), ("unseen", "Unseen")):
+        lines += [f"## {label}", "",
+                  "| 模型 | 成功数 / 80 | 成功率 | VLA 直接 | 准备后 VLA | Planner 介入后 |",
+                  "|---|---|---|---|---|---|"]
+        for model, m in data["models"].items():
+            items = [e for e in data["episodes"] if e["model"] == model and e["split"] == split]
+            counts = Counter(e["category"] for e in items)
+            successes = sum(e["success"] for e in items)
+            lines.append(f'| {m["name"]} | {successes}/{len(items)} | {100 * successes / len(items):.2f}% | {counts["vla"]} | {counts["setup"]} | {counts["repair"]} |')
+        lines.append("")
+    lines += ["## 整体分析"]
     lines += ["", "分类按 states.json 的实际动作顺序，截止首次 success=true。VLA 包括 rldx_arm/rldx_skill，连续续跑仍属于 VLA 直接完成。只读感知和记忆调用不算控制介入。",
               "准备类：非 VLA 动作只出现在首次 VLA 前。修复/介入类：首次 VLA 之后有非 VLA 动作，最后任务成功；并非因果消融结论。两批无纯解析动作成功案例，也无单次 VLA 调用直接成功案例。",
               "Astra 的 34 个介入成功中，17 个最后由 VLA 完成，17 个最后由解析动作完成；Sol 的 27 个分别为 17 和 10。",

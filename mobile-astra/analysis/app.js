@@ -27,16 +27,30 @@ function table(headers, rows) {
 
 function renderOverview() {
   const models = Object.entries(data.models);
-  $("#findings").innerHTML = `<div class="finding"><b>53 / 160 vs 45 / 160</b><span>Astra 33.1% · Sol 28.1% · 相差 +5.0 个百分点</span></div><div class="finding"><b>17 vs 18 个 VLA 直接成功</b><span>允许多次 VLA 续跑，成功前无解析动作</span></div><div class="finding"><b>34 vs 27 个介入后成功</b><span>另有 Astra 2 个准备后由 VLA 完成的案例</span></div>`;
+  const splits = ["seen", "unseen"].map(split=>({
+    id: split,
+    label: split === "seen" ? "Seen" : "Unseen",
+    models: models.map(([id,m])=>{
+      const episodes = data.episodes.filter(e=>e.model===id && e.split===split);
+      const categories = Object.fromEntries(["vla","setup","repair","failure"].map(c=>[c,episodes.filter(e=>e.category===c).length]));
+      return {id, name:m.name, episodes, categories, total:episodes.length, success:episodes.filter(e=>e.success).length};
+    })
+  }));
+  $("#findings").innerHTML = splits.map(split=>{
+    const astra = split.models.find(m=>m.id==="astra"), sol = split.models.find(m=>m.id==="sol");
+    const difference = 100 * (astra.success/astra.total - sol.success/sol.total);
+    return `<div class="finding"><b>${split.label} · Astra ${astra.success}/${astra.total} vs Sol ${sol.success}/${sol.total}</b><span>Astra ${pct(astra.success,astra.total)} · Sol ${pct(sol.success,sol.total)} · ${difference===0?"成功率相同":`Astra 高 ${difference.toFixed(1)} 个百分点`}</span></div>`;
+  }).join("");
   $("#success-table").innerHTML = table(["模型", "Seen", "Unseen", "Overall"], models.map(([id,m])=>[
     `<span class="row-label">${shortModel(id)}</span><small>xhigh</small>`,
     ...[m.summary.by_split.seen,m.summary.by_split.unseen,m.summary].map(s=>`<span class="rate">${pct(s.success,s.total)}</span><small>${s.success}/${s.total}</small>`)
   ]));
-  $("#stage-table").innerHTML = table(["成功路径", "Astra", "Sol"], ["vla","setup","repair"].map(c=>[
-    `<span class="badge ${c}">${labels[c]}</span>`, ...models.map(([id,m])=>`<button class="number-button" data-filter-model="${id}" data-filter-category="${c}">${m.summary.categories[c]||0}</button><small>${pct(m.summary.categories[c]||0,160)} / 全部运行</small>`)
-  ]));
-  $("#stage-bars").innerHTML = models.map(([id,m])=>`<div class="bar-row"><span>${id === "astra" ? "Astra" : "Sol"}</span><div class="stacked-bar" aria-label="${m.name} 的全部160次运行构成">${["vla","setup","repair","failure"].map(c=>`<i class="${c}" style="width:${100*(m.summary.categories[c]||0)/160}%" title="${labels[c]} ${m.summary.categories[c]||0}"></i>`).join("")}</div></div>`).join("");
-  $("#completion-table").innerHTML = table(["首次成功所在动作", "Astra", "Sol"], [["VLA 完成最后一步",17,17],["解析动作完成最后一步",17,10]]);
+  $("#stage-table").innerHTML = splits.map(split=>`<div class="split-summary"><h3>${split.label}<span>每模型 ${split.models[0].total} 局</span></h3>${table(["成功路径", "Astra", "Sol"], ["vla","setup","repair"].map(c=>[
+    `<span class="badge ${c}">${labels[c]}</span>`, ...split.models.map(m=>`<button class="number-button" data-filter-model="${m.id}" data-filter-split="${split.id}" data-filter-category="${c}">${m.categories[c]}</button><small>${pct(m.categories[c],m.total)} / 本组运行</small>`)
+  ]))}${split.models.map(m=>`<div class="bar-row"><span>${m.id === "astra" ? "Astra" : "Sol"}</span><div class="stacked-bar" role="group" aria-label="${m.name} · ${split.label} 的 ${m.total} 次运行构成">${["vla","setup","repair","failure"].map(c=>`<button class="${c}" type="button" data-filter-model="${m.id}" data-filter-split="${split.id}" data-filter-category="${c}" style="width:${100*m.categories[c]/m.total}%" aria-label="${m.name} · ${split.label} · ${labels[c]} ${m.categories[c]} 局" title="${split.label} · ${labels[c]} ${m.categories[c]}"></button>`).join("")}</div></div>`).join("")}</div>`).join("");
+  $("#completion-table").innerHTML = splits.map(split=>`<div class="split-summary"><h3>${split.label}</h3>${table(["首次成功所在动作", "Astra", "Sol"], [["vla","VLA 完成最后一步"],["manual","解析动作完成最后一步"]].map(([actor,label])=>[
+    label, ...split.models.map(m=>m.episodes.filter(e=>e.category==="repair" && e.completion_actor===actor).length)
+  ]))}</div>`).join("");
   $("#paired").innerHTML = `<div class="paired-grid">${[["both","两者均成功"],["astra_only","仅 Astra 成功"],["sol_only","仅 Sol 成功"],["neither","两者均失败"]].map(([id,label])=>`<button data-filter-paired="${id}"><b>${data.paired[id]}</b>${label}</button>`).join("")}</div>`;
   $("#failure-table").innerHTML = table(["停止方式", "Astra", "Sol"], [
     ["主动结束 · finish=stuck", ...models.map(([,m])=>m.summary.stops.stuck)],
@@ -55,7 +69,7 @@ function renderOverview() {
   ]));
   $("#example-grid").innerHTML = examples.map(ex=>{
     const e = episodeMap.get(ex.id);
-    return `<article class="example"><div class="example-head"><span>${data.models[e.model].name}</span>${badge(e.category)}</div><h3>${ex.title}</h3><div class="mini-stats">${e.task} · seed ${e.seed} · VLA ${e.vla_calls} / 解析 ${e.manual_calls} · ${seconds(e.elapsed_s)}</div><p>${ex.text}</p><div class="example-foot"><button class="text-button" data-case="${e.id}">查看动作证据 →</button>${ex.replay?'<a href="../pan-transfer/">视频与全部工具调用 →</a>':""}</div></article>`;
+    return `<article class="example"><div class="example-head"><span>${data.models[e.model].name} · ${e.split === "seen" ? "Seen" : "Unseen"}</span>${badge(e.category)}</div><h3>${ex.title}</h3><div class="mini-stats">${e.task} · seed ${e.seed} · VLA ${e.vla_calls} / 解析 ${e.manual_calls} · ${seconds(e.elapsed_s)}</div><p>${ex.text}</p><div class="example-foot"><button class="text-button" data-case="${e.id}">查看动作证据 →</button>${ex.replay?'<a href="../pan-transfer/">视频与全部工具调用 →</a>':""}</div></article>`;
   }).join("");
   $("#generated").textContent = new Date(data.generated_utc).toLocaleString("zh-CN", {timeZone:"Asia/Hong_Kong",hour12:false}) + " UTC+8";
 }
@@ -184,7 +198,7 @@ document.addEventListener("click", (event)=>{
   if(!target || !data) return;
   if(target.dataset.case) return showCase(target.dataset.case);
   if(target.dataset.matrixModel) { matrixModel=target.dataset.matrixModel; renderMatrix(); return; }
-  if(target.dataset.filterCategory) setFilters({model:target.dataset.filterModel,category:target.dataset.filterCategory});
+  if(target.dataset.filterCategory) setFilters({model:target.dataset.filterModel,split:target.dataset.filterSplit,category:target.dataset.filterCategory});
   if(target.dataset.filterPaired) setFilters({category:"all",paired:target.dataset.filterPaired});
   if(target.dataset.methodSearch) setFilters({category:"repair",search:target.dataset.methodSearch});
   $("#case-browser").scrollIntoView({behavior:"smooth",block:"start"});

@@ -9,6 +9,7 @@
 <title>Mobile Astra</title>
 <style>
 *{box-sizing:border-box}body{margin:0;color:#222b35;background:#f7f8fa;font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif}header{border-bottom:1px solid #dfe3e8;background:#fff;padding:17px 28px;display:flex;align-items:center;gap:14px}header strong{font-size:18px;font-weight:600}header span{font-size:12px;color:#78828c}main{max-width:1100px;margin:32px auto;padding:0 24px}h1{font-size:17px;font-weight:600;margin:0 0 12px}section{margin-bottom:30px}.table{border:1px solid #dfe3e8;border-radius:6px;overflow:auto;background:#fff}table{border-collapse:collapse;width:100%;text-align:left;white-space:nowrap}th{background:#f1f3f5;color:#626d78;font-size:12px;font-weight:500}th,td{padding:13px 17px;border-bottom:1px solid #e8ebee}tbody tr:last-child td{border-bottom:0}td small{display:block;color:#7a8490;font-size:12px}.badge{background:#eaf4ed;color:#357245;font-size:12px;padding:3px 8px;border-radius:4px}a{color:#2563a8;text-decoration:none}a:hover{text-decoration:underline}.open{display:inline-block;border:1px solid #c6d7e8;background:#f4f8fc;padding:5px 12px;border-radius:4px;font-size:12px;white-space:nowrap}.description{font-size:12px;color:#74808b;margin:10px 0}.doc{display:flex;justify-content:space-between;align-items:center;gap:20px;background:#fff;border:1px solid #dfe3e8;padding:18px;border-radius:6px}.doc strong{font-size:14px;font-weight:500}.doc p{font-size:12px;color:#74808b;margin:5px 0 0}.links{display:flex;gap:18px;align-items:center}.download{font-size:12px;white-space:nowrap}@media(max-width:600px){header{padding:15px 18px}main{padding:0 16px;margin-top:24px}.doc{align-items:flex-start;flex-direction:column}th,td{padding:11px 13px}}
+.split-heading{font-size:14px;font-weight:600;margin:18px 0 8px}
 .badge.failure{background:#f6e9e5;color:#9b4a3f}
 </style>
 </head>
@@ -21,8 +22,11 @@
 </section>
 <section aria-labelledby="analysis-title">
 <h1 id="analysis-title">官方 RPent · RoboCasa 两组实验分析</h1>
-<div class="table"><table><thead><tr><th>模型 · xhigh</th><th>总成功</th><th>VLA 直接完成</th><th>准备后 VLA 完成</th><th>Planner 介入后成功</th></tr></thead><tbody><tr><td>GPT-6-Astra</td><td><strong>53 / 160 · 33.1%</strong></td><td>17</td><td>2</td><td>34</td></tr><tr><td>GPT-5.6-Sol</td><td><strong>45 / 160 · 28.1%</strong></td><td>18</td><td>0</td><td>27</td></tr></tbody></table></div>
-<p class="description">32 个任务 × seeds 1–5，共 320 个有效 episode。包含 Seen / Unseen、逐 seed 矩阵、成功路径、代表案例，以及每个案例的动作参数和判据变化。两组使用不同任务记忆；介入后的成功按实际轨迹分类。</p>
+<h2 class="split-heading" id="seen-title">Seen</h2>
+<div class="table"><table aria-labelledby="seen-title"><thead><tr><th>模型 · xhigh</th><th>成功数 / 80</th><th>VLA 直接完成</th><th>准备后 VLA 完成</th><th>Planner 介入后成功</th></tr></thead><tbody><tr><td>GPT-6-Astra</td><td><strong>32 / 80 · 40.00%</strong></td><td>12</td><td>2</td><td>18</td></tr><tr><td>GPT-5.6-Sol</td><td><strong>32 / 80 · 40.00%</strong></td><td>13</td><td>0</td><td>19</td></tr></tbody></table></div>
+<h2 class="split-heading" id="unseen-title">Unseen</h2>
+<div class="table"><table aria-labelledby="unseen-title"><thead><tr><th>模型 · xhigh</th><th>成功数 / 80</th><th>VLA 直接完成</th><th>准备后 VLA 完成</th><th>Planner 介入后成功</th></tr></thead><tbody><tr><td>GPT-6-Astra</td><td><strong>21 / 80 · 26.25%</strong></td><td>5</td><td>0</td><td>16</td></tr><tr><td>GPT-5.6-Sol</td><td><strong>13 / 80 · 16.25%</strong></td><td>5</td><td>0</td><td>8</td></tr></tbody></table></div>
+<p class="description">Seen / Unseen 各 16 个任务 × seeds 1–5，每个模型每组 80 局，共 320 个有效 episode。三个成功路径互斥，相加等于该组成功数。两组模型使用不同任务记忆；介入后的成功按实际轨迹分类。</p>
 <div class="links"><a class="open" href="analysis/">查看完整分析 →</a><a class="download" href="analysis/episodes.csv" download>下载 320 条记录 CSV</a></div>
 </section>
 <section aria-labelledby="runs-title">
