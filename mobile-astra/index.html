@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<meta name="description" content="Mobile Astra 工作页：RoboCasa 官方 RPent 与 Baiyajing 实验分析、执行回放与方法调用文档。">
+<meta name="description" content="Mobile Astra 工作页：RoboCasa 官方 RPent 实验分析、执行回放与方法调用文档。">
 <link rel="icon" href="data:,">
 <title>Mobile Astra</title>
 <style>
@@ -25,17 +25,10 @@
 <p class="description">32 个任务 × seeds 1–5，共 320 个有效 episode。包含 Seen / Unseen、逐 seed 矩阵、成功路径、代表案例，以及每个案例的动作参数和判据变化。两组使用不同任务记忆；介入后的成功按实际轨迹分类。</p>
 <div class="links"><a class="open" href="analysis/">查看完整分析 →</a><a class="download" href="analysis/episodes.csv" download>下载 320 条记录 CSV</a></div>
 </section>
-<section aria-labelledby="baiyajing-title">
-<h1 id="baiyajing-title">Baiyajing 版本 · 实验分析</h1>
-<div class="table"><table><thead><tr><th>Planner</th><th>Seen</th><th>Unseen</th><th>总成功</th><th>初始整任务 VLA</th><th>Planner 修复</th></tr></thead><tbody><tr><td>GPT-6-Sol<small>medium · hybrid</small></td><td>39 / 80</td><td>22 / 80</td><td><strong>61 / 160 · 38.1%</strong></td><td>28</td><td>33 / 132<small>20 个 vla/pick 程序 · 13 个含显式控制</small></td></tr></tbody></table></div>
-<p class="description">32 个任务 × seeds 1–5。先运行完整任务 VLA，未完成再由 Planner 输出程序；报告包含逐 seed 结果、计划 JSON、实际执行与重试、6 个成功 / 失败案例。此版本的 pick 也由 VLA 执行；实现、模型、记忆和预算与上面两组不同。</p>
-<div class="links"><a class="open" href="baiyajing-analysis/">查看 Baiyajing 完整分析 →</a><a class="download" href="baiyajing-analysis/episodes.csv" download>下载 160 条记录 CSV</a></div>
-</section>
 <section aria-labelledby="runs-title">
 <h1 id="runs-title">实验回放</h1>
-<div class="table"><table><thead><tr><th>任务</th><th>模型</th><th>结果</th><th>执行记录</th><th></th></tr></thead><tbody><tr><td>PanTransfer<small>RoboCasa · seed 2</small></td><td>GPT-6-Astra<small>xhigh</small></td><td><span class="badge">成功</span></td><td>79 次工具调用<small>44 次解析动作 · 4 次 VLA</small></td><td><a class="open" href="pan-transfer/">打开回放 →</a></td></tr><tr><td>PanTransfer<small>RoboCasa · seed 1 · 食物洒落后未恢复</small></td><td>GPT-6-Astra<small>xhigh</small></td><td><span class="badge failure">失败 · stuck</span></td><td>34 次工具调用<small>4 次解析动作 · 12 次 VLA</small></td><td><a class="open" href="pan-transfer-failure/">查看失败回放 →</a></td></tr><tr><td>GetToastedBread<small>Baiyajing · seed 5 · 重规划抓取后送盘</small></td><td>GPT-6-Sol<small>medium</small></td><td><span class="badge">成功</span></td><td>2 次 Planner · 6 个程序步骤<small>连续回放 86 秒 · 含 66 秒 VLA 录像</small></td><td><a class="open" href="baiyajing-replay/?case=success">查看规划成功回放 →</a></td></tr><tr><td>GetToastedBread<small>Baiyajing · seed 3 · 搬运后失去面包</small></td><td>GPT-6-Sol<small>medium</small></td><td><span class="badge failure">失败 · object_on_floor</span></td><td>2 次 Planner · 3 个程序步骤<small>连续回放 89.2 秒 · 含 73.2 秒 VLA 录像</small></td><td><a class="open" href="baiyajing-replay/?case=failure">查看规划失败回放 →</a></td></tr></tbody></table></div>
+<div class="table"><table><thead><tr><th>任务</th><th>模型</th><th>结果</th><th>执行记录</th><th></th></tr></thead><tbody><tr><td>PanTransfer<small>RoboCasa · seed 2</small></td><td>GPT-6-Astra<small>xhigh</small></td><td><span class="badge">成功</span></td><td>79 次工具调用<small>44 次解析动作 · 4 次 VLA</small></td><td><a class="open" href="pan-transfer/">打开回放 →</a></td></tr><tr><td>PanTransfer<small>RoboCasa · seed 1 · 食物洒落后未恢复</small></td><td>GPT-6-Astra<small>xhigh</small></td><td><span class="badge failure">失败 · stuck</span></td><td>34 次工具调用<small>4 次解析动作 · 12 次 VLA</small></td><td><a class="open" href="pan-transfer-failure/">查看失败回放 →</a></td></tr></tbody></table></div>
 <p class="description">PanTransfer：seed 2 由解析控制完成倾倒并恢复滑落的锅；seed 1 在食物洒落后尝试恢复，仍未完成。回放包含完整工具参数与返回结果。</p>
-<p class="description">Baiyajing GetToastedBread：对照 Planner 抓取、搬运与放置的成功 / 失败路径。统一视频连续播放，右侧同步展示计划与操作；观测和未录像步骤用明确标注的 4 秒说明画面衔接。</p>
 </section>
 <section aria-labelledby="docs-title">
 <h1 id="docs-title">方法调用文档</h1>
