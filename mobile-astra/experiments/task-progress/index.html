@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="description" content="验证：如果 Agent 看不到任务内部的中间完成判据，是否还能依靠观测进行规划和修复。">
+<link rel="icon" href="data:,"><link rel="stylesheet" href="../../project.css"><title>E03 · 移除任务进度真值 · Mobile Astra</title></head>
+<body><header class="site-head"><div class="head-inner"><a class="brand" href="../../">Mobile Astra / 实验工作页</a><nav aria-label="项目导航"><a href="../../">项目总览</a><a href="../" aria-current="page">实验目录</a><a href="../../reference/">接口与真值</a></nav></div></header>
+<main><nav class="crumbs" aria-label="当前位置"><a href="../../">项目总览</a> <span aria-hidden="true">/</span> <a href="../">实验目录</a> <span aria-hidden="true">/</span> <span aria-current="page">E03 · 移除任务进度真值</span></nav><div class="hero"><p class="eyebrow">HARNESSVLA / ROBOCASA</p><h1>E03 · 移除任务进度真值</h1><p class="lead">验证：如果 Agent 看不到任务内部的中间完成判据，是否还能依靠观测进行规划和修复。</p></div>
+
+<section class="current"><h3>当前状态：部分接口审计，尚无正式结果</h3><p>一次 SetUpCuttingStation seed 3 试跑中，11 次 Agent 观测未返回 <code>task_progress</code>，内部记录仍保留。但该次用了 DA3，和要求的原版深度配置不符，已中止；没有 result.json。</p><p><a href="cases/setup-cutting-station-s3/">查看此次试跑的审计证据 →</a></p></section>
+<section><h2>要移除什么</h2><p>原版初始观测及动作后的自动观测会把任务内部判据返回给 Agent，例如 <code>vegetable_on_plate</code>、<code>pan_on_stove</code>、<code>gripper_obj_far</code>。本实验首先关注这条实时进度通道。</p><p>环境内部保留真值用于最终评分；Agent 侧移除实时 <code>task_progress</code>。这次试跑仍保留 <code>success</code> 等信号，也仍可读取指定历史记忆，因此只覆盖部分通道。</p></section>
+<section><h2>正确配置下还需要做什么</h2><ol><li><strong>使用原版深度：</strong>回到 E01 的几何来源，避免同时替换深度与移除任务进度。</li><li><strong>明确读取边界：</strong>当前试跑把文件读取限在记忆目录，这还会影响评分规则等文件访问。正式对照要匹配读取权限，或把这一变化单独列成设置，避免混为纯 task_progress 消融。</li><li><strong>先核对接口，再做任务评测：</strong>检查初始观测、动作返回和文件访问；核对真实 Agent 上下文后，再跑 32 任务 × 5 seeds。</li><li><strong>后续再做估计替代：</strong>让视觉模型依据图像判断子目标完成情况，同时报告不确定性；这一替代尚未实施。</li></ol></section>
+<div class="links"><a href="../../reference/ground-truth.html">查任务进度从哪里来 →</a><a href="../baseline/cases/pan-transfer-success/">在 baseline 成功案例中查看真实返回 →</a></div></main><footer class="site-foot"><span>HarnessVLA 真值移除与替代 · 整理于 2026-11-03</span><a href="../">实验目录</a></footer></body></html>

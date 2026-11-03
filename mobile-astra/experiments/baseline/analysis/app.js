@@ -27,13 +27,13 @@ const examples = [
     "id": "astra--PanTransfer--3",
     "title": "规划抓取、倾倒、放回并撤离",
     "text": "13 次 VLA 与前期位置调整未完成倾倒；#16 解析抓取，#39 食物落盘，#58 锅回到炉灶，#60 move_to 撤离后环境成功。",
-    "replay": "../pan-transfer/"
+    "replay": "../cases/pan-transfer-success/"
   },
   {
     "id": "astra--PanTransfer--1",
     "title": "重新定位与三轮姿态调整仍未恢复",
     "text": "VLA 后在 #14、#19–20、#23 调整末端或底盘，并继续 VLA。共 21 次 VLA、6 次解析动作，最终食物未入盘、锅未回炉灶，finish=stuck。",
-    "replay": "../pan-transfer-failure/"
+    "replay": "../cases/pan-transfer-failure/"
   },
   {
     "id": "astra--PrepareCoffee--4",
@@ -188,7 +188,7 @@ async function loadCase(id) {
       <div class="task-instruction">${escapeHTML(e.task_language)}</div>
       <div class="detail-stats"><div><b>${e.vla_calls} / ${e.manual_calls}</b><span>VLA / 解析动作</span></div><div><b>${e.tool_calls}</b><span>全部工具调用（transcript）</span></div><div><b>${e.turns} / 100</b><span>模型响应计数</span></div><div><b>${seconds(e.elapsed_s)}</b><span>episode 墙钟耗时</span></div></div>
       <div class="evidence"><p><strong>归类依据：</strong>${attributionText(e,d)}</p>${ex?`<p><strong>案例解读：</strong>${ex.text}</p>`:""}<p class="note">调用数截止首次成功（失败则取全程）；解析动作数包含准备动作。这里的 step 是环境动作编号，不是仿真步。</p></div>
-      <div class="detail-links">${id==="astra--PanTransfer--2"?'<a href="../pan-transfer/">观看视频与全部 79 次工具调用 →</a>':""}<a href="cases/${encodeURIComponent(id)}.json" download>下载本例证据 JSON</a><button class="text-button" data-case="${e.model==="astra"?"sol":"astra"}--${e.task}--${e.seed}">查看另一模型同 seed →</button></div>
+      <div class="detail-links">${ex?.replay?`<a href="${ex.replay}">观看视频与全部方法调用 →</a>`:""}<a href="cases/${encodeURIComponent(id)}.json" download>下载本例证据 JSON</a><button class="text-button" data-case="${e.model==="astra"?"sol":"astra"}--${e.task}--${e.seed}">查看另一模型同 seed →</button></div>
       ${d.finish_summary?`<details class="detail-summary"><summary>Agent 结束时的报告（原文；环境判定优先）</summary><blockquote>${escapeHTML(d.finish_summary)}</blockquote></details>`:'<p class="note">本例没有 finish summary；不能据缺少 Agent 总结判断是否成功。</p>'}
       <div class="trace-tools"><h3>环境动作轨迹 <span class="subtle">${d.trace.length} 个动作</span></h3><label class="subtle" for="trace-filter">显示</label><select id="trace-filter"><option value="all">全部动作</option><option value="manual">仅解析动作</option><option value="changes">仅判据变化 / 成功</option><option value="vla">仅 VLA</option></select><button id="expand-trace" type="button">展开参数</button></div>
       <div class="trace-summary" aria-label="动作类型时间顺序">${d.trace.map(a=>`<span class="trace-dot ${a.kind==="vla"?"vla":"repair"}" title="#${a.step} ${a.method}">${a.step}</span>`).join("")}</div>

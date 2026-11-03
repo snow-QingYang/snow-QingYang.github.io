@@ -1,0 +1,159 @@
+{
+  "as_of": "2026-11-03",
+  "baseline": {
+    "name": "GPT-6-Astra",
+    "model": "gpt-6-astra",
+    "effort": "xhigh",
+    "memory": "GPT_6_astra_high",
+    "memory_revision": "47f301ef33bf8d0e8c770342f16b3c39c6a0e8c1",
+    "repository_revision": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+    "run": "composite_main_astra_rerun_20261101T150450Z",
+    "summary": {
+      "total": 160,
+      "success": 55,
+      "by_split": {
+        "seen": {
+          "total": 80,
+          "success": 34,
+          "categories": {
+            "repair": 18,
+            "vla": 13,
+            "setup": 3
+          }
+        },
+        "unseen": {
+          "total": 80,
+          "success": 21,
+          "categories": {
+            "repair": 14,
+            "vla": 6,
+            "setup": 1
+          }
+        }
+      },
+      "categories": {
+        "repair": 32,
+        "vla": 19,
+        "setup": 4,
+        "failure": 105
+      },
+      "repair_final": {
+        "manual": 20,
+        "vla": 12
+      },
+      "repair_attempted": 128,
+      "stops": {
+        "stuck": 91,
+        "turn_limit": 14
+      },
+      "first_call_success": 0,
+      "median_success_s": 524.2,
+      "median_by_category": {
+        "vla": 257.9,
+        "setup": 340.5,
+        "repair": 1193.3
+      },
+      "manual_success_methods": {
+        "move_to": 229,
+        "scripted_grasp": 22,
+        "rotate_pitch": 39,
+        "move_delta": 100,
+        "set_gripper": 32,
+        "move_base": 57,
+        "release": 11,
+        "navigate_to": 71
+      }
+    }
+  },
+  "da3": {
+    "run": "composite_da3_astra_20261103",
+    "summary": {
+      "seen": {
+        "total": 80,
+        "baseline_success": 34,
+        "da3_success": 33,
+        "both_success": 23,
+        "baseline_only": 11,
+        "da3_only": 10,
+        "neither": 36
+      },
+      "unseen": {
+        "total": 80,
+        "baseline_success": 21,
+        "da3_success": 17,
+        "both_success": 10,
+        "baseline_only": 11,
+        "da3_only": 7,
+        "neither": 52
+      },
+      "all": {
+        "total": 160,
+        "baseline_success": 55,
+        "da3_success": 50,
+        "both_success": 33,
+        "baseline_only": 22,
+        "da3_only": 17,
+        "neither": 88
+      }
+    },
+    "initial_state_audit": {
+      "robot_state_threshold": 1e-06,
+      "robot_state_differences": 14,
+      "task_language_differences": 5,
+      "task_progress_differences": 3
+    }
+  },
+  "task_progress": {
+    "status": "interrupted_configuration_mismatch",
+    "valid_benchmark_result": false,
+    "run": "task_progress_smoke_20261103T133104Z",
+    "task": "SetUpCuttingStation",
+    "seed": 3,
+    "requested_geometry": "original simulator depth",
+    "actual_geometry": "DA3",
+    "completed_tool_calls": 22,
+    "observations": 11,
+    "agent_task_progress_fields": 0,
+    "internal_states_with_task_progress": 11,
+    "other_observation_mismatches": [],
+    "success_signal": "retained",
+    "tool_counts": {
+      "view_env_state": 1,
+      "read_text_file": 1,
+      "back_project_batch": 10,
+      "rldx_skill": 3,
+      "move_delta": 2,
+      "rldx_arm": 5
+    },
+    "agent_attempted_forbidden_read": false,
+    "separate_direct_file_checks": [
+      {
+        "case": "selected_memory",
+        "allowed": true,
+        "expected_allowed": true,
+        "passed": true
+      },
+      {
+        "case": "current_episode_states",
+        "allowed": false,
+        "expected_allowed": false,
+        "passed": true
+      },
+      {
+        "case": "current_success_criteria",
+        "allowed": false,
+        "expected_allowed": false,
+        "passed": true
+      }
+    ],
+    "source_sha256": {
+      "audit_tools_agent.md": "66779fe77e6c5cb5d0eadf909f1697f0b1a589827b8eb94613207255843ab635",
+      "manual_file_checks.json": "c2eb286e43e33e49f39a90603f02e2486098d86f9d45c37df11ccc5a8b971010",
+      "tool_calls.jsonl": "cfd81c8e905b338c490edf56f7c45b193af1d09a94b78c5a544cce04845f7a8e"
+    }
+  },
+  "notes": [
+    "The smoke run is interrupted and excluded from benchmark counts.",
+    "DA3 only replaces depth for back_project_batch and query_world_map."
+  ]
+}

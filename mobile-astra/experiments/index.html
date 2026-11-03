@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="description" content="每个实验分别记录：改了什么、保留什么、当前状态、结果和具体案例。">
+<link rel="icon" href="data:,"><link rel="stylesheet" href="../project.css"><title>实验目录 · Mobile Astra</title></head>
+<body><header class="site-head"><div class="head-inner"><a class="brand" href="../">Mobile Astra / 实验工作页</a><nav aria-label="项目导航"><a href="../">项目总览</a><a href="./" aria-current="page">实验目录</a><a href="../reference/">接口与真值</a></nav></div></header>
+<main><nav class="crumbs" aria-label="当前位置"><a href="../">项目总览</a> <span aria-hidden="true">/</span> <span aria-current="page">实验目录</span></nav><div class="hero"><p class="eyebrow">HARNESSVLA / ROBOCASA</p><h1>实验目录</h1><p class="lead">每个实验分别记录：改了什么、保留什么、当前状态、结果和具体案例。</p></div>
+
+<section><div class="table-wrap stack-small"><table><thead><tr><th>实验</th><th>改变的信息</th><th>状态</th><th>结果 / 内容</th></tr></thead><tbody>
+<tr><td data-label="实验"><a href="baseline/"><strong>E01 · 原版 baseline</strong></a></td><td data-label="改变的信息">保留原版真值</td><td data-label="状态"><span class="badge complete">160 / 160 完成</span></td><td data-label="结果 / 内容">55 局成功 · 34.38%<small><a href="baseline/analysis/">详细统计</a> · <a href="baseline/cases/">成功与失败完整回放</a></small></td></tr>
+<tr><td data-label="实验"><a href="geometry-da3/"><strong>E02 · DA3 深度替代</strong></a></td><td data-label="改变的信息">几何查询：模拟器深度 → 预测深度</td><td data-label="状态"><span class="badge complete">160 / 160 完成</span></td><td data-label="结果 / 内容">50 局成功 · 31.25%<small><a href="geometry-da3/analysis/">160 对逐项比较</a> · <a href="geometry-da3/cases/">结果变化案例</a></small></td></tr>
+<tr><td data-label="实验"><a href="task-progress/"><strong>E03 · 移除任务进度</strong></a></td><td data-label="改变的信息">去掉 Agent 观测里的 task_progress</td><td data-label="状态"><span class="badge pending">部分审计 / 待验证</span></td><td data-label="结果 / 内容">无正式成功率<small>一次使用 DA3 的试跑已中止；<a href="task-progress/cases/setup-cutting-station-s3/">查看审计案例</a></small></td></tr>
+</tbody></table></div></section>
+<section><h2>统一记录口径</h2><ul><li><strong>结果：</strong>以环境最终判定为准，成功与失败都计入；中断或配置不符单独记录。</li><li><strong>路径：</strong>区分 VLA 直接完成、先准备再调用 VLA、VLA 后有解析动作介入。介入后成功是轨迹分类，不自动证明介入导致成功。</li><li><strong>可比性：</strong>列出模型、记忆、预算、初始状态检查和仍然可用的真值通道。</li><li><strong>证据：</strong>详细分析保留逐局 JSON / CSV、来源哈希与统计脚本；案例嵌套在所属实验目录。</li></ul></section>
+<section><h2>后续实验</h2><p>优先完成 E03 的正确配置验证，再安排接触／抓持反馈和成功信号等逐项消融。传感器替代与多项组合实验在单项结果清楚后进行。</p><p class="note">这些是研究方向，尚未产生正式实验结果。已有 Sol 模型比较放在 <a href="baseline/analysis/">E01 的补充分析</a>；两模型记忆不同，不能当作纯模型消融。</p></section></main><footer class="site-foot"><span>HarnessVLA 真值移除与替代 · 整理于 2026-11-03</span><a href="./">实验目录</a></footer></body></html>

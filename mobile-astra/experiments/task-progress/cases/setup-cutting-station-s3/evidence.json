@@ -1,0 +1,49 @@
+{
+  "status": "interrupted_configuration_mismatch",
+  "valid_benchmark_result": false,
+  "run": "task_progress_smoke_20261103T133104Z",
+  "task": "SetUpCuttingStation",
+  "seed": 3,
+  "requested_geometry": "original simulator depth",
+  "actual_geometry": "DA3",
+  "completed_tool_calls": 22,
+  "observations": 11,
+  "agent_task_progress_fields": 0,
+  "internal_states_with_task_progress": 11,
+  "other_observation_mismatches": [],
+  "success_signal": "retained",
+  "tool_counts": {
+    "view_env_state": 1,
+    "read_text_file": 1,
+    "back_project_batch": 10,
+    "rldx_skill": 3,
+    "move_delta": 2,
+    "rldx_arm": 5
+  },
+  "agent_attempted_forbidden_read": false,
+  "separate_direct_file_checks": [
+    {
+      "case": "selected_memory",
+      "allowed": true,
+      "expected_allowed": true,
+      "passed": true
+    },
+    {
+      "case": "current_episode_states",
+      "allowed": false,
+      "expected_allowed": false,
+      "passed": true
+    },
+    {
+      "case": "current_success_criteria",
+      "allowed": false,
+      "expected_allowed": false,
+      "passed": true
+    }
+  ],
+  "source_sha256": {
+    "audit_tools_agent.md": "66779fe77e6c5cb5d0eadf909f1697f0b1a589827b8eb94613207255843ab635",
+    "manual_file_checks.json": "c2eb286e43e33e49f39a90603f02e2486098d86f9d45c37df11ccc5a8b971010",
+    "tool_calls.jsonl": "cfd81c8e905b338c490edf56f7c45b193af1d09a94b78c5a544cce04845f7a8e"
+  }
+}

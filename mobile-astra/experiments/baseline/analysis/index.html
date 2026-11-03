@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="按 Seen / Unseen 分析 GPT-6-Astra 与 GPT-5.6-Sol 的 320 次 RoboCasa composite 运行：VLA 完成、Planner 准备、Planner 修复与逐例动作证据。">
+  <link rel="icon" href="data:,">
+  <title>RoboCasa 实验分析 · Mobile Astra</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+<header class="topbar"><a href="../../../">项目总览</a><span>/</span><a href="../">E01 · baseline</a><span>/</span><span>详细分析（含 Sol 参照）</span><div class="exports"><a href="episodes.csv" download>CSV</a><a href="data.json" download>JSON</a><a href="report.md" download>报告 Markdown</a><button type="button" id="print">打印当前视图</button></div></header>
+<main>
+  <div class="heading"><h1>RoboCasa composite：VLA 做了什么，Planner 修复了什么</h1><p>官方 RPent 实现 · GPT-6-Astra / GPT-5.6-Sol · xhigh · 32 个任务 × seeds 1–5 · 每组 160 个有效 episode · Astra 使用 11 月 1–2 日重跑</p></div>
+  <div id="loading" role="status">正在加载 320 次运行记录…</div>
+  <div id="report" hidden>
+    <div class="findings" id="findings"></div>
+    <div class="report-grid">
+      <div class="summary-column">
+        <section><h2>成功率</h2><div id="success-table"></div><p class="note">Astra 成功 55/160，Sol 成功 45/160；Seen 相差 2 局，Unseen 相差 8 局。</p></section>
+        <section><h2>成功路径 <span class="subtle">按 Seen / Unseen</span></h2><div id="stage-table"></div><p class="note">三种成功路径互斥；百分比以对应任务组的 80 局为分母。点击数量或条形图可筛选该组案例。连续多次 VLA 调用仍计入“直接完成”；读取图像、地图或记忆不算动作介入。</p></section>
+        <section><h2>Planner 介入成功的收尾方式</h2><div id="completion-table"></div><p class="note">根据首次 <code>success=true</code> 所在动作区分；“解析动作收尾”不代表前面的 VLA 没有贡献。</p></section>
+      </div>
+      <section class="matrix-section">
+        <div class="section-head"><h2>逐任务、逐 seed 结果</h2><div class="segmented" role="group" aria-label="矩阵模型"><button data-matrix-model="astra" aria-pressed="true">GPT-6-Astra</button><button data-matrix-model="sol" aria-pressed="false">GPT-5.6-Sol</button></div></div>
+        <div class="legend"><span><i class="vla"></i>V · VLA 直接</span><span><i class="setup"></i>S · 准备后 VLA</span><span><i class="repair"></i>R · Planner 介入后</span><span><i class="failure"></i>– · 未成功</span></div>
+        <p class="note matrix-hint">每行从左至右为 seed 1–5；点击方格查看方法、参数与判据变化。</p>
+        <div id="matrix" class="matrix-grid"></div>
+      </section>
+    </div>
+
+    <section class="interpretation"><h2>分组结果与整体解释</h2><div class="three-columns">
+      <article><h3>Seen 与 Unseen 的成功路径</h3><p><strong>Seen：</strong>Astra 的成功路径为 <strong>13 + 3 + 18</strong>，Sol 为 <strong>13 + 0 + 19</strong>，分别成功 34、32 局。</p><p><strong>Unseen：</strong>Astra 为 <strong>6 + 1 + 14</strong>，Sol 为 <strong>5 + 0 + 8</strong>；分别成功 21、13 局，介入后成功相差 6 局。</p><p class="note">顺序为 VLA 直接、准备后 VLA、Planner 介入后。这是路径构成差异；不是把同一次 VLA 失败交给两个 Planner 的配对修复实验。</p></article>
+      <article><h3>“直接 VLA”也常需要续跑 <span class="subtle">整体</span></h3><p>两个模型的直接完成案例都使用了 <strong>至少 2 次 VLA 调用</strong>，没有单次 VLA 调用直接完成的案例。每次最多 320 仿真步，达到上限后 Planner 可以观察并继续调用。</p><p class="note">此类仍有 Planner 的观察、调用与模式选择；不能等同于独立、固定预算的 VLA-only 基线。</p></article>
+      <article><h3>实际介入的成功比例 <span class="subtle">整体</span></h3><p>合并 Seen / Unseen 后，Astra 在 <strong>128</strong> 个 episode 中于 VLA 之后介入，成功 <strong>32（25.0%）</strong>；Sol 为 <strong>27/142（19.0%）</strong>。进入介入阶段的 episode 集合不同。</p><p class="note">没有“同种子持续只跑 VLA”的反事实对照，不能证明这些成功一定由介入带来。</p></article>
+    </div></section>
+
+    <div class="two-columns supporting">
+      <section><h2>同任务、同 seed 的配对结果 <span class="subtle">整体</span></h2><div id="paired"></div><p class="note">合并 Seen / Unseen，相同 task 与 seed 对齐，共 160 对；点击数字查看对应案例。只比较最终环境成功；同 seed 不保证初始场景或执行轨迹完全一致。</p></section>
+      <section><h2>失败的停止方式 <span class="subtle">整体</span></h2><div id="failure-table"></div><p class="note">合并 Seen / Unseen，按 transcript 的 <code>finish</code> 与模型响应计数分类。两批结果的 <code>termination_reason=completed</code> 只表示运行结束；不等于成功，也不能据此判为 3600 秒超时。</p></section>
+    </div>
+
+    <section id="examples"><div class="section-head"><h2>代表案例：从 VLA 续跑到解析控制</h2><span class="subtle">点击查看逐步证据</span></div><div id="example-grid" class="example-grid"></div></section>
+
+    <section id="case-browser">
+      <div class="section-head"><h2>全部案例明细 <span class="subtle" id="case-count"></span></h2><button id="reset-filters" type="button">重置筛选</button></div>
+      <div class="filters">
+        <label class="search-label">搜索任务或方法<input id="search" type="search" placeholder="PanTransfer / move_delta…"></label>
+        <label>模型<select id="filter-model"><option value="all">两个模型</option><option value="astra">GPT-6-Astra</option><option value="sol">GPT-5.6-Sol</option></select></label>
+        <label>任务组<select id="filter-split"><option value="all">Seen + Unseen</option><option value="seen">Seen</option><option value="unseen">Unseen</option></select></label>
+        <label>路径 / 结果<select id="filter-category"><option value="success">全部成功</option><option value="vla">VLA 直接完成</option><option value="setup">准备后 VLA 完成</option><option value="repair">Planner 介入后成功</option><option value="failure">未成功</option><option value="all">全部 320 个</option></select></label>
+        <label>配对结果<select id="filter-paired"><option value="all">全部配对</option><option value="both">两者均成功</option><option value="astra_only">仅 Astra 成功</option><option value="sol_only">仅 Sol 成功</option><option value="neither">两者均失败</option></select></label>
+      </div>
+      <div class="table-scroll"><table class="cases-table"><thead><tr><th>任务 / seed</th><th>模型</th><th>成功路径 / 结果</th><th>VLA / 解析动作</th><th>首次成功动作</th><th>耗时</th><th></th></tr></thead><tbody id="cases-body"></tbody></table></div>
+      <div class="pagination"><span id="page-label" aria-live="polite"></span><button id="prev-page">上一页</button><button id="next-page">下一页</button></div>
+      <p class="note">VLA / 解析动作只计改变环境的调用；感知、文件读写与 finish 不在其中。动作编号是 <code>states.json.step_idx</code>，不是仿真步，也不是全部工具的调用序号。耗时为整个 episode 的墙钟时间。</p>
+    </section>
+
+    <div class="two-columns supporting">
+      <section><h2>成功案例的耗时中位数 <span class="subtle">整体</span></h2><div id="time-table"></div><p class="note">合并 Seen / Unseen，包含模型响应、观察、动作执行和收尾记录。各类样本数与任务不同，不能直接解释为模型推理速度差异。</p></section>
+      <section><h2>Planner 介入成功时使用的方法 <span class="subtle">整体</span></h2><div id="method-table"></div><p class="note">合并 Seen / Unseen；每格为“出现该方法的成功 episode 数 / 调用数”。统计介入成功的整个 episode，包含首次 VLA 前的准备动作。点击方法可筛选。</p></section>
+    </div>
+
+    <section class="methodology" id="methodology"><h2>统计口径与实验配置</h2>
+      <div class="two-columns">
+        <div><h3>怎么判定 VLA 和 Planner 修复</h3><ol>
+          <li>成功由 <code>result.json.success</code> 决定，并逐条核对 <code>states.json</code> 中的环境 <code>success</code>。全部 320 个有效 episode 一致。</li>
+          <li>归因只看首次成功之前（含成功动作）的动作。<code>rldx_arm</code> 和 <code>rldx_skill</code> 都算 VLA；续跑、切换两种 VLA 模式仍属于 VLA 执行动作。</li>
+          <li><strong>VLA 直接：</strong>没有任何非 VLA 环境动作。<strong>准备后 VLA：</strong>非 VLA 动作仅在首次 VLA 之前。<strong>Planner 介入后：</strong>首次 VLA 之后出现非 VLA 动作，且最终成功。</li>
+          <li>“修复”在本页是基于调用轨迹的操作性分类：包括导航、解卡、重抓、放置、按钮操作和撤离等，也可能有未奏效的尝试；不自动声称每个动作都有效或必不可少。两批均没有不调用 VLA 的成功案例。</li>
+          <li>结果中的判据名称和数值按原样展示；并非所有字段都应为 true。可用判据因任务而异，部分任务返回空字典，以环境 <code>success</code> 为准。</li>
+        </ol></div>
+        <div><h3>配置及可比性</h3><dl class="config">
+          <dt>实现</dt><dd>RLinf/RPent · <code>a744bd5</code></dd>
+          <dt>任务</dt><dd>target50 中的 composite_seen / composite_unseen，各 16 任务 × 5 seeds；环境 split=target</dd>
+          <dt>Planner</dt><dd>GPT-6-Astra / GPT-5.6-Sol，均为 xhigh</dd>
+          <dt>预算</dt><dd>100 个模型响应 / 3600 秒每 episode。模型响应可包含 reasoning 或工具调用，不能等同于 100 次工具调用。</dd>
+          <dt>VLA</dt><dd>RLDX-1-FT-RC365 · 40 chunks × 8 steps = 每次最多 320 仿真步；settle_patience=999</dd>
+          <dt>任务文本</dt><dd>RLDX 使用环境完整 task_language；调用参数中的子任务文本不能视为实际 VLA 子任务规划。</dd>
+          <dt>记忆</dt><dd><strong>Astra: GPT_6_astra_high；Sol: GPT_5.5_xhigh。</strong>共享 memory revision <code>47f301e</code>，但使用不同记忆目录，因此不是只改变 Planner 模型的消融。两者可读取 seed-0 任务记忆。</dd>
+          <dt>来源</dt><dd>每个 manifest cell 的最终 result、states、transcript；排除中断 / 基础设施重试的归档记录，不重复计数。</dd>
+        </dl></div>
+      </div>
+      <p class="note">Astra：composite_main_astra_rerun_20261101T150450Z；Sol：composite_main_gpt56_sol。本页使用各批最终有效记录。逐例 JSON 附原始来源文件 SHA-256，可用于核对。</p>
+    </section>
+    <footer>数据生成时间：<span id="generated"></span> · <a href="extract.py" download>下载统计脚本</a> · <a href="report.md">文字报告</a> · <a href="../../../reference/methods.html">方法参考</a></footer>
+  </div>
+</main>
+<dialog id="case-dialog" aria-labelledby="detail-title"><div class="dialog-top"><span>Episode 证据</span><div><button id="compare-case" type="button">对比同 seed</button><button id="copy-link" type="button">复制链接</button><button id="close-dialog" type="button" aria-label="关闭案例">关闭 ×</button></div></div><div id="case-detail" class="case-detail"></div></dialog>
+</body>
+</html>

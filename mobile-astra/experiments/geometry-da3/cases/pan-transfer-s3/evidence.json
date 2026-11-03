@@ -1,0 +1,30 @@
+{
+  "scope": "Paired final outcomes, not a causal attribution",
+  "sources": {
+    "baseline": {
+      "run": "composite_main_astra_rerun_20261101T150450Z",
+      "revision": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1"
+    },
+    "da3": {
+      "run": "composite_da3_astra_20261103",
+      "revision": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+      "revision_scope": "Base revision with local DA3 geometry changes"
+    }
+  },
+  "pair": {
+    "split": "unseen",
+    "task": "PanTransfer",
+    "seed": 3,
+    "initial_robot_state_max_abs_diff": 0.0,
+    "initial_task_language_equal": true,
+    "initial_task_progress_equal": true,
+    "baseline_success": true,
+    "baseline_elapsed_s": 1715.8,
+    "baseline_result_sha256": "0decc4695c8ee469a8cae8deedc60e898df2875092ec2ecd67541883af7ea736",
+    "baseline_states_sha256": "5b59a78a2c751d65b59ae1a83c7b97dc68a7f05bec06d6131fbca15026f15fc5",
+    "da3_success": false,
+    "da3_elapsed_s": 1112.5,
+    "da3_result_sha256": "17e812fa544c4af1b7c55c60effe8127826c1e1dc7edab31d3f40efd15eaa510",
+    "da3_states_sha256": "5ee361c255288a4f0db7af99dec41562b4f5ae143f41acc9f7598fa09de2df68"
+  }
+}

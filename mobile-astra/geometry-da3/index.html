@@ -1,48 +1,5 @@
-<!doctype html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,nofollow">
-<meta name="description" content="GPT-6-Astra 在 RoboCasa composite 上的 DA3 几何替代实验：Seen / Unseen 成功率、32 个任务与 160 对 seed 结果。">
-<link rel="icon" href="data:,">
-<link rel="stylesheet" href="style.css">
-<script src="app.js" defer></script>
-<title>DA3 几何替代 · Mobile Astra</title>
-</head>
-<body>
-<header><a href="../">Mobile Astra</a><span>/ DA3 几何替代</span><nav aria-label="数据下载"><a href="episodes.csv" download>CSV</a><a href="data.json" download>JSON</a><a href="report.md">文字报告</a></nav></header>
-<main>
-<h1>用预测深度替换真值几何</h1>
-<p class="intro">官方 RPent · GPT-6-Astra · xhigh · RLDX-1-FT-RC365<br>32 个 RoboCasa composite 任务 × seeds 1–5，两组各 160 个有效 episode。</p>
-<section aria-labelledby="summary-title">
-<h2 id="summary-title">完整结果</h2>
-<div class="table"><table aria-labelledby="summary-title"><thead><tr><th>任务组</th><th>Baseline · 真值几何</th><th>DA3 · 预测几何</th><th>成功率差</th></tr></thead><tbody><tr><th scope="row">Seen</th><td>34 / 80 · 42.50%</td><td>33 / 80 · 41.25%</td><td>-1.25 个百分点</td></tr><tr><th scope="row">Unseen</th><td>21 / 80 · 26.25%</td><td>17 / 80 · 21.25%</td><td>-5.00 个百分点</td></tr><tr><th scope="row">总计</th><td>55 / 160 · 34.38%</td><td>50 / 160 · 31.25%</td><td>-3.13 个百分点</td></tr></tbody></table></div>
-<p>Seen 少成功 1 局，Unseen 少成功 4 局，合计少 5 局。按任务和 seed 对齐后，17 局仅 DA3 成功，22 局仅 baseline 成功。</p>
-<p class="note">这是两次完整运行的观测对比；相同任务与 seed 对齐，不保证初始场景或 Planner、VLA 的执行轨迹完全相同。不能仅凭单次结果把每个成功或失败归因于深度误差。</p>
-</section>
-<p class="note" id="initial-audit">初始状态核对：14 对机器人状态最大绝对差超过 1e-6；5 对任务文本不同，3 对初始任务进度不同。检查不覆盖全部物体状态，因此不能将观察到的差异完全归因于深度替换。逐 seed 的 * 标记及 CSV 提供核对结果。</p>
-<section aria-labelledby="scope-title">
-<h2 id="scope-title">这次替换了什么</h2>
-<div class="scope-grid">
-<article><h3>几何来源</h3><p>相机 RGB → <strong>DA3METRIC-LARGE 预测深度</strong> → 已知内参 K 与相机 pose → 世界坐标。</p><p><code>back_project_batch</code> 返回指定像素的 XYZ；<code>query_world_map</code> 在预测生成的 world map 上筛选区域与点簇。两者共享同一帧的深度缓存，不回退到模拟器深度。</p></article>
-<article><h3>保留的信息与配置</h3><p>相机内参与 pose、机器人本体状态与底盘坐标、接触和抓持反馈、任务进度、成功信号及评分规则访问均保留。<strong>这不是完整的无真值实验。</strong></p><p>Planner、VLA、提示、控制流程、初始任务记忆和评测预算按 Astra baseline 对齐。使用 <code>GPT_6_astra_high</code> 记忆，100 个模型响应 / 3600 秒预算，VLA 每次最多 40 × 8 仿真步。</p></article>
-</div>
-<p class="note">Baseline 已换为 11 月 1–2 日重跑的 55/160 批次（<code>composite_main_astra_rerun_20261101T150450Z</code>）。<a href="../perception-method-plan.html">查看完整真值访问说明 →</a></p>
-</section>
-<section aria-labelledby="paired-title">
-<h2 id="paired-title">相同任务、相同 seed 的结果</h2>
-<div class="table"><table aria-labelledby="paired-title"><thead><tr><th>任务组</th><th>两者成功</th><th>仅 baseline 成功</th><th>仅 DA3 成功</th><th>两者失败</th></tr></thead><tbody id="paired-body"></tbody></table></div>
-</section>
-<section aria-labelledby="tasks-title">
-<h2 id="tasks-title">逐任务与 seed 对照</h2>
-<div class="filters"><label>任务组<select id="split"><option value="all">Seen + Unseen</option><option value="seen">Seen</option><option value="unseen">Unseen</option></select></label><label class="search">搜索任务<input id="search" type="search" placeholder="例如 StackBowlsCabinet"></label><button id="reset" type="button">重置</button></div>
-<p class="note">每个 seed 显示 <strong>baseline → DA3</strong>；✓ 成功，× 失败。绿色表示仅 DA3 成功，红色表示仅 baseline 成功。差值为成功局数之差；* 表示初始状态核对发现差异，悬停可看说明。窄屏下表格可左右滑动。</p>
-<p id="status" role="status">正在加载 160 对运行记录…</p>
-<div id="task-tables"></div>
-<noscript><p>启用 JavaScript 可查看筛选表，也可直接<a href="episodes.csv">下载完整 CSV</a>或阅读<a href="report.md">文字报告</a>。</p></noscript>
-</section>
-<footer>统计取自环境 <code>result.json.success</code>，并核对 <code>states.json</code>。JSON 和 CSV 保留结果文件 SHA-256。<br>数据生成：<span id="generated">—</span> · <a href="extract.py" download>下载统计脚本</a> · <a href="../analysis/">两模型分析</a></footer>
-</main>
-</body>
-</html>
+<!doctype html><html lang="zh-CN"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="data:,"><title>页面已归入实验目录 · Mobile Astra</title>
+<p>页面已归入实验目录。<a id="destination" href="../experiments/geometry-da3/analysis/">打开整理后的页面 →</a></p>
+<script>const u=new URL(document.querySelector('#destination').getAttribute('href'),location.href);u.search=location.search;u.hash=location.hash;location.replace(u.href);</script></html>

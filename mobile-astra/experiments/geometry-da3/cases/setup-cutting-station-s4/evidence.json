@@ -1,0 +1,30 @@
+{
+  "scope": "Paired final outcomes, not a causal attribution",
+  "sources": {
+    "baseline": {
+      "run": "composite_main_astra_rerun_20261101T150450Z",
+      "revision": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1"
+    },
+    "da3": {
+      "run": "composite_da3_astra_20261103",
+      "revision": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+      "revision_scope": "Base revision with local DA3 geometry changes"
+    }
+  },
+  "pair": {
+    "split": "seen",
+    "task": "SetUpCuttingStation",
+    "seed": 4,
+    "initial_robot_state_max_abs_diff": 0.0,
+    "initial_task_language_equal": true,
+    "initial_task_progress_equal": true,
+    "baseline_success": false,
+    "baseline_elapsed_s": 2136.5,
+    "baseline_result_sha256": "75b9333b93716921f0be118af536a19aad35a6ea0df42deff01685dbce9a1698",
+    "baseline_states_sha256": "01d553b82363caa78d48e9d82ae7592e884d042721907027b032bde0a04bf12a",
+    "da3_success": true,
+    "da3_elapsed_s": 933.5,
+    "da3_result_sha256": "71dd4111fa37ccaf00b27fecc9328cdcbb52686a2f25c1bc5dd06794c32da5ea",
+    "da3_states_sha256": "ee012934bc51e1c113fda35bb7615a6fe7297480aa5e446205ddcb25cc0f3b23"
+  }
+}

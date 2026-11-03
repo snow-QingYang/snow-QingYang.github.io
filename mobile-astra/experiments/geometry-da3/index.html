@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="description" content="将两种几何查询使用的模拟器深度，替换为从 RGB 预测的深度，观察任务表现的变化。">
+<link rel="icon" href="data:,"><link rel="stylesheet" href="../../project.css"><title>E02 · DA3 深度替代 · Mobile Astra</title></head>
+<body><header class="site-head"><div class="head-inner"><a class="brand" href="../../">Mobile Astra / 实验工作页</a><nav aria-label="项目导航"><a href="../../">项目总览</a><a href="../" aria-current="page">实验目录</a><a href="../../reference/">接口与真值</a></nav></div></header>
+<main><nav class="crumbs" aria-label="当前位置"><a href="../../">项目总览</a> <span aria-hidden="true">/</span> <a href="../">实验目录</a> <span aria-hidden="true">/</span> <span aria-current="page">E02 · DA3 深度替代</span></nav><div class="hero"><p class="eyebrow">HARNESSVLA / ROBOCASA</p><h1>E02 · DA3 深度替代</h1><p class="lead">将两种几何查询使用的模拟器深度，替换为从 RGB 预测的深度，观察任务表现的变化。</p></div>
+
+<section><span class="badge complete">已完成 · 160 个有效 episode</span><p class="meta">2026-11-03 · GPT-6-Astra / xhigh · 与 E01 新版 baseline 按 task / seed 对照</p></section>
+<section><h2>替换范围</h2><div class="flow"><article><span class="step">输入</span><h3>相机 RGB</h3><p>交给 DA3METRIC-LARGE 预测公制深度。</p></article><article><span class="step">坐标变换</span><h3>深度 → 三维点</h3><p>继续使用已知相机内参和相机 pose 转成世界坐标。</p></article><article><span class="step">Agent 接口</span><h3>两种几何查询</h3><p>back_project_batch 查询像素坐标；query_world_map 筛选区域与点簇。</p></article></div>
+<p class="note"><strong>仅替换这两种查询的深度来源。</strong>标定、机器人状态、任务进度、抓持／接触、成功反馈、评分规则访问和记忆均保留。尚未实现整套无真值系统。</p></section>
+<section><h2>已有结果</h2><div class="table-wrap"><table><thead><tr><th>任务组</th><th>原版 baseline</th><th>DA3 替代</th><th>差值</th></tr></thead><tbody><tr><td>Seen</td><td>34 / 80 · 42.50%</td><td>33 / 80 · 41.25%</td><td>−1.25 pp</td></tr><tr><td>Unseen</td><td>21 / 80 · 26.25%</td><td>17 / 80 · 21.25%</td><td>−5.00 pp</td></tr><tr><td>总计</td><td><strong>55 / 160 · 34.38%</strong></td><td><strong>50 / 160 · 31.25%</strong></td><td>−3.13 pp</td></tr></tbody></table></div>
+<p class="note">33 对都成功；22 对仅 baseline 成功；17 对仅 DA3 成功；88 对都失败。pp 表示百分点。</p>
+<div class="links" style="margin-top:17px"><a class="button" href="analysis/">完整逐任务与 seed 对照 →</a><a href="cases/">结果变化案例 →</a><a href="analysis/episodes.csv" download>下载 160 对 CSV</a></div></section>
+<section><h2>现在能说明什么</h2><p>这次预测深度替代后的成功数比 baseline 少 5 局，但也有 17 局仅 DA3 成功。结果是一次完整批次的观测对比，不能把每个变化直接归因于深度质量。</p><p>初始状态核对发现 <strong>14 对机器人状态、5 对任务文本、3 对任务进度</strong>有差异，且检查不覆盖全部物体状态。进一步归因需要固定场景并重复运行。</p></section>
+<details><summary>运行批次与配置</summary><dl class="record"><dt>DA3 批次</dt><dd><code>composite_da3_astra_20261103</code></dd><dt>参照批次</dt><dd><code>composite_main_astra_rerun_20261101T150450Z</code></dd><dt>基础实现</dt><dd><code>a744bd5</code> + 本地 DA3 几何改动</dd><dt>其余主要设置</dt><dd>模型、VLA、提示、初始任务记忆与预算按 E01 对齐；每组 32 任务 × 5 seeds。</dd></dl></details></main><footer class="site-foot"><span>HarnessVLA 真值移除与替代 · 整理于 2026-11-03</span><a href="../">实验目录</a></footer></body></html>

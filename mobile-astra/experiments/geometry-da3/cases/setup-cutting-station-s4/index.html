@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="description" content="E02 结果变化案例：仅 DA3 成功。这里只比较两次运行的已记录结果。">
+<link rel="icon" href="data:,"><link rel="stylesheet" href="../../../../project.css"><title>SetUpCuttingStation · seed 4 · Mobile Astra</title></head>
+<body><header class="site-head"><div class="head-inner"><a class="brand" href="../../../../">Mobile Astra / 实验工作页</a><nav aria-label="项目导航"><a href="../../../../">项目总览</a><a href="../../../" aria-current="page">实验目录</a><a href="../../../../reference/">接口与真值</a></nav></div></header>
+<main><nav class="crumbs" aria-label="当前位置"><a href="../../../../">项目总览</a> <span aria-hidden="true">/</span> <a href="../../../">实验目录</a> <span aria-hidden="true">/</span> <a href="../../">E02 · DA3</a> <span aria-hidden="true">/</span> <a href="../">结果变化案例</a> <span aria-hidden="true">/</span> <span aria-current="page">SetUpCuttingStation · seed 4</span></nav><div class="hero"><p class="eyebrow">HARNESSVLA / ROBOCASA</p><h1>SetUpCuttingStation · seed 4</h1><p class="lead">E02 结果变化案例：仅 DA3 成功。这里只比较两次运行的已记录结果。</p></div>
+
+<section><div class="table-wrap"><table><thead><tr><th>设置</th><th>环境最终判定</th><th>episode 墙钟耗时</th></tr></thead><tbody><tr><td>原版 baseline</td><td>未成功</td><td>2136.5 秒</td></tr><tr><td>DA3 替代</td><td>成功</td><td>933.5 秒</td></tr></tbody></table></div></section>
+<section><h2>初始状态检查</h2><dl class="record"><dt>机器人状态最大绝对差</dt><dd>0.0</dd><dt>任务文本一致</dt><dd>是</dd><dt>初始任务进度一致</dt><dd>是</dd></dl><p class="note">这些检查不覆盖全部物体位置和姿态，不能据此证明两个初始场景完全相同。Planner 与 VLA 的执行也可能不同。</p></section>
+<section><h2>如何解读</h2><p>DA3 成功而 baseline 未成功，说明两组结果并非简单的成功集合包含关系。 不能仅凭最终结果确定深度预测或某个控制动作是原因。</p><div class="links"><a href="../../../baseline/analysis/#case=astra--SetUpCuttingStation--4">查看 baseline 的动作证据 →</a><a href="evidence.json" download>下载配对记录与来源 SHA-256</a><a href="../../analysis/">返回 160 对完整比较</a></div></section></main><footer class="site-foot"><span>HarnessVLA 真值移除与替代 · 整理于 2026-11-03</span><a href="../../../">实验目录</a></footer></body></html>

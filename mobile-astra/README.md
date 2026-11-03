@@ -1,19 +1,78 @@
-# Mobile Astra deployment
+# HarnessVLA ground-truth study / Mobile Astra
 
-Direct URL: https://snow-qingyang.github.io/mobile-astra/
+Public work page: https://snow-qingyang.github.io/mobile-astra/
 
-This directory is only a deployment location. Its pages must use their own standalone work interface, with no personal-site avatar, name, background, navigation, footer, CSS, or JavaScript. Do not add links to it from the main website navigation, Home, Research, Blog, or generated-page templates.
+Keep this deployment entirely inside `mobile-astra/`. Do not modify or link from
+personal Home, Research, Blog, shared navigation, styles, assets or templates.
+All pages are standalone work interfaces. Public URLs are not access control.
 
-- `index.html`: direct-link landing page.
-- `geometry-da3/`: DA3 geometry experiment (50/160) compared with the November 1–2 Astra rerun (55/160), by task and seed. Includes split summaries, 160 pairs, CSV, JSON, source hashes and extractor. Initial-state checks flag 14 robot-state differences above 1e-6, five task-text differences and three progress differences; identical task/seed does not guarantee identical scenes. This only replaces depth for the two geometry queries; other simulator information remains available.
-- `analysis/`: Astra rerun (55/160) and existing GPT-5.6-Sol run (45/160), 320 canonical episodes with split success paths, per-case evidence, CSV, Markdown and extractor. Astra successes: 19 VLA only, four preparation then VLA, 32 with intervention after VLA. Keep the memory-profile and scene-comparability caveats.
-- `pan-transfer/`: complete successful interaction from the rerun, PanTransfer seed 3. Contains the original prompt, 94 public agent messages, all 90 method calls and full returns, 183 images, 3,337 raw events, and the original continuous 270.80-second video. 13 VLA calls and 47 analytic actions; first success at action 60. All 60 action endpoints checked against returned images.
-- `pan-transfer-failure/`: complete failed interaction from the same rerun, PanTransfer seed 1. Contains 62 public agent messages, all 53 method calls, 84 images, 2,053 raw events and the original continuous 340.95-second video. 21 VLA calls and six analytic actions; all 27 action endpoints checked. No observation reports success; the agent ends with stuck after multiple recovery attempts.
-- `pan-transfer-full/`: compatibility redirect to the updated successful full interaction at `pan-transfer/`.
-- Both replay HTML files are standalone with embedded raw records and original video. Downloaded source files retain SHA-256 hashes. Frame boundaries are reconstructed from step counts and verified images, not logged per-frame tool timestamps; underlying action vectors are not invented. Empty reasoning events remain empty. Runtime files are distinguished from files the agent actually read.
-- `methods.html`: self-contained tool reference.
-- `perception-method-plan.html`: ground-truth access reference, including robot state, geometry, grasp/motion feedback, task criteria and scoring rules. Its example now points to rerun PanTransfer seed 3 (61 observations).
+## Page hierarchy
 
-These published copies do not depend on local experiment directories or running servers. To remove this deployment later, delete `mobile-astra/`, commit, and push. No shared navigation, styles, or assets need to be removed.
+- `index.html`: research objective, current work, completed results, next steps.
+- `experiments/index.html`: experiment catalog with completed and partial work separated.
+- `experiments/baseline/`: E01, current Astra rerun, 55/160.
+  - `analysis/`: detailed 320-episode Astra / Sol analysis, data, CSV, report,
+    extractor, and all individual JSON evidence. The Sol run remains an auxiliary
+    reference; its different memory profile prevents a pure model ablation.
+  - `cases/`: case directory.
+  - `cases/pan-transfer-success/`: rerun seed 3, 90 calls, 183 images,
+    60 environment actions and the original continuous 270.80-second video.
+  - `cases/pan-transfer-failure/`: rerun seed 1, 53 calls, 84 images,
+    27 environment actions and the original continuous 340.95-second video.
+- `experiments/geometry-da3/`: E02, 50/160, compared to E01's 55/160.
+  - `analysis/`: all 160 matched pairs, initial-state audit, CSV, JSON and extractor.
+  - `cases/`: two paired-outcome examples (PanTransfer seed 3 and
+    SetUpCuttingStation seed 4). These pages are result comparisons, not DA3 video
+    replays. Each includes source hashes and links to baseline evidence.
+- `experiments/task-progress/`: E03, partial audit only; no valid benchmark result.
+  - `cases/setup-cutting-station-s3/`: interrupted configuration-mismatch smoke
+    run, 22 completed calls and 11 observations, 0 live task_progress fields.
+    Actual geometry was DA3, while the requested setting was original depth.
+    No result.json; do not label this episode successful or failed or include it
+    in the benchmark denominator. Direct file checks are not Agent calls.
+- `reference/`: information categories, existing detailed ground-truth access
+  guide, and the self-contained original method reference.
+- `project-status.json`: provenance and structured snapshot for the overview.
 
-The URL is publicly accessible to anyone who has it; absence of navigation is not access control. The older `snow-QingYang/astra-robocasa-replay` repository is separate and unchanged.
+## Interpretation
+
+DA3 only replaces depth for back_project_batch and query_world_map. Known camera
+calibration/pose, robot state, task progress, interaction feedback, success,
+scoring-source access and memory remain. The current paired batches have 14
+robot-state, five task-text and three initial-progress differences. They are not
+proof of identical scenes or a causal per-episode attribution.
+
+The progress-removal smoke run retains success and historical memory. Its file
+allowlist additionally restricts scoring-source access: a future single-variable
+comparison must match file permissions or separately disclose that intervention.
+The smoke audit does not validate a full experiment or a ground-truth-free system.
+
+The success/failure replay HTML embeds the original video, raw records, images,
+prompt, all tool calls and full returns. Original data stays byte-identical during
+this reorganization. Video boundaries are reconstructed from step counts and
+verified returned images, not original per-frame tool timestamps. Empty reasoning
+remains empty; runtime files are distinguished from files the Agent actually read.
+
+## Maintenance
+
+`../organize_ground_truth_site.py` (relative to site-publish) creates the overview,
+catalogs, short experiment pages, comparison examples, smoke audit summary and
+compatibility pages. It uses the existing detailed exports and the original local
+smoke audit. Its assertions intentionally require review if source results change.
+Canonical detailed exports live under their experiment's `analysis/` directory.
+Replay builder source is `presentations/rpent-interaction-record/` in the local
+workspace; pass the new canonical output directory when rebuilding.
+
+Old HTML URLs `/analysis/`, `/geometry-da3/`, `/pan-transfer/`,
+`/pan-transfer-failure/`, `/pan-transfer-full/`, `methods.html` and
+`perception-method-plan.html` forward to the corresponding canonical page,
+preserving query strings and hashes. Main CSV/JSON/report/extractor download URLs
+are retained as compatibility copies. Per-episode JSON lives under E01.
+
+`codex-token-cost-plan.html` is an older, unlinked proposal. It is not part of the
+current experiment results. The local-only expanded ground-truth and real-robot
+planning documents have not been published here.
+
+To remove this deployment, delete only `mobile-astra/`, commit and push. No shared
+navigation, assets or templates need cleanup. The separate historical
+`snow-QingYang/astra-robocasa-replay` repository is unaffected.
