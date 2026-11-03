@@ -13,13 +13,13 @@
 <body>
 <header class="topbar"><a href="../">Mobile Astra</a><span>/</span><span>实验分析</span><div class="exports"><a href="episodes.csv" download>CSV</a><a href="data.json" download>JSON</a><a href="report.md" download>报告 Markdown</a><button type="button" id="print">打印当前视图</button></div></header>
 <main>
-  <div class="heading"><h1>RoboCasa composite：VLA 做了什么，Planner 修复了什么</h1><p>官方 RPent 实现 · GPT-6-Astra / GPT-5.6-Sol · xhigh · 32 个任务 × seeds 1–5 · 每组 160 个有效 episode</p></div>
+  <div class="heading"><h1>RoboCasa composite：VLA 做了什么，Planner 修复了什么</h1><p>官方 RPent 实现 · GPT-6-Astra / GPT-5.6-Sol · xhigh · 32 个任务 × seeds 1–5 · 每组 160 个有效 episode · Astra 使用 11 月 1–2 日重跑</p></div>
   <div id="loading" role="status">正在加载 320 次运行记录…</div>
   <div id="report" hidden>
     <div class="findings" id="findings"></div>
     <div class="report-grid">
       <div class="summary-column">
-        <section><h2>成功率</h2><div id="success-table"></div><p class="note">两个模型的 Seen 都为 32/80。Astra 的净增 8 个成功全部体现在 Unseen。</p></section>
+        <section><h2>成功率</h2><div id="success-table"></div><p class="note">Astra 成功 55/160，Sol 成功 45/160；Seen 相差 2 局，Unseen 相差 8 局。</p></section>
         <section><h2>成功路径 <span class="subtle">按 Seen / Unseen</span></h2><div id="stage-table"></div><p class="note">三种成功路径互斥；百分比以对应任务组的 80 局为分母。点击数量或条形图可筛选该组案例。连续多次 VLA 调用仍计入“直接完成”；读取图像、地图或记忆不算动作介入。</p></section>
         <section><h2>Planner 介入成功的收尾方式</h2><div id="completion-table"></div><p class="note">根据首次 <code>success=true</code> 所在动作区分；“解析动作收尾”不代表前面的 VLA 没有贡献。</p></section>
       </div>
@@ -32,13 +32,13 @@
     </div>
 
     <section class="interpretation"><h2>分组结果与整体解释</h2><div class="three-columns">
-      <article><h3>差距来自 Unseen 介入后的成功</h3><p><strong>Seen：</strong>Astra 的成功路径为 <strong>12 + 2 + 18</strong>，Sol 为 <strong>13 + 0 + 19</strong>，两者均成功 32 局。</p><p><strong>Unseen：</strong>Astra 为 <strong>5 + 0 + 16</strong>，Sol 为 <strong>5 + 0 + 8</strong>；VLA 直接完成均为 5 局，介入后成功相差 8 局。</p><p class="note">顺序为 VLA 直接、准备后 VLA、Planner 介入后。这是路径构成差异；不是把同一次 VLA 失败交给两个 Planner 的配对修复实验。</p></article>
+      <article><h3>Seen 与 Unseen 的成功路径</h3><p><strong>Seen：</strong>Astra 的成功路径为 <strong>13 + 3 + 18</strong>，Sol 为 <strong>13 + 0 + 19</strong>，分别成功 34、32 局。</p><p><strong>Unseen：</strong>Astra 为 <strong>6 + 1 + 14</strong>，Sol 为 <strong>5 + 0 + 8</strong>；分别成功 21、13 局，介入后成功相差 6 局。</p><p class="note">顺序为 VLA 直接、准备后 VLA、Planner 介入后。这是路径构成差异；不是把同一次 VLA 失败交给两个 Planner 的配对修复实验。</p></article>
       <article><h3>“直接 VLA”也常需要续跑 <span class="subtle">整体</span></h3><p>两个模型的直接完成案例都使用了 <strong>至少 2 次 VLA 调用</strong>，没有单次 VLA 调用直接完成的案例。每次最多 320 仿真步，达到上限后 Planner 可以观察并继续调用。</p><p class="note">此类仍有 Planner 的观察、调用与模式选择；不能等同于独立、固定预算的 VLA-only 基线。</p></article>
-      <article><h3>实际介入的成功比例 <span class="subtle">整体</span></h3><p>合并 Seen / Unseen 后，Astra 在 <strong>134</strong> 个 episode 中于 VLA 之后介入，成功 <strong>34（25.4%）</strong>；Sol 为 <strong>27/142（19.0%）</strong>。进入介入阶段的 episode 集合不同。</p><p class="note">没有“同种子持续只跑 VLA”的反事实对照，不能证明这些成功一定由介入带来。</p></article>
+      <article><h3>实际介入的成功比例 <span class="subtle">整体</span></h3><p>合并 Seen / Unseen 后，Astra 在 <strong>128</strong> 个 episode 中于 VLA 之后介入，成功 <strong>32（25.0%）</strong>；Sol 为 <strong>27/142（19.0%）</strong>。进入介入阶段的 episode 集合不同。</p><p class="note">没有“同种子持续只跑 VLA”的反事实对照，不能证明这些成功一定由介入带来。</p></article>
     </div></section>
 
     <div class="two-columns supporting">
-      <section><h2>同任务、同 seed 的配对结果 <span class="subtle">整体</span></h2><div id="paired"></div><p class="note">合并 Seen / Unseen，相同 task 与 seed 对齐，共 160 对；点击数字查看对应案例。只比较最终环境成功，不要求成功路径相同。</p></section>
+      <section><h2>同任务、同 seed 的配对结果 <span class="subtle">整体</span></h2><div id="paired"></div><p class="note">合并 Seen / Unseen，相同 task 与 seed 对齐，共 160 对；点击数字查看对应案例。只比较最终环境成功；同 seed 不保证初始场景或执行轨迹完全一致。</p></section>
       <section><h2>失败的停止方式 <span class="subtle">整体</span></h2><div id="failure-table"></div><p class="note">合并 Seen / Unseen，按 transcript 的 <code>finish</code> 与模型响应计数分类。两批结果的 <code>termination_reason=completed</code> 只表示运行结束；不等于成功，也不能据此判为 3600 秒超时。</p></section>
     </div>
 
@@ -83,7 +83,7 @@
           <dt>来源</dt><dd>每个 manifest cell 的最终 result、states、transcript；排除中断 / 基础设施重试的归档记录，不重复计数。</dd>
         </dl></div>
       </div>
-      <p class="note">本页统计来自两批官方 RPent 运行。逐例 JSON 附原始来源文件 SHA-256，可用于核对。</p>
+      <p class="note">Astra：composite_main_astra_rerun_20261101T150450Z；Sol：composite_main_gpt56_sol。本页使用各批最终有效记录。逐例 JSON 附原始来源文件 SHA-256，可用于核对。</p>
     </section>
     <footer>数据生成时间：<span id="generated"></span> · <a href="extract.py" download>下载统计脚本</a> · <a href="report.md">文字报告</a> · <a href="../methods.html">方法参考</a></footer>
   </div>

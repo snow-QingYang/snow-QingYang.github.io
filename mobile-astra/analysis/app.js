@@ -13,12 +13,43 @@ const pageSize = 20;
 const detailCache = new Map();
 
 const examples = [
-  {id:"astra--BreadSelection--4", title:"连续 3 次 VLA，自行完成选面包", text:"3 次 rldx_arm 共执行 824 个仿真步（320 + 320 + 184），第三次返回 success=true。这里的三段是调用预算切分，动作全由 VLA 执行。"},
-  {id:"astra--LoadDishwasher--3", title:"先转动底盘，再交给 VLA", text:"动作 #1–2 是 move_base，用于扩大可见区域；#3–7 连续运行 rldx_skill。#5 两件餐具已放好，#7 门关闭并成功。这是准备类，不是 VLA 停滞后的修复。"},
-  {id:"astra--PanTransfer--2", title:"VLA 后接管倾倒，并恢复滑落的锅", text:"#1–4 VLA 未完成倾倒；#5 起解析抓取和搬运，#16 旋转后 vegetable_on_plate=true。回程锅滑落，#28 再抓取，最终 #48 撤离后 success=true。", replay:true},
-  {id:"astra--KettleBoiling--4", title:"VLA 搬好水壶，Planner 旋转炉灶旋钮", text:"#11 VLA 已使 kettle_on_site=true，但 burner_on 仍为 false。随后经历调整与 VLA 续跑；#35–37 定位、靠近并夹紧旋钮，#38–39 旋转后 burner_on=true，任务完成。"},
-  {id:"sol--StackBowlsCabinet--3", title:"一次位姿调整后，再由 VLA 完成", text:"连续 11 次 VLA 尚未完成入柜；#12 move_to 调整末端位置，随后两次 rldx_skill。#14 两个 bowl_in_cabinet 判据与撤离判据成立。共 13 次 VLA、1 次解析动作。"},
-  {id:"sol--PrepareCoffee--5", title:"修正杯子位置，再按启动键并撤离", text:"VLA 和解析抓放交替尝试；#29 杯子 contact_check=true，#35 move_to 后 coffee_machine__turned_on=true，但尚未成功。#36 撤离使 gripper_button_far=true，环境才判成功。"},
+  {
+    "id": "astra--BreadSelection--4",
+    "title": "连续调用 VLA 完成面包选择",
+    "text": "成功前 3 次环境动作均为 rldx_arm，第 #3 次返回 success=true；没有解析控制动作。"
+  },
+  {
+    "id": "astra--StackBowlsCabinet--2",
+    "title": "先抬高手臂，再让 VLA 把碗入柜",
+    "text": "#1 move_delta 做准备，#2–5 连续调用 VLA；#4 两个碗入柜，#5 夹爪远离后任务成功。"
+  },
+  {
+    "id": "astra--PanTransfer--3",
+    "title": "规划抓取、倾倒、放回并撤离",
+    "text": "13 次 VLA 与前期位置调整未完成倾倒；#16 解析抓取，#39 食物落盘，#58 锅回到炉灶，#60 move_to 撤离后环境成功。",
+    "replay": "../pan-transfer/"
+  },
+  {
+    "id": "astra--PanTransfer--1",
+    "title": "重新定位与三轮姿态调整仍未恢复",
+    "text": "VLA 后在 #14、#19–20、#23 调整末端或底盘，并继续 VLA。共 21 次 VLA、6 次解析动作，最终食物未入盘、锅未回炉灶，finish=stuck。",
+    "replay": "../pan-transfer-failure/"
+  },
+  {
+    "id": "astra--PrepareCoffee--4",
+    "title": "放稳杯子，再按键并撤离",
+    "text": "#14 release 后 contact_check=true；#18 move_to 后咖啡机启动，但尚未成功；#19 move_delta 撤离后两个远离判据成立，环境确认成功。"
+  },
+  {
+    "id": "sol--StackBowlsCabinet--3",
+    "title": "一次位姿调整后，再由 VLA 完成",
+    "text": "连续 11 次 VLA 尚未完成入柜；#12 move_to 调整末端位置，随后两次 rldx_skill。#14 入柜与撤离判据成立。共 13 次 VLA、1 次解析动作。"
+  },
+  {
+    "id": "sol--PrepareCoffee--5",
+    "title": "修正杯子位置，再按启动键并撤离",
+    "text": "VLA 和解析抓放交替尝试；#29 杯子 contact_check=true，#35 咖啡机启动但尚未成功；#36 撤离后环境判成功。"
+  }
 ];
 
 function table(headers, rows) {
@@ -69,7 +100,7 @@ function renderOverview() {
   ]));
   $("#example-grid").innerHTML = examples.map(ex=>{
     const e = episodeMap.get(ex.id);
-    return `<article class="example"><div class="example-head"><span>${data.models[e.model].name} · ${e.split === "seen" ? "Seen" : "Unseen"}</span>${badge(e.category)}</div><h3>${ex.title}</h3><div class="mini-stats">${e.task} · seed ${e.seed} · VLA ${e.vla_calls} / 解析 ${e.manual_calls} · ${seconds(e.elapsed_s)}</div><p>${ex.text}</p><div class="example-foot"><button class="text-button" data-case="${e.id}">查看动作证据 →</button>${ex.replay?'<a href="../pan-transfer/">视频与全部工具调用 →</a>':""}</div></article>`;
+    return `<article class="example"><div class="example-head"><span>${data.models[e.model].name} · ${e.split === "seen" ? "Seen" : "Unseen"}</span>${badge(e.category)}</div><h3>${ex.title}</h3><div class="mini-stats">${e.task} · seed ${e.seed} · VLA ${e.vla_calls} / 解析 ${e.manual_calls} · ${seconds(e.elapsed_s)}</div><p>${ex.text}</p><div class="example-foot"><button class="text-button" data-case="${e.id}">查看动作证据 →</button>${ex.replay?`<a href="${ex.replay}">视频与全部工具调用 →</a>`:""}</div></article>`;
   }).join("");
   $("#generated").textContent = new Date(data.generated_utc).toLocaleString("zh-CN", {timeZone:"Asia/Hong_Kong",hour12:false}) + " UTC+8";
 }

@@ -19,7 +19,7 @@ MANUAL = {"move_to", "move_delta", "move_base", "navigate_to", "rotate_pitch",
           "set_gripper", "release", "scripted_grasp"}
 LABELS = {"vla": "VLA 直接完成", "setup": "Planner 准备后 VLA 完成",
           "repair": "Planner 介入后成功", "failure": "未成功"}
-MODELS = [("astra", "GPT-6-Astra", "composite_main"),
+MODELS = [("astra", "GPT-6-Astra", "composite_main_astra_rerun_20261101T150450Z"),
           ("sol", "GPT-5.6-Sol", "composite_main_gpt56_sol")]
 RESULT_KEYS = {"ok", "status", "chunks", "steps_applied", "grasped", "grasp_detected",
                "grasp_contact", "held_apart", "grasp_obj", "gripper_qpos", "peak_lift",
@@ -154,6 +154,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repo", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--astra-run", default=MODELS[0][2])
     args = parser.parse_args()
     out = args.output
     (out / "cases").mkdir(parents=True, exist_ok=True)
@@ -162,6 +163,8 @@ def main():
             "tasks": {s: manifest["splits"][f"composite_{s}"]["tasks"] for s in ("seen", "unseen")},
             "models": {}, "episodes": [], "labels": LABELS}
     for model, name, run in MODELS:
+        if model == "astra":
+            run = args.astra_run
         root = args.repo / "runs" / run
         info = read(root / "run-info.json")
         items = [episode(root, model, split, task, seed, out)
@@ -173,8 +176,6 @@ def main():
                                  "run": run, "summary": summarize(items)}
     assert len(data["episodes"]) == 320
     assert len({e["id"] for e in data["episodes"]}) == 320
-    assert data["models"]["astra"]["summary"]["success"] == 53
-    assert data["models"]["sol"]["summary"]["success"] == 45
     astra = [e for e in data["episodes"] if e["model"] == "astra"]
     sol = [e for e in data["episodes"] if e["model"] == "sol"]
     paired = Counter()
@@ -192,25 +193,22 @@ def main():
         writer = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore", lineterminator="\n")
         writer.writeheader()
         writer.writerows(data["episodes"])
-    lines = ["# RoboCasa composite：Astra 与 5.6-Sol", "",
-             "320 个有效 episode；Seen / Unseen 各 16 个任务 × seeds 1–5 × 2 模型。", ""]
-    for split, label in (("seen", "Seen"), ("unseen", "Unseen")):
-        lines += [f"## {label}", "",
-                  "| 模型 | 成功数 / 80 | 成功率 | VLA 直接 | 准备后 VLA | Planner 介入后 |",
-                  "|---|---|---|---|---|---|"]
-        for model, m in data["models"].items():
-            items = [e for e in data["episodes"] if e["model"] == model and e["split"] == split]
-            counts = Counter(e["category"] for e in items)
-            successes = sum(e["success"] for e in items)
-            lines.append(f'| {m["name"]} | {successes}/{len(items)} | {100 * successes / len(items):.2f}% | {counts["vla"]} | {counts["setup"]} | {counts["repair"]} |')
+    lines = ["# RoboCasa composite：Astra 与 5.6-Sol", "", "320 个有效 episode；32 个任务 × seeds 1–5 × 2 模型。", "",
+             f"Astra 批次：`{args.astra_run}`；Sol 批次：`{MODELS[1][2]}`。", ""]
+    for split in ("seen", "unseen"):
+        lines += [f"## {split.title()}", "", "| 模型 | 成功数 / 80 | 成功率 | VLA 直接 | 准备后 VLA | Planner 介入后 |", "|---|---:|---:|---:|---:|---:|"]
+        for m in data["models"].values():
+            s = m["summary"]["by_split"][split]; c = s["categories"]
+            lines.append(f'| {m["name"]} | {s["success"]}/80 | {s["success"]/80*100:.2f}% | {c.get("vla",0)} | {c.get("setup",0)} | {c.get("repair",0)} |')
         lines.append("")
-    lines += ["## 整体分析"]
+    a = data["models"]["astra"]["summary"]
+    b = data["models"]["sol"]["summary"]
     lines += ["", "分类按 states.json 的实际动作顺序，截止首次 success=true。VLA 包括 rldx_arm/rldx_skill，连续续跑仍属于 VLA 直接完成。只读感知和记忆调用不算控制介入。",
               "准备类：非 VLA 动作只出现在首次 VLA 前。修复/介入类：首次 VLA 之后有非 VLA 动作，最后任务成功；并非因果消融结论。两批无纯解析动作成功案例，也无单次 VLA 调用直接成功案例。",
-              "Astra 的 34 个介入成功中，17 个最后由 VLA 完成，17 个最后由解析动作完成；Sol 的 27 个分别为 17 和 10。",
-              "Astra 共有 134 个 episode 出现 VLA 后介入，34 个成功；Sol 142 个中 27 个成功。这是实际介入病例的观察比例，不是随机化修复实验。",
-              "失败停止方式：Astra finish=stuck 82 个，无 finish 且到达 100 responses 上限 25 个；Sol 分别 42、73。completed 仅表示运行结束，不表示任务成功。",
-              "配对：双方成功 30、仅 Astra 成功 23、仅 Sol 成功 15、双方失败 92。", "",
+              f"Astra 的 {a['categories']['repair']} 个介入成功中，{a['repair_final']['vla']} 个最后由 VLA 完成，{a['repair_final']['manual']} 个最后由解析动作完成；Sol 的 {b['categories']['repair']} 个分别为 {b['repair_final']['vla']} 和 {b['repair_final']['manual']}。",
+              f"Astra 共有 {a['repair_attempted']} 个 episode 出现 VLA 后介入，{a['categories']['repair']} 个成功；Sol {b['repair_attempted']} 个中 {b['categories']['repair']} 个成功。这是实际介入病例的观察比例，不是随机化修复实验。",
+              f"失败停止方式：Astra finish=stuck {a['stops']['stuck']} 个，无 finish 且到达 100 responses 上限 {a['stops']['turn_limit']} 个；Sol 分别 {b['stops']['stuck']}、{b['stops']['turn_limit']}。completed 仅表示运行结束，不表示任务成功。",
+              f"配对：双方成功 {paired['both']}、仅 Astra 成功 {paired['astra_only']}、仅 Sol 成功 {paired['sol_only']}、双方失败 {paired['neither']}。按 task 与 seed 对齐不保证初始场景完全一致。", "",
               "配置：官方 RLinf/RPent a744bd5；xhigh；最多 100 个模型响应（并非 100 个工具调用），3600s/episode；RLDX-1-FT-RC365，每次最多 40 chunks × 8 steps=320 仿真步。",
               "Astra 记忆 GPT_6_astra_high，Sol 记忆 GPT_5.5_xhigh；不是单一模型变量的公平消融。种子0任务记忆可用，感知、地图与解析控制可用。",
               "报告采用 target50 manifest 中的 320 个 canonical result.json；排除归档和中断的尝试。成功来自环境 state.success，与 320 份 states.json 交叉核对。逐例 JSON 附源文件 SHA-256。", ""]

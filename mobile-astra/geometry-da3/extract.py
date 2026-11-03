@@ -2,7 +2,7 @@
 
 Example from a workspace containing both repositories:
     python extract.py \
-        --baseline-run HarnessVLA-RPent/runs/composite_main \
+        --baseline-run HarnessVLA-RPent/runs/composite_main_astra_rerun_20261101T150450Z \
         --da3-run HarnessVLA-RPent-NoGeomGT/runs/composite_da3_astra_20261103 \
         --manifest HarnessVLA-RPent/robots/robocasa/eval/target50.json \
         --output geometry-da3
@@ -40,6 +40,8 @@ CSV_FIELDS = (
     "split", "task", "seed", "baseline_success", "da3_success",
     "baseline_elapsed_s", "da3_elapsed_s", "baseline_result_sha256",
     "da3_result_sha256", "baseline_states_sha256", "da3_states_sha256",
+    "initial_robot_state_max_abs_diff", "initial_task_language_equal",
+    "initial_task_progress_equal",
 )
 
 
@@ -117,6 +119,7 @@ def read_episode(root, split, task, seed, protocol_id):
         "result_sha256": file_sha256(result_path),
         "states_sha256": file_sha256(states_path),
         "memory_files": result["memory"]["selected_files"],
+        "initial": states["steps"][0],
     }
 
 
@@ -135,7 +138,6 @@ def summarize(episodes):
 def public_sources(baseline_root, da3_root):
     baseline = read_json(baseline_root / "run-info.json")
     da3 = read_json(da3_root / "run_manifest.json")
-    require(baseline_root.name == "composite_main", "Expected the website's original baseline run")
     require(baseline["repository_revision"] == da3["base_commit"], "Base revisions differ")
     revision = baseline["repository_revision"]
     require(bool(re.fullmatch(r"[a-f0-9]{40}", revision)), "Invalid source revision")
@@ -165,7 +167,7 @@ def percentage(numerator, denominator, signed=False):
 def report_text(data):
     lines = [
         "# RoboCasa composite：模拟器深度与 DA3 深度", "",
-        "同一任务、同一 seed 配对比较 160 局。Baseline 为网站原有的 Astra 批次；"
+        "按任务、seed 对齐比较 160 局。Baseline 为 11 月 1–2 日 Astra 重跑批次；"
         "两组均为 GPT-6-Astra / xhigh。", "",
         "| 分组 | Baseline | DA3 | DA3 − Baseline |",
         "|---|---:|---:|---:|",
@@ -179,6 +181,11 @@ def report_text(data):
     lines += [
         "", f"配对结果：双方成功 {s['both_success']} 局，仅 Baseline 成功 {s['baseline_only']} 局，"
         f"仅 DA3 成功 {s['da3_only']} 局，双方失败 {s['neither']} 局。", "",
+        f"Baseline 批次：`{data['sources']['baseline']['run']}`；DA3 批次：`{data['sources']['da3']['run']}`。",
+        f"初始状态核对：{data['initial_state_audit']['robot_state_differences']} 对机器人状态最大绝对差超过 1e-6；"
+        f"{data['initial_state_audit']['task_language_differences']} 对任务文本不同，"
+        f"{data['initial_state_audit']['task_progress_differences']} 对初始任务进度不同。"
+        "这些检查不覆盖全部场景物体；相同 seed 不保证场景完全一致，不能将全部差异归因于深度替换。", "",
         "本实验仅将 `back_project_batch` 与 `query_world_map` 的几何来源替换为 "
         "DA3METRIC-LARGE 从 RGB 估计的米制深度。相机内参 K 与相机位姿仍为已知的模拟器数据；"
         "其他真值接口、任务进度与成功反馈、VLA 输入和权重、记忆、提示词与控制流程保留 baseline 设置。"
@@ -215,9 +222,14 @@ def main():
                 require(baseline["memory_files"] == da3["memory_files"],
                         f"{split}/{task}_s{seed}: selected memory files differ")
                 row = {"split": split, "task": task, "seed": seed}
+                ai, bi = baseline["initial"], da3["initial"]
+                row["initial_robot_state_max_abs_diff"] = max(
+                    abs(x-y) for k in ai["state"] for x, y in zip(ai["state"][k], bi["state"][k]))
+                row["initial_task_language_equal"] = ai["extras"]["task_language"] == bi["extras"]["task_language"]
+                row["initial_task_progress_equal"] = ai["extras"]["task_progress"] == bi["extras"]["task_progress"]
                 for name, result in (("baseline", baseline), ("da3", da3)):
                     row.update({f"{name}_{key}": value for key, value in result.items()
-                                if key != "memory_files"})
+                                if key not in {"memory_files", "initial"}})
                 episodes.append(row)
     data = {
         "schema_version": 1,
@@ -237,6 +249,12 @@ def main():
             "comparison": "One run per setting, paired by task and seed",
         },
         "sources": sources,
+        "initial_state_audit": {
+            "robot_state_threshold": 1e-6,
+            "robot_state_differences": sum(e["initial_robot_state_max_abs_diff"] > 1e-6 for e in episodes),
+            "task_language_differences": sum(not e["initial_task_language_equal"] for e in episodes),
+            "task_progress_differences": sum(not e["initial_task_progress_equal"] for e in episodes),
+        },
         "summary": {split: summarize([e for e in episodes if e["split"] == split])
                     for split in SPLITS},
         "tasks": tasks,

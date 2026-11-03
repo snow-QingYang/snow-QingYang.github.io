@@ -20,8 +20,9 @@ function renderTasks() {
       const delta = da3 - baseline;
       const cells = episodes.map((e) => {
         const category = e.baseline_success === e.da3_success ? '' : e.da3_success ? 'gain' : 'loss';
-        const label = `seed ${e.seed}：baseline ${e.baseline_success ? '成功' : '失败'}，DA3 ${e.da3_success ? '成功' : '失败'}`;
-        return `<td><span class="pair ${category}" role="img" title="${label}" aria-label="${label}">${e.baseline_success ? '✓' : '×'} → ${e.da3_success ? '✓' : '×'}</span></td>`;
+        const differences = [e.initial_robot_state_max_abs_diff > 1e-6 ? '初始机器人状态不同' : '', !e.initial_task_language_equal ? '初始任务文本不同' : '', !e.initial_task_progress_equal ? '初始任务进度不同' : ''].filter(Boolean);
+        const label = `seed ${e.seed}：baseline ${e.baseline_success ? '成功' : '失败'}，DA3 ${e.da3_success ? '成功' : '失败'}${differences.length ? '；' + differences.join('、') : ''}`;
+        return `<td><span class="pair ${category}" role="img" title="${label}" aria-label="${label}">${e.baseline_success ? '✓' : '×'} → ${e.da3_success ? '✓' : '×'}${differences.length ? ' *' : ''}</span></td>`;
       }).join('');
       return `<tr><th scope="row">${escapeHTML(task)}</th><td>${baseline}/5</td><td>${da3}/5</td><td class="${delta > 0 ? 'gain-text' : delta < 0 ? 'loss-text' : ''}">${delta > 0 ? '+' : ''}${delta}</td>${cells}</tr>`;
     }).join('');

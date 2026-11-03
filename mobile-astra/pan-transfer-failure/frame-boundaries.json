@@ -1,0 +1,218 @@
+[
+  {
+    "step": 1,
+    "method": "move_base",
+    "calibrationFrames": 0,
+    "startFrame": 0,
+    "endFrame": 10,
+    "frameMatchMAE": 1.757
+  },
+  {
+    "step": 2,
+    "method": "move_base",
+    "calibrationFrames": 0,
+    "startFrame": 10,
+    "endFrame": 30,
+    "frameMatchMAE": 1.907
+  },
+  {
+    "step": 3,
+    "method": "rldx_arm",
+    "calibrationFrames": 0,
+    "startFrame": 30,
+    "endFrame": 350,
+    "frameMatchMAE": 1.791
+  },
+  {
+    "step": 4,
+    "method": "rldx_arm",
+    "calibrationFrames": 0,
+    "startFrame": 350,
+    "endFrame": 670,
+    "frameMatchMAE": 1.723
+  },
+  {
+    "step": 5,
+    "method": "rldx_arm",
+    "calibrationFrames": 0,
+    "startFrame": 670,
+    "endFrame": 990,
+    "frameMatchMAE": 1.759
+  },
+  {
+    "step": 6,
+    "method": "rldx_arm",
+    "calibrationFrames": 0,
+    "startFrame": 990,
+    "endFrame": 1310,
+    "frameMatchMAE": 1.674
+  },
+  {
+    "step": 7,
+    "method": "rldx_arm",
+    "calibrationFrames": 0,
+    "startFrame": 1310,
+    "endFrame": 1630,
+    "frameMatchMAE": 1.72
+  },
+  {
+    "step": 8,
+    "method": "rldx_arm",
+    "calibrationFrames": 0,
+    "startFrame": 1630,
+    "endFrame": 1950,
+    "frameMatchMAE": 1.695
+  },
+  {
+    "step": 9,
+    "method": "rldx_arm",
+    "calibrationFrames": 0,
+    "startFrame": 1950,
+    "endFrame": 2270,
+    "frameMatchMAE": 1.705
+  },
+  {
+    "step": 10,
+    "method": "rldx_arm",
+    "calibrationFrames": 0,
+    "startFrame": 2270,
+    "endFrame": 2590,
+    "frameMatchMAE": 1.833
+  },
+  {
+    "step": 11,
+    "method": "rldx_skill",
+    "calibrationFrames": 0,
+    "startFrame": 2590,
+    "endFrame": 2910,
+    "frameMatchMAE": 1.673
+  },
+  {
+    "step": 12,
+    "method": "rldx_skill",
+    "calibrationFrames": 0,
+    "startFrame": 2910,
+    "endFrame": 3230,
+    "frameMatchMAE": 1.726
+  },
+  {
+    "step": 13,
+    "method": "rldx_skill",
+    "calibrationFrames": 0,
+    "startFrame": 3230,
+    "endFrame": 3550,
+    "frameMatchMAE": 1.77
+  },
+  {
+    "step": 14,
+    "method": "move_to",
+    "calibrationFrames": 9,
+    "startFrame": 3550,
+    "endFrame": 3566,
+    "frameMatchMAE": 1.743
+  },
+  {
+    "step": 15,
+    "method": "rldx_skill",
+    "calibrationFrames": 0,
+    "startFrame": 3566,
+    "endFrame": 3886,
+    "frameMatchMAE": 1.75
+  },
+  {
+    "step": 16,
+    "method": "rldx_skill",
+    "calibrationFrames": 0,
+    "startFrame": 3886,
+    "endFrame": 4206,
+    "frameMatchMAE": 1.773
+  },
+  {
+    "step": 17,
+    "method": "rldx_skill",
+    "calibrationFrames": 0,
+    "startFrame": 4206,
+    "endFrame": 4526,
+    "frameMatchMAE": 1.753
+  },
+  {
+    "step": 18,
+    "method": "rldx_skill",
+    "calibrationFrames": 0,
+    "startFrame": 4526,
+    "endFrame": 4846,
+    "frameMatchMAE": 1.753
+  },
+  {
+    "step": 19,
+    "method": "move_delta",
+    "calibrationFrames": 0,
+    "startFrame": 4846,
+    "endFrame": 4862,
+    "frameMatchMAE": 1.724
+  },
+  {
+    "step": 20,
+    "method": "move_base",
+    "calibrationFrames": 0,
+    "startFrame": 4862,
+    "endFrame": 4882,
+    "frameMatchMAE": 1.704
+  },
+  {
+    "step": 21,
+    "method": "rldx_skill",
+    "calibrationFrames": 0,
+    "startFrame": 4882,
+    "endFrame": 5202,
+    "frameMatchMAE": 1.783
+  },
+  {
+    "step": 22,
+    "method": "rldx_skill",
+    "calibrationFrames": 0,
+    "startFrame": 5202,
+    "endFrame": 5522,
+    "frameMatchMAE": 1.853
+  },
+  {
+    "step": 23,
+    "method": "move_to",
+    "calibrationFrames": 0,
+    "startFrame": 5522,
+    "endFrame": 5539,
+    "frameMatchMAE": 1.806
+  },
+  {
+    "step": 24,
+    "method": "rldx_skill",
+    "calibrationFrames": 0,
+    "startFrame": 5539,
+    "endFrame": 5859,
+    "frameMatchMAE": 1.712
+  },
+  {
+    "step": 25,
+    "method": "rldx_skill",
+    "calibrationFrames": 0,
+    "startFrame": 5859,
+    "endFrame": 6179,
+    "frameMatchMAE": 1.756
+  },
+  {
+    "step": 26,
+    "method": "rldx_skill",
+    "calibrationFrames": 0,
+    "startFrame": 6179,
+    "endFrame": 6499,
+    "frameMatchMAE": 1.81
+  },
+  {
+    "step": 27,
+    "method": "rldx_skill",
+    "calibrationFrames": 0,
+    "startFrame": 6499,
+    "endFrame": 6819,
+    "frameMatchMAE": 1.761
+  }
+]

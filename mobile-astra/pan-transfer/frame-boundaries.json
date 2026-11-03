@@ -1,0 +1,483 @@
+[
+  {
+    "step": 1,
+    "method": "rldx_arm",
+    "calibrationFrames": 0,
+    "startFrame": 0,
+    "endFrame": 320,
+    "frameMatchMAE": 2.76
+  },
+  {
+    "step": 2,
+    "method": "rldx_arm",
+    "calibrationFrames": 0,
+    "startFrame": 320,
+    "endFrame": 640,
+    "frameMatchMAE": 2.631
+  },
+  {
+    "step": 3,
+    "method": "rldx_arm",
+    "calibrationFrames": 0,
+    "startFrame": 640,
+    "endFrame": 960,
+    "frameMatchMAE": 2.733
+  },
+  {
+    "step": 4,
+    "method": "rldx_arm",
+    "calibrationFrames": 0,
+    "startFrame": 960,
+    "endFrame": 1280,
+    "frameMatchMAE": 2.738
+  },
+  {
+    "step": 5,
+    "method": "move_to",
+    "calibrationFrames": 9,
+    "startFrame": 1280,
+    "endFrame": 1300,
+    "frameMatchMAE": 2.679
+  },
+  {
+    "step": 6,
+    "method": "rldx_arm",
+    "calibrationFrames": 0,
+    "startFrame": 1300,
+    "endFrame": 1620,
+    "frameMatchMAE": 2.685
+  },
+  {
+    "step": 7,
+    "method": "rldx_arm",
+    "calibrationFrames": 0,
+    "startFrame": 1620,
+    "endFrame": 1940,
+    "frameMatchMAE": 2.643
+  },
+  {
+    "step": 8,
+    "method": "rldx_arm",
+    "calibrationFrames": 0,
+    "startFrame": 1940,
+    "endFrame": 2260,
+    "frameMatchMAE": 2.664
+  },
+  {
+    "step": 9,
+    "method": "rldx_arm",
+    "calibrationFrames": 0,
+    "startFrame": 2260,
+    "endFrame": 2580,
+    "frameMatchMAE": 2.669
+  },
+  {
+    "step": 10,
+    "method": "rldx_arm",
+    "calibrationFrames": 0,
+    "startFrame": 2580,
+    "endFrame": 2900,
+    "frameMatchMAE": 2.661
+  },
+  {
+    "step": 11,
+    "method": "rldx_arm",
+    "calibrationFrames": 0,
+    "startFrame": 2900,
+    "endFrame": 3220,
+    "frameMatchMAE": 2.596
+  },
+  {
+    "step": 12,
+    "method": "rldx_arm",
+    "calibrationFrames": 0,
+    "startFrame": 3220,
+    "endFrame": 3540,
+    "frameMatchMAE": 2.608
+  },
+  {
+    "step": 13,
+    "method": "move_to",
+    "calibrationFrames": 0,
+    "startFrame": 3540,
+    "endFrame": 3560,
+    "frameMatchMAE": 2.578
+  },
+  {
+    "step": 14,
+    "method": "rldx_skill",
+    "calibrationFrames": 0,
+    "startFrame": 3560,
+    "endFrame": 3880,
+    "frameMatchMAE": 2.566
+  },
+  {
+    "step": 15,
+    "method": "rldx_skill",
+    "calibrationFrames": 0,
+    "startFrame": 3880,
+    "endFrame": 4200,
+    "frameMatchMAE": 2.748
+  },
+  {
+    "step": 16,
+    "method": "scripted_grasp",
+    "calibrationFrames": 0,
+    "lengthSource": "Video total minus all other recorded action lengths",
+    "startFrame": 4200,
+    "endFrame": 4259,
+    "frameMatchMAE": 2.641
+  },
+  {
+    "step": 17,
+    "method": "set_gripper",
+    "calibrationFrames": 0,
+    "startFrame": 4259,
+    "endFrame": 4274,
+    "frameMatchMAE": 2.623
+  },
+  {
+    "step": 18,
+    "method": "move_base",
+    "calibrationFrames": 0,
+    "startFrame": 4274,
+    "endFrame": 4294,
+    "frameMatchMAE": 2.315
+  },
+  {
+    "step": 19,
+    "method": "move_to",
+    "calibrationFrames": 0,
+    "startFrame": 4294,
+    "endFrame": 4317,
+    "frameMatchMAE": 2.301
+  },
+  {
+    "step": 20,
+    "method": "move_to",
+    "calibrationFrames": 0,
+    "startFrame": 4317,
+    "endFrame": 4339,
+    "frameMatchMAE": 2.303
+  },
+  {
+    "step": 21,
+    "method": "set_gripper",
+    "calibrationFrames": 0,
+    "startFrame": 4339,
+    "endFrame": 4359,
+    "frameMatchMAE": 2.315
+  },
+  {
+    "step": 22,
+    "method": "move_to",
+    "calibrationFrames": 0,
+    "startFrame": 4359,
+    "endFrame": 4382,
+    "frameMatchMAE": 2.315
+  },
+  {
+    "step": 23,
+    "method": "set_gripper",
+    "calibrationFrames": 0,
+    "startFrame": 4382,
+    "endFrame": 4397,
+    "frameMatchMAE": 2.314
+  },
+  {
+    "step": 24,
+    "method": "rotate_pitch",
+    "calibrationFrames": 0,
+    "startFrame": 4397,
+    "endFrame": 4417,
+    "frameMatchMAE": 2.37
+  },
+  {
+    "step": 25,
+    "method": "move_to",
+    "calibrationFrames": 0,
+    "startFrame": 4417,
+    "endFrame": 4432,
+    "frameMatchMAE": 2.323
+  },
+  {
+    "step": 26,
+    "method": "move_to",
+    "calibrationFrames": 0,
+    "startFrame": 4432,
+    "endFrame": 4461,
+    "frameMatchMAE": 2.326
+  },
+  {
+    "step": 27,
+    "method": "move_to",
+    "calibrationFrames": 0,
+    "startFrame": 4461,
+    "endFrame": 4524,
+    "frameMatchMAE": 2.321
+  },
+  {
+    "step": 28,
+    "method": "set_gripper",
+    "calibrationFrames": 0,
+    "startFrame": 4524,
+    "endFrame": 4544,
+    "frameMatchMAE": 2.319
+  },
+  {
+    "step": 29,
+    "method": "move_to",
+    "calibrationFrames": 0,
+    "startFrame": 4544,
+    "endFrame": 4555,
+    "frameMatchMAE": 2.293
+  },
+  {
+    "step": 30,
+    "method": "set_gripper",
+    "calibrationFrames": 0,
+    "startFrame": 4555,
+    "endFrame": 4570,
+    "frameMatchMAE": 2.291
+  },
+  {
+    "step": 31,
+    "method": "move_to",
+    "calibrationFrames": 0,
+    "startFrame": 4570,
+    "endFrame": 4586,
+    "frameMatchMAE": 2.335
+  },
+  {
+    "step": 32,
+    "method": "set_gripper",
+    "calibrationFrames": 0,
+    "startFrame": 4586,
+    "endFrame": 4601,
+    "frameMatchMAE": 2.355
+  },
+  {
+    "step": 33,
+    "method": "move_to",
+    "calibrationFrames": 0,
+    "startFrame": 4601,
+    "endFrame": 4625,
+    "frameMatchMAE": 2.365
+  },
+  {
+    "step": 34,
+    "method": "move_to",
+    "calibrationFrames": 0,
+    "startFrame": 4625,
+    "endFrame": 4650,
+    "frameMatchMAE": 2.393
+  },
+  {
+    "step": 35,
+    "method": "rotate_pitch",
+    "calibrationFrames": 0,
+    "startFrame": 4650,
+    "endFrame": 4680,
+    "frameMatchMAE": 2.377
+  },
+  {
+    "step": 36,
+    "method": "rotate_pitch",
+    "calibrationFrames": 0,
+    "startFrame": 4680,
+    "endFrame": 4710,
+    "frameMatchMAE": 2.373
+  },
+  {
+    "step": 37,
+    "method": "rotate_pitch",
+    "calibrationFrames": 0,
+    "startFrame": 4710,
+    "endFrame": 4740,
+    "frameMatchMAE": 2.415
+  },
+  {
+    "step": 38,
+    "method": "rotate_pitch",
+    "calibrationFrames": 0,
+    "startFrame": 4740,
+    "endFrame": 4770,
+    "frameMatchMAE": 2.398
+  },
+  {
+    "step": 39,
+    "method": "rotate_pitch",
+    "calibrationFrames": 0,
+    "startFrame": 4770,
+    "endFrame": 4800,
+    "frameMatchMAE": 2.435
+  },
+  {
+    "step": 40,
+    "method": "move_to",
+    "calibrationFrames": 0,
+    "startFrame": 4800,
+    "endFrame": 4835,
+    "frameMatchMAE": 2.411
+  },
+  {
+    "step": 41,
+    "method": "move_to",
+    "calibrationFrames": 0,
+    "startFrame": 4835,
+    "endFrame": 4865,
+    "frameMatchMAE": 2.401
+  },
+  {
+    "step": 42,
+    "method": "rotate_pitch",
+    "calibrationFrames": 0,
+    "startFrame": 4865,
+    "endFrame": 4895,
+    "frameMatchMAE": 2.363
+  },
+  {
+    "step": 43,
+    "method": "rotate_pitch",
+    "calibrationFrames": 0,
+    "startFrame": 4895,
+    "endFrame": 4925,
+    "frameMatchMAE": 2.268
+  },
+  {
+    "step": 44,
+    "method": "rotate_pitch",
+    "calibrationFrames": 0,
+    "startFrame": 4925,
+    "endFrame": 4955,
+    "frameMatchMAE": 2.251
+  },
+  {
+    "step": 45,
+    "method": "rotate_pitch",
+    "calibrationFrames": 0,
+    "startFrame": 4955,
+    "endFrame": 4985,
+    "frameMatchMAE": 2.233
+  },
+  {
+    "step": 46,
+    "method": "rotate_pitch",
+    "calibrationFrames": 0,
+    "startFrame": 4985,
+    "endFrame": 5015,
+    "frameMatchMAE": 2.22
+  },
+  {
+    "step": 47,
+    "method": "move_to",
+    "calibrationFrames": 0,
+    "startFrame": 5015,
+    "endFrame": 5046,
+    "frameMatchMAE": 2.218
+  },
+  {
+    "step": 48,
+    "method": "move_to",
+    "calibrationFrames": 0,
+    "startFrame": 5046,
+    "endFrame": 5077,
+    "frameMatchMAE": 2.364
+  },
+  {
+    "step": 49,
+    "method": "set_gripper",
+    "calibrationFrames": 0,
+    "startFrame": 5077,
+    "endFrame": 5097,
+    "frameMatchMAE": 2.398
+  },
+  {
+    "step": 50,
+    "method": "move_to",
+    "calibrationFrames": 0,
+    "startFrame": 5097,
+    "endFrame": 5143,
+    "frameMatchMAE": 2.35
+  },
+  {
+    "step": 51,
+    "method": "move_to",
+    "calibrationFrames": 0,
+    "startFrame": 5143,
+    "endFrame": 5183,
+    "frameMatchMAE": 2.327
+  },
+  {
+    "step": 52,
+    "method": "set_gripper",
+    "calibrationFrames": 0,
+    "startFrame": 5183,
+    "endFrame": 5203,
+    "frameMatchMAE": 2.299
+  },
+  {
+    "step": 53,
+    "method": "move_to",
+    "calibrationFrames": 0,
+    "startFrame": 5203,
+    "endFrame": 5236,
+    "frameMatchMAE": 2.316
+  },
+  {
+    "step": 54,
+    "method": "set_gripper",
+    "calibrationFrames": 0,
+    "startFrame": 5236,
+    "endFrame": 5251,
+    "frameMatchMAE": 2.378
+  },
+  {
+    "step": 55,
+    "method": "move_to",
+    "calibrationFrames": 0,
+    "startFrame": 5251,
+    "endFrame": 5288,
+    "frameMatchMAE": 2.402
+  },
+  {
+    "step": 56,
+    "method": "set_gripper",
+    "calibrationFrames": 0,
+    "startFrame": 5288,
+    "endFrame": 5303,
+    "frameMatchMAE": 2.408
+  },
+  {
+    "step": 57,
+    "method": "move_to",
+    "calibrationFrames": 0,
+    "startFrame": 5303,
+    "endFrame": 5340,
+    "frameMatchMAE": 2.424
+  },
+  {
+    "step": 58,
+    "method": "move_to",
+    "calibrationFrames": 0,
+    "startFrame": 5340,
+    "endFrame": 5364,
+    "frameMatchMAE": 2.391
+  },
+  {
+    "step": 59,
+    "method": "release",
+    "calibrationFrames": 0,
+    "startFrame": 5364,
+    "endFrame": 5384,
+    "frameMatchMAE": 2.416
+  },
+  {
+    "step": 60,
+    "method": "move_to",
+    "calibrationFrames": 0,
+    "startFrame": 5384,
+    "endFrame": 5416,
+    "frameMatchMAE": 2.383
+  }
+]

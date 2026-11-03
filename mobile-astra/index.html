@@ -19,27 +19,27 @@
 <main>
 <section aria-labelledby="interaction-title">
 <h1 id="interaction-title">Agent 与环境 · 完整交互记录</h1>
-<div class="doc"><div><strong>PanTransfer · GPT-6-Astra · seed 2 · 成功</strong><p>完整初始提示、实际记忆读取、77 条公开消息、79 次工具调用及原始返回、147 张相机图片与连续视频。信息清单可跳转查看任务真值、抓持反馈和到位误差。</p></div><div class="links"><a class="open" href="pan-transfer-full/">查看全部交互 →</a></div></div>
+<div class="doc"><div><strong>PanTransfer · GPT-6-Astra · seed 3 · 成功 · 本次重跑</strong><p>完整初始提示、实际记忆读取、94 条公开消息、90 次工具调用及原始返回、183 张相机图片与 270.80 秒完整视频。信息清单可跳转查看任务真值、抓持反馈和到位误差。</p></div><div class="links"><a class="open" href="pan-transfer/">查看全部交互 →</a></div></div>
 </section>
 <section aria-labelledby="da3-title" id="geometry-da3">
 <h1 id="da3-title">DA3 几何替代 · GPT-6-Astra</h1>
-<div class="table"><table aria-labelledby="da3-title"><thead><tr><th>任务组</th><th>Baseline · 真值几何</th><th>DA3 · 预测几何</th><th>成功率差</th></tr></thead><tbody><tr><td>Seen</td><td>32 / 80 · 40.00%</td><td><strong>33 / 80 · 41.25%</strong></td><td>+1.25 个百分点</td></tr><tr><td>Unseen</td><td>21 / 80 · 26.25%</td><td><strong>17 / 80 · 21.25%</strong></td><td>−5.00 个百分点</td></tr><tr><td>总计</td><td>53 / 160 · 33.13%</td><td><strong>50 / 160 · 31.25%</strong></td><td>−1.88 个百分点</td></tr></tbody></table></div>
-<p class="description">同一组 32 个任务 × seeds 1–5。仅将 back_project_batch / query_world_map 的几何深度来源换为 DA3METRIC-LARGE；保留相机内参、相机 pose、机器人状态、任务进度与成功反馈。Planner、VLA、提示和初始任务记忆按 Astra baseline 对齐。这不是完整的无真值实验。</p>
+<div class="table"><table aria-labelledby="da3-title"><thead><tr><th>任务组</th><th>Baseline · 真值几何</th><th>DA3 · 预测几何</th><th>成功率差</th></tr></thead><tbody><tr><td>Seen</td><td>34 / 80 · 42.50%</td><td><strong>33 / 80 · 41.25%</strong></td><td>−1.25 个百分点</td></tr><tr><td>Unseen</td><td>21 / 80 · 26.25%</td><td><strong>17 / 80 · 21.25%</strong></td><td>−5.00 个百分点</td></tr><tr><td>总计</td><td>55 / 160 · 34.38%</td><td><strong>50 / 160 · 31.25%</strong></td><td>−3.13 个百分点</td></tr></tbody></table></div>
+<p class="description">Baseline 使用 11 月 1–2 日重跑。32 个任务 × seeds 1–5 按编号对照，初始场景差异见详情。仅将 back_project_batch / query_world_map 的几何深度来源换为 DA3METRIC-LARGE；保留相机内参、相机 pose、机器人状态、任务进度与成功反馈。Planner、VLA、提示和初始任务记忆按 Astra baseline 对齐。这不是完整的无真值实验。</p>
 <div class="links"><a class="open" href="geometry-da3/">查看逐任务与 seed 对照 →</a><a class="download" href="geometry-da3/episodes.csv" download>下载 160 对记录 CSV</a></div>
 </section>
 <section aria-labelledby="analysis-title">
 <h1 id="analysis-title">官方 RPent · RoboCasa 两组实验分析</h1>
 <h2 class="split-heading" id="seen-title">Seen</h2>
-<div class="table"><table aria-labelledby="seen-title"><thead><tr><th>模型 · xhigh</th><th>成功数 / 80</th><th>VLA 直接完成</th><th>准备后 VLA 完成</th><th>Planner 介入后成功</th></tr></thead><tbody><tr><td>GPT-6-Astra</td><td><strong>32 / 80 · 40.00%</strong></td><td>12</td><td>2</td><td>18</td></tr><tr><td>GPT-5.6-Sol</td><td><strong>32 / 80 · 40.00%</strong></td><td>13</td><td>0</td><td>19</td></tr></tbody></table></div>
+<div class="table"><table aria-labelledby="seen-title"><thead><tr><th>模型 · xhigh</th><th>成功数 / 80</th><th>VLA 直接完成</th><th>准备后 VLA 完成</th><th>Planner 介入后成功</th></tr></thead><tbody><tr><td>GPT-6-Astra</td><td><strong>34 / 80 · 42.50%</strong></td><td>13</td><td>3</td><td>18</td></tr><tr><td>GPT-5.6-Sol</td><td><strong>32 / 80 · 40.00%</strong></td><td>13</td><td>0</td><td>19</td></tr></tbody></table></div>
 <h2 class="split-heading" id="unseen-title">Unseen</h2>
-<div class="table"><table aria-labelledby="unseen-title"><thead><tr><th>模型 · xhigh</th><th>成功数 / 80</th><th>VLA 直接完成</th><th>准备后 VLA 完成</th><th>Planner 介入后成功</th></tr></thead><tbody><tr><td>GPT-6-Astra</td><td><strong>21 / 80 · 26.25%</strong></td><td>5</td><td>0</td><td>16</td></tr><tr><td>GPT-5.6-Sol</td><td><strong>13 / 80 · 16.25%</strong></td><td>5</td><td>0</td><td>8</td></tr></tbody></table></div>
-<p class="description">Seen / Unseen 各 16 个任务 × seeds 1–5，每个模型每组 80 局，共 320 个有效 episode。三个成功路径互斥，相加等于该组成功数。两组模型使用不同任务记忆；介入后的成功按实际轨迹分类。</p>
+<div class="table"><table aria-labelledby="unseen-title"><thead><tr><th>模型 · xhigh</th><th>成功数 / 80</th><th>VLA 直接完成</th><th>准备后 VLA 完成</th><th>Planner 介入后成功</th></tr></thead><tbody><tr><td>GPT-6-Astra</td><td><strong>21 / 80 · 26.25%</strong></td><td>6</td><td>1</td><td>14</td></tr><tr><td>GPT-5.6-Sol</td><td><strong>13 / 80 · 16.25%</strong></td><td>5</td><td>0</td><td>8</td></tr></tbody></table></div>
+<p class="description">Astra 使用 11 月 1–2 日重跑。Seen / Unseen 各 16 个任务 × seeds 1–5，每个模型每组 80 局，共 320 个有效 episode。三个成功路径互斥，相加等于该组成功数。两组模型使用不同任务记忆；介入后的成功按实际轨迹分类。</p>
 <div class="links"><a class="open" href="analysis/">查看完整分析 →</a><a class="download" href="analysis/episodes.csv" download>下载 320 条记录 CSV</a></div>
 </section>
 <section aria-labelledby="runs-title">
 <h1 id="runs-title">实验回放</h1>
-<div class="table"><table><thead><tr><th>任务</th><th>模型</th><th>结果</th><th>执行记录</th><th></th></tr></thead><tbody><tr><td>PanTransfer<small>RoboCasa · seed 2</small></td><td>GPT-6-Astra<small>xhigh</small></td><td><span class="badge">成功</span></td><td>79 次工具调用<small>44 次解析动作 · 4 次 VLA</small></td><td><a class="open" href="pan-transfer/">打开回放 →</a></td></tr><tr><td>PanTransfer<small>RoboCasa · seed 1 · 食物洒落后未恢复</small></td><td>GPT-6-Astra<small>xhigh</small></td><td><span class="badge failure">失败 · stuck</span></td><td>34 次工具调用<small>4 次解析动作 · 12 次 VLA</small></td><td><a class="open" href="pan-transfer-failure/">查看失败回放 →</a></td></tr></tbody></table></div>
-<p class="description">PanTransfer：seed 2 由解析控制完成倾倒并恢复滑落的锅；seed 1 在食物洒落后尝试恢复，仍未完成。回放包含完整工具参数与返回结果。</p>
+<div class="table"><table><thead><tr><th>任务</th><th>模型</th><th>结果</th><th>执行记录</th><th></th></tr></thead><tbody><tr><td>PanTransfer<small>RoboCasa · seed 3</small></td><td>GPT-6-Astra<small>xhigh</small></td><td><span class="badge">成功</span></td><td>90 次工具调用<small>47 次解析动作 · 13 次 VLA</small></td><td><a class="open" href="pan-transfer/">打开回放 →</a></td></tr><tr><td>PanTransfer<small>RoboCasa · seed 1 · 多次调整后仍未完成</small></td><td>GPT-6-Astra<small>xhigh</small></td><td><span class="badge failure">失败 · stuck</span></td><td>53 次工具调用<small>6 次解析动作 · 21 次 VLA</small></td><td><a class="open" href="pan-transfer-failure/">查看失败回放 →</a></td></tr></tbody></table></div>
+<p class="description">两条均来自本次 Astra 重跑。seed 3 由 Planner 抓取、倾倒、放回并撤离；seed 1 多次调整末端和底盘后仍未完成。完整连续视频：成功 270.80 秒，失败 340.95 秒；右侧保留全部方法调用，包括感知、参数、返回及相机图片。</p>
 </section>
 <section aria-labelledby="docs-title">
 <h1 id="docs-title">方法调用文档</h1>

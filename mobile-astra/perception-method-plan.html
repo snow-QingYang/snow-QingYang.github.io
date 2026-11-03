@@ -68,7 +68,7 @@ html{scroll-behavior:smooth;scroll-padding-top:16px}.page-nav{display:flex;flex-
 <p class="flow"><strong>“目标”是 Agent 传入的坐标。</strong>Agent 看图选像素 → 用 <code>back_project_batch</code> 查三维表面点 → 选择目标并调用 <code>move_to(xyz)</code>。<code>final_dist</code> 衡量末端距这个坐标有多远；<code>navigate_to(xy)</code> 对底盘同理。上述两个方法不会自动替 Agent 查询目标物体位置。<strong>选错坐标，也可以准确到达；距离小不代表抓对了。</strong></p>
 <p>物体三维点和点簇仍需通过几何查询获取。<code>moved</code>、<code>base_drift</code> 只比较底盘起终点，不需要物体位置或目标坐标，也不能说明碰到了什么。</p>
 <p class="note">工具的 <code>ok=true</code> 不统一表示“抓到了”或“任务成功”；任务是否完成以环境的 <code>success</code> 为准。</p>
-<p class="note">实际例子：<a href="pan-transfer-full/">PanTransfer seed 2</a> 只主动调用 1 次 view_env_state，但收到 49 次状态观测（初始状态 + 48 次动作回传）；评分源码文件已生成，实际读取次数为 0。</p>
+<p class="note">实际例子：<a href="pan-transfer-full/">PanTransfer seed 3</a> 只主动调用 1 次 view_env_state，但收到 61 次状态观测（初始状态 + 60 次动作回传）；评分源码文件已生成，实际读取次数为 0。</p>
 <p class="source">源码：<a href="https://github.com/RLinf/RPent/blob/a744bd5f128ebef3cb8c6736cf7cd98adff681f1/robots/robocasa/tools.py#L66">状态与几何文件采集</a><a href="https://github.com/RLinf/RPent/blob/a744bd5f128ebef3cb8c6736cf7cd98adff681f1/robots/robocasa/tools.py#L159">观测返回</a></p>
 <footer>范围：官方 RPent RoboCasa · 源码版本 <a href="https://github.com/RLinf/RPent/tree/a744bd5f128ebef3cb8c6736cf7cd98adff681f1">a744bd5</a> · 2026-11-02 · <a href="methods.html">完整 method 手册</a> · <a href="./">返回首页</a></footer>
 </main></body></html>
