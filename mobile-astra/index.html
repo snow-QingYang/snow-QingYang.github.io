@@ -1,11 +1,25 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,nofollow"><meta name="description" content="研究 HarnessVLA 依赖了哪些模拟器真值；逐项去掉，或换成可从真实传感器获得的估计，再观察任务成功率和 Planner 的行为怎样变化。">
+<meta name="robots" content="noindex,nofollow"><meta name="description" content="逐项验证模拟器真值对 HarnessVLA 的贡献，并评估可用于真机的替代方案。">
 <link rel="icon" href="data:,"><link rel="stylesheet" href="project.css"><title>HarnessVLA：真值移除与替代 · Mobile Astra</title></head>
 <body><header class="site-head"><div class="head-inner"><a class="brand" href="./">Mobile Astra / 实验工作页</a><nav aria-label="项目导航"><a href="./" aria-current="page">项目总览</a><a href="experiments/">实验目录</a><a href="reference/">接口与真值</a></nav></div></header>
-<main><div class="hero"><p class="eyebrow">HARNESSVLA / ROBOCASA</p><h1>HarnessVLA：真值移除与替代</h1><p class="lead">研究 HarnessVLA 依赖了哪些模拟器真值；逐项去掉，或换成可从真实传感器获得的估计，再观察任务成功率和 Planner 的行为怎样变化。</p><p class="meta">当前基础：RPent / RoboCasa · GPT-6-Astra xhigh · 32 个 composite 任务 × seeds 1–5</p></div>
+<main><div class="hero"><p class="eyebrow">HARNESSVLA / ROBOCASA</p><h1>HarnessVLA：真值移除与替代</h1><p class="lead">逐项验证模拟器真值对 HarnessVLA 的贡献，并评估可用于真机的替代方案。</p><p class="meta">当前基础：RPent / RoboCasa · GPT-6-Astra xhigh · 32 个 composite 任务 × seeds 1–5</p></div>
 
-<section id="goal"><h2>我们要做什么</h2>
+<section id="motivation"><h2>实验动机 · Motivation</h2>
+<p>原版 HarnessVLA 可直接读取模拟器提供的三维几何、任务进度和交互反馈。真机上，这些信息往往需要测量或估计，也会有误差。因此，我们要弄清：<strong>当前成功率有多依赖这些真值，哪些信息最关键，以及用传感器或感知模型替代后能保留多少能力。</strong></p>
+<p>通过“原版 → 逐项去掉 → 估计替代”对照，同时查看成功率和 Planner 的失败／修复过程，找出从模拟器走向真机需要补齐的信息。</p></section>
+<section id="truth-list"><h2>要验证的真值清单</h2>
+<div class="table-wrap stack-small"><table aria-label="待验证的真值与特权信息"><thead><tr><th>信息类别</th><th>具体信息与入口</th><th>验证方向 / 当前进展</th></tr></thead><tbody>
+<tr><td data-label="信息类别">1 · 几何深度</td><td data-label="具体信息与入口"><code>back_project_batch</code>、<code>query_world_map</code>：由模拟器深度生成三维点与点簇。</td><td data-label="验证方向 / 当前进展">用预测深度替代。<a href="experiments/geometry-da3/">E02 · DA3 已完成</a>，相机标定仍保留。</td></tr>
+<tr><td data-label="信息类别">2 · 相机标定与位姿</td><td data-label="具体信息与入口">几何查询内部使用的相机内参、相机到世界坐标的变换。</td><td data-label="验证方向 / 当前进展">换成实际标定、运动学或定位估计，并检查误差影响。<strong>待验证。</strong></td></tr>
+<tr><td data-label="信息类别">3 · 机器人状态与运动反馈</td><td data-label="具体信息与入口"><code>view_env_state().state</code>；动作返回的 <code>final_dist</code>、<code>moved</code>、<code>base_drift</code>。</td><td data-label="验证方向 / 当前进展">用编码器、正运动学和里程计提供位姿、到指定坐标的误差及实际位移。<strong>待验证。</strong></td></tr>
+<tr><td data-label="信息类别">4 · 接触与抓持</td><td data-label="具体信息与入口"><code>rldx_skill / rldx_arm</code> 的 <code>grasp_contact</code>、<code>grasp_obj</code>，以及内部接触判断。</td><td data-label="验证方向 / 当前进展">移除后，用视觉共运动、夹爪开度或力／触觉估计。<strong>待完整评测。</strong></td></tr>
+<tr><td data-label="信息类别">5 · 任务进度</td><td data-label="具体信息与入口">观测里的 <code>task_progress</code>，例如食物是否入盘、锅是否回到炉灶。</td><td data-label="验证方向 / 当前进展"><a href="experiments/task-progress/">E03 · 移除实验已完成</a>，同时限制了文件读取；视觉子目标判断替代尚未做。</td></tr>
+<tr><td data-label="信息类别">6 · 成功与终止反馈</td><td data-label="具体信息与入口"><code>success</code>、<code>robocasa_terminated</code>，以及 VLA 内部的成功提前停止。</td><td data-label="验证方向 / 当前进展">分别验证 Agent 可见信号和内部早停的作用；评测端保留真实评分。<strong>待验证。</strong></td></tr>
+<tr><td data-label="信息类别">7 · 评分规则访问</td><td data-label="具体信息与入口"><code>read_text_file</code> 可读取的 <code>success_criteria.md</code>：成功条件、阈值和判定源码。</td><td data-label="验证方向 / 当前进展">E03 已一并限制读取；<strong>独立贡献待分离</strong>，需与实时任务进度的影响区分。</td></tr>
+</tbody></table></div>
+<p class="note">评分规则属于特权知识；机器人状态与相机标定在真机上可测量，重点是替换来源和评估误差。RGB 与历史记忆单独记录和控制。<a href="reference/ground-truth.html">查看接口与来源细节 →</a></p></section>
+<section id="goal"><h2>怎么验证</h2>
 <p>先沿着实际接口查清楚：哪些信息进入 Agent 上下文，哪些只在控制器或 VLA 内部使用，哪些仅用于最终评分。然后每次改一类信息，比较原版、去掉、替代三个设置。</p>
 <div class="flow"><article><span class="step">01 / 原版</span><h3>建立参照</h3><p>保留现有真值，记录成功率、动作轨迹和 Agent 实际看到的信息。</p></article><article><span class="step">02 / 去掉</span><h3>看它是否重要</h3><p>逐项切断信息来源，检查返回值、文件读取和内部控制是否仍泄露同类信息。</p></article><article><span class="step">03 / 替代</span><h3>看估计能否补回来</h3><p>用 RGB / RGB-D、机器人传感器或视觉判断代替直接读取模拟器状态。</p></article></div>
 <p class="note">模拟器真值仍可用于独立评测。需要限制的是被实验移除的信息进入 Agent 或执行过程的通道。</p></section>
