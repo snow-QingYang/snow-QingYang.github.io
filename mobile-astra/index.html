@@ -16,9 +16,8 @@
 <tr><td data-label="信息类别">4 · 接触与抓持</td><td data-label="具体信息与入口"><code>rldx_skill / rldx_arm</code> 的 <code>grasp_contact</code>、<code>grasp_obj</code>，以及内部接触判断。</td><td data-label="验证方向 / 当前进展">移除后，用视觉共运动、夹爪开度或力／触觉估计。<strong>待完整评测。</strong></td></tr>
 <tr><td data-label="信息类别">5 · 任务进度</td><td data-label="具体信息与入口">观测里的 <code>task_progress</code>，例如食物是否入盘、锅是否回到炉灶。</td><td data-label="验证方向 / 当前进展"><a href="experiments/task-progress/">E03 · 移除实验已完成</a>，同时限制了文件读取；视觉子目标判断替代尚未做。</td></tr>
 <tr><td data-label="信息类别">6 · 成功与终止反馈</td><td data-label="具体信息与入口"><code>success</code>、<code>robocasa_terminated</code>，以及 VLA 内部的成功提前停止。</td><td data-label="验证方向 / 当前进展">分别验证 Agent 可见信号和内部早停的作用；评测端保留真实评分。<strong>待验证。</strong></td></tr>
-<tr><td data-label="信息类别">7 · 评分规则访问</td><td data-label="具体信息与入口"><code>read_text_file</code> 可读取的 <code>success_criteria.md</code>：成功条件、阈值和判定源码。</td><td data-label="验证方向 / 当前进展">E03 已一并限制读取；<strong>独立贡献待分离</strong>，需与实时任务进度的影响区分。</td></tr>
 </tbody></table></div>
-<p class="note">评分规则属于特权知识；机器人状态与相机标定在真机上可测量，重点是替换来源和评估误差。RGB 与历史记忆单独记录和控制。<a href="reference/ground-truth.html">查看接口与来源细节 →</a></p></section>
+<p class="note">机器人状态与相机标定在真机上可测量，重点是替换来源和评估误差。RGB 与历史记忆单独记录和控制。<a href="reference/ground-truth.html">查看接口与来源细节 →</a></p></section>
 <section id="goal"><h2>怎么验证</h2>
 <p>先沿着实际接口查清楚：哪些信息进入 Agent 上下文，哪些只在控制器或 VLA 内部使用，哪些仅用于最终评分。然后每次改一类信息，比较原版、去掉、替代三个设置。</p>
 <div class="flow"><article><span class="step">01 / 原版</span><h3>建立参照</h3><p>保留现有真值，记录成功率、动作轨迹和 Agent 实际看到的信息。</p></article><article><span class="step">02 / 去掉</span><h3>看它是否重要</h3><p>逐项切断信息来源，检查返回值、文件读取和内部控制是否仍泄露同类信息。</p></article><article><span class="step">03 / 替代</span><h3>看估计能否补回来</h3><p>用 RGB / RGB-D、机器人传感器或视觉判断代替直接读取模拟器状态。</p></article></div>
