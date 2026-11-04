@@ -1,11 +1,23 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,nofollow"><meta name="description" content="验证：如果 Agent 看不到任务内部的中间完成判据，是否还能依靠观测进行规划和修复。">
+<meta name="robots" content="noindex,nofollow"><meta name="description" content="隐藏任务的实时中间判据，并限制评分规则文件访问；观察 Planner 在保留视觉、几何与成功信号时的表现。">
 <link rel="icon" href="data:,"><link rel="stylesheet" href="../../project.css"><title>E03 · 移除任务进度真值 · Mobile Astra</title></head>
 <body><header class="site-head"><div class="head-inner"><a class="brand" href="../../">Mobile Astra / 实验工作页</a><nav aria-label="项目导航"><a href="../../">项目总览</a><a href="../" aria-current="page">实验目录</a><a href="../../reference/">接口与真值</a></nav></div></header>
-<main><nav class="crumbs" aria-label="当前位置"><a href="../../">项目总览</a> <span aria-hidden="true">/</span> <a href="../">实验目录</a> <span aria-hidden="true">/</span> <span aria-current="page">E03 · 移除任务进度真值</span></nav><div class="hero"><p class="eyebrow">HARNESSVLA / ROBOCASA</p><h1>E03 · 移除任务进度真值</h1><p class="lead">验证：如果 Agent 看不到任务内部的中间完成判据，是否还能依靠观测进行规划和修复。</p></div>
+<main><nav class="crumbs" aria-label="当前位置"><a href="../../">项目总览</a> <span aria-hidden="true">/</span> <a href="../">实验目录</a> <span aria-hidden="true">/</span> <span aria-current="page">E03 · 移除任务进度真值</span></nav><div class="hero"><p class="eyebrow">HARNESSVLA / ROBOCASA</p><h1>E03 · 移除任务进度真值</h1><p class="lead">隐藏任务的实时中间判据，并限制评分规则文件访问；观察 Planner 在保留视觉、几何与成功信号时的表现。</p></div>
 
-<section class="current"><h3>当前状态：部分接口审计，尚无正式结果</h3><p>一次 SetUpCuttingStation seed 3 试跑中，11 次 Agent 观测未返回 <code>task_progress</code>，内部记录仍保留。但该次用了 DA3，和要求的原版深度配置不符，已中止；没有 result.json。</p><p><a href="cases/setup-cutting-station-s3/">查看此次试跑的审计证据 →</a></p></section>
-<section><h2>要移除什么</h2><p>原版初始观测及动作后的自动观测会把任务内部判据返回给 Agent，例如 <code>vegetable_on_plate</code>、<code>pan_on_stove</code>、<code>gripper_obj_far</code>。本实验首先关注这条实时进度通道。</p><p>环境内部保留真值用于最终评分；Agent 侧移除实时 <code>task_progress</code>。这次试跑仍保留 <code>success</code> 等信号，也仍可读取指定历史记忆，因此只覆盖部分通道。</p></section>
-<section><h2>正确配置下还需要做什么</h2><ol><li><strong>使用原版深度：</strong>回到 E01 的几何来源，避免同时替换深度与移除任务进度。</li><li><strong>明确读取边界：</strong>当前试跑把文件读取限在记忆目录，这还会影响评分规则等文件访问。正式对照要匹配读取权限，或把这一变化单独列成设置，避免混为纯 task_progress 消融。</li><li><strong>先核对接口，再做任务评测：</strong>检查初始观测、动作返回和文件访问；核对真实 Agent 上下文后，再跑 32 任务 × 5 seeds。</li><li><strong>后续再做估计替代：</strong>让视觉模型依据图像判断子目标完成情况，同时报告不确定性；这一替代尚未实施。</li></ol></section>
-<div class="links"><a href="../../reference/ground-truth.html">查任务进度从哪里来 →</a><a href="../baseline/cases/pan-transfer-success/">在 baseline 成功案例中查看真实返回 →</a></div></main><footer class="site-foot"><span>HarnessVLA 真值移除与替代 · 整理于 2026-11-03</span><a href="../">实验目录</a></footer></body></html>
+<section><span class="badge complete">已完成 · 160 个有效 episode</span><p class="meta">2026-11-04 · NoTaskGT · GPT-6-Astra / xhigh · 原版模拟器深度</p></section>
+<section><h2>完整结果</h2><div class="table-wrap"><table><thead><tr><th>任务组</th><th>E01 · baseline 重跑</th><th>NoTaskGT</th><th>成功率差</th></tr></thead><tbody>
+<tr><td>Seen</td><td>34 / 80 · 42.50%</td><td>24 / 80 · 30.00%</td><td>−12.50 pp</td></tr>
+<tr><td>Unseen</td><td>21 / 80 · 26.25%</td><td>17 / 80 · 21.25%</td><td>−5.00 pp</td></tr>
+<tr><td>总计</td><td><strong>55 / 160 · 34.38%</strong></td><td><strong>41 / 160 · 25.63%</strong></td><td>−8.75 pp</td></tr></tbody></table></div>
+<p class="note">Seen 少成功 10 局，Unseen 少成功 4 局。相同任务与 seed 对齐：24 对都成功，31 对仅 baseline 成功，17 对仅 NoTaskGT 成功，88 对都失败。pp 表示百分点。</p>
+<div class="links" style="margin-top:17px"><a class="button" href="analysis/">完整逐任务与 seed 对照 →</a><a href="analysis/episodes.csv" download>下载 160 对 CSV</a><a href="analysis/report.md">文字报告</a></div></section>
+<section><h2>这次移除了什么</h2><div class="cards">
+<article class="card"><h3>实时任务进度</h3><p>初始观测、动作后的自动观测和 <code>view_env_state</code> 不再向 Agent 返回 <code>task_progress</code>，例如食物是否入盘、锅是否回炉灶、清洗计数和任务内部距离。</p><p>Prompt 中对应的进度查看要求同步移除。</p></article>
+<article class="card"><h3>评分规则文件访问</h3><p><code>read_text_file</code> 只允许读取记忆目录内的文件，不能用该工具读取本次运行的 <code>success_criteria.md</code> 或 <code>states.json</code>。</p><p>Prompt 不再要求读取成功判定源码。这个文件限制与进度隐藏共同构成本次设置。</p></article></div>
+<p class="note">保留原版深度与两种几何查询、相机标定、机器人本体状态、抓持／接触反馈、<code>success</code>、<code>robocasa_terminated</code>、环境内部评分与成功提前停止，以及已有任务记忆。此批次没有 DA3，也没有叠加 NoContactGT。</p></section>
+<section><h2>结果如何理解</h2><p>这批结果的净下降主要来自 Seen：10 / 14 局。也有 17 局只在 NoTaskGT 中成功，因此不同任务与 seed 的变化并不一致。</p><p>本实验同时改变实时进度、文件读取范围和相应提示，不能把差值单独归因于 <code>task_progress</code>。初始状态核对还有 <strong>10 对机器人状态、4 对任务文本</strong>不同；检查未覆盖全部物体状态。</p>
+<p class="note">本页沿用网站当前 E01 的 55/160 重跑。若使用早先 10/28 的 53/160 批次，NoTaskGT 少成功 12 局、下降 7.50 个百分点；这是此前聊天中的比较口径。</p></section>
+<details><summary>运行批次与配置</summary><dl class="record"><dt>NoTaskGT 批次</dt><dd><code>official_main_composite_notaskgt_astra_xhigh_20261103T152118Z</code></dd><dt>参照批次</dt><dd><code>official_main_composite_astra_xhigh_20261101T150450Z</code></dd><dt>模型与 VLA</dt><dd>GPT-6-Astra / xhigh · RLDX-1-FT-RC365</dd><dt>记忆</dt><dd>GPT_6_astra_high；与 E01 重跑的对应文件 SHA-256 核对一致。</dd><dt>预算</dt><dd>100 个模型响应 / 3600 秒每局；每次 VLA 最多 40 × 8 仿真步。</dd><dt>完成时间</dt><dd>2026-11-04 07:53（香港时间）；160 个结果均有效，进程退出码均为 0。</dd></dl></details>
+<details><summary>此前中止的配置错误试跑</summary><p>旧 SetUpCuttingStation seed 3 试跑误用了 DA3，已中止且无 result.json。它仅作为历史接口审计保留，不计入这次 160 局。</p><a href="cases/setup-cutting-station-s3/">查看旧试跑审计 →</a></details>
+<div class="links border-top"><a href="../../reference/ground-truth.html">查任务进度与评分规则来源 →</a><a href="../baseline/">查看 E01 参照 →</a></div></main><footer class="site-foot"><span>HarnessVLA 真值移除与替代 · 整理于 2026-11-04</span><a href="../">实验目录</a></footer></body></html>

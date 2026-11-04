@@ -9,19 +9,20 @@
 <p>先沿着实际接口查清楚：哪些信息进入 Agent 上下文，哪些只在控制器或 VLA 内部使用，哪些仅用于最终评分。然后每次改一类信息，比较原版、去掉、替代三个设置。</p>
 <div class="flow"><article><span class="step">01 / 原版</span><h3>建立参照</h3><p>保留现有真值，记录成功率、动作轨迹和 Agent 实际看到的信息。</p></article><article><span class="step">02 / 去掉</span><h3>看它是否重要</h3><p>逐项切断信息来源，检查返回值、文件读取和内部控制是否仍泄露同类信息。</p></article><article><span class="step">03 / 替代</span><h3>看估计能否补回来</h3><p>用 RGB / RGB-D、机器人传感器或视觉判断代替直接读取模拟器状态。</p></article></div>
 <p class="note">模拟器真值仍可用于独立评测。需要限制的是被实验移除的信息进入 Agent 或执行过程的通道。</p></section>
-<section id="current"><h2>目前在做什么</h2><div class="current"><h3>任务进度真值移除 · 待正确配置验证</h3>
-<p>目标是去掉观测里的 <code>task_progress</code>，例如食物是否入盘、锅是否回到炉灶。这些中间判据会直接告诉 Planner 哪一步还没完成。</p>
-<p>已有一次试跑的 11 次观测未向 Agent 返回该字段，但试跑误用了 DA3 配置，已中止；还没有有效的单变量实验结果。下一步应使用原版深度验证，并单独说明文件读取限制的影响。<a href="experiments/task-progress/">查看进展与审计 →</a></p></div></section>
+<section id="current"><h2>最新结果</h2><div class="current"><h3>E03 · 任务进度移除已完成：41 / 160 · 25.63%</h3>
+<p>Seen 成功 <strong>24 / 80</strong>，Unseen 成功 <strong>17 / 80</strong>。与本站 E01 的 55/160 重跑相比，少成功 14 局，下降 8.75 个百分点。</p>
+<p>使用原版模拟器深度；隐藏 <code>task_progress</code>，同时将文件读取限制在记忆目录，保留成功信号。<a href="experiments/task-progress/">查看设置与结果 →</a> · <a href="experiments/task-progress/analysis/">160 对逐任务／seed 对照 →</a></p></div></section>
 <section id="completed"><h2>已经做了什么</h2>
 <div class="table-wrap stack-small"><table><thead><tr><th>工作</th><th>已有结果</th><th>查看</th></tr></thead><tbody>
 <tr><td data-label="工作">真值来源梳理</td><td data-label="已有结果">接口、内部控制、任务进度与成功反馈；已核对真实 Agent 返回</td><td data-label="查看"><a href="reference/">接口与真值</a></td></tr>
 <tr><td data-label="工作">E01 · 原版 baseline 重跑</td><td data-label="已有结果"><strong>55 / 160 · 34.38%</strong><small>19 局 VLA 直接完成；4 局准备后 VLA；32 局 Planner 介入后成功</small></td><td data-label="查看"><a href="experiments/baseline/">实验与案例</a></td></tr>
 <tr><td data-label="工作">E02 · DA3 深度替代</td><td data-label="已有结果"><strong>50 / 160 · 31.25%</strong><small>较 baseline 少 5 局，−3.13 个百分点；仅替换两类几何查询的深度来源</small></td><td data-label="查看"><a href="experiments/geometry-da3/">替代范围与对照</a></td></tr>
+<tr><td data-label="工作">E03 · 任务进度移除</td><td data-label="已有结果"><strong>41 / 160 · 25.63%</strong><small>Seen 24/80，Unseen 17/80；较 baseline 少 14 局，−8.75 个百分点</small></td><td data-label="查看"><a href="experiments/task-progress/">设置与完整结果</a></td></tr>
 <tr><td data-label="工作">完整交互案例</td><td data-label="已有结果">同一批 baseline 的 1 个成功、1 个失败；连续视频、全部方法参数与返回、观测图片</td><td data-label="查看"><a href="experiments/baseline/cases/">打开案例目录</a></td></tr>
 </tbody></table></div><p class="note">正式实验与中止试跑分开列出。已有 GPT-5.6-Sol 的 45/160 结果保留在 baseline 详细分析中，作为补充参照。</p></section>
 <section id="next"><h2>接下来怎么推进</h2><ol>
-<li><strong>先验证任务进度移除：</strong>原版深度、相同模型和预算；核对 Agent 返回与文件通道，验证通过后再跑完整任务集。</li>
+<li><strong>分析任务进度移除：</strong>逐项查看成败变化；进一步区分实时进度与评分规则访问限制的影响。</li>
 <li><strong>再逐类移除或替代：</strong>继续检查几何、抓持／接触、成功信号与评分规则。相机标定和机器人状态单独处理，区分传感器可测量量与特权信息。</li>
 <li><strong>让对比更可解释：</strong>固定初始场景和记忆，增加重复运行；每个实验同时保存结果、成功／失败案例及仍然保留的信息。</li>
 </ol><p class="note">当前 DA3 对照有初始状态差异，单批结果不能证明每个成败变化由深度替换引起。上述后续工作尚未完成。</p></section>
-<div class="links border-top"><a class="button" href="experiments/">全部实验 →</a><a href="reference/ground-truth.html">查具体真值从哪里来</a><a href="reference/methods.html">查全部方法</a></div></main><footer class="site-foot"><span>HarnessVLA 真值移除与替代 · 整理于 2026-11-03</span><a href="experiments/">实验目录</a></footer></body></html>
+<div class="links border-top"><a class="button" href="experiments/">全部实验 →</a><a href="reference/ground-truth.html">查具体真值从哪里来</a><a href="reference/methods.html">查全部方法</a></div></main><footer class="site-foot"><span>HarnessVLA 真值移除与替代 · 整理于 2026-11-04</span><a href="experiments/">实验目录</a></footer></body></html>

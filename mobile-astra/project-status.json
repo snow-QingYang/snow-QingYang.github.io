@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-03",
+  "as_of": "2026-11-04",
   "baseline": {
     "name": "GPT-6-Astra",
     "model": "gpt-6-astra",
@@ -104,56 +104,155 @@
     }
   },
   "task_progress": {
-    "status": "interrupted_configuration_mismatch",
-    "valid_benchmark_result": false,
-    "run": "task_progress_smoke_20261103T133104Z",
-    "task": "SetUpCuttingStation",
-    "seed": 3,
-    "requested_geometry": "original simulator depth",
-    "actual_geometry": "DA3",
-    "completed_tool_calls": 22,
-    "observations": 11,
-    "agent_task_progress_fields": 0,
-    "internal_states_with_task_progress": 11,
-    "other_observation_mismatches": [],
-    "success_signal": "retained",
-    "tool_counts": {
-      "view_env_state": 1,
-      "read_text_file": 1,
-      "back_project_batch": 10,
-      "rldx_skill": 3,
-      "move_delta": 2,
-      "rldx_arm": 5
-    },
-    "agent_attempted_forbidden_read": false,
-    "separate_direct_file_checks": [
-      {
-        "case": "selected_memory",
-        "allowed": true,
-        "expected_allowed": true,
-        "passed": true
+    "status": "complete",
+    "valid_benchmark_result": true,
+    "run": "official_main_composite_notaskgt_astra_xhigh_20261103T152118Z",
+    "summary": {
+      "seen": {
+        "total": 80,
+        "baseline_success": 34,
+        "notask_success": 24,
+        "both_success": 14,
+        "baseline_only": 20,
+        "notask_only": 10,
+        "neither": 36
       },
-      {
-        "case": "current_episode_states",
-        "allowed": false,
-        "expected_allowed": false,
-        "passed": true
+      "unseen": {
+        "total": 80,
+        "baseline_success": 21,
+        "notask_success": 17,
+        "both_success": 10,
+        "baseline_only": 11,
+        "notask_only": 7,
+        "neither": 52
       },
-      {
-        "case": "current_success_criteria",
-        "allowed": false,
-        "expected_allowed": false,
-        "passed": true
+      "all": {
+        "total": 160,
+        "baseline_success": 55,
+        "notask_success": 41,
+        "both_success": 24,
+        "baseline_only": 31,
+        "notask_only": 17,
+        "neither": 88
+      },
+      "legacy_baseline": {
+        "total": 160,
+        "baseline_success": 53,
+        "notask_success": 41,
+        "both_success": 27,
+        "baseline_only": 26,
+        "notask_only": 14,
+        "neither": 93,
+        "run": "official_main_composite_astra_xhigh_20261028T135510Z",
+        "delta_success": -12,
+        "delta_percentage_points": -7.5,
+        "comparison_role": "Historical reference; not the main paired baseline"
       }
-    ],
-    "source_sha256": {
-      "audit_tools_agent.md": "66779fe77e6c5cb5d0eadf909f1697f0b1a589827b8eb94613207255843ab635",
-      "manual_file_checks.json": "c2eb286e43e33e49f39a90603f02e2486098d86f9d45c37df11ccc5a8b971010",
-      "tool_calls.jsonl": "cfd81c8e905b338c490edf56f7c45b193af1d09a94b78c5a544cce04845f7a8e"
+    },
+    "initial_state_audit": {
+      "pairs_checked": 160,
+      "robot_state_threshold": 1e-06,
+      "robot_state_differences": 10,
+      "task_language_differences": 4,
+      "task_progress_comparison": "not_applicable",
+      "scope": "Step-0 robot state and task_language only; does not establish equality of all scene objects"
+    },
+    "protocol": {
+      "benchmark": "RoboCasa composite",
+      "environment_split": "target",
+      "protocol_id": "robocasa-harness-vla-v2",
+      "planner": {
+        "backend": "codex",
+        "model": "gpt-6-astra",
+        "reasoning_effort": "xhigh",
+        "max_turns": 100
+      },
+      "runtime": {
+        "cell_timeout_seconds": 3600,
+        "rldx_max_chunks": 40,
+        "rldx_settle_patience": 999,
+        "rldx_action_steps_per_chunk": 8
+      },
+      "seeds": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "tasks_per_split": 16,
+      "memory_profile": "local",
+      "memory_version": "GPT_6_astra_high",
+      "memory_policy": "Same task and global memory, on-demand reading",
+      "vla": "RLDX-1-FT-RC365",
+      "geometry": "Official simulator depth and world maps",
+      "da3": false,
+      "task_progress": "Omitted from agent-facing observations; internal state records retained",
+      "read_text_file": "Restricted to the selected memory directory and memory policy",
+      "success_criteria": "Not readable through read_text_file",
+      "prompt_changes": "Removed instructions to inspect task_progress and scoring source; completion assessed from observations",
+      "success": "Retained",
+      "robocasa_terminated": "Retained",
+      "contact_feedback": "Retained",
+      "native_success_and_vla_early_stop": "Retained",
+      "success_source": "state.success",
+      "states_crosschecked": 320,
+      "legacy_states_crosschecked": 160,
+      "manifest_sha256": "395dc7d5d47d0ac78d45613f29858d87c4dd06326ec99a091c0e9a5c053b0614",
+      "comparison": "One run per setting, paired by task and seed"
+    },
+    "archived_smoke": {
+      "status": "interrupted_configuration_mismatch",
+      "valid_benchmark_result": false,
+      "run": "task_progress_smoke_20261103T133104Z",
+      "task": "SetUpCuttingStation",
+      "seed": 3,
+      "requested_geometry": "original simulator depth",
+      "actual_geometry": "DA3",
+      "completed_tool_calls": 22,
+      "observations": 11,
+      "agent_task_progress_fields": 0,
+      "internal_states_with_task_progress": 11,
+      "other_observation_mismatches": [],
+      "success_signal": "retained",
+      "tool_counts": {
+        "view_env_state": 1,
+        "read_text_file": 1,
+        "back_project_batch": 10,
+        "rldx_skill": 3,
+        "move_delta": 2,
+        "rldx_arm": 5
+      },
+      "agent_attempted_forbidden_read": false,
+      "separate_direct_file_checks": [
+        {
+          "case": "selected_memory",
+          "allowed": true,
+          "expected_allowed": true,
+          "passed": true
+        },
+        {
+          "case": "current_episode_states",
+          "allowed": false,
+          "expected_allowed": false,
+          "passed": true
+        },
+        {
+          "case": "current_success_criteria",
+          "allowed": false,
+          "expected_allowed": false,
+          "passed": true
+        }
+      ],
+      "source_sha256": {
+        "audit_tools_agent.md": "66779fe77e6c5cb5d0eadf909f1697f0b1a589827b8eb94613207255843ab635",
+        "manual_file_checks.json": "c2eb286e43e33e49f39a90603f02e2486098d86f9d45c37df11ccc5a8b971010",
+        "tool_calls.jsonl": "cfd81c8e905b338c490edf56f7c45b193af1d09a94b78c5a544cce04845f7a8e"
+      }
     }
   },
   "notes": [
-    "The smoke run is interrupted and excluded from benchmark counts.",
+    "The historical DA3 smoke is interrupted and excluded from the 160 valid NoTaskGT episodes.",
     "DA3 only replaces depth for back_project_batch and query_world_map."
   ]
 }

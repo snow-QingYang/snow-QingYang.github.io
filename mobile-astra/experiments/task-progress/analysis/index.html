@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="NoTaskGT 完整实验：Seen 24/80，Unseen 17/80；与当前 Astra baseline 的 160 对任务和 seed 结果逐项比较。">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+<title>NoTaskGT · 任务进度移除对照 · Mobile Astra</title>
+</head>
+<body>
+<header><a href="../../../">项目总览</a><span>/</span><a href="../">E03 · 任务进度</a><span>/ 详细对照</span><nav aria-label="数据下载"><a href="episodes.csv" download>CSV</a><a href="data.json" download>JSON</a><a href="report.md">文字报告</a></nav></header>
+<main>
+<h1>隐藏任务进度后的表现</h1>
+<p class="intro">官方 RPent · GPT-6-Astra / xhigh · RLDX-1-FT-RC365<br>32 个 RoboCasa composite 任务 × seeds 1–5，两组各 160 个有效 episode。</p>
+
+<section aria-labelledby="summary-title">
+<h2 id="summary-title">完整结果</h2>
+<div class="table"><table aria-labelledby="summary-title"><thead><tr><th>任务组</th><th>E01 · baseline 重跑</th><th>NoTaskGT</th><th>成功率差</th></tr></thead><tbody>
+<tr><th scope="row">Seen</th><td>34 / 80 · 42.50%</td><td>24 / 80 · 30.00%</td><td>−12.50 个百分点</td></tr>
+<tr><th scope="row">Unseen</th><td>21 / 80 · 26.25%</td><td>17 / 80 · 21.25%</td><td>−5.00 个百分点</td></tr>
+<tr><th scope="row">总计</th><td>55 / 160 · 34.38%</td><td>41 / 160 · 25.63%</td><td>−8.75 个百分点</td></tr>
+</tbody></table></div>
+<p>Seen 少成功 10 局，Unseen 少成功 4 局。相同任务与 seed 对齐后，31 局仅 baseline 成功，17 局仅 NoTaskGT 成功。</p>
+<p class="note">主对照是本站 E01 的 11 月 1–2 日重跑（55/160）。早先 10/28 的 baseline 为 53/160；与旧批次相比，NoTaskGT 少成功 12 局、下降 7.50 个百分点。旧批次的配对统计另存于 JSON 和文字报告。</p>
+</section>
+
+<section aria-labelledby="scope-title">
+<h2 id="scope-title">实验设置</h2>
+<div class="scope-grid">
+<article><h3>隐藏的信息</h3><p>初始观测、动作后的自动观测和 <code>view_env_state</code> 不返回 <code>task_progress</code>。<code>read_text_file</code> 仅允许读取记忆目录内的文件，因此不能用它访问当前 episode 的 <code>success_criteria.md</code> 和 <code>states.json</code>。</p><p>Prompt 同步去掉查看任务进度、读取评分源码的要求。这三项共同构成 NoTaskGT 设置。</p></article>
+<article><h3>保留的信息与配置</h3><p>原版模拟器深度、几何查询、相机标定、机器人本体状态、接触／抓持反馈、<code>success</code> 与 <code>robocasa_terminated</code> 均保留；环境内部评分和 VLA 成功提前停止仍然有效。</p><p>未使用 DA3 或 NoContactGT。两组使用相同模型与 VLA；100 个模型响应 / 3600 秒预算，VLA 每次最多 40 × 8 仿真步。</p></article>
+</div>
+<p class="note">使用的 95 个任务／全局记忆文件与 E01 重跑记录的 SHA-256 全部一致；内容仍是原有记忆。文件读取限制针对这个工具，不构成对所有原生 Planner 能力的隔离保证。<a href="../../../reference/ground-truth.html">查看真值访问说明 →</a></p>
+</section>
+
+<section aria-labelledby="changes-title">
+<h2 id="changes-title">哪些任务变化较大</h2>
+<div class="scope-grid">
+<article><h3>下降</h3><p><code>ScrubCuttingBoard</code>：5/5 → 2/5。</p><p><code>StackBowlsCabinet</code>、<code>SteamInMicrowave</code>、<code>PrepareCoffee</code>、<code>WashFruitColander</code>、<code>RecycleBottlesByType</code> 各少成功 2 局。</p></article>
+<article><h3>提高</h3><p><code>KettleBoiling</code>：1/5 → 3/5。<br><code>CategorizeCondiments</code>：0/5 → 2/5。<br><code>PortionHotDogs</code>：2/5 → 4/5。</p><p>每个任务只有 5 个 seed；这些是本批次的结果变化，尚未通过重复运行确认稳定性。</p></article>
+</div>
+<p class="note" id="initial-audit">初始状态核对发现 10 对机器人状态最大绝对差超过 1e-6，4 对任务文本不同。检查未覆盖全部物体状态；task_progress 的缺失属于实验设置，不作为场景差异。实时进度、文件权限和提示同时改变，不能将全部差值单独归因于某一项。</p>
+</section>
+
+<section aria-labelledby="paired-title">
+<h2 id="paired-title">相同任务、相同 seed 的结果</h2>
+<div class="table"><table aria-labelledby="paired-title"><thead><tr><th>任务组</th><th>两者成功</th><th>仅 baseline 成功</th><th>仅 NoTaskGT 成功</th><th>两者失败</th></tr></thead><tbody id="paired-body"></tbody></table></div>
+</section>
+
+<section aria-labelledby="tasks-title">
+<h2 id="tasks-title">逐任务与 seed 对照</h2>
+<div class="filters"><label>任务组<select id="split"><option value="all">Seen + Unseen</option><option value="seen">Seen</option><option value="unseen">Unseen</option></select></label><label class="search">搜索任务<input id="search" type="search" placeholder="例如 ScrubCuttingBoard"></label><button id="reset" type="button">重置</button></div>
+<p class="note">每个 seed 显示 <strong>baseline → NoTaskGT</strong>；✓ 成功，× 失败。绿色表示仅 NoTaskGT 成功，红色表示仅 baseline 成功。差值为成功局数之差；* 标记初始状态核对发现差异的 episode，悬停可看说明。窄屏下表格可左右滑动。</p>
+<p id="status" role="status">正在加载 160 对运行记录…</p>
+<div id="task-tables"></div>
+<noscript><p>启用 JavaScript 可筛选任务，也可直接<a href="episodes.csv">下载完整 CSV</a>或阅读<a href="report.md">文字报告</a>。</p></noscript>
+</section>
+<footer>统计取自环境 <code>result.json.success</code>，并核对 <code>states.json</code>；JSON / CSV 保留来源 SHA-256。旧 DA3 配置错误试跑不计入本批次。<br>数据生成：<span id="generated">—</span> · <a href="extract.py" download>下载统计脚本</a> · <a href="../">实验概览</a> · <a href="../../baseline/analysis/">Baseline 详细分析</a></footer>
+</main>
+</body>
+</html>

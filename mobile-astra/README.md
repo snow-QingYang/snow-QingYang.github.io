@@ -24,7 +24,11 @@ All pages are standalone work interfaces. Public URLs are not access control.
   - `cases/`: two paired-outcome examples (PanTransfer seed 3 and
     SetUpCuttingStation seed 4). These pages are result comparisons, not DA3 video
     replays. Each includes source hashes and links to baseline evidence.
-- `experiments/task-progress/`: E03, partial audit only; no valid benchmark result.
+- `experiments/task-progress/`: E03, completed NoTaskGT run, 41/160.
+  - `analysis/`: Seen 24/80 and Unseen 17/80; all 160 matched pairs against
+    E01's 55/160 rerun, initial-state and memory audits, CSV, JSON, report and
+    a portable extractor. The old 53/160 baseline is a separate historical
+    reference. It is not the primary comparison displayed on the site.
   - `cases/setup-cutting-station-s3/`: interrupted configuration-mismatch smoke
     run, 22 completed calls and 11 observations, 0 live task_progress fields.
     Actual geometry was DA3, while the requested setting was original depth.
@@ -42,10 +46,15 @@ scoring-source access and memory remain. The current paired batches have 14
 robot-state, five task-text and three initial-progress differences. They are not
 proof of identical scenes or a causal per-episode attribution.
 
-The progress-removal smoke run retains success and historical memory. Its file
-allowlist additionally restricts scoring-source access: a future single-variable
-comparison must match file permissions or separately disclose that intervention.
-The smoke audit does not validate a full experiment or a ground-truth-free system.
+The completed NoTaskGT run uses original simulator depth. It hides task_progress
+from Agent observations, restricts read_text_file to memory files, and updates
+the corresponding prompt instructions. Success, termination, grasp/contact
+feedback, native scoring and VLA early stopping remain. This setting combines
+progress removal and file-access restrictions; it is not a pure task_progress
+ablation or a ground-truth-free system. The 95 selected memory files match E01's
+recorded hashes. Ten paired initial robot states and four task descriptions
+differ; the audit does not establish identical complete scenes. The historical
+DA3 smoke remains separate from the 160 valid episodes.
 
 The success/failure replay HTML embeds the original video, raw records, images,
 prompt, all tool calls and full returns. Original data stays byte-identical during
@@ -60,6 +69,10 @@ catalogs, short experiment pages, comparison examples, smoke audit summary and
 compatibility pages. It uses the existing detailed exports and the original local
 smoke audit. Its assertions intentionally require review if source results change.
 Canonical detailed exports live under their experiment's `analysis/` directory.
+After regenerating the NoTaskGT export, rerun the overview generator to update
+its experiment page and project-status.json. The E03 detailed HTML and JS use
+the same table/filter layout as E02; check their displayed summaries against the
+new export when changing source runs.
 Replay builder source is `presentations/rpent-interaction-record/` in the local
 workspace; pass the new canonical output directory when rebuilding.
 
