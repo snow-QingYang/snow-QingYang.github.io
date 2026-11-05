@@ -1,0 +1,357 @@
+{
+  "scope": "Six selected Unseen gains; not a representative sample or causal attribution.",
+  "audit_collected_utc": "2026-11-04T12:43:17.729488+00:00",
+  "baseline_run": "official_main_composite_astra_xhigh_20261101T150450Z",
+  "nocontact_run": "official_main_composite_nocontactgt_astra_xhigh_20261104T014440Z",
+  "source_evidence_sha256": "1d3461ed7a0a7ef0965262367447873fde074c51c5a5f9dc3eba8f802381d639",
+  "cases": {
+    "ArrangeBreadBasket_s1": {
+      "initial_robot_state_equal": true,
+      "initial_images": {
+        "agentview": {
+          "baseline_sha256": "60b0c7bf21a402d7ef381b129303451c2b223c3dd1771d14f5c5296b019ebca3",
+          "nocontact_sha256": "60b0c7bf21a402d7ef381b129303451c2b223c3dd1771d14f5c5296b019ebca3",
+          "identical": true
+        },
+        "navview": {
+          "baseline_sha256": "93c217cbb9e9620d1edc5901172e32a3b27c8fa5b4b2faa6131d2111da38f7c0",
+          "nocontact_sha256": "93c217cbb9e9620d1edc5901172e32a3b27c8fa5b4b2faa6131d2111da38f7c0",
+          "identical": true
+        },
+        "wrist": {
+          "baseline_sha256": "59248dedecf3ba6b3c0e48216c33444d53a17c448accc8a2413f3e2a0dee1a51",
+          "nocontact_sha256": "59248dedecf3ba6b3c0e48216c33444d53a17c448accc8a2413f3e2a0dee1a51",
+          "identical": true
+        }
+      },
+      "task_language_equal": true,
+      "success_criteria_equal": true,
+      "planner_config_equal": true,
+      "runtime_config_equal": true,
+      "first_tool_command_equal": true,
+      "common_action_command_prefix": 3,
+      "first_return_eef_distance_m": 0.07908321509209984,
+      "note": "Identical tool commands are NOT identical sampled low-level action vectors. Images and logged robot state do not certify every hidden simulator variable.",
+      "baseline": {
+        "valid": true,
+        "success": false,
+        "success_source": "state.success",
+        "termination_reason": "completed",
+        "action_commands": 27,
+        "vla_commands": 15,
+        "manual_commands": 12,
+        "first_eef_pos": [
+          2.933279988430081,
+          -0.8201133361484519,
+          1.4665807981026469
+        ],
+        "first_native_success_step": null
+      },
+      "nocontact": {
+        "valid": true,
+        "success": true,
+        "success_source": "state.success",
+        "termination_reason": "completed",
+        "action_commands": 12,
+        "vla_commands": 10,
+        "manual_commands": 2,
+        "first_eef_pos": [
+          3.0110327833232593,
+          -0.806328096551962,
+          1.462265133047287
+        ],
+        "first_native_success_step": 12
+      }
+    },
+    "ArrangeTea_s2": {
+      "initial_robot_state_equal": true,
+      "initial_images": {
+        "agentview": {
+          "baseline_sha256": "300e7418c52ce826a9dcc3819f49ca6d74926f90791ff37a041428d0c146e3e6",
+          "nocontact_sha256": "300e7418c52ce826a9dcc3819f49ca6d74926f90791ff37a041428d0c146e3e6",
+          "identical": true
+        },
+        "navview": {
+          "baseline_sha256": "d1e1ef071f6c83474d0a58a5c58f0cd30005d9d58a08f7a1bb62f5243fff3ff8",
+          "nocontact_sha256": "d1e1ef071f6c83474d0a58a5c58f0cd30005d9d58a08f7a1bb62f5243fff3ff8",
+          "identical": true
+        },
+        "wrist": {
+          "baseline_sha256": "879f0df20532395458bc3e8cbbfca4ac74d619df0cd4b10fb20fc9c07911eca3",
+          "nocontact_sha256": "879f0df20532395458bc3e8cbbfca4ac74d619df0cd4b10fb20fc9c07911eca3",
+          "identical": true
+        }
+      },
+      "task_language_equal": true,
+      "success_criteria_equal": true,
+      "planner_config_equal": true,
+      "runtime_config_equal": true,
+      "first_tool_command_equal": true,
+      "common_action_command_prefix": 5,
+      "first_return_eef_distance_m": 0.5332582211572704,
+      "note": "Identical tool commands are NOT identical sampled low-level action vectors. Images and logged robot state do not certify every hidden simulator variable.",
+      "baseline": {
+        "valid": true,
+        "success": false,
+        "success_source": "state.success",
+        "termination_reason": "completed",
+        "action_commands": 17,
+        "vla_commands": 12,
+        "manual_commands": 5,
+        "first_eef_pos": [
+          2.2400005489918433,
+          -1.8792495382538308,
+          1.4720431886916034
+        ],
+        "first_native_success_step": null
+      },
+      "nocontact": {
+        "valid": true,
+        "success": true,
+        "success_source": "state.success",
+        "termination_reason": "completed",
+        "action_commands": 6,
+        "vla_commands": 6,
+        "manual_commands": 0,
+        "first_eef_pos": [
+          2.640245776975208,
+          -1.5310439399872744,
+          1.5260889955982486
+        ],
+        "first_native_success_step": 6
+      }
+    },
+    "BreadSelection_s2": {
+      "initial_robot_state_equal": true,
+      "initial_images": {
+        "agentview": {
+          "baseline_sha256": "45a1c57550f092cb8023777b6bf420baaec3391c36fbca6ac8c5556c744d7713",
+          "nocontact_sha256": "45a1c57550f092cb8023777b6bf420baaec3391c36fbca6ac8c5556c744d7713",
+          "identical": true
+        },
+        "navview": {
+          "baseline_sha256": "c6141808c16767d54de21a1f932a18f142505f4d985eaf0f514ef3af2c1b645c",
+          "nocontact_sha256": "c6141808c16767d54de21a1f932a18f142505f4d985eaf0f514ef3af2c1b645c",
+          "identical": true
+        },
+        "wrist": {
+          "baseline_sha256": "89baa4f1ea64bdb0fe411a8000fb655ebfb0f9c3ed91328705f55093a029b3eb",
+          "nocontact_sha256": "89baa4f1ea64bdb0fe411a8000fb655ebfb0f9c3ed91328705f55093a029b3eb",
+          "identical": true
+        }
+      },
+      "task_language_equal": true,
+      "success_criteria_equal": true,
+      "planner_config_equal": true,
+      "runtime_config_equal": true,
+      "first_tool_command_equal": true,
+      "common_action_command_prefix": 3,
+      "first_return_eef_distance_m": 0.15345927060312023,
+      "note": "Identical tool commands are NOT identical sampled low-level action vectors. Images and logged robot state do not certify every hidden simulator variable.",
+      "baseline": {
+        "valid": true,
+        "success": false,
+        "success_source": "state.success",
+        "termination_reason": "completed",
+        "action_commands": 48,
+        "vla_commands": 13,
+        "manual_commands": 35,
+        "first_eef_pos": [
+          2.0493611562014658,
+          -0.2883270770028913,
+          1.1406567912858923
+        ],
+        "first_native_success_step": null
+      },
+      "nocontact": {
+        "valid": true,
+        "success": true,
+        "success_source": "state.success",
+        "termination_reason": "completed",
+        "action_commands": 38,
+        "vla_commands": 11,
+        "manual_commands": 27,
+        "first_eef_pos": [
+          2.024831503075669,
+          -0.42344679422453135,
+          1.0721680632387618
+        ],
+        "first_native_success_step": 38
+      }
+    },
+    "CategorizeCondiments_s2": {
+      "initial_robot_state_equal": true,
+      "initial_images": {
+        "agentview": {
+          "baseline_sha256": "8fb9042675573ccba9180e0ef2a217be69b2ae8655e7621788f4d0600ddee701",
+          "nocontact_sha256": "8fb9042675573ccba9180e0ef2a217be69b2ae8655e7621788f4d0600ddee701",
+          "identical": true
+        },
+        "navview": {
+          "baseline_sha256": "9ed9874a4c9f4fea542339c6be051429f4ffaf42252949483404f79c8b225ec7",
+          "nocontact_sha256": "9ed9874a4c9f4fea542339c6be051429f4ffaf42252949483404f79c8b225ec7",
+          "identical": true
+        },
+        "wrist": {
+          "baseline_sha256": "97fc5b328d5c756ed148af85662a6ccbfb3067335d4b26d15e253606a7d7f438",
+          "nocontact_sha256": "97fc5b328d5c756ed148af85662a6ccbfb3067335d4b26d15e253606a7d7f438",
+          "identical": true
+        }
+      },
+      "task_language_equal": true,
+      "success_criteria_equal": true,
+      "planner_config_equal": true,
+      "runtime_config_equal": true,
+      "first_tool_command_equal": true,
+      "common_action_command_prefix": 5,
+      "first_return_eef_distance_m": 0.5902626550976822,
+      "note": "Identical tool commands are NOT identical sampled low-level action vectors. Images and logged robot state do not certify every hidden simulator variable.",
+      "baseline": {
+        "valid": true,
+        "success": false,
+        "success_source": "state.success",
+        "termination_reason": "completed",
+        "action_commands": 31,
+        "vla_commands": 11,
+        "manual_commands": 20,
+        "first_eef_pos": [
+          2.0119447688304097,
+          -0.5224358311603066,
+          0.9971525024162207
+        ],
+        "first_native_success_step": null
+      },
+      "nocontact": {
+        "valid": true,
+        "success": true,
+        "success_source": "state.success",
+        "termination_reason": "completed",
+        "action_commands": 53,
+        "vla_commands": 9,
+        "manual_commands": 44,
+        "first_eef_pos": [
+          2.186333241930224,
+          -0.3127470717926557,
+          1.5206305694331073
+        ],
+        "first_native_success_step": 53
+      }
+    },
+    "CuttingToolSelection_s2": {
+      "initial_robot_state_equal": true,
+      "initial_images": {
+        "agentview": {
+          "baseline_sha256": "a044aa394371dc543c0b4f189735c30791701f944b4e93990354b28cd50e1829",
+          "nocontact_sha256": "a044aa394371dc543c0b4f189735c30791701f944b4e93990354b28cd50e1829",
+          "identical": true
+        },
+        "navview": {
+          "baseline_sha256": "2642ddfe23046a8666b87ccce11cd6d9288c7be2652b9652a5f3110cd3445ff4",
+          "nocontact_sha256": "2642ddfe23046a8666b87ccce11cd6d9288c7be2652b9652a5f3110cd3445ff4",
+          "identical": true
+        },
+        "wrist": {
+          "baseline_sha256": "35474c85c0fd1718b9e22c8dca0248edaf52da89a98170b9f222c86c86accaf4",
+          "nocontact_sha256": "35474c85c0fd1718b9e22c8dca0248edaf52da89a98170b9f222c86c86accaf4",
+          "identical": true
+        }
+      },
+      "task_language_equal": true,
+      "success_criteria_equal": true,
+      "planner_config_equal": true,
+      "runtime_config_equal": true,
+      "first_tool_command_equal": true,
+      "common_action_command_prefix": 6,
+      "first_return_eef_distance_m": 0.1311961353783019,
+      "note": "Identical tool commands are NOT identical sampled low-level action vectors. Images and logged robot state do not certify every hidden simulator variable.",
+      "baseline": {
+        "valid": true,
+        "success": false,
+        "success_source": "state.success",
+        "termination_reason": "completed",
+        "action_commands": 36,
+        "vla_commands": 19,
+        "manual_commands": 17,
+        "first_eef_pos": [
+          5.622567878977119,
+          -1.9454338132300195,
+          0.870215222679108
+        ],
+        "first_native_success_step": null
+      },
+      "nocontact": {
+        "valid": true,
+        "success": true,
+        "success_source": "state.success",
+        "termination_reason": "completed",
+        "action_commands": 6,
+        "vla_commands": 6,
+        "manual_commands": 0,
+        "first_eef_pos": [
+          5.676975118168948,
+          -1.910844162221038,
+          0.7559530928862425
+        ],
+        "first_native_success_step": 6
+      }
+    },
+    "GarnishPancake_s1": {
+      "initial_robot_state_equal": true,
+      "initial_images": {
+        "agentview": {
+          "baseline_sha256": "454c4b63417d24d27d01d45537f195a53601496b811fe9d8f7740992871afad5",
+          "nocontact_sha256": "454c4b63417d24d27d01d45537f195a53601496b811fe9d8f7740992871afad5",
+          "identical": true
+        },
+        "navview": {
+          "baseline_sha256": "acc6c96761c1f5ae2d998143132d66f334715b6430d2083fc4b5a6f28b1e7898",
+          "nocontact_sha256": "acc6c96761c1f5ae2d998143132d66f334715b6430d2083fc4b5a6f28b1e7898",
+          "identical": true
+        },
+        "wrist": {
+          "baseline_sha256": "35b88f581fa636f816b19223ac8ddc9aa0bd35f4f4514d3e5690dd28e23b42fb",
+          "nocontact_sha256": "35b88f581fa636f816b19223ac8ddc9aa0bd35f4f4514d3e5690dd28e23b42fb",
+          "identical": true
+        }
+      },
+      "task_language_equal": true,
+      "success_criteria_equal": true,
+      "planner_config_equal": true,
+      "runtime_config_equal": true,
+      "first_tool_command_equal": true,
+      "common_action_command_prefix": 5,
+      "first_return_eef_distance_m": 0.19018490364087706,
+      "note": "Identical tool commands are NOT identical sampled low-level action vectors. Images and logged robot state do not certify every hidden simulator variable.",
+      "baseline": {
+        "valid": true,
+        "success": false,
+        "success_source": "state.success",
+        "termination_reason": "completed",
+        "action_commands": 56,
+        "vla_commands": 9,
+        "manual_commands": 47,
+        "first_eef_pos": [
+          4.083981412032097,
+          -0.8710452123037994,
+          1.3084613654364388
+        ],
+        "first_native_success_step": null
+      },
+      "nocontact": {
+        "valid": true,
+        "success": true,
+        "success_source": "state.success",
+        "termination_reason": "completed",
+        "action_commands": 5,
+        "vla_commands": 5,
+        "manual_commands": 0,
+        "first_eef_pos": [
+          3.970224464023931,
+          -1.0234251257251938,
+          1.3116262253773217
+        ],
+        "first_native_success_step": 5
+      }
+    }
+  }
+}

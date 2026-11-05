@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-04",
+  "as_of": "2026-11-05",
   "baseline": {
     "name": "GPT-6-Astra",
     "model": "gpt-6-astra",
@@ -251,8 +251,218 @@
       }
     }
   },
+  "contact_feedback": {
+    "status": "complete",
+    "valid_benchmark_result": true,
+    "run": "official_main_composite_nocontactgt_astra_xhigh_20261104T014440Z",
+    "summary": {
+      "seen": {
+        "total": 80,
+        "baseline_success": 34,
+        "nocontact_success": 26,
+        "both_success": 20,
+        "baseline_only": 14,
+        "nocontact_only": 6,
+        "neither": 40
+      },
+      "unseen": {
+        "total": 80,
+        "baseline_success": 21,
+        "nocontact_success": 20,
+        "both_success": 9,
+        "baseline_only": 12,
+        "nocontact_only": 11,
+        "neither": 48
+      },
+      "all": {
+        "total": 160,
+        "baseline_success": 55,
+        "nocontact_success": 46,
+        "both_success": 29,
+        "baseline_only": 26,
+        "nocontact_only": 17,
+        "neither": 88
+      }
+    },
+    "initial_state_audit": {
+      "pairs_checked": 160,
+      "robot_state_threshold": 1e-06,
+      "robot_state_differences": 11,
+      "exact_robot_state_differences": 17,
+      "task_language_differences": 2,
+      "scope": "Step-0 robot state and task_language; task_progress excluded, full object state not checked"
+    },
+    "protocol": {
+      "benchmark": "RoboCasa composite",
+      "environment_split": "target",
+      "protocol_id": "robocasa-harness-vla-v2",
+      "planner": {
+        "backend": "codex",
+        "model": "gpt-6-astra",
+        "reasoning_effort": "xhigh",
+        "max_turns": 100
+      },
+      "runtime": {
+        "cell_timeout_seconds": 3600,
+        "rldx_max_chunks": 40,
+        "rldx_settle_patience": 999,
+        "rldx_action_steps_per_chunk": 8
+      },
+      "seeds": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "tasks_per_split": 16,
+      "vla": "RLDX-1-FT-RC365",
+      "memory_profile": "local",
+      "memory_version": "GPT_6_astra_high",
+      "geometry": "Original simulator depth and world maps; known camera calibration retained",
+      "da3": false,
+      "notaskgt": false,
+      "removed_vla_result_fields": [
+        "grasp_contact",
+        "grasp_obj",
+        "grasped",
+        "grasp_detected"
+      ],
+      "removed_progress_fields_by_task": {
+        "ArrangeBreadBasket": [
+          "basket_on_counter",
+          "bread_in_basket"
+        ],
+        "ArrangeTea": [
+          "obj1_container_contact",
+          "obj2_container_contact"
+        ],
+        "CuttingToolSelection": [
+          "correct_tool_chosen",
+          "knife_on_cutting_board",
+          "peeler_on_cutting_board"
+        ],
+        "DeliverStraw": [
+          "straw_in_glass_cup"
+        ],
+        "GarnishPancake": [
+          "pancake_on_plate",
+          "plate_on_table",
+          "strawberry_on_pancake"
+        ],
+        "GetToastedBread": [
+          "slot_pair",
+          "toast_in_slot",
+          "toast_slot",
+          "toaster_on"
+        ],
+        "HeatKebabSandwich": [
+          "baguette_in_toaster",
+          "kebab_in_toaster"
+        ],
+        "KettleBoiling": [
+          "burner_on",
+          "dist",
+          "kettle_on_site",
+          "obj_on_stove"
+        ],
+        "LoadDishwasher": [
+          "all_checks_passed",
+          "are_dishes_correctly_placed",
+          "check1",
+          "check2"
+        ],
+        "MakeIceLemonade": [
+          "ice1_in_cup",
+          "ice2_in_cup",
+          "ice_in_cup",
+          "lemon_in_cup",
+          "success"
+        ],
+        "PackIdenticalLunches": [
+          "gripper_far",
+          "no_duplicates",
+          "tupper0_valid",
+          "tupper1_valid"
+        ],
+        "PanTransfer": [
+          "_robot_touched_food",
+          "pan_on_stove",
+          "vegetable_on_plate"
+        ],
+        "PortionHotDogs": [
+          "buns_in_plate1",
+          "buns_in_plate2",
+          "sausages_in_plate1",
+          "sausages_in_plate2"
+        ],
+        "RecycleBottlesByType": [
+          "on_table"
+        ],
+        "ScrubCuttingBoard": [
+          "board_contact_timer",
+          "sweep_range"
+        ],
+        "SearingMeat": [
+          "meat_in_pan",
+          "pan_loc"
+        ],
+        "SeparateFreezerRack": [
+          "meat_in_tupperware",
+          "veg1_in_tupperware",
+          "veg2_in_tupperware"
+        ],
+        "SetUpCuttingStation": [
+          "knife_on_board",
+          "meat_on_board"
+        ],
+        "StackBowlsCabinet": [
+          "bowl1_in_bowl2",
+          "bowl2_in_bowl1"
+        ],
+        "SteamInMicrowave": [
+          "vegetable_in_bowl"
+        ],
+        "StirVegetables": [
+          "success_time"
+        ],
+        "StoreLeftoversInBowl": [
+          "chicken_in_bowl",
+          "vegetable_in_bowl"
+        ],
+        "WaffleReheat": [
+          "waffle_in_bowl"
+        ],
+        "WashFruitColander": [
+          "fruit_in_colander"
+        ],
+        "WeighIngredients": [
+          "packaged_food_on_digital_scale"
+        ]
+      },
+      "filtered_tasks": 25,
+      "filtered_task_field_pairs": 60,
+      "retained_skill_feedback": [
+        "held_apart",
+        "gripper_qpos",
+        "peak_lift",
+        "status"
+      ],
+      "task_progress": "Reviewed contact-derived fields removed before persistence; other progress retained",
+      "read_text_file": "Baseline permissions; static scoring rules and historical memory retained",
+      "prompt_changes": "None",
+      "success": "Retained",
+      "robocasa_terminated": "Retained",
+      "native_success_and_vla_early_stop": "Retained",
+      "success_source": "state.success",
+      "states_crosschecked": 320,
+      "manifest_sha256": "395dc7d5d47d0ac78d45613f29858d87c4dd06326ec99a091c0e9a5c053b0614",
+      "comparison": "One run per setting, paired by task and seed; not full-scene equivalence"
+    }
+  },
   "notes": [
     "The historical DA3 smoke is interrupted and excluded from the 160 valid NoTaskGT episodes.",
-    "DA3 only replaces depth for back_project_batch and query_world_map."
+    "DA3 only replaces depth for back_project_batch and query_world_map.",
+    "NoContactGT removes contact-derived feedback; other progress, geometry, success, scoring-source access and historical memory remain."
   ]
 }

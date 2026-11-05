@@ -34,6 +34,13 @@ All pages are standalone work interfaces. Public URLs are not access control.
     Actual geometry was DA3, while the requested setting was original depth.
     No result.json; do not label this episode successful or failed or include it
     in the benchmark denominator. Direct file checks are not Agent calls.
+- `experiments/contact-feedback/`: E04, completed NoContactGT run, 46/160.
+  - `analysis/`: Seen 26/80 and Unseen 20/80; all 160 pairs against E01,
+    initial-state and memory audits, native-success checks, CSV, JSON, report
+    and a portable extractor. One valid planner-timeout failure is included.
+  - `cases/`: six selected Unseen gains, action comparisons, image montages,
+    initial-image hashes and the earliest observed execution divergence.
+    These examples do not establish that removing feedback caused improvement.
 - `reference/`: information categories, existing detailed ground-truth access
   guide, and the self-contained original method reference.
 - `project-status.json`: provenance and structured snapshot for the overview.
@@ -56,6 +63,17 @@ recorded hashes. Ten paired initial robot states and four task descriptions
 differ; the audit does not establish identical complete scenes. The historical
 DA3 smoke remains separate from the 160 valid episodes.
 
+NoContactGT removes four VLA grasp/contact result fields and the corresponding
+wrapper queries, plus 60 task/field entries across 25 tasks' contact-derived
+progress. It retains the held_apart gripper-width heuristic, other progress,
+geometry, success, native scoring, file access, memory and the baseline prompt.
+It is independent of DA3 and NoTaskGT. All 148 launch memory hashes and 95 selected
+files match E01. Eleven paired initial robot states differ above 1e-6 (17 differ
+at exact precision), and two task descriptions differ. The 4,772-state output
+scan does not establish isolation of all historical memory or shell/file channels.
+Scene seeds do not fix independent VLA action sampling in this run; case-level
+outcome flips cannot be attributed solely to contact-feedback removal.
+
 The success/failure replay HTML embeds the original video, raw records, images,
 prompt, all tool calls and full returns. Original data stays byte-identical during
 this reorganization. Video boundaries are reconstructed from step counts and
@@ -69,10 +87,13 @@ catalogs, short experiment pages, comparison examples, smoke audit summary and
 compatibility pages. It uses the existing detailed exports and the original local
 smoke audit. Its assertions intentionally require review if source results change.
 Canonical detailed exports live under their experiment's `analysis/` directory.
-After regenerating the NoTaskGT export, rerun the overview generator to update
-its experiment page and project-status.json. The E03 detailed HTML and JS use
-the same table/filter layout as E02; check their displayed summaries against the
+After regenerating a detailed export, rerun the overview generator to update
+its experiment page and project-status.json. The E03 and E04 detailed HTML and JS
+use the same table/filter layout as E02; check their displayed summaries against the
 new export when changing source runs.
+The E04 case builder also uses the local six-case audit under
+`analyses/nocontact_unseen_gains_20261104/`. It publishes only selected evidence
+fields and images; incomplete snapshot totals and local server paths are omitted.
 Replay builder source is `presentations/rpent-interaction-record/` in the local
 workspace; pass the new canonical output directory when rebuilding.
 
