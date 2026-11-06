@@ -6,6 +6,22 @@ Keep this deployment entirely inside `mobile-astra/`. Do not modify or link from
 personal Home, Research, Blog, shared navigation, styles, assets or templates.
 All pages are standalone work interfaces. Public URLs are not access control.
 
+## Completed checklist · 2026-11-06
+
+Five primary GPT-6-Astra / xhigh experiments are complete: 160 valid episodes
+per setting, 800 total. Each setting has 80 Seen and 80 Unseen episodes.
+
+- [x] [E01 · Baseline](experiments/baseline/): Seen 34/80, Unseen 21/80; **55/160**.
+- [x] [E02 · DA3 depth replacement](experiments/geometry-da3/): Seen 33/80, Unseen 17/80; **50/160**.
+- [x] [E03 · Task-progress removal](experiments/task-progress/): Seen 24/80, Unseen 17/80; **41/160**.
+- [x] [E04 · Contact-feedback removal](experiments/contact-feedback/): Seen 26/80, Unseen 20/80; **46/160**.
+- [x] [E05 · Geometry-query removal](experiments/geometry-removed/): Seen 22/80, Unseen 17/80; **39/160**.
+
+The 800-episode total excludes the auxiliary Sol run and interrupted smoke runs.
+E05 removes the two active geometry-query tools; internal depth and other feedback
+remain. Camera calibration/pose replacement, visual or tactile contact estimation,
+and visual task-progress/success estimation remain pending.
+
 ## Page hierarchy
 
 - `index.html`: research objective, current work, completed results, next steps.

@@ -1,5 +1,44 @@
 {
   "as_of": "2026-11-06",
+  "completed_experiments": [
+    {
+      "id": "E01",
+      "path": "experiments/baseline/",
+      "status": "complete",
+      "total": 160,
+      "success": 55
+    },
+    {
+      "id": "E02",
+      "path": "experiments/geometry-da3/",
+      "status": "complete",
+      "total": 160,
+      "success": 50
+    },
+    {
+      "id": "E03",
+      "path": "experiments/task-progress/",
+      "status": "complete",
+      "total": 160,
+      "success": 41
+    },
+    {
+      "id": "E04",
+      "path": "experiments/contact-feedback/",
+      "status": "complete",
+      "total": 160,
+      "success": 46
+    },
+    {
+      "id": "E05",
+      "path": "experiments/geometry-removed/",
+      "status": "complete",
+      "total": 160,
+      "success": 39
+    }
+  ],
+  "completed_experiment_count": 5,
+  "completed_valid_episodes": 800,
   "baseline": {
     "name": "GPT-6-Astra",
     "model": "gpt-6-astra",
@@ -63,9 +102,13 @@
         "release": 11,
         "navigate_to": 71
       }
-    }
+    },
+    "status": "complete",
+    "valid_benchmark_result": true
   },
   "da3": {
+    "status": "complete",
+    "valid_benchmark_result": true,
     "run": "composite_da3_astra_20261103",
     "summary": {
       "seen": {
