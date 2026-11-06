@@ -10,7 +10,7 @@
 <p>通过“原版 → 逐项去掉 → 估计替代”对照，同时查看成功率和 Planner 的失败／修复过程，找出从模拟器走向真机需要补齐的信息。</p></section>
 <section id="truth-list"><h2>要验证的真值清单</h2>
 <div class="table-wrap stack-small"><table aria-label="待验证的真值与特权信息"><thead><tr><th>信息类别</th><th>具体信息与入口</th><th>验证方向 / 当前进展</th></tr></thead><tbody>
-<tr><td data-label="信息类别">1 · 几何深度</td><td data-label="具体信息与入口"><code>back_project_batch</code>、<code>query_world_map</code>：由模拟器深度生成三维点与点簇。</td><td data-label="验证方向 / 当前进展">用预测深度替代。<a href="experiments/geometry-da3/">E02 · DA3 已完成</a>，相机标定仍保留。</td></tr>
+<tr><td data-label="信息类别">1 · 几何深度</td><td data-label="具体信息与入口"><code>back_project_batch</code>、<code>query_world_map</code>：由模拟器深度生成三维点与点簇。</td><td data-label="验证方向 / 当前进展"><a href="experiments/geometry-da3/">E02 · DA3 替代：50/160</a>；<a href="experiments/geometry-removed/">E05 · 移除两种查询：39/160</a>。E05 保留内部深度与其他反馈。</td></tr>
 <tr><td data-label="信息类别">2 · 相机标定与位姿</td><td data-label="具体信息与入口">几何查询内部使用的相机内参、相机到世界坐标的变换。</td><td data-label="验证方向 / 当前进展">换成实际标定、运动学或定位估计，并检查误差影响。<strong>待验证。</strong></td></tr>
 <tr><td data-label="信息类别">3 · 接触与抓持</td><td data-label="具体信息与入口"><code>rldx_skill / rldx_arm</code> 的接触／抓持返回，以及部分接触派生的任务进度。</td><td data-label="验证方向 / 当前进展"><a href="experiments/contact-feedback/">E04 · 接触反馈移除已完成</a>，46/160；夹爪开度启发式和原生评分保留。视觉或触觉替代尚待验证。</td></tr>
 <tr><td data-label="信息类别">4 · 任务进度与完成判定</td><td data-label="具体信息与入口"><code>task_progress</code> 是中间子条件；原版 <code>success</code> 与 <code>robocasa_terminated</code> 均来自 <code>check_success()</code>。VLA 成功早停也使用该判定。</td><td data-label="验证方向 / 当前进展"><a href="experiments/task-progress/">E03 已隐藏中间进度</a>（同时限读文件），<strong>仍保留成功反馈与 VLA 早停</strong>。其余通道移除及视觉进度估计尚待验证；评测端保留真实评分。</td></tr>
@@ -20,9 +20,9 @@
 <p>先沿着实际接口查清楚：哪些信息进入 Agent 上下文，哪些只在控制器或 VLA 内部使用，哪些仅用于最终评分。然后每次改一类信息，比较原版、去掉、替代三个设置。</p>
 <div class="flow"><article><span class="step">01 / 原版</span><h3>建立参照</h3><p>保留现有真值，记录成功率、动作轨迹和 Agent 实际看到的信息。</p></article><article><span class="step">02 / 去掉</span><h3>看它是否重要</h3><p>逐项切断信息来源，检查返回值、文件读取和内部控制是否仍泄露同类信息。</p></article><article><span class="step">03 / 替代</span><h3>看估计能否补回来</h3><p>用 RGB / RGB-D、机器人传感器或视觉判断代替直接读取模拟器状态。</p></article></div>
 <p class="note">模拟器真值仍可用于独立评测。需要限制的是被实验移除的信息进入 Agent 或执行过程的通道。</p></section>
-<section id="current"><h2>最新结果</h2><div class="current"><h3>E04 · 接触反馈移除已完成：46 / 160 · 28.75%</h3>
-<p>Seen 成功 <strong>26 / 80</strong>，Unseen 成功 <strong>20 / 80</strong>。与本站 E01 的 55/160 重跑相比，少成功 9 局，下降 5.63 个百分点。</p>
-<p>移除 VLA 接触／抓持字段及部分接触派生进度；原版几何、其他进度和成功信号保留。<a href="experiments/contact-feedback/">查看设置与结果 →</a> · <a href="experiments/contact-feedback/analysis/">160 对逐任务／seed 对照 →</a></p></div></section>
+<section id="current"><h2>最新结果</h2><div class="current"><h3>E05 · 几何查询移除已完成：39 / 160 · 24.38%</h3>
+<p>Seen 成功 <strong>22 / 80</strong>，Unseen 成功 <strong>17 / 80</strong>。与本站 E01 的 55/160 重跑相比，少成功 16 局，下降 10.00 个百分点。</p>
+<p>禁用 <code>back_project_batch</code> 和 <code>query_world_map</code>，同步移除提示中的调用要求；任务进度中的距离、接触、成功信号与内部深度保留。<a href="experiments/geometry-removed/">查看设置与结果 →</a> · <a href="experiments/geometry-removed/analysis/">160 对逐任务／seed 对照 →</a></p></div></section>
 <section id="completed"><h2>已经做了什么</h2>
 <div class="table-wrap stack-small"><table><thead><tr><th>工作</th><th>已有结果</th><th>查看</th></tr></thead><tbody>
 <tr><td data-label="工作">真值来源梳理</td><td data-label="已有结果">接口、内部控制、任务进度与成功反馈；已核对真实 Agent 返回</td><td data-label="查看"><a href="reference/">接口与真值</a></td></tr>
@@ -30,11 +30,12 @@
 <tr><td data-label="工作">E02 · DA3 深度替代</td><td data-label="已有结果"><strong>50 / 160 · 31.25%</strong><small>较 baseline 少 5 局，−3.13 个百分点；仅替换两类几何查询的深度来源</small></td><td data-label="查看"><a href="experiments/geometry-da3/">替代范围与对照</a></td></tr>
 <tr><td data-label="工作">E03 · 任务进度移除</td><td data-label="已有结果"><strong>41 / 160 · 25.63%</strong><small>Seen 24/80，Unseen 17/80；较 baseline 少 14 局，−8.75 个百分点</small></td><td data-label="查看"><a href="experiments/task-progress/">设置与完整结果</a></td></tr>
 <tr><td data-label="工作">E04 · 接触反馈移除</td><td data-label="已有结果"><strong>46 / 160 · 28.75%</strong><small>Seen 26/80，Unseen 20/80；较 baseline 少 9 局，−5.63 个百分点</small></td><td data-label="查看"><a href="experiments/contact-feedback/">设置、结果与变化案例</a></td></tr>
+<tr><td data-label="工作">E05 · 几何查询移除</td><td data-label="已有结果"><strong>39 / 160 · 24.38%</strong><small>Seen 22/80，Unseen 17/80；较 baseline 少 16 局，−10.00 个百分点</small></td><td data-label="查看"><a href="experiments/geometry-removed/">移除范围与完整结果</a></td></tr>
 <tr><td data-label="工作">完整交互案例</td><td data-label="已有结果">同一批 baseline 的 1 个成功、1 个失败；连续视频、全部方法参数与返回、观测图片</td><td data-label="查看"><a href="experiments/baseline/cases/">打开案例目录</a></td></tr>
 </tbody></table></div><p class="note">正式实验与中止试跑分开列出。已有 GPT-5.6-Sol 的 45/160 结果保留在 baseline 详细分析中，作为补充参照。</p></section>
 <section id="next"><h2>接下来怎么推进</h2><ol>
-<li><strong>继续几何工具消融：</strong>禁用两种主动三维查询的 NoGeomTools 已启动评测，完成后单独公布结果。</li>
-<li><strong>解释成败变化：</strong>结合 E03 / E04 的轨迹，区分实时反馈、评分规则访问和执行波动的影响。</li>
+<li><strong>比较几何信息的三种设置：</strong>原版查询 55/160、DA3 替代 50/160、移除查询 39/160，结合逐局记录分析变化。</li>
+<li><strong>解释成败变化：</strong>结合 E03 / E04 / E05 的轨迹，区分实时反馈、评分规则访问和执行波动的影响。</li>
 <li><strong>让对比更可解释：</strong>固定初始场景、记忆和 VLA 动作采样，增加成对重复运行。</li>
 </ol><p class="note">已有批次存在初始状态差异；六个接触消融新增成功案例还在首次相同 VLA 调用后就产生不同物理状态。单批结果不足以把每次胜负翻转归因于被移除的信息。</p></section>
-<div class="links border-top"><a class="button" href="experiments/">全部实验 →</a><a href="reference/ground-truth.html">查具体真值从哪里来</a><a href="reference/methods.html">查全部方法</a></div></main><footer class="site-foot"><span>HarnessVLA 真值移除与替代 · 整理于 2026-11-05</span><a href="experiments/">实验目录</a></footer></body></html>
+<div class="links border-top"><a class="button" href="experiments/">全部实验 →</a><a href="reference/ground-truth.html">查具体真值从哪里来</a><a href="reference/methods.html">查全部方法</a></div></main><footer class="site-foot"><span>HarnessVLA 真值移除与替代 · 整理于 2026-11-06</span><a href="experiments/">实验目录</a></footer></body></html>

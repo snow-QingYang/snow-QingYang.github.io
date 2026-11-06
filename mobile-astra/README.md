@@ -41,6 +41,13 @@ All pages are standalone work interfaces. Public URLs are not access control.
   - `cases/`: six selected Unseen gains, action comparisons, image montages,
     initial-image hashes and the earliest observed execution divergence.
     These examples do not establish that removing feedback caused improvement.
+- `experiments/geometry-removed/`: E05, completed NoGeomTools run, 39/160.
+  - `analysis/`: Seen 22/80 and Unseen 17/80; all 160 matched pairs against
+    E01's 55/160, task/seed filters, native-success and memory checks,
+    initial-state comparison, tool-call audit, CSV, JSON and portable extractor.
+  - The experiment page compares original geometry, DA3 replacement and removal
+    of the two geometry query tools. It does not claim all depth or geometry
+    information was removed from the simulator or the agent's other channels.
 - `reference/`: information categories, existing detailed ground-truth access
   guide, and the self-contained original method reference.
 - `project-status.json`: provenance and structured snapshot for the overview.
@@ -74,6 +81,18 @@ scan does not establish isolation of all historical memory or shell/file channel
 Scene seeds do not fix independent VLA action sampling in this run; case-level
 outcome flips cannot be attributed solely to contact-feedback removal.
 
+NoGeomTools removes back_project_batch and query_world_map from the registered
+Agent tools and removes their instructions from the evaluation prompt and view
+tool description. It retains simulator depth/world-map generation, robot state,
+task_progress including distances, contact feedback, success, native scoring,
+VLA execution, baseline file permissions and historical memory. It is independent
+of E02/E03/E04. The paired result is 23 both-success, 32 baseline-only,
+16 NoGeomTools-only and 89 both-failure episodes, for a net decrease of 16/160
+(10 percentage points). The run finished on 2026-11-06 at 00:51 Hong Kong time.
+Its scheduler resumed on eight GPUs after initially running on six; completed
+valid episodes were preserved. See the detailed export for audit scope and
+initial-state differences. Removing registered tools is not filesystem isolation.
+
 The success/failure replay HTML embeds the original video, raw records, images,
 prompt, all tool calls and full returns. Original data stays byte-identical during
 this reorganization. Video boundaries are reconstructed from step counts and
@@ -88,7 +107,7 @@ compatibility pages. It uses the existing detailed exports and the original loca
 smoke audit. Its assertions intentionally require review if source results change.
 Canonical detailed exports live under their experiment's `analysis/` directory.
 After regenerating a detailed export, rerun the overview generator to update
-its experiment page and project-status.json. The E03 and E04 detailed HTML and JS
+its experiment page and project-status.json. The E03, E04 and E05 detailed HTML and JS
 use the same table/filter layout as E02; check their displayed summaries against the
 new export when changing source runs.
 The E04 case builder also uses the local six-case audit under

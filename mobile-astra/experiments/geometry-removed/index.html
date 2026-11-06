@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="description" content="禁用两种主动三维查询，评估保留 RGB、机器人状态与其他任务反馈时的表现。">
+<link rel="icon" href="data:,"><link rel="stylesheet" href="../../project.css"><title>E05 · 移除几何查询 · Mobile Astra</title></head>
+<body><header class="site-head"><div class="head-inner"><a class="brand" href="../../">Mobile Astra / 实验工作页</a><nav aria-label="项目导航"><a href="../../">项目总览</a><a href="../" aria-current="page">实验目录</a><a href="../../reference/">接口与真值</a></nav></div></header>
+<main><nav class="crumbs" aria-label="当前位置"><a href="../../">项目总览</a> <span aria-hidden="true">/</span> <a href="../">实验目录</a> <span aria-hidden="true">/</span> <span aria-current="page">E05 · 移除几何查询</span></nav><div class="hero"><p class="eyebrow">HARNESSVLA / ROBOCASA</p><h1>E05 · 移除几何查询</h1><p class="lead">禁用两种主动三维查询，评估保留 RGB、机器人状态与其他任务反馈时的表现。</p></div>
+
+<section><span class="badge complete">已完成 · 160 个有效 episode</span><p class="meta">2026-11-06 · NoGeomTools · GPT-6-Astra / xhigh · RLDX-1-FT-RC365</p></section>
+<section><h2>完整结果</h2><div class="table-wrap"><table><thead><tr><th>任务组</th><th>E01 · baseline</th><th>移除几何查询</th><th>成功率差</th></tr></thead><tbody>
+<tr><td>Seen</td><td>34 / 80 · 42.50%</td><td>22 / 80 · 27.50%</td><td>−15.00 pp</td></tr>
+<tr><td>Unseen</td><td>21 / 80 · 26.25%</td><td>17 / 80 · 21.25%</td><td>−5.00 pp</td></tr>
+<tr><td>总计</td><td><strong>55 / 160 · 34.38%</strong></td><td><strong>39 / 160 · 24.38%</strong></td><td>−10.00 pp</td></tr></tbody></table></div>
+<p>净少成功 16 局，其中 Seen 少 12 局、Unseen 少 4 局。两组按相同任务与 seed 配对：23 对都成功，32 对仅 baseline 成功，16 对仅 NoGeomTools 成功，89 对都失败。</p>
+<div class="links"><a class="button" href="analysis/">Seen / Unseen 与逐 seed 对照 →</a><a href="analysis/episodes.csv" download>下载 160 对 CSV</a><a href="analysis/report.md">文字报告</a></div></section>
+<section><h2>这次移除了什么</h2><div class="cards"><article class="card"><h3>两种主动三维查询</h3><p>从 Agent 工具列表中移除 <code>back_project_batch</code> 和 <code>query_world_map</code>，不能再通过它们取得像素对应的世界坐标或按空间范围筛选点簇。</p><p>初始 Prompt 和工具说明同步去掉调用要求，改为查看当前 RGB 图像；提醒只使用当前可用的方法。</p></article><article class="card"><h3>仍然保留的信息与控制</h3><p>RGB 图像、末端与底盘状态、<code>task_progress</code>（含部分距离）、抓持／接触反馈、成功信号、评分源码访问与历史记忆。</p><p><code>move_to</code>、<code>scripted_grasp</code>、<code>navigate_to</code> 和相对移动仍可用；VLA、控制流程和原生任务评分保留。</p></article></div>
+<p class="note">“移除深度”在这里具体指移除这两个几何查询入口。模拟器内部仍生成深度和 world map 文件；文件、记忆和 shell 权限没有额外收紧。本实验没有叠加 DA3、任务进度移除或接触反馈移除，不代表所有几何真值通道都被隔离。</p></section>
+<section><h2>几何信息的三种设置</h2><div class="table-wrap"><table><thead><tr><th>设置</th><th>查询方式</th><th>Seen</th><th>Unseen</th><th>总计</th></tr></thead><tbody>
+<tr><td><a href="../baseline/">E01 · 原版</a></td><td>模拟器深度 → 三维查询</td><td>34 / 80</td><td>21 / 80</td><td>55 / 160</td></tr>
+<tr><td><a href="../geometry-da3/">E02 · DA3 替代</a></td><td>预测深度 → 相同查询接口</td><td>33 / 80</td><td>17 / 80</td><td>50 / 160</td></tr>
+<tr><td>E05 · 移除查询</td><td>两种查询均不可调用</td><td>22 / 80</td><td>17 / 80</td><td>39 / 160</td></tr></tbody></table></div>
+<p>本批次移除查询比 DA3 替代少成功 11 局，差值全部来自 Seen。Unseen 的总成功数相同，但不代表成功的是同一批 episode。三组各运行一次，这些差值不能直接作为深度质量或几何信息贡献的因果估计。</p></section>
+<section><h2>哪些任务变化较大</h2><div class="table-wrap"><table><thead><tr><th>任务</th><th>分组</th><th>Baseline</th><th>NoGeomTools</th><th>成功数变化</th></tr></thead><tbody>
+<tr><td>RinseSinkBasin</td><td>Seen</td><td>3 / 5</td><td>0 / 5</td><td>−3</td></tr>
+<tr><td>ScrubCuttingBoard</td><td>Seen</td><td>5 / 5</td><td>3 / 5</td><td>−2</td></tr>
+<tr><td>RecycleBottlesByType</td><td>Unseen</td><td>2 / 5</td><td>0 / 5</td><td>−2</td></tr>
+<tr><td>WashFruitColander</td><td>Unseen</td><td>2 / 5</td><td>0 / 5</td><td>−2</td></tr>
+<tr><td>DeliverStraw</td><td>Seen</td><td>1 / 5</td><td>2 / 5</td><td>+1</td></tr>
+<tr><td>GarnishPancake</td><td>Unseen</td><td>3 / 5</td><td>4 / 5</td><td>+1</td></tr></tbody></table></div>
+<p class="note">这里选取部分变化任务；<a href="analysis/">详细分析</a>包含全部 32 个任务和 160 对 episode。统计变化本身不能说明某个工具缺失就是该局失败的原因。</p></section>
+<section><h2>结果核验与比较限制</h2><p>160 局结果均有效，并与保存的环境原生成功信号核对。模型、响应与时间预算、VLA 配置及选用记忆与 E01 对齐；具体哈希和工具日志检查见详细数据。</p>
+<p>扫描全部 160 局日志中的 5,263 次已记录 MCP 工具调用，两种被移除几何工具的调用数为 <strong>0</strong>。已记录的文件读取参数和原生命令文本中，也未命中所检查的几何文件／位置访问模式；检查不覆盖间接脚本、历史记忆或未记录的操作。</p>
+<p>初态检查发现 <strong>10 对机器人状态</strong>存在大于 10<sup>−6</sup> 的差异，<strong>2 对任务文本</strong>不同。检查不覆盖全部物体状态，场景 seed 也未同时固定独立 VLA 的动作采样。</p><p>结果支持的描述是：这次移除查询的批次成功率较低，净下降主要发生在 Seen。是否由特定几何查询缺失导致，需要结合轨迹并用成对重复实验验证。</p></section>
+<details><summary>运行批次与配置</summary><dl class="record"><dt>NoGeomTools 批次</dt><dd><code>official_main_composite_nogeomtools_astra_xhigh_20261104T093002Z</code></dd><dt>参照批次</dt><dd><code>official_main_composite_astra_xhigh_20261101T150450Z</code></dd><dt>任务</dt><dd>Seen / Unseen 各 16 个 composite 任务，seeds 1–5；环境 split 为 target。</dd><dt>基础实现</dt><dd><code>a744bd5</code> + 几何工具注册与提示改动</dd><dt>记忆</dt><dd>GPT_6_astra_high</dd><dt>预算</dt><dd>100 个模型响应 / 3600 秒每局；每次 VLA 最多 40 × 8 仿真步。</dd><dt>完成时间</dt><dd>2026-11-06 00:51（香港时间）</dd><dt>调度</dt><dd>最初使用 6 张卡，后切换到 8 卡共享待办队列；保留已完成的有效结果。</dd></dl></details>
+<div class="links border-top"><a href="../../reference/ground-truth.html">查几何信息来源 →</a><a href="../geometry-da3/">查看 DA3 替代 →</a><a href="../baseline/">查看 E01 参照 →</a></div></main><footer class="site-foot"><span>HarnessVLA 真值移除与替代 · 整理于 2026-11-06</span><a href="../">实验目录</a></footer></body></html>

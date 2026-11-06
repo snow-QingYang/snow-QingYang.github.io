@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-05",
+  "as_of": "2026-11-06",
   "baseline": {
     "name": "GPT-6-Astra",
     "model": "gpt-6-astra",
@@ -460,9 +460,141 @@
       "comparison": "One run per setting, paired by task and seed; not full-scene equivalence"
     }
   },
+  "geometry_removed": {
+    "status": "complete",
+    "valid_benchmark_result": true,
+    "run": "official_main_composite_nogeomtools_astra_xhigh_20261104T093002Z",
+    "summary": {
+      "seen": {
+        "total": 80,
+        "baseline_success": 34,
+        "nogeom_success": 22,
+        "both_success": 15,
+        "baseline_only": 19,
+        "nogeom_only": 7,
+        "neither": 39
+      },
+      "unseen": {
+        "total": 80,
+        "baseline_success": 21,
+        "nogeom_success": 17,
+        "both_success": 8,
+        "baseline_only": 13,
+        "nogeom_only": 9,
+        "neither": 50
+      },
+      "all": {
+        "total": 160,
+        "baseline_success": 55,
+        "nogeom_success": 39,
+        "both_success": 23,
+        "baseline_only": 32,
+        "nogeom_only": 16,
+        "neither": 89
+      }
+    },
+    "initial_state_audit": {
+      "pairs_checked": 160,
+      "robot_state_threshold": 1e-06,
+      "robot_state_differences": 10,
+      "exact_robot_state_differences": 16,
+      "task_language_differences": 2,
+      "scope": "Step-0 robot state and task_language; task_progress excluded, full object state not checked"
+    },
+    "protocol": {
+      "benchmark": "RoboCasa composite",
+      "environment_split": "target",
+      "protocol_id": "robocasa-harness-vla-v2",
+      "planner": {
+        "backend": "codex",
+        "model": "gpt-6-astra",
+        "reasoning_effort": "xhigh",
+        "max_turns": 100
+      },
+      "runtime": {
+        "cell_timeout_seconds": 3600,
+        "rldx_max_chunks": 40,
+        "rldx_settle_patience": 999,
+        "rldx_action_steps_per_chunk": 8
+      },
+      "seeds": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "tasks_per_split": 16,
+      "vla": "RLDX-1-FT-RC365",
+      "memory_profile": "local",
+      "memory_version": "GPT_6_astra_high",
+      "geometry": "Original simulator depth and world maps; known camera calibration retained",
+      "da3": false,
+      "notaskgt": false,
+      "nocontactgt": false,
+      "removed_tools": [
+        "back_project_batch",
+        "query_world_map"
+      ],
+      "retained_skill_feedback": [
+        "grasp_contact",
+        "grasp_obj",
+        "grasped",
+        "grasp_detected",
+        "held_apart",
+        "gripper_qpos",
+        "peak_lift",
+        "status"
+      ],
+      "task_progress": "Baseline task_progress including distances retained",
+      "read_text_file": "Baseline permissions; static scoring rules and historical memory retained",
+      "prompt_changes": "Removed instructions and examples for the two unavailable geometry tools; updated view_env_state method description",
+      "success": "Retained",
+      "robocasa_terminated": "Retained",
+      "native_success_and_vla_early_stop": "Retained",
+      "success_source": "state.success",
+      "states_crosschecked": 320,
+      "manifest_sha256": "395dc7d5d47d0ac78d45613f29858d87c4dd06326ec99a091c0e9a5c053b0614",
+      "comparison": "One run per setting, paired by task and seed; not full-scene equivalence"
+    },
+    "geometry_access_audit": {
+      "streams_checked": 160,
+      "recorded_mcp_calls": 5263,
+      "removed_tool_calls": 0,
+      "geometry_artifact_read_attempts": 0,
+      "native_command_items": 1,
+      "native_geometry_access_attempts": 0,
+      "geometry_image_access_attempts": 0,
+      "recorded_tool_counts": {
+        "finish": 152,
+        "move_base": 430,
+        "move_delta": 1327,
+        "move_to": 38,
+        "navigate_to": 171,
+        "read_text_file": 279,
+        "release": 16,
+        "rldx_arm": 730,
+        "rldx_skill": 1384,
+        "rotate_pitch": 134,
+        "scripted_grasp": 57,
+        "set_gripper": 168,
+        "view_env_state": 160,
+        "write_text_file": 217
+      },
+      "item_types": {
+        "commandExecution": 1,
+        "imageView": 1,
+        "mcpToolCall": 5263,
+        "sleep": 10
+      },
+      "flagged_calls": [],
+      "scope": "Recorded MCP tool names, geometry filenames in read arguments, and geometry references in native command text; indirect paths, external scripts, historical memory and unlogged execution are not covered"
+    }
+  },
   "notes": [
     "The historical DA3 smoke is interrupted and excluded from the 160 valid NoTaskGT episodes.",
     "DA3 only replaces depth for back_project_batch and query_world_map.",
-    "NoContactGT removes contact-derived feedback; other progress, geometry, success, scoring-source access and historical memory remain."
+    "NoContactGT removes contact-derived feedback; other progress, geometry, success, scoring-source access and historical memory remain.",
+    "NoGeomTools removes back_project_batch and query_world_map from registered tools and their prompt instructions; internal depth/world maps, task-progress distances, contact, success, file permissions and historical memory remain."
   ]
 }
