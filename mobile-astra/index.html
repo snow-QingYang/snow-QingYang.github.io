@@ -23,19 +23,18 @@
 <section id="current"><h2>最新结果</h2><div class="current"><h3>E05 · 几何查询移除已完成：39 / 160 · 24.38%</h3>
 <p>Seen 成功 <strong>22 / 80</strong>，Unseen 成功 <strong>17 / 80</strong>。与本站 E01 的 55/160 重跑相比，少成功 16 局，下降 10.00 个百分点。</p>
 <p>禁用 <code>back_project_batch</code> 和 <code>query_world_map</code>，同步移除提示中的调用要求；任务进度中的距离、接触、成功信号与内部深度保留。<a href="experiments/geometry-removed/">查看设置与结果 →</a> · <a href="experiments/geometry-removed/analysis/">160 对逐任务／seed 对照 →</a></p></div></section>
-<section id="completed"><h2>已经做了什么</h2>
-<div class="table-wrap stack-small"><table><thead><tr><th>工作</th><th>已有结果</th><th>查看</th></tr></thead><tbody>
-<tr><td data-label="工作">真值来源梳理</td><td data-label="已有结果">接口、内部控制、任务进度与成功反馈；已核对真实 Agent 返回</td><td data-label="查看"><a href="reference/">接口与真值</a></td></tr>
-<tr><td data-label="工作">E01 · 原版 baseline 重跑</td><td data-label="已有结果"><strong>55 / 160 · 34.38%</strong><small>19 局 VLA 直接完成；4 局准备后 VLA；32 局 Planner 介入后成功</small></td><td data-label="查看"><a href="experiments/baseline/">实验与案例</a></td></tr>
-<tr><td data-label="工作">E02 · DA3 深度替代</td><td data-label="已有结果"><strong>50 / 160 · 31.25%</strong><small>较 baseline 少 5 局，−3.13 个百分点；仅替换两类几何查询的深度来源</small></td><td data-label="查看"><a href="experiments/geometry-da3/">替代范围与对照</a></td></tr>
-<tr><td data-label="工作">E03 · 任务进度移除</td><td data-label="已有结果"><strong>41 / 160 · 25.63%</strong><small>Seen 24/80，Unseen 17/80；较 baseline 少 14 局，−8.75 个百分点</small></td><td data-label="查看"><a href="experiments/task-progress/">设置与完整结果</a></td></tr>
-<tr><td data-label="工作">E04 · 接触反馈移除</td><td data-label="已有结果"><strong>46 / 160 · 28.75%</strong><small>Seen 26/80，Unseen 20/80；较 baseline 少 9 局，−5.63 个百分点</small></td><td data-label="查看"><a href="experiments/contact-feedback/">设置、结果与变化案例</a></td></tr>
-<tr><td data-label="工作">E05 · 几何查询移除</td><td data-label="已有结果"><strong>39 / 160 · 24.38%</strong><small>Seen 22/80，Unseen 17/80；较 baseline 少 16 局，−10.00 个百分点</small></td><td data-label="查看"><a href="experiments/geometry-removed/">移除范围与完整结果</a></td></tr>
-<tr><td data-label="工作">完整交互案例</td><td data-label="已有结果">同一批 baseline 的 1 个成功、1 个失败；连续视频、全部方法参数与返回、观测图片</td><td data-label="查看"><a href="experiments/baseline/cases/">打开案例目录</a></td></tr>
-</tbody></table></div><p class="note">正式实验与中止试跑分开列出。已有 GPT-5.6-Sol 的 45/160 结果保留在 baseline 详细分析中，作为补充参照。</p></section>
 <section id="next"><h2>接下来怎么推进</h2><ol>
 <li><strong>比较几何信息的三种设置：</strong>原版查询 55/160、DA3 替代 50/160、移除查询 39/160，结合逐局记录分析变化。</li>
 <li><strong>解释成败变化：</strong>结合 E03 / E04 / E05 的轨迹，区分实时反馈、评分规则访问和执行波动的影响。</li>
 <li><strong>让对比更可解释：</strong>固定初始场景、记忆和 VLA 动作采样，增加成对重复运行。</li>
 </ol><p class="note">已有批次存在初始状态差异；六个接触消融新增成功案例还在首次相同 VLA 调用后就产生不同物理状态。单批结果不足以把每次胜负翻转归因于被移除的信息。</p></section>
-<div class="links border-top"><a class="button" href="experiments/">全部实验 →</a><a href="reference/ground-truth.html">查具体真值从哪里来</a><a href="reference/methods.html">查全部方法</a></div></main><footer class="site-foot"><span>HarnessVLA 真值移除与替代 · 整理于 2026-11-06</span><a href="experiments/">实验目录</a></footer></body></html>
+<section id="completed"><h2>全部已完成实验</h2>
+<p>以下五组均使用 GPT-6-Astra / xhigh，每组完成 160 局：Seen、Unseen 各 16 个任务，每个任务 5 个 seed。</p>
+<div class="table-wrap stack-small"><table aria-label="全部已完成实验的 Seen 与 Unseen 结果"><thead><tr><th>实验</th><th>Seen</th><th>Unseen</th><th>总计</th><th>查看</th></tr></thead><tbody>
+<tr><td data-label="实验">E01 · 原版 baseline 重跑</td><td data-label="Seen">34 / 80</td><td data-label="Unseen">21 / 80</td><td data-label="总计"><strong>55 / 160 · 34.38%</strong></td><td data-label="查看"><a href="experiments/baseline/">实验与案例</a></td></tr>
+<tr><td data-label="实验">E02 · DA3 深度替代</td><td data-label="Seen">33 / 80</td><td data-label="Unseen">17 / 80</td><td data-label="总计"><strong>50 / 160 · 31.25%</strong></td><td data-label="查看"><a href="experiments/geometry-da3/">替代范围与对照</a></td></tr>
+<tr><td data-label="实验">E03 · 任务进度移除</td><td data-label="Seen">24 / 80</td><td data-label="Unseen">17 / 80</td><td data-label="总计"><strong>41 / 160 · 25.63%</strong></td><td data-label="查看"><a href="experiments/task-progress/">设置与完整结果</a></td></tr>
+<tr><td data-label="实验">E04 · 接触反馈移除</td><td data-label="Seen">26 / 80</td><td data-label="Unseen">20 / 80</td><td data-label="总计"><strong>46 / 160 · 28.75%</strong></td><td data-label="查看"><a href="experiments/contact-feedback/">设置与变化案例</a></td></tr>
+<tr><td data-label="实验">E05 · 几何查询移除</td><td data-label="Seen">22 / 80</td><td data-label="Unseen">17 / 80</td><td data-label="总计"><strong>39 / 160 · 24.38%</strong></td><td data-label="查看"><a href="experiments/geometry-removed/">移除范围与完整结果</a></td></tr>
+</tbody></table></div><p class="note">E05 移除两个主动三维查询接口，保留内部深度与其他反馈。GPT-5.6-Sol 的 45/160 结果保留在 <a href="experiments/baseline/analysis/">baseline 详细分析</a>中，作为补充参照。</p></section>
+<div class="links border-top"><a class="button" href="experiments/">全部实验 →</a><a href="experiments/baseline/cases/">完整交互案例</a><a href="reference/">接口与真值</a><a href="reference/ground-truth.html">查具体真值从哪里来</a><a href="reference/methods.html">查全部方法</a></div></main><footer class="site-foot"><span>HarnessVLA 真值移除与替代 · 整理于 2026-11-06</span><a href="experiments/">实验目录</a></footer></body></html>
