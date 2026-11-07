@@ -6,21 +6,24 @@ Keep this deployment entirely inside `mobile-astra/`. Do not modify or link from
 personal Home, Research, Blog, shared navigation, styles, assets or templates.
 All pages are standalone work interfaces. Public URLs are not access control.
 
-## Completed checklist · 2026-11-06
+## Completed checklist · 2026-11-07
 
-Five primary GPT-6-Astra / xhigh experiments are complete: 160 valid episodes
-per setting, 800 total. Each setting has 80 Seen and 80 Unseen episodes.
+Six primary GPT-6-Astra / xhigh experiments are complete: 160 valid episodes
+per setting, 960 total. Each setting has 80 Seen and 80 Unseen episodes.
 
 - [x] [E01 · Baseline](experiments/baseline/): Seen 34/80, Unseen 21/80; **55/160**.
 - [x] [E02 · DA3 depth replacement](experiments/geometry-da3/): Seen 33/80, Unseen 17/80; **50/160**.
 - [x] [E03 · Task-progress removal](experiments/task-progress/): Seen 24/80, Unseen 17/80; **41/160**.
 - [x] [E04 · Contact-feedback removal](experiments/contact-feedback/): Seen 26/80, Unseen 20/80; **46/160**.
 - [x] [E05 · Geometry-query removal](experiments/geometry-removed/): Seen 22/80, Unseen 17/80; **39/160**.
+- [x] [E06 · agent_check_success](experiments/agent-check-success/): Seen 18/80, Unseen 11/80; **29/160**.
 
-The 800-episode total excludes the auxiliary Sol run and interrupted smoke runs.
+The 960-episode total excludes the auxiliary Sol run and interrupted smoke runs.
 E05 removes the two active geometry-query tools; internal depth and other feedback
-remain. Camera calibration/pose replacement, visual or tactile contact estimation,
-and visual task-progress/success estimation remain pending.
+remain. E06 completes removal of live task-progress/success/termination feedback
+and VLA native-success early stopping; the evaluator keeps independent final
+scoring. Camera calibration/pose replacement, visual or tactile contact estimation,
+and validation of visual task-progress/completion estimates remain pending.
 
 ## Page hierarchy
 
@@ -64,6 +67,12 @@ and visual task-progress/success estimation remain pending.
   - The experiment page compares original geometry, DA3 replacement and removal
     of the two geometry query tools. It does not claim all depth or geometry
     information was removed from the simulator or the agent's other channels.
+- `experiments/agent-check-success/`: E06, completed agent_check_success run, 29/160.
+  - `analysis/`: Seen 18/80 and Unseen 11/80; native final scores and Agent
+    declarations for all 160 episodes, with E01/E03 comparisons.
+  - 134 episodes call `finish`, 26 return without it. Of 43 success claims,
+    28 match the native score and 15 are false positives. WaffleReheat seed 4
+    succeeds natively without `finish`; native scores, not claims, give 29/160.
 - `reference/`: information categories, existing detailed ground-truth access
   guide, and the self-contained original method reference.
 - `project-status.json`: provenance and structured snapshot for the overview.
@@ -109,6 +118,20 @@ Its scheduler resumed on eight GPUs after initially running on six; completed
 valid episodes were preserved. See the detailed export for audit scope and
 initial-state differences. Removing registered tools is not filesystem isolation.
 
+agent_check_success is based on NoTaskGT commit `26d8665`. It hides ordinary
+observation fields `success`, `robocasa_terminated` and `task_progress`, removes
+native-success VLA early stopping and does not generate `success_criteria.md`.
+Geometry, contact feedback and historical memory remain. Final native scoring
+runs after the planner returns, independently of the Agent's `finish` declaration.
+Private predicate bookkeeping and state records remain; this is not a sandbox.
+The experiment is evaluation-only and has no added actuator guard after `finish`.
+The result schema retains the legacy `agent_stop` variant for compatibility;
+the displayed experiment and published branch are named `agent_check_success`.
+The run completed on 2026-11-07 at 19:26 Hong Kong time. Source:
+[agent_check_success branch](https://github.com/snow-QingYang/RPent/tree/agent_check_success),
+commit `65f7e1b`. Compared with E01 it has 26 fewer native successes; compared
+with E03 it has 12 fewer. These totals do not establish per-episode causality.
+
 The success/failure replay HTML embeds the original video, raw records, images,
 prompt, all tool calls and full returns. Original data stays byte-identical during
 this reorganization. Video boundaries are reconstructed from step counts and
@@ -122,8 +145,11 @@ catalogs, short experiment pages, comparison examples, smoke audit summary and
 compatibility pages. It uses the existing detailed exports and the original local
 smoke audit. Its assertions intentionally require review if source results change.
 Canonical detailed exports live under their experiment's `analysis/` directory.
-After regenerating a detailed export, rerun the overview generator to update
-its experiment page and project-status.json. The E03, E04 and E05 detailed HTML and JS
+The legacy overview generator predates E06. Do not use it to regenerate the
+current overview or project-status.json until it supports E06: it would restore
+the older five-group checklist and drop the new entry. After adding that support,
+verify the six-group, 960-episode total whenever rebuilding a detailed export
+and the overview. The E03, E04 and E05 detailed HTML and JS
 use the same table/filter layout as E02; check their displayed summaries against the
 new export when changing source runs.
 The E04 case builder also uses the local six-case audit under

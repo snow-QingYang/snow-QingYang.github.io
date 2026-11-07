@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-06",
+  "as_of": "2026-11-07",
   "completed_experiments": [
     {
       "id": "E01",
@@ -35,10 +35,18 @@
       "status": "complete",
       "total": 160,
       "success": 39
+    },
+    {
+      "id": "E06",
+      "name": "agent_check_success",
+      "path": "experiments/agent-check-success/",
+      "status": "complete",
+      "total": 160,
+      "success": 29
     }
   ],
-  "completed_experiment_count": 5,
-  "completed_valid_episodes": 800,
+  "completed_experiment_count": 6,
+  "completed_valid_episodes": 960,
   "baseline": {
     "name": "GPT-6-Astra",
     "model": "gpt-6-astra",
@@ -638,6 +646,136 @@
     "The historical DA3 smoke is interrupted and excluded from the 160 valid NoTaskGT episodes.",
     "DA3 only replaces depth for back_project_batch and query_world_map.",
     "NoContactGT removes contact-derived feedback; other progress, geometry, success, scoring-source access and historical memory remain.",
-    "NoGeomTools removes back_project_batch and query_world_map from registered tools and their prompt instructions; internal depth/world maps, task-progress distances, contact, success, file permissions and historical memory remain."
-  ]
+    "NoGeomTools removes back_project_batch and query_world_map from registered tools and their prompt instructions; internal depth/world maps, task-progress distances, contact, success, file permissions and historical memory remain.",
+    "E06 agent_check_success builds on NoTaskGT, hides live success/termination/progress and removes native-success VLA early stopping. The independent evaluator scores the final state after the planner returns; geometry, contact and historical memory remain. Agent declarations are not benchmark scores."
+  ],
+  "latest_result": {
+    "id": "E06",
+    "name": "agent_check_success",
+    "path": "experiments/agent-check-success/",
+    "analysis_path": "experiments/agent-check-success/analysis/",
+    "completed_at": "2026-11-07T19:26:21.731297+08:00",
+    "total": 160,
+    "success": 29,
+    "success_rate_percent": 18.125
+  },
+  "agent_check_success": {
+    "id": "E06",
+    "name": "agent_check_success",
+    "status": "complete",
+    "valid_benchmark_result": true,
+    "run": "official_main_composite_agentstop_astra_xhigh_20261106T141106Z",
+    "completed_at": "2026-11-07T19:26:21.731297+08:00",
+    "source": {
+      "repository": "https://github.com/snow-QingYang/RPent",
+      "branch": "agent_check_success",
+      "branch_url": "https://github.com/snow-QingYang/RPent/tree/agent_check_success",
+      "commit": "65f7e1b85eba219c28ccb75f94740d75071fca34",
+      "base_branch": "no_task_progress",
+      "base_commit": "26d8665d3d394dc77ce90a68d266d370d2384f98"
+    },
+    "summary": {
+      "seen": {
+        "total": 80,
+        "success": 18,
+        "success_rate_percent": 22.5
+      },
+      "unseen": {
+        "total": 80,
+        "success": 11,
+        "success_rate_percent": 13.75
+      },
+      "all": {
+        "total": 160,
+        "success": 29,
+        "success_rate_percent": 18.125
+      }
+    },
+    "completion_declarations": {
+      "finish_called": 134,
+      "without_finish": 26,
+      "success_claims": 43,
+      "stuck": 90,
+      "failure": 1,
+      "success_claim_true": 28,
+      "success_claim_false": 15,
+      "native_success_without_finish": 1,
+      "native_failure_without_finish": 25,
+      "native_success_without_finish_cases": [
+        {
+          "task": "WaffleReheat",
+          "seed": 4,
+          "split": "unseen"
+        }
+      ]
+    },
+    "comparisons": {
+      "E01": {
+        "baseline_success": 55,
+        "experiment_success": 29,
+        "delta_success": -26,
+        "delta_percentage_points": -16.25,
+        "seen_delta_success": -16,
+        "unseen_delta_success": -10
+      },
+      "E03": {
+        "baseline_success": 41,
+        "experiment_success": 29,
+        "delta_success": -12,
+        "delta_percentage_points": -7.5,
+        "seen_delta_success": -6,
+        "unseen_delta_success": -6
+      }
+    },
+    "protocol": {
+      "benchmark": "RoboCasa composite",
+      "environment_split": "target",
+      "protocol_id": "robocasa-harness-vla-v2",
+      "planner": {
+        "backend": "codex",
+        "model": "gpt-6-astra",
+        "reasoning_effort": "xhigh",
+        "max_turns": 100
+      },
+      "runtime": {
+        "cell_timeout_seconds": 3600,
+        "rldx_max_chunks": 40,
+        "rldx_settle_patience": 999,
+        "rldx_action_steps_per_chunk": 8
+      },
+      "seeds": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "tasks_per_split": 16,
+      "vla": "RLDX-1-FT-RC365",
+      "memory_profile": "local",
+      "memory_version": "GPT_6_astra_high",
+      "geometry": "Official simulator geometry retained",
+      "contact_feedback": "Retained",
+      "historical_memory": "Retained",
+      "task_progress": "Omitted from ordinary agent observations; private state records retained",
+      "success": "Omitted from ordinary agent observations",
+      "robocasa_terminated": "Omitted from ordinary agent observations",
+      "native_success_and_vla_early_stop": "VLA native-success early stopping removed; private predicate calls retained",
+      "read_text_file": "Restricted to selected memory",
+      "success_criteria": "success_criteria.md is not generated",
+      "success_source": "env.check_success_after_planner",
+      "experiment_variant": "agent_stop",
+      "variant_note": "Legacy serialized identifier retained; public experiment and branch name is agent_check_success",
+      "score_definition": "Native final-state verdict after the planner returns, independent of agent_finish",
+      "scope": "Evaluation only; no added post-finish actuator guard; file-tool restrictions are not an operating-system sandbox",
+      "comparison": "One run per setting; task/seed matching does not establish identical initial scenes or VLA sampling. Published E03 predates the NoTaskGT revision that stopped generating success_criteria.md; this is not a single-toggle causal comparison."
+    },
+    "result_integrity": {
+      "expected_episodes": 160,
+      "valid_episodes": 160,
+      "missing": 0,
+      "duplicates": 0,
+      "infrastructure_errors": 0
+    }
+  }
 }

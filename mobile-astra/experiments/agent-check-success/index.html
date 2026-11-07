@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="description" content="隐藏实时任务进度与成功反馈，取消 VLA 原生成功早停；由 Agent 判断完成，环境独立评分。">
+<link rel="icon" href="data:,"><link rel="stylesheet" href="../../project.css"><title>E06 · agent_check_success · Mobile Astra</title></head>
+<body><header class="site-head"><div class="head-inner"><a class="brand" href="../../">Mobile Astra / 实验工作页</a><nav aria-label="项目导航"><a href="../../">项目总览</a><a href="../" aria-current="page">实验目录</a><a href="../../reference/">接口与真值</a></nav></div></header>
+<main><nav class="crumbs" aria-label="当前位置"><a href="../../">项目总览</a> <span aria-hidden="true">/</span> <a href="../">实验目录</a> <span aria-hidden="true">/</span> <span aria-current="page">E06 · agent_check_success</span></nav><div class="hero"><p class="eyebrow">HARNESSVLA / ROBOCASA</p><h1>E06 · agent_check_success</h1><p class="lead">隐藏实时任务进度与成功反馈，取消 VLA 原生成功早停。Agent 根据任务文字与观测判断完成，环境在规划器结束后独立评分。</p></div>
+
+<section><span class="badge complete">已完成 · 160 个有效 episode</span><p class="meta">2026-11-07 19:26（香港时间）· GPT-6-Astra / xhigh · RLDX-1-FT-RC365</p></section>
+
+<section><h2>完整结果</h2><div class="table-wrap stack-small"><table aria-label="E06 与 baseline、任务进度移除的 Seen 和 Unseen 结果"><thead><tr><th>任务组</th><th>E01 · baseline</th><th>E03 · 任务进度移除</th><th>E06 · agent_check_success</th></tr></thead><tbody>
+<tr><td data-label="任务组">Seen</td><td data-label="E01 · baseline">34 / 80 · 42.50%</td><td data-label="E03 · 任务进度移除">24 / 80 · 30.00%</td><td data-label="E06 · agent_check_success"><strong>18 / 80 · 22.50%</strong></td></tr>
+<tr><td data-label="任务组">Unseen</td><td data-label="E01 · baseline">21 / 80 · 26.25%</td><td data-label="E03 · 任务进度移除">17 / 80 · 21.25%</td><td data-label="E06 · agent_check_success"><strong>11 / 80 · 13.75%</strong></td></tr>
+<tr><td data-label="任务组">总计</td><td data-label="E01 · baseline">55 / 160 · 34.38%</td><td data-label="E03 · 任务进度移除">41 / 160 · 25.63%</td><td data-label="E06 · agent_check_success"><strong>29 / 160 · 18.13%</strong></td></tr>
+</tbody></table></div>
+<p class="note">成功数以环境最终评分为准。E06 比 E01 少成功 26 局，下降 16.25 个百分点；比 E03 少 12 局，下降 7.50 个百分点，Seen 与 Unseen 各少 6 局。</p>
+<div class="links"><a class="button" href="analysis/">Seen / Unseen 与逐局分析 →</a><a href="analysis/episodes.csv" download>下载 160 局 CSV</a><a href="analysis/report.md">文字报告</a></div></section>
+
+<section><h2>Agent 声明与环境评分</h2><p><strong>134 / 160</strong> 局调用了 <code>finish</code>，另有 <strong>26 / 160</strong> 局返回时未调用。Prompt 要求 Agent 自行判断并声明结束，但没有强制每局必须调用该方法。</p>
+<div class="table-wrap stack-small"><table aria-label="Agent 结束声明与环境最终评分交叉统计"><thead><tr><th>Agent 声明</th><th>环境成功</th><th>环境失败</th><th>局数</th></tr></thead><tbody>
+<tr><td data-label="Agent 声明"><code>success</code></td><td data-label="环境成功">28</td><td data-label="环境失败">15</td><td data-label="局数">43</td></tr>
+<tr><td data-label="Agent 声明"><code>stuck</code></td><td data-label="环境成功">0</td><td data-label="环境失败">90</td><td data-label="局数">90</td></tr>
+<tr><td data-label="Agent 声明"><code>failure</code></td><td data-label="环境成功">0</td><td data-label="环境失败">1</td><td data-label="局数">1</td></tr>
+<tr><td data-label="Agent 声明">未调用 <code>finish</code></td><td data-label="环境成功">1</td><td data-label="环境失败">25</td><td data-label="局数">26</td></tr>
+</tbody></table></div>
+<p class="note">43 次成功声明中有 15 次与最终评分不符。另一个方向的例子是 Unseen 的 <strong>WaffleReheat · seed 4</strong>：环境成功，但 Agent 没有调用 <code>finish</code>。因此本实验成绩为 29/160，不能用 43 次自报成功代替。</p></section>
+
+<section><h2>设置与信息范围</h2><div class="cards">
+<article class="card"><h3>隐藏反馈，取消成功早停</h3><p>基于 NoTaskGT <code>26d8665</code>，初始、动作后及历史工具观测不再提供 <code>success</code>、<code>robocasa_terminated</code> 和 <code>task_progress</code>。</p><p>VLA 不再因原生成功判定而提前结束或返回成功状态；保留每次 40 块、每块 8 步的预算与原有静止判据。<code>success_criteria.md</code> 不再生成，<code>read_text_file</code> 仍限于选中的记忆。</p></article>
+<article class="card"><h3>独立评分，保留其他信息</h3><p>规划器返回后，评测器读取并缓存原生最终判定，分别记录 <code>success</code> 与 <code>agent_finish</code>。评分针对最终状态，不是“曾经成功”，也不是 <code>finish</code> 调用瞬间的快照。</p><p>保留模拟器几何、相机标定与位姿、机器人状态、接触／抓持反馈和历史记忆。没有叠加 DA3、无接触或几何查询移除。</p></article>
+</div><p class="note">原生判据仍按原节奏在内部调用，以维护可能依赖它更新的任务状态；内部状态文件仍可保存进度。文件工具限制不等于系统沙箱。实验仅用于 evaluation，未增加 <code>finish</code> 后的动作拦截器。</p></section>
+
+<section><h2>比较能说明什么</h2><p>E03 使用 11 月 3 日启动的 NoTaskGT 批次；评分源码文件的生成直到 11 月 6 日才被删除。E06 还改变了成功反馈、VLA 早停与完成判断提示，因此 E03 → E06 不是只改一个开关的对照。</p><p>两组按相同任务名与 seed 对比，但未验证全部初始场景与独立 VLA 动作采样完全一致。这批结果显示 E06 的最终成功率更低，并存在成功误报和未声明结束；具体原因需要结合轨迹和重复实验判断。</p></section>
+
+<details><summary>运行批次、代码与预算</summary><dl class="record">
+<dt>代码</dt><dd><a href="https://github.com/snow-QingYang/RPent/tree/agent_check_success">agent_check_success 分支</a> · <a href="https://github.com/snow-QingYang/RPent/commit/65f7e1b85eba219c28ccb75f94740d75071fca34"><code>65f7e1b85eba219c28ccb75f94740d75071fca34</code></a></dd>
+<dt>基础版本</dt><dd>NoTaskGT / <code>no_task_progress</code> · <code>26d8665</code></dd>
+<dt>批次</dt><dd><code>official_main_composite_agentstop_astra_xhigh_20261106T141106Z</code></dd>
+<dt>任务与 seed</dt><dd>Seen / Unseen 各 16 个 composite 任务，seeds 1–5，共 160 局；环境 split 为 <code>target</code>。</dd>
+<dt>模型与记忆</dt><dd>GPT-6-Astra / xhigh · RLDX-1-FT-RC365 · 官方 <code>GPT_6_astra_high</code> 记忆，local profile。</dd>
+<dt>预算</dt><dd>100 个模型响应 / 每局 3600 秒；每次 VLA 最多 40 × 8 仿真步，settle patience = 999。</dd>
+<dt>评分来源</dt><dd><code>env.check_success_after_planner</code>；Agent 声明另存为 <code>agent_finish</code>。</dd>
+<dt>数据标签</dt><dd>兼容已有批次，结果仍保留 <code>experiment_variant="agent_stop"</code>；实验与代码分支名称为 <code>agent_check_success</code>。</dd>
+<dt>完成时间</dt><dd>2026-11-07 19:26（香港时间）；160 局均有效，无缺失、重复或基础设施错误结果。</dd>
+</dl></details>
+<div class="links border-top"><a href="analysis/">查看逐局证据 →</a><a href="../task-progress/">查看 E03 参照 →</a><a href="../baseline/">查看 E01 参照 →</a><a href="../../reference/ground-truth.html">查任务判定真值来源 →</a></div></main><footer class="site-foot"><span>HarnessVLA 真值移除与替代 · 整理于 2026-11-07</span><a href="../">实验目录</a></footer></body></html>
