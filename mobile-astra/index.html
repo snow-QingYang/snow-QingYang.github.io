@@ -15,23 +15,23 @@
 <tr><td data-label="信息类别">3 · 接触与抓持</td><td data-label="具体信息与入口"><code>rldx_skill / rldx_arm</code> 的接触／抓持返回，以及部分接触派生的任务进度。</td><td data-label="完成情况 / 待做工作"><span class="badge complete">已完成 · 反馈移除</span><p><a href="experiments/contact-feedback/">E04 · 160/160 完成，46 局成功</a>；夹爪开度启发式和原生评分保留。</p><small>待做：视觉或触觉替代。</small></td></tr>
 <tr><td data-label="信息类别">4 · 任务进度与完成判定</td><td data-label="具体信息与入口"><code>task_progress</code> 是中间子条件；原版 <code>success</code> 与 <code>robocasa_terminated</code> 均来自 <code>check_success()</code>。VLA 成功早停也使用该判定。</td><td data-label="完成情况 / 待做工作"><span class="badge complete">已完成 · 进度／成功反馈与早停消融</span><p><a href="experiments/task-progress/">E03 · 41/160</a>：移除中间进度、限制文件读取，仍保留成功反馈与 VLA 早停。<a href="experiments/agent-check-success/">E06 · agent_check_success：29/160</a>：进一步隐藏成功／终止字段、取消 VLA 原生成功早停，不生成评分源码文件；由 Agent 判断完成，评测端独立评分。</p><small>待做：分析成功误报与未声明结束的案例，验证视觉完成判定；文件工具限制不等于系统沙箱。</small></td></tr>
 </tbody></table></div>
-<p class="note">机器人本体状态与运动反馈保留，真机可通过传感器测得或估计。RGB 与历史记忆单独记录和控制。<a href="reference/ground-truth.html">查看接口与来源细节 →</a></p></section>
+<p class="note">机器人本体状态与运动反馈保留，真机可通过传感器测得或估计。RGB 单独记录和控制。<a href="experiments/no-memory/">E07 历史记忆移除</a>已完成，其他 baseline 信息保留。<a href="reference/ground-truth.html">查看接口与来源细节 →</a></p></section>
 <section id="goal"><h2>怎么验证</h2>
 <p>先沿着实际接口查清楚：哪些信息进入 Agent 上下文，哪些只在控制器或 VLA 内部使用，哪些仅用于最终评分。然后每次改一类信息，比较原版、去掉、替代三个设置。</p>
 <div class="flow"><article><span class="step">01 / 原版</span><h3>建立参照</h3><p>保留现有真值，记录成功率、动作轨迹和 Agent 实际看到的信息。</p></article><article><span class="step">02 / 去掉</span><h3>看它是否重要</h3><p>逐项切断信息来源，检查返回值、文件读取和内部控制是否仍泄露同类信息。</p></article><article><span class="step">03 / 替代</span><h3>看估计能否补回来</h3><p>用 RGB / RGB-D、机器人传感器或视觉判断代替直接读取模拟器状态。</p></article></div>
 <p class="note">模拟器真值仍可用于独立评测。需要限制的是被实验移除的信息进入 Agent 或执行过程的通道。</p></section>
-<section id="current"><h2>最新结果</h2><div class="current"><h3>E06 · agent_check_success 已完成：29 / 160 · 18.13%</h3>
-<p>2026-11-07 19:26（香港时间）完成全部 160 局。Seen <strong>18 / 80 · 22.50%</strong>，Unseen <strong>11 / 80 · 13.75%</strong>；比 E01 baseline 少成功 26 局，比 E03 任务进度移除少 12 局。</p>
-<p>基于 NoTaskGT，隐藏 <code>success</code>、<code>robocasa_terminated</code> 与 <code>task_progress</code>，取消 VLA 原生成功早停，不生成 <code>success_criteria.md</code>；几何、接触与历史记忆保留。规划器结束后，由环境独立判定最终状态。</p>
-<p>Agent 共 43 次声明成功，其中 28 次确实成功、15 次误报；另有 1 次环境成功但未调用 <code>finish</code>。以上成功率按<strong>环境最终评分</strong>计算。<a href="experiments/agent-check-success/">查看设置与结果 →</a> · <a href="experiments/agent-check-success/analysis/">Seen / Unseen 与逐局声明对照 →</a></p></div></section>
+<section id="current"><h2>最新结果</h2><div class="current"><h3>E07 · NoMemory 已完成：41 / 160 · 25.63%</h3>
+<p>2026-11-09 08:57（香港时间）完成全部 160 局。Seen <strong>24 / 80 · 30.00%</strong>，Unseen <strong>17 / 80 · 21.25%</strong>；比 E01 baseline 少成功 14 局，下降 8.75 个百分点。</p>
+<p>只移除历史任务／全局记忆，Prompt 明确不提供历史记忆，文件工具不允许读取记忆文件。本局交互历史、几何、接触、任务进度、成功反馈和 VLA 成功早停均保留。</p>
+<p>160 局结果均有效。E07 和 E03 的总分及分组成绩恰好相同，但设置与逐局结果分别记录。<a href="experiments/no-memory/">查看设置与结果 →</a> · <a href="experiments/no-memory/analysis/">Seen / Unseen 与逐局对照 →</a></p></div></section>
 <section id="next"><h2>接下来怎么推进</h2><ol>
 <li><strong>比较几何信息的三种设置：</strong>原版查询 55/160、DA3 替代 50/160、移除查询 39/160，结合逐局记录分析变化。</li>
 <li><strong>检查完成判断：</strong>对照 E03 与 E06，分析 15 次成功误报、26 次未调用 <code>finish</code>，以及其中 1 次环境成功；结合轨迹区分反馈、停止方式和执行波动。</li>
 <li><strong>让对比更可解释：</strong>固定初始场景、记忆和 VLA 动作采样，增加成对重复运行。</li>
 </ol><p class="note">已有批次存在初始状态差异；六个接触消融新增成功案例还在首次相同 VLA 调用后就产生不同物理状态。单批结果不足以把每次胜负翻转归因于被移除的信息。</p></section>
 <section id="completed"><h2>全部已完成实验</h2>
-<p><span class="badge complete">6 组已完成 · 960 个有效 episode</span></p>
-<p>更新于 2026-11-07。以下六组均使用 GPT-6-Astra / xhigh，每组完成 160 局：Seen、Unseen 各 16 个任务，每个任务 5 个 seed。</p>
+<p><span class="badge complete">7 组已完成 · 1120 个有效 episode</span></p>
+<p>更新于 2026-11-09。以下七组均使用 GPT-6-Astra / xhigh，每组完成 160 局：Seen、Unseen 各 16 个任务，每个任务 5 个 seed。</p>
 <div class="table-wrap stack-small"><table aria-label="全部已完成实验的 Seen 与 Unseen 结果"><thead><tr><th>实验</th><th>Seen</th><th>Unseen</th><th>总计</th><th>查看</th></tr></thead><tbody>
 <tr><td data-label="实验">E01 · 原版 baseline 重跑<small>✓ 已完成 · 160/160</small></td><td data-label="Seen">34 / 80</td><td data-label="Unseen">21 / 80</td><td data-label="总计"><strong>55 / 160 · 34.38%</strong></td><td data-label="查看"><a href="experiments/baseline/">实验与案例</a></td></tr>
 <tr><td data-label="实验">E02 · DA3 深度替代<small>✓ 已完成 · 160/160</small></td><td data-label="Seen">33 / 80</td><td data-label="Unseen">17 / 80</td><td data-label="总计"><strong>50 / 160 · 31.25%</strong></td><td data-label="查看"><a href="experiments/geometry-da3/">替代范围与对照</a></td></tr>
@@ -39,5 +39,6 @@
 <tr><td data-label="实验">E04 · 接触反馈移除<small>✓ 已完成 · 160/160</small></td><td data-label="Seen">26 / 80</td><td data-label="Unseen">20 / 80</td><td data-label="总计"><strong>46 / 160 · 28.75%</strong></td><td data-label="查看"><a href="experiments/contact-feedback/">设置与变化案例</a></td></tr>
 <tr><td data-label="实验">E05 · 几何查询移除<small>✓ 已完成 · 160/160</small></td><td data-label="Seen">22 / 80</td><td data-label="Unseen">17 / 80</td><td data-label="总计"><strong>39 / 160 · 24.38%</strong></td><td data-label="查看"><a href="experiments/geometry-removed/">移除范围与完整结果</a></td></tr>
 <tr><td data-label="实验">E06 · agent_check_success<small>✓ 已完成 · 160/160 · Agent 判断完成</small></td><td data-label="Seen">18 / 80</td><td data-label="Unseen">11 / 80</td><td data-label="总计"><strong>29 / 160 · 18.13%</strong></td><td data-label="查看"><a href="experiments/agent-check-success/">设置与最终评分</a> · <a href="experiments/agent-check-success/analysis/">逐局分析</a></td></tr>
-</tbody></table></div><p class="note">E05 移除两个主动三维查询接口；E06 移除实时任务判定反馈及 VLA 成功早停，保留几何与接触。所有成功数均来自环境评分，Agent 自报单独记录。GPT-5.6-Sol 的 45/160 结果保留在 <a href="experiments/baseline/analysis/">baseline 详细分析</a>中，作为补充参照。</p></section>
-<div class="links border-top"><a class="button" href="experiments/">全部实验 →</a><a href="experiments/baseline/cases/">完整交互案例</a><a href="reference/">接口与真值</a><a href="reference/ground-truth.html">查具体真值从哪里来</a><a href="reference/methods.html">查全部方法</a></div></main><footer class="site-foot"><span>HarnessVLA 真值移除与替代 · 整理于 2026-11-07</span><a href="experiments/">实验目录</a></footer></body></html>
+<tr><td data-label="实验">E07 · NoMemory<small>✓ 已完成 · 160/160 · 移除历史记忆</small></td><td data-label="Seen">24 / 80</td><td data-label="Unseen">17 / 80</td><td data-label="总计"><strong>41 / 160 · 25.63%</strong></td><td data-label="查看"><a href="experiments/no-memory/">设置与完整结果</a> · <a href="experiments/no-memory/analysis/">逐局对照</a></td></tr>
+</tbody></table></div><p class="note">E05 移除两个主动三维查询接口；E06 移除实时任务判定反馈及 VLA 成功早停，保留几何与接触。E07 只移除历史记忆，保留当前交互历史与 baseline 真值。所有成功数均来自环境评分，Agent 自报单独记录。GPT-5.6-Sol 的 45/160 结果保留在 <a href="experiments/baseline/analysis/">baseline 详细分析</a>中，作为补充参照。</p></section>
+<div class="links border-top"><a class="button" href="experiments/">全部实验 →</a><a href="experiments/baseline/cases/">完整交互案例</a><a href="reference/">接口与真值</a><a href="reference/ground-truth.html">查具体真值从哪里来</a><a href="reference/methods.html">查全部方法</a></div></main><footer class="site-foot"><span>HarnessVLA 真值移除与替代 · 整理于 2026-11-09</span><a href="experiments/">实验目录</a></footer></body></html>

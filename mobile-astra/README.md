@@ -6,10 +6,10 @@ Keep this deployment entirely inside `mobile-astra/`. Do not modify or link from
 personal Home, Research, Blog, shared navigation, styles, assets or templates.
 All pages are standalone work interfaces. Public URLs are not access control.
 
-## Completed checklist · 2026-11-07
+## Completed checklist · 2026-11-09
 
-Six primary GPT-6-Astra / xhigh experiments are complete: 160 valid episodes
-per setting, 960 total. Each setting has 80 Seen and 80 Unseen episodes.
+Seven primary GPT-6-Astra / xhigh experiments are complete: 160 valid episodes
+per setting, 1,120 total. Each setting has 80 Seen and 80 Unseen episodes.
 
 - [x] [E01 · Baseline](experiments/baseline/): Seen 34/80, Unseen 21/80; **55/160**.
 - [x] [E02 · DA3 depth replacement](experiments/geometry-da3/): Seen 33/80, Unseen 17/80; **50/160**.
@@ -17,8 +17,9 @@ per setting, 960 total. Each setting has 80 Seen and 80 Unseen episodes.
 - [x] [E04 · Contact-feedback removal](experiments/contact-feedback/): Seen 26/80, Unseen 20/80; **46/160**.
 - [x] [E05 · Geometry-query removal](experiments/geometry-removed/): Seen 22/80, Unseen 17/80; **39/160**.
 - [x] [E06 · agent_check_success](experiments/agent-check-success/): Seen 18/80, Unseen 11/80; **29/160**.
+- [x] [E07 · NoMemory](experiments/no-memory/): Seen 24/80, Unseen 17/80; **41/160**.
 
-The 960-episode total excludes the auxiliary Sol run and interrupted smoke runs.
+The 1,120-episode total excludes the auxiliary Sol run and interrupted smoke runs.
 E05 removes the two active geometry-query tools; internal depth and other feedback
 remain. E06 completes removal of live task-progress/success/termination feedback
 and VLA native-success early stopping; the evaluator keeps independent final
@@ -73,6 +74,11 @@ and validation of visual task-progress/completion estimates remain pending.
   - 134 episodes call `finish`, 26 return without it. Of 43 success claims,
     28 match the native score and 15 are false positives. WaffleReheat seed 4
     succeeds natively without `finish`; native scores, not claims, give 29/160.
+- `experiments/no-memory/`: E07, completed historical-memory removal, 41/160.
+  - `analysis/`: Seen 24/80 and Unseen 17/80; all 160 matched outcomes against
+    E01, task/seed filters, CSV, JSON, report and portable extractor.
+  - Current-episode history and baseline simulator feedback remain. E03 has
+    the same aggregate score but is a separate setting.
 - `reference/`: information categories, existing detailed ground-truth access
   guide, and the self-contained original method reference.
 - `project-status.json`: provenance and structured snapshot for the overview.
@@ -132,6 +138,21 @@ The run completed on 2026-11-07 at 19:26 Hong Kong time. Source:
 commit `65f7e1b`. Compared with E01 it has 26 fewer native successes; compared
 with E03 it has 12 fewer. These totals do not establish per-episode causality.
 
+NoMemory starts from the official baseline and removes historical task/global
+memory selection, prompt exposure and permission to read memory files through
+the file tool. It retains current-episode history, geometry, contact feedback,
+task progress, success, scoring-source access and VLA native-success early
+stopping. All 160 result records pass the no-memory validator. The recorded-trajectory
+audit covers 337,744 events and 364 native shell commands across 84 episodes;
+no historical task/global memory read attempt was observed. Source/AGENTS and
+current-episode artifact reads occurred. The harness still validates the corpus
+internally before returning an empty selection; this is not OS isolation. Source is official
+`a744bd5` plus the recorded three-file experiment patch; do not assume an
+unpublished remote `no_memory` branch exists. It finished on 2026-11-09 at 08:57
+Hong Kong time. The launcher logged a trailing shell EOF after all episodes
+and validation completed; an independent post-run validator passed all 160.
+The saved runner exit marker alone is not proof of clean shell termination.
+
 The success/failure replay HTML embeds the original video, raw records, images,
 prompt, all tool calls and full returns. Original data stays byte-identical during
 this reorganization. Video boundaries are reconstructed from step counts and
@@ -145,10 +166,10 @@ catalogs, short experiment pages, comparison examples, smoke audit summary and
 compatibility pages. It uses the existing detailed exports and the original local
 smoke audit. Its assertions intentionally require review if source results change.
 Canonical detailed exports live under their experiment's `analysis/` directory.
-The legacy overview generator predates E06. Do not use it to regenerate the
-current overview or project-status.json until it supports E06: it would restore
-the older five-group checklist and drop the new entry. After adding that support,
-verify the six-group, 960-episode total whenever rebuilding a detailed export
+The legacy overview generator predates E06 and E07. Do not use it to regenerate the
+current overview or project-status.json until it supports E06 and E07: it would restore
+the older five-group checklist and drop the newer entries. After adding that support,
+verify the seven-group, 1,120-episode total whenever rebuilding a detailed export
 and the overview. The E03, E04 and E05 detailed HTML and JS
 use the same table/filter layout as E02; check their displayed summaries against the
 new export when changing source runs.

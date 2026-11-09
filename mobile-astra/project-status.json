@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-07",
+  "as_of": "2026-11-09",
   "completed_experiments": [
     {
       "id": "E01",
@@ -43,10 +43,18 @@
       "status": "complete",
       "total": 160,
       "success": 29
+    },
+    {
+      "id": "E07",
+      "name": "NoMemory",
+      "path": "experiments/no-memory/",
+      "status": "complete",
+      "total": 160,
+      "success": 41
     }
   ],
-  "completed_experiment_count": 6,
-  "completed_valid_episodes": 960,
+  "completed_experiment_count": 7,
+  "completed_valid_episodes": 1120,
   "baseline": {
     "name": "GPT-6-Astra",
     "model": "gpt-6-astra",
@@ -647,17 +655,18 @@
     "DA3 only replaces depth for back_project_batch and query_world_map.",
     "NoContactGT removes contact-derived feedback; other progress, geometry, success, scoring-source access and historical memory remain.",
     "NoGeomTools removes back_project_batch and query_world_map from registered tools and their prompt instructions; internal depth/world maps, task-progress distances, contact, success, file permissions and historical memory remain.",
-    "E06 agent_check_success builds on NoTaskGT, hides live success/termination/progress and removes native-success VLA early stopping. The independent evaluator scores the final state after the planner returns; geometry, contact and historical memory remain. Agent declarations are not benchmark scores."
+    "E06 agent_check_success builds on NoTaskGT, hides live success/termination/progress and removes native-success VLA early stopping. The independent evaluator scores the final state after the planner returns; geometry, contact and historical memory remain. Agent declarations are not benchmark scores.",
+    "E07 removes historical task/global memory only; current-episode history and baseline feedback remain. Its 41/160 score happens to match E03, a separate setting. Task/seed matching is not proof of identical scenes or causal attribution."
   ],
   "latest_result": {
-    "id": "E06",
-    "name": "agent_check_success",
-    "path": "experiments/agent-check-success/",
-    "analysis_path": "experiments/agent-check-success/analysis/",
-    "completed_at": "2026-11-07T19:26:21.731297+08:00",
+    "id": "E07",
+    "name": "NoMemory",
+    "path": "experiments/no-memory/",
+    "analysis_path": "experiments/no-memory/analysis/",
+    "completed_at": "2026-11-09T08:57:33+08:00",
     "total": 160,
-    "success": 29,
-    "success_rate_percent": 18.125
+    "success": 41,
+    "success_rate_percent": 25.625
   },
   "agent_check_success": {
     "id": "E06",
@@ -776,6 +785,131 @@
       "missing": 0,
       "duplicates": 0,
       "infrastructure_errors": 0
+    }
+  },
+  "no_memory": {
+    "id": "E07",
+    "name": "NoMemory",
+    "status": "complete",
+    "valid_benchmark_result": true,
+    "run": "official_main_composite_nomemory_astra_xhigh_20261108T155013Z",
+    "completed_at": "2026-11-09T08:57:33+08:00",
+    "source": {
+      "base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+      "changes": [
+        "robots/robocasa/memory.py",
+        "robots/robocasa/prompts/evaluate.py",
+        "robots/robocasa/eval/validate_target50.py"
+      ],
+      "revision_note": "Official baseline plus recorded experiment patch; no published branch assumed."
+    },
+    "summary": {
+      "seen": {
+        "total": 80,
+        "success": 24,
+        "success_rate_percent": 30.0
+      },
+      "unseen": {
+        "total": 80,
+        "success": 17,
+        "success_rate_percent": 21.25
+      },
+      "all": {
+        "total": 160,
+        "success": 41,
+        "success_rate_percent": 25.625
+      }
+    },
+    "comparisons": {
+      "E01": {
+        "baseline_success": 55,
+        "experiment_success": 41,
+        "delta_success": -14,
+        "delta_percentage_points": -8.75,
+        "seen_delta_success": -10,
+        "unseen_delta_success": -4
+      }
+    },
+    "protocol": {
+      "model": "gpt-6-astra",
+      "reasoning_effort": "xhigh",
+      "max_turns": 100,
+      "timeout_seconds": 3600,
+      "vla": "RLDX-1-FT-RC365",
+      "rldx_max_chunks": 40,
+      "rldx_action_steps_per_chunk": 8,
+      "rldx_settle_patience": 999,
+      "environment_split": "target",
+      "seeds": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "tasks_per_split": 16,
+      "memory_policy": "none",
+      "historical_memory": "Not selected, exposed in prompt or permitted by file tool",
+      "current_episode_history": "Retained",
+      "geometry": "Baseline simulator depth/world maps retained",
+      "contact_feedback": "Retained",
+      "task_progress": "Retained",
+      "success": "Retained",
+      "native_success_and_vla_early_stop": "Retained",
+      "success_criteria": "Baseline scoring-source generation and access retained",
+      "success_source": "state.success"
+    },
+    "result_integrity": {
+      "expected_episodes": 160,
+      "valid_episodes": 160,
+      "missing": 0,
+      "rejected": 0,
+      "episode_launcher_exit_zero": 160,
+      "post_run_validation": "passed",
+      "runner_note": "Trailing shell EOF after all episodes and validation; saved runner exit marker is not a clean-shell guarantee.",
+      "native_score_crosschecks_both_runs": 320
+    },
+    "paired_outcomes": {
+      "seen": {
+        "both_success": 15,
+        "baseline_only": 19,
+        "nomemory_only": 9,
+        "neither": 37
+      },
+      "unseen": {
+        "both_success": 6,
+        "baseline_only": 15,
+        "nomemory_only": 11,
+        "neither": 48
+      },
+      "all": {
+        "both_success": 21,
+        "baseline_only": 34,
+        "nomemory_only": 20,
+        "neither": 85
+      }
+    },
+    "initial_state_audit": {
+      "pairs": 160,
+      "robot_state_differences_above_1e_6": 14,
+      "robot_state_exact_differences": 23,
+      "task_instruction_differences": 5,
+      "scope": "Robot state and task text only; full object scene identity and VLA action-sampling equivalence not established."
+    },
+    "memory_audit": {
+      "episodes": 160,
+      "parsed_events": 337744,
+      "parse_errors": 0,
+      "native_commands": 364,
+      "episodes_with_native_commands": 84,
+      "observed_historical_memory_read_attempts": 0,
+      "observed_historical_memory_reads": 0,
+      "memory_log_bytes": 0,
+      "result_policy": "none",
+      "selected_files": [],
+      "read_files": [],
+      "scope": "Recorded agent trajectories and file-tool audit logs; source/AGENTS and current-episode artifact reads occurred. Internal corpus validation retained; not OS filesystem isolation.",
+      "audit_sha256": "8b4bad55bb1d92c1a6a4fca5be5448b0a56a1fae78d371634b4deda42233b17f"
     }
   }
 }
