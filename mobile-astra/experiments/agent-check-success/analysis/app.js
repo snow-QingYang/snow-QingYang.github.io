@@ -56,7 +56,7 @@ function showEpisode(row) {
     ["停止原因", row.termination_reason],
     ["E06 评分时机", "Planner 返回后查询 env.check_success"],
   ];
-  const table = [["E01 · baseline", row.baseline_success, row.baseline_elapsed_s], ["E03 · NoTaskGT", row.notask_success, row.notask_elapsed_s], ["E06 · 自判完成", row.agent_success, row.elapsed_s]];
+  const table = [["E01 · baseline", row.baseline_success, row.baseline_elapsed_s], ["E03 · No task progress", row.notask_success, row.notask_elapsed_s], ["E06 · No task progress and agent success", row.agent_success, row.elapsed_s]];
   $("episode-content").innerHTML = `<div class="table-wrap"><table><thead><tr><th>设置</th><th>原生结果</th><th>耗时</th></tr></thead><tbody>${table.map(([name, success, elapsed]) => `<tr><td>${name}</td><td>${nativeText(success)}</td><td>${minutes(elapsed)}</td></tr>`).join("")}</tbody></table></div><dl class="record">${fields.map(([key, value]) => `<dt>${key}</dt><dd>${escapeHTML(value)}</dd>`).join("")}</dl><p class="note">对照仅按任务与 seed 匹配；耗时受调度、API 等因素影响。原生结果均保留在各自 160 局分母内。</p><details><summary>结果文件 SHA-256</summary>${[["E01", row.baseline_result_sha256], ["E03", row.notask_result_sha256], ["E06", row.result_sha256]].map(([name, hash]) => `<p>${name}<code class="hash">${escapeHTML(hash)}</code></p>`).join("")}</details>`;
   $("episode-dialog").showModal();
 }
@@ -76,7 +76,7 @@ fetch("data.json").then((response) => {
   $("generated").textContent = data.generated_utc;
   $("paired-body").innerHTML = ["seen", "unseen", "all"].flatMap((split) => ["baseline", "notask"].map((reference) => {
     const stats = data.summary[split].paired[reference];
-    return `<tr><th scope="row">${splitName[split]}</th><td>${reference === "baseline" ? "E01 · baseline" : "E03 · NoTaskGT"}</td><td>${stats.both_success}</td><td>${stats.reference_only}</td><td>${stats.agent_only}</td><td>${stats.both_failure}</td></tr>`;
+    return `<tr><th scope="row">${splitName[split]}</th><td>${reference === "baseline" ? "E01 · baseline" : "E03 · No task progress"}</td><td>${stats.both_success}</td><td>${stats.reference_only}</td><td>${stats.agent_only}</td><td>${stats.both_failure}</td></tr>`;
   })).join("");
   for (const id of ["split", "outcome"]) $(id).addEventListener("change", render);
   $("search").addEventListener("input", render);

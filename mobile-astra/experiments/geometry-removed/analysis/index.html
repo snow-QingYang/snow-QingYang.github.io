@@ -33,7 +33,7 @@
 <article><h3>不再向 Agent 注册</h3><p><code>back_project_batch</code>：从指定相机像素查询世界 XYZ 坐标。</p><p><code>query_world_map</code>：按高度或 XY 区域过滤世界坐标图，再返回聚类位置。</p><p>评测 prompt 删除了这两个工具的说明、示例与调用要求；观测方法的说明同步调整。</p></article>
 <article><h3>仍然保留</h3><p>模拟器内部深度和世界坐标图、相机标定、本体状态、接触反馈、<code>task_progress</code>（可能包含距离）、成功与终止信号、评分规则访问、历史记忆。</p><p>VLA 输入、权重、控制与预算保留原设置。<code>move_to</code>、<code>scripted_grasp</code>、<code>navigate_to</code>、<code>move_delta</code> 仍可接收 Agent 给定的位置或位移。</p></article>
 </div>
-<p class="note">没有使用 DA3，也没有叠加 NoTaskGT 或 NoContactGT。本实验关闭主动几何查询入口；不是移除模拟器内部 depth，不是完全无几何真值，也没有建立文件／RPC 隔离。</p>
+<p class="note">没有使用 DA3，也没有叠加 No task progress 或 NoContactGT。本实验关闭主动几何查询入口；不是移除模拟器内部 depth，不是完全无几何真值，也没有建立文件／RPC 隔离。</p>
 </section>
 
 <section aria-labelledby="changes-title">

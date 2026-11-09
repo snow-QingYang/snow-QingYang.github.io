@@ -1,10 +1,10 @@
-# E06 · agent_check_success
+# E06 · No task progress and agent success
 
 GPT-6-Astra / xhigh · RoboCasa composite · 32 tasks × seeds 1–5.
 
 Score: native env.check_success after the planner returns. Agent declarations are separate.
 
-| Split | E01 baseline | E03 NoTaskGT | E06 |
+| Split | E01 baseline | E03 No task progress | E06 |
 | --- | ---: | ---: | ---: |
 | seen | 34/80 (42.50%) | 24/80 (30.00%) | 18/80 (22.50%) |
 | unseen | 21/80 (26.25%) | 17/80 (21.25%) | 11/80 (13.75%) |
@@ -29,7 +29,7 @@ No task_progress, success or robocasa_terminated in Agent observations; no nativ
 Simulator geometry, camera calibration, robot state, contact feedback and selected memory remain. Private native predicate calls preserve simulator bookkeeping. Final scoring is not shown to the running Agent.
 
 - Task/seed matching; initial scene and VLA sampling equivalence not audited for E06.
-- Published E03 predates the later NoTaskGT revision that stopped generating success_criteria.md.
+- Published E03 predates the later No task progress revision that stopped generating success_criteria.md.
 - Native scoring happens after the planner returns; agent claims are reported separately.
 - Prompt requests finish, but the planner can return without calling it.
 
@@ -76,6 +76,6 @@ Each seed cell is E01 / E03 / E06 followed by the E06 declaration; 1 = native su
 
 Run: `official_main_composite_agentstop_astra_xhigh_20261106T141106Z`.
 
-Published implementation: `65f7e1b85eba219c28ccb75f94740d75071fca34`; branch `agent_check_success`.
+Published commit: `412efe9c32e3cac630c77138da86def960968610` (documentation name update; runtime implementation `65f7e1b85eba219c28ccb75f94740d75071fca34`); branch `no_task_progress_and_agent_success`.
 
 JSON and CSV contain per-result SHA-256 hashes. The extractor verifies all canonical cells, runtime/model settings, final summary and E01 reference agreement. It exports only selected structured fields; no raw transcripts or credentials.

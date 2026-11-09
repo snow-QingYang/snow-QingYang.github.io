@@ -6,43 +6,148 @@
       "path": "experiments/baseline/",
       "status": "complete",
       "total": 160,
-      "success": 55
+      "success": 55,
+      "source": {
+        "id": "E01",
+        "experiment_path": "experiments/baseline/",
+        "name": "Baseline",
+        "branch": "baseline_composite",
+        "commit": "eebdfcd79b6f292003093be5dd1ce8fe639a4f82",
+        "branch_url": "https://github.com/snow-QingYang/RPent/tree/baseline_composite",
+        "commit_url": "https://github.com/snow-QingYang/RPent/commit/eebdfcd79b6f292003093be5dd1ce8fe639a4f82",
+        "status": "published",
+        "evaluation_relationship": "Experiment implementation; detailed analysis retains the runtime source-file and result hashes.",
+        "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+        "implementation_commit": "eebdfcd79b6f292003093be5dd1ce8fe639a4f82",
+        "instructions_file": "EXPERIMENT.md",
+        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/eebdfcd79b6f292003093be5dd1ce8fe639a4f82/EXPERIMENT.md"
+      }
     },
     {
       "id": "E02",
       "path": "experiments/geometry-da3/",
       "status": "complete",
       "total": 160,
-      "success": 50
+      "success": 50,
+      "source": {
+        "id": "E02",
+        "experiment_path": "experiments/geometry-da3/",
+        "name": "DA3 深度替代",
+        "branch": "da3",
+        "commit": "bc35d93728e3678404b63f9cc78e5e98764dbbb7",
+        "branch_url": "https://github.com/snow-QingYang/RPent/tree/da3",
+        "commit_url": "https://github.com/snow-QingYang/RPent/commit/bc35d93728e3678404b63f9cc78e5e98764dbbb7",
+        "status": "published",
+        "evaluation_relationship": "Experiment implementation; detailed analysis retains the runtime source-file and result hashes.",
+        "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+        "implementation_commit": "bc35d93728e3678404b63f9cc78e5e98764dbbb7",
+        "instructions_file": "EXPERIMENT.md",
+        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/bc35d93728e3678404b63f9cc78e5e98764dbbb7/EXPERIMENT.md"
+      }
     },
     {
       "id": "E03",
       "path": "experiments/task-progress/",
       "status": "complete",
       "total": 160,
-      "success": 41
+      "success": 41,
+      "source": {
+        "id": "E03",
+        "experiment_path": "experiments/task-progress/",
+        "name": "No task progress",
+        "branch": "no_task_progress",
+        "commit": "b7333814fcb1178442057b231e267d4dcfba4554",
+        "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_task_progress",
+        "commit_url": "https://github.com/snow-QingYang/RPent/commit/b7333814fcb1178442057b231e267d4dcfba4554",
+        "status": "published",
+        "evaluation_relationship": "The immutable commit is the evaluated snapshot: all 350 tracked runtime/test/requirements/pyproject files match the archived run manifest. All 160 episodes generated success_criteria.md; the restricted file tool did not expose it. The no_task_progress branch also contains a later variant that stops generating this file.",
+        "later_variant": {
+          "branch": "no_task_progress",
+          "commit": "26d8665d3d394dc77ce90a68d266d370d2384f98",
+          "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_task_progress",
+          "commit_url": "https://github.com/snow-QingYang/RPent/commit/26d8665d3d394dc77ce90a68d266d370d2384f98",
+          "note": "Later variant: stops generating success_criteria.md. Not used for the published 160-episode E03 run.",
+          "implementation_commit": "26d8665d3d394dc77ce90a68d266d370d2384f98",
+          "instructions_file": "EXPERIMENT.md",
+          "instructions_url": "https://github.com/snow-QingYang/RPent/blob/26d8665d3d394dc77ce90a68d266d370d2384f98/EXPERIMENT.md"
+        },
+        "runtime_source_files_checked": 350,
+        "runtime_source_files_matching": 350,
+        "runtime_base_commit": "0e406bb96d670d0c18a4cea9a6ea047119661d19",
+        "implementation_commit": "b7333814fcb1178442057b231e267d4dcfba4554",
+        "evaluated_code_commit": "b7333814fcb1178442057b231e267d4dcfba4554",
+        "instructions_file": "EXPERIMENT.md",
+        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/b7333814fcb1178442057b231e267d4dcfba4554/EXPERIMENT.md"
+      },
+      "name": "No task progress"
     },
     {
       "id": "E04",
       "path": "experiments/contact-feedback/",
       "status": "complete",
       "total": 160,
-      "success": 46
+      "success": 46,
+      "source": {
+        "id": "E04",
+        "experiment_path": "experiments/contact-feedback/",
+        "name": "接触反馈移除",
+        "branch": "no_contact_gt",
+        "commit": "e33f97430972135de2208a83fc27dece7af4510c",
+        "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_contact_gt",
+        "commit_url": "https://github.com/snow-QingYang/RPent/commit/e33f97430972135de2208a83fc27dece7af4510c",
+        "status": "published",
+        "evaluation_relationship": "Experiment implementation; detailed analysis retains the runtime source-file and result hashes.",
+        "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+        "implementation_commit": "e33f97430972135de2208a83fc27dece7af4510c",
+        "instructions_file": "NO_CONTACT_GT.md",
+        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/e33f97430972135de2208a83fc27dece7af4510c/NO_CONTACT_GT.md"
+      }
     },
     {
       "id": "E05",
       "path": "experiments/geometry-removed/",
       "status": "complete",
       "total": 160,
-      "success": 39
+      "success": 39,
+      "source": {
+        "id": "E05",
+        "experiment_path": "experiments/geometry-removed/",
+        "name": "几何查询移除",
+        "branch": "no_geometry_tools",
+        "commit": "19a9ea934810999428715324507021db51ec06bf",
+        "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_geometry_tools",
+        "commit_url": "https://github.com/snow-QingYang/RPent/commit/19a9ea934810999428715324507021db51ec06bf",
+        "status": "published",
+        "evaluation_relationship": "Experiment implementation; detailed analysis retains the runtime source-file and result hashes.",
+        "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+        "implementation_commit": "19a9ea934810999428715324507021db51ec06bf",
+        "instructions_file": "NO_GEOMETRY_TOOLS.md",
+        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/19a9ea934810999428715324507021db51ec06bf/NO_GEOMETRY_TOOLS.md"
+      }
     },
     {
       "id": "E06",
-      "name": "agent_check_success",
+      "name": "No task progress and agent success",
       "path": "experiments/agent-check-success/",
       "status": "complete",
       "total": 160,
-      "success": 29
+      "success": 29,
+      "source": {
+        "id": "E06",
+        "experiment_path": "experiments/agent-check-success/",
+        "name": "No task progress and agent success",
+        "branch": "no_task_progress_and_agent_success",
+        "commit": "412efe9c32e3cac630c77138da86def960968610",
+        "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_task_progress_and_agent_success",
+        "commit_url": "https://github.com/snow-QingYang/RPent/commit/412efe9c32e3cac630c77138da86def960968610",
+        "status": "published",
+        "evaluation_relationship": "Experiment implementation; detailed analysis retains the runtime source-file and result hashes.",
+        "runtime_base_commit": "26d8665d3d394dc77ce90a68d266d370d2384f98",
+        "implementation_commit": "65f7e1b85eba219c28ccb75f94740d75071fca34",
+        "instructions_file": "EXPERIMENT.md",
+        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/412efe9c32e3cac630c77138da86def960968610/EXPERIMENT.md",
+        "publication_changes": "Only EXPERIMENT.md display naming changed from implementation_commit; runtime code and tests unchanged."
+      }
     },
     {
       "id": "E07",
@@ -50,7 +155,24 @@
       "path": "experiments/no-memory/",
       "status": "complete",
       "total": 160,
-      "success": 41
+      "success": 41,
+      "source": {
+        "id": "E07",
+        "experiment_path": "experiments/no-memory/",
+        "name": "NoMemory",
+        "branch": "no_memory",
+        "commit": "a640f3202d092b0803540dff35521f7996ce0945",
+        "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_memory",
+        "commit_url": "https://github.com/snow-QingYang/RPent/commit/a640f3202d092b0803540dff35521f7996ce0945",
+        "status": "published",
+        "evaluation_relationship": "The three modified production files and all ten recorded runtime source-file hashes match the evaluated run. Added tests and experiment documentation do not alter runtime source hashes.",
+        "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+        "runtime_source_files_checked": 10,
+        "runtime_source_files_matching": 10,
+        "implementation_commit": "a640f3202d092b0803540dff35521f7996ce0945",
+        "instructions_file": "EXPERIMENT.md",
+        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/a640f3202d092b0803540dff35521f7996ce0945/EXPERIMENT.md"
+      }
     }
   ],
   "completed_experiment_count": 7,
@@ -308,7 +430,8 @@
         "manual_file_checks.json": "c2eb286e43e33e49f39a90603f02e2486098d86f9d45c37df11ccc5a8b971010",
         "tool_calls.jsonl": "cfd81c8e905b338c490edf56f7c45b193af1d09a94b78c5a544cce04845f7a8e"
       }
-    }
+    },
+    "name": "No task progress"
   },
   "contact_feedback": {
     "status": "complete",
@@ -651,11 +774,11 @@
     }
   },
   "notes": [
-    "The historical DA3 smoke is interrupted and excluded from the 160 valid NoTaskGT episodes.",
+    "The historical DA3 smoke is interrupted and excluded from the 160 valid No task progress episodes.",
     "DA3 only replaces depth for back_project_batch and query_world_map.",
     "NoContactGT removes contact-derived feedback; other progress, geometry, success, scoring-source access and historical memory remain.",
     "NoGeomTools removes back_project_batch and query_world_map from registered tools and their prompt instructions; internal depth/world maps, task-progress distances, contact, success, file permissions and historical memory remain.",
-    "E06 agent_check_success builds on NoTaskGT, hides live success/termination/progress and removes native-success VLA early stopping. The independent evaluator scores the final state after the planner returns; geometry, contact and historical memory remain. Agent declarations are not benchmark scores.",
+    "E06 No task progress and agent success builds on No task progress, hides live success/termination/progress and removes native-success VLA early stopping. The independent evaluator scores the final state after the planner returns; geometry, contact and historical memory remain. Agent declarations are not benchmark scores.",
     "E07 removes historical task/global memory only; current-episode history and baseline feedback remain. Its 41/160 score happens to match E03, a separate setting. Task/seed matching is not proof of identical scenes or causal attribution."
   ],
   "latest_result": {
@@ -670,18 +793,20 @@
   },
   "agent_check_success": {
     "id": "E06",
-    "name": "agent_check_success",
+    "name": "No task progress and agent success",
     "status": "complete",
     "valid_benchmark_result": true,
     "run": "official_main_composite_agentstop_astra_xhigh_20261106T141106Z",
     "completed_at": "2026-11-07T19:26:21.731297+08:00",
     "source": {
       "repository": "https://github.com/snow-QingYang/RPent",
-      "branch": "agent_check_success",
-      "branch_url": "https://github.com/snow-QingYang/RPent/tree/agent_check_success",
-      "commit": "65f7e1b85eba219c28ccb75f94740d75071fca34",
+      "branch": "no_task_progress_and_agent_success",
+      "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_task_progress_and_agent_success",
+      "commit": "412efe9c32e3cac630c77138da86def960968610",
       "base_branch": "no_task_progress",
-      "base_commit": "26d8665d3d394dc77ce90a68d266d370d2384f98"
+      "base_commit": "26d8665d3d394dc77ce90a68d266d370d2384f98",
+      "implementation_commit": "65f7e1b85eba219c28ccb75f94740d75071fca34",
+      "commit_url": "https://github.com/snow-QingYang/RPent/commit/412efe9c32e3cac630c77138da86def960968610"
     },
     "summary": {
       "seen": {
@@ -774,7 +899,7 @@
       "success_criteria": "success_criteria.md is not generated",
       "success_source": "env.check_success_after_planner",
       "experiment_variant": "agent_stop",
-      "variant_note": "Legacy serialized identifier retained; public experiment and branch name is agent_check_success",
+      "variant_note": "Legacy serialized identifier agent_stop retained; display name is No task progress and agent success; published branch is no_task_progress_and_agent_success.",
       "score_definition": "Native final-state verdict after the planner returns, independent of agent_finish",
       "scope": "Evaluation only; no added post-finish actuator guard; file-tool restrictions are not an operating-system sandbox",
       "comparison": "One run per setting; task/seed matching does not establish identical initial scenes or VLA sampling. Published E03 predates the NoTaskGT revision that stopped generating success_criteria.md; this is not a single-toggle causal comparison."
@@ -801,7 +926,11 @@
         "robots/robocasa/prompts/evaluate.py",
         "robots/robocasa/eval/validate_target50.py"
       ],
-      "revision_note": "Official baseline plus recorded experiment patch; no published branch assumed."
+      "revision_note": "Published NoMemory implementation; archived runtime source-file and patch hashes remain authoritative for the evaluated run.",
+      "branch": "no_memory",
+      "commit": "a640f3202d092b0803540dff35521f7996ce0945",
+      "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_memory",
+      "commit_url": "https://github.com/snow-QingYang/RPent/commit/a640f3202d092b0803540dff35521f7996ce0945"
     },
     "summary": {
       "seen": {
@@ -910,6 +1039,134 @@
       "read_files": [],
       "scope": "Recorded agent trajectories and file-tool audit logs; source/AGENTS and current-episode artifact reads occurred. Internal corpus validation retained; not OS filesystem isolation.",
       "audit_sha256": "8b4bad55bb1d92c1a6a4fca5be5448b0a56a1fae78d371634b4deda42233b17f"
+    }
+  },
+  "source_publication": {
+    "metadata": "source-publication.json",
+    "repository": "https://github.com/snow-QingYang/RPent",
+    "as_of": "2026-11-09",
+    "experiments": {
+      "E01": {
+        "id": "E01",
+        "experiment_path": "experiments/baseline/",
+        "name": "Baseline",
+        "branch": "baseline_composite",
+        "commit": "eebdfcd79b6f292003093be5dd1ce8fe639a4f82",
+        "branch_url": "https://github.com/snow-QingYang/RPent/tree/baseline_composite",
+        "commit_url": "https://github.com/snow-QingYang/RPent/commit/eebdfcd79b6f292003093be5dd1ce8fe639a4f82",
+        "status": "published",
+        "evaluation_relationship": "Experiment implementation; detailed analysis retains the runtime source-file and result hashes.",
+        "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+        "implementation_commit": "eebdfcd79b6f292003093be5dd1ce8fe639a4f82",
+        "instructions_file": "EXPERIMENT.md",
+        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/eebdfcd79b6f292003093be5dd1ce8fe639a4f82/EXPERIMENT.md"
+      },
+      "E02": {
+        "id": "E02",
+        "experiment_path": "experiments/geometry-da3/",
+        "name": "DA3 深度替代",
+        "branch": "da3",
+        "commit": "bc35d93728e3678404b63f9cc78e5e98764dbbb7",
+        "branch_url": "https://github.com/snow-QingYang/RPent/tree/da3",
+        "commit_url": "https://github.com/snow-QingYang/RPent/commit/bc35d93728e3678404b63f9cc78e5e98764dbbb7",
+        "status": "published",
+        "evaluation_relationship": "Experiment implementation; detailed analysis retains the runtime source-file and result hashes.",
+        "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+        "implementation_commit": "bc35d93728e3678404b63f9cc78e5e98764dbbb7",
+        "instructions_file": "EXPERIMENT.md",
+        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/bc35d93728e3678404b63f9cc78e5e98764dbbb7/EXPERIMENT.md"
+      },
+      "E03": {
+        "id": "E03",
+        "experiment_path": "experiments/task-progress/",
+        "name": "No task progress",
+        "branch": "no_task_progress",
+        "commit": "b7333814fcb1178442057b231e267d4dcfba4554",
+        "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_task_progress",
+        "commit_url": "https://github.com/snow-QingYang/RPent/commit/b7333814fcb1178442057b231e267d4dcfba4554",
+        "status": "published",
+        "evaluation_relationship": "The immutable commit is the evaluated snapshot: all 350 tracked runtime/test/requirements/pyproject files match the archived run manifest. All 160 episodes generated success_criteria.md; the restricted file tool did not expose it. The no_task_progress branch also contains a later variant that stops generating this file.",
+        "later_variant": {
+          "branch": "no_task_progress",
+          "commit": "26d8665d3d394dc77ce90a68d266d370d2384f98",
+          "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_task_progress",
+          "commit_url": "https://github.com/snow-QingYang/RPent/commit/26d8665d3d394dc77ce90a68d266d370d2384f98",
+          "note": "Later variant: stops generating success_criteria.md. Not used for the published 160-episode E03 run.",
+          "implementation_commit": "26d8665d3d394dc77ce90a68d266d370d2384f98",
+          "instructions_file": "EXPERIMENT.md",
+          "instructions_url": "https://github.com/snow-QingYang/RPent/blob/26d8665d3d394dc77ce90a68d266d370d2384f98/EXPERIMENT.md"
+        },
+        "runtime_source_files_checked": 350,
+        "runtime_source_files_matching": 350,
+        "runtime_base_commit": "0e406bb96d670d0c18a4cea9a6ea047119661d19",
+        "implementation_commit": "b7333814fcb1178442057b231e267d4dcfba4554",
+        "evaluated_code_commit": "b7333814fcb1178442057b231e267d4dcfba4554",
+        "instructions_file": "EXPERIMENT.md",
+        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/b7333814fcb1178442057b231e267d4dcfba4554/EXPERIMENT.md"
+      },
+      "E04": {
+        "id": "E04",
+        "experiment_path": "experiments/contact-feedback/",
+        "name": "接触反馈移除",
+        "branch": "no_contact_gt",
+        "commit": "e33f97430972135de2208a83fc27dece7af4510c",
+        "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_contact_gt",
+        "commit_url": "https://github.com/snow-QingYang/RPent/commit/e33f97430972135de2208a83fc27dece7af4510c",
+        "status": "published",
+        "evaluation_relationship": "Experiment implementation; detailed analysis retains the runtime source-file and result hashes.",
+        "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+        "implementation_commit": "e33f97430972135de2208a83fc27dece7af4510c",
+        "instructions_file": "NO_CONTACT_GT.md",
+        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/e33f97430972135de2208a83fc27dece7af4510c/NO_CONTACT_GT.md"
+      },
+      "E05": {
+        "id": "E05",
+        "experiment_path": "experiments/geometry-removed/",
+        "name": "几何查询移除",
+        "branch": "no_geometry_tools",
+        "commit": "19a9ea934810999428715324507021db51ec06bf",
+        "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_geometry_tools",
+        "commit_url": "https://github.com/snow-QingYang/RPent/commit/19a9ea934810999428715324507021db51ec06bf",
+        "status": "published",
+        "evaluation_relationship": "Experiment implementation; detailed analysis retains the runtime source-file and result hashes.",
+        "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+        "implementation_commit": "19a9ea934810999428715324507021db51ec06bf",
+        "instructions_file": "NO_GEOMETRY_TOOLS.md",
+        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/19a9ea934810999428715324507021db51ec06bf/NO_GEOMETRY_TOOLS.md"
+      },
+      "E06": {
+        "id": "E06",
+        "experiment_path": "experiments/agent-check-success/",
+        "name": "No task progress and agent success",
+        "branch": "no_task_progress_and_agent_success",
+        "commit": "412efe9c32e3cac630c77138da86def960968610",
+        "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_task_progress_and_agent_success",
+        "commit_url": "https://github.com/snow-QingYang/RPent/commit/412efe9c32e3cac630c77138da86def960968610",
+        "status": "published",
+        "evaluation_relationship": "Experiment implementation; detailed analysis retains the runtime source-file and result hashes.",
+        "runtime_base_commit": "26d8665d3d394dc77ce90a68d266d370d2384f98",
+        "implementation_commit": "65f7e1b85eba219c28ccb75f94740d75071fca34",
+        "instructions_file": "EXPERIMENT.md",
+        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/412efe9c32e3cac630c77138da86def960968610/EXPERIMENT.md",
+        "publication_changes": "Only EXPERIMENT.md display naming changed from implementation_commit; runtime code and tests unchanged."
+      },
+      "E07": {
+        "id": "E07",
+        "experiment_path": "experiments/no-memory/",
+        "name": "NoMemory",
+        "branch": "no_memory",
+        "commit": "a640f3202d092b0803540dff35521f7996ce0945",
+        "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_memory",
+        "commit_url": "https://github.com/snow-QingYang/RPent/commit/a640f3202d092b0803540dff35521f7996ce0945",
+        "status": "published",
+        "evaluation_relationship": "The three modified production files and all ten recorded runtime source-file hashes match the evaluated run. Added tests and experiment documentation do not alter runtime source hashes.",
+        "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+        "runtime_source_files_checked": 10,
+        "runtime_source_files_matching": 10,
+        "implementation_commit": "a640f3202d092b0803540dff35521f7996ce0945",
+        "instructions_file": "EXPERIMENT.md",
+        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/a640f3202d092b0803540dff35521f7996ce0945/EXPERIMENT.md"
+      }
     }
   }
 }

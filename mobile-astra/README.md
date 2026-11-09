@@ -13,10 +13,10 @@ per setting, 1,120 total. Each setting has 80 Seen and 80 Unseen episodes.
 
 - [x] [E01 · Baseline](experiments/baseline/): Seen 34/80, Unseen 21/80; **55/160**.
 - [x] [E02 · DA3 depth replacement](experiments/geometry-da3/): Seen 33/80, Unseen 17/80; **50/160**.
-- [x] [E03 · Task-progress removal](experiments/task-progress/): Seen 24/80, Unseen 17/80; **41/160**.
+- [x] [E03 · No task progress](experiments/task-progress/): Seen 24/80, Unseen 17/80; **41/160**.
 - [x] [E04 · Contact-feedback removal](experiments/contact-feedback/): Seen 26/80, Unseen 20/80; **46/160**.
 - [x] [E05 · Geometry-query removal](experiments/geometry-removed/): Seen 22/80, Unseen 17/80; **39/160**.
-- [x] [E06 · agent_check_success](experiments/agent-check-success/): Seen 18/80, Unseen 11/80; **29/160**.
+- [x] [E06 · No task progress and agent success](experiments/agent-check-success/): Seen 18/80, Unseen 11/80; **29/160**.
 - [x] [E07 · NoMemory](experiments/no-memory/): Seen 24/80, Unseen 17/80; **41/160**.
 
 The 1,120-episode total excludes the auxiliary Sol run and interrupted smoke runs.
@@ -25,6 +25,33 @@ remain. E06 completes removal of live task-progress/success/termination feedback
 and VLA native-success early stopping; the evaluator keeps independent final
 scoring. Camera calibration/pose replacement, visual or tactile contact estimation,
 and validation of visual task-progress/completion estimates remain pending.
+
+## Published experiment code
+
+Repository: [https://github.com/snow-QingYang/RPent](https://github.com/snow-QingYang/RPent). Machine-readable mapping: [source-publication.json](source-publication.json).
+
+| Experiment | Branch | Immutable commit | Instructions |
+| --- | --- | --- | --- |
+| E01 · Baseline | [baseline_composite](https://github.com/snow-QingYang/RPent/tree/baseline_composite) | [eebdfcd7](https://github.com/snow-QingYang/RPent/commit/eebdfcd79b6f292003093be5dd1ce8fe639a4f82) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/eebdfcd79b6f292003093be5dd1ce8fe639a4f82/EXPERIMENT.md) |
+| E02 · DA3 深度替代 | [da3](https://github.com/snow-QingYang/RPent/tree/da3) | [bc35d937](https://github.com/snow-QingYang/RPent/commit/bc35d93728e3678404b63f9cc78e5e98764dbbb7) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/bc35d93728e3678404b63f9cc78e5e98764dbbb7/EXPERIMENT.md) |
+| E03 · No task progress | [no_task_progress](https://github.com/snow-QingYang/RPent/tree/no_task_progress) | [b7333814](https://github.com/snow-QingYang/RPent/commit/b7333814fcb1178442057b231e267d4dcfba4554) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/b7333814fcb1178442057b231e267d4dcfba4554/EXPERIMENT.md) |
+| E04 · 接触反馈移除 | [no_contact_gt](https://github.com/snow-QingYang/RPent/tree/no_contact_gt) | [e33f9743](https://github.com/snow-QingYang/RPent/commit/e33f97430972135de2208a83fc27dece7af4510c) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/e33f97430972135de2208a83fc27dece7af4510c/NO_CONTACT_GT.md) |
+| E05 · 几何查询移除 | [no_geometry_tools](https://github.com/snow-QingYang/RPent/tree/no_geometry_tools) | [19a9ea93](https://github.com/snow-QingYang/RPent/commit/19a9ea934810999428715324507021db51ec06bf) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/19a9ea934810999428715324507021db51ec06bf/NO_GEOMETRY_TOOLS.md) |
+| E06 · No task progress and agent success | [no_task_progress_and_agent_success](https://github.com/snow-QingYang/RPent/tree/no_task_progress_and_agent_success) | [412efe9c](https://github.com/snow-QingYang/RPent/commit/412efe9c32e3cac630c77138da86def960968610) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/412efe9c32e3cac630c77138da86def960968610/EXPERIMENT.md) |
+| E07 · NoMemory | [no_memory](https://github.com/snow-QingYang/RPent/tree/no_memory) | [a640f320](https://github.com/snow-QingYang/RPent/commit/a640f3202d092b0803540dff35521f7996ce0945) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/a640f3202d092b0803540dff35521f7996ce0945/EXPERIMENT.md) |
+
+E03 immutable commit `b7333814` is the evaluated snapshot: all 350 archived tracked
+runtime, test, requirements and pyproject files match. All 160 episodes generated
+`success_criteria.md`, while the file tool restricted reads to selected memory.
+
+The later variant [no_task_progress](https://github.com/snow-QingYang/RPent/tree/no_task_progress), commit [26d8665d3d394dc77ce90a68d266d370d2384f98](https://github.com/snow-QingYang/RPent/commit/26d8665d3d394dc77ce90a68d266d370d2384f98), also stops generating that file. It was not used for the published E03 result.
+
+Seven experiment settings have seven primary branch links. The E03 branch also
+contains a later variant; use the immutable evaluated commit for its 160-episode result.
+
+Publication commits may include documentation or launch instructions added after
+evaluation. Runtime source-file, patch and result hashes remain unchanged in each
+analysis export. Branch tips may move; immutable commit links identify this release.
 
 ## Page hierarchy
 
@@ -44,7 +71,7 @@ and validation of visual task-progress/completion estimates remain pending.
   - `cases/`: two paired-outcome examples (PanTransfer seed 3 and
     SetUpCuttingStation seed 4). These pages are result comparisons, not DA3 video
     replays. Each includes source hashes and links to baseline evidence.
-- `experiments/task-progress/`: E03, completed NoTaskGT run, 41/160.
+- `experiments/task-progress/`: E03, completed No task progress run, 41/160.
   - `analysis/`: Seen 24/80 and Unseen 17/80; all 160 matched pairs against
     E01's 55/160 rerun, initial-state and memory audits, CSV, JSON, report and
     a portable extractor. The old 53/160 baseline is a separate historical
@@ -68,7 +95,7 @@ and validation of visual task-progress/completion estimates remain pending.
   - The experiment page compares original geometry, DA3 replacement and removal
     of the two geometry query tools. It does not claim all depth or geometry
     information was removed from the simulator or the agent's other channels.
-- `experiments/agent-check-success/`: E06, completed agent_check_success run, 29/160.
+- `experiments/agent-check-success/`: E06, completed No task progress and agent success run, 29/160.
   - `analysis/`: Seen 18/80 and Unseen 11/80; native final scores and Agent
     declarations for all 160 episodes, with E01/E03 comparisons.
   - 134 episodes call `finish`, 26 return without it. Of 43 success claims,
@@ -82,6 +109,7 @@ and validation of visual task-progress/completion estimates remain pending.
 - `reference/`: information categories, existing detailed ground-truth access
   guide, and the self-contained original method reference.
 - `project-status.json`: provenance and structured snapshot for the overview.
+- `source-publication.json`: published branch/commit mapping, including E03 version notes.
 
 ## Interpretation
 
@@ -91,7 +119,7 @@ scoring-source access and memory remain. The current paired batches have 14
 robot-state, five task-text and three initial-progress differences. They are not
 proof of identical scenes or a causal per-episode attribution.
 
-The completed NoTaskGT run uses original simulator depth. It hides task_progress
+The completed No task progress run uses original simulator depth. It hides task_progress
 from Agent observations, restricts read_text_file to memory files, and updates
 the corresponding prompt instructions. Success, termination, grasp/contact
 feedback, native scoring and VLA early stopping remain. This setting combines
@@ -105,7 +133,7 @@ NoContactGT removes four VLA grasp/contact result fields and the corresponding
 wrapper queries, plus 60 task/field entries across 25 tasks' contact-derived
 progress. It retains the held_apart gripper-width heuristic, other progress,
 geometry, success, native scoring, file access, memory and the baseline prompt.
-It is independent of DA3 and NoTaskGT. All 148 launch memory hashes and 95 selected
+It is independent of DA3 and No task progress. All 148 launch memory hashes and 95 selected
 files match E01. Eleven paired initial robot states differ above 1e-6 (17 differ
 at exact precision), and two task descriptions differ. The 4,772-state output
 scan does not establish isolation of all historical memory or shell/file channels.
@@ -124,7 +152,7 @@ Its scheduler resumed on eight GPUs after initially running on six; completed
 valid episodes were preserved. See the detailed export for audit scope and
 initial-state differences. Removing registered tools is not filesystem isolation.
 
-agent_check_success is based on NoTaskGT commit `26d8665`. It hides ordinary
+No task progress and agent success is based on No task progress commit `26d8665`. It hides ordinary
 observation fields `success`, `robocasa_terminated` and `task_progress`, removes
 native-success VLA early stopping and does not generate `success_criteria.md`.
 Geometry, contact feedback and historical memory remain. Final native scoring
@@ -132,10 +160,11 @@ runs after the planner returns, independently of the Agent's `finish` declaratio
 Private predicate bookkeeping and state records remain; this is not a sandbox.
 The experiment is evaluation-only and has no added actuator guard after `finish`.
 The result schema retains the legacy `agent_stop` variant for compatibility;
-the displayed experiment and published branch are named `agent_check_success`.
+the display name is "No task progress and agent success"; the published branch
+is `no_task_progress_and_agent_success`; the earlier `agent_check_success` branch is retained.
 The run completed on 2026-11-07 at 19:26 Hong Kong time. Source:
-[agent_check_success branch](https://github.com/snow-QingYang/RPent/tree/agent_check_success),
-commit `65f7e1b`. Compared with E01 it has 26 fewer native successes; compared
+[no_task_progress_and_agent_success branch](https://github.com/snow-QingYang/RPent/tree/no_task_progress_and_agent_success),
+published commit `412efe9c` (runtime implementation `65f7e1b`). Compared with E01 it has 26 fewer native successes; compared
 with E03 it has 12 fewer. These totals do not establish per-episode causality.
 
 NoMemory starts from the official baseline and removes historical task/global
@@ -147,8 +176,10 @@ audit covers 337,744 events and 364 native shell commands across 84 episodes;
 no historical task/global memory read attempt was observed. Source/AGENTS and
 current-episode artifact reads occurred. The harness still validates the corpus
 internally before returning an empty selection; this is not OS isolation. Source is official
-`a744bd5` plus the recorded three-file experiment patch; do not assume an
-unpublished remote `no_memory` branch exists. It finished on 2026-11-09 at 08:57
+`a744bd5` plus the recorded three-file experiment patch, published as
+[no_memory](https://github.com/snow-QingYang/RPent/tree/no_memory), commit [a640f3202d092b0803540dff35521f7996ce0945](https://github.com/snow-QingYang/RPent/commit/a640f3202d092b0803540dff35521f7996ce0945).
+All ten recorded runtime source-file hashes match; tests and documentation are
+additional publication artifacts. It finished on 2026-11-09 at 08:57
 Hong Kong time. The launcher logged a trailing shell EOF after all episodes
 and validation completed; an independent post-run validator passed all 160.
 The saved runner exit marker alone is not proof of clean shell termination.
@@ -160,6 +191,10 @@ verified returned images, not original per-frame tool timestamps. Empty reasonin
 remains empty; runtime files are distinguished from files the Agent actually read.
 
 ## Maintenance
+
+The NoMemory export reads `source-publication.json` (or `--source-publication`)
+so regenerated data and reports retain the published branch and commit. Keep this
+mapping consistent with the homepage code table, experiment pages and status JSON.
 
 `../organize_ground_truth_site.py` (relative to site-publish) creates the overview,
 catalogs, short experiment pages, comparison examples, smoke audit summary and

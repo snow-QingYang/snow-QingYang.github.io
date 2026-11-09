@@ -29,8 +29,8 @@
     "agent": {
       "run": "official_main_composite_agentstop_astra_xhigh_20261106T141106Z",
       "base_commit": "26d8665d3d394dc77ce90a68d266d370d2384f98",
-      "published_commit": "65f7e1b85eba219c28ccb75f94740d75071fca34",
-      "branch": "agent_check_success",
+      "published_commit": "412efe9c32e3cac630c77138da86def960968610",
+      "branch": "no_task_progress_and_agent_success",
       "source_files": {
         "robots/robocasa/eval/result.py": "6cdecc7a56209aaaa681eacdb94453a2c1f958cd4fecce8eb775ab7ac4e1a41d",
         "robots/robocasa/eval/validate_target50.py": "3f7a721d79e8f00959f92ffed4600112c7c1ce0a8f3b247254404ddf791d7f0f",
@@ -41,7 +41,8 @@
         "robots/robocasa/tools.py": "eacaff13756cfc2b417da425fbd991927c422b5b5c8bebb944ee6b8e68ae650c"
       },
       "final_summary_sha256": "ea804b7e0478e6849b0c6c858ebfb1b6f7effabc277a625d3788ceb633f0df40",
-      "source_revision_sha256": "5bcb118d4833f5ff7fef9635822883c5398721a8ab9b1a1de901db06e77d7bc2"
+      "source_revision_sha256": "5bcb118d4833f5ff7fef9635822883c5398721a8ab9b1a1de901db06e77d7bc2",
+      "implementation_commit": "65f7e1b85eba219c28ccb75f94740d75071fca34"
     },
     "baseline": {
       "run": "official_main_composite_astra_xhigh_20261101T150450Z",
@@ -3105,5 +3106,6 @@
       "baseline_result_sha256": "e216fe4afc3be4909e2de605c6ef7faf14f02197fd31ed3848d1f3a96200d70f",
       "notask_result_sha256": "ed29f7ec6478e3200ddce8f6373eceefb1364e923197cb263fafd2951298e309"
     }
-  ]
+  ],
+  "display_name": "No task progress and agent success"
 }

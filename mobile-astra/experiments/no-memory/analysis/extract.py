@@ -4,6 +4,7 @@
 python extract.py --run-root NO_MEMORY_RUN --baseline-root BASELINE_RUN \
   --baseline-data ../../baseline/analysis/data.json --output .
 Optional: --memory-audit AUDIT_SUMMARY_JSON; otherwise discover the run summary.
+Publication metadata: --source-publication JSON (defaults to site source-publication.json).
 """
 import argparse
 import csv
@@ -82,6 +83,7 @@ def main():
     for flag in ('run-root', 'baseline-root', 'baseline-data', 'output'):
         parser.add_argument('--' + flag, type=Path, required=True)
     parser.add_argument('--memory-audit', type=Path)
+    parser.add_argument('--source-publication', type=Path, default=Path(__file__).resolve().parent / '../../../source-publication.json')
     args = parser.parse_args()
     baseline = read(args.baseline_data)
     refs = {(r['split'], r['task'], r['seed']): r for r in baseline['episodes'] if r['model'] == 'astra'}
@@ -124,7 +126,22 @@ def main():
                          'retained': 'Current-episode history, geometry, contact, task progress, success, scoring source access, VLA inputs/control and native-success early stopping.'},
             'comparison_limits': ['One batch per setting and five seeds per task; no causal claim from individual outcome changes.',
                                   'Initial robot state and task text checked; full object state and independent VLA sampling are not matched.',
-                                  'E07 and NoTaskGT both score 41/160 but remove different information.']}
+                                  'E07 and E03 No task progress both score 41/160 but remove different information.']}
+    publication = None
+    if args.source_publication.is_file():
+        published = read(args.source_publication).get('experiments', {}).get('E07', {})
+        if published.get('status') == 'published':
+            commit = published.get('commit', '')
+            require(len(commit) == 40 and all(c in '0123456789abcdef' for c in commit), 'Invalid published commit')
+            publication = {key: published[key] for key in ('branch', 'commit', 'branch_url', 'commit_url', 'instructions_url', 'evaluation_relationship')}
+            data['sources']['nomemory']['publication'] = publication
+    publication_note = (
+        f'Published implementation: [{publication["branch"]}]({publication["branch_url"]}), '
+        f'commit [{publication["commit"]}]({publication["commit_url"]}). '
+        f'[Run instructions]({publication["instructions_url"]}). '
+        'Publication metadata is separate from the archived runtime source-file and patch hashes.'
+        if publication else 'Publication metadata was not supplied; see the archived runtime source-file and patch hashes.'
+    )
     audit_paths = sorted(args.run_root.glob('final_memory_audit_summary_*.json'))
     memory_audit_path = args.memory_audit or (audit_paths[-1] if audit_paths else None)
     data['recorded_trajectory_audit'] = {'status': 'not_supplied'}
@@ -180,7 +197,7 @@ def main():
                   f"The source audit notes {a['tool_items_missing_completion_event']} VLA tool items without a completion event and {a['retryable_stream_errors']} retryable stream error. All 160 planner turns have completion events. This is a recorded-trajectory audit, not an OS syscall trace.", '',
                   f"Private source audit SHA-256: `{a['source_sha256']}`."]
     lines += ['', '## Provenance', '', f'Run: `{args.run_root.name}`. Finished 2026-11-09 08:57 HKT.', '',
-              f'Official base: `{provenance["base_commit"]}` plus the archived NoMemory patch. NoMemory branch is not yet published.', '',
+              f'Official base: `{provenance["base_commit"]}` plus the archived NoMemory patch.', '', publication_note, '',
               'JSON/CSV include per-episode result and states SHA-256 hashes. JSON also records the source-file hashes, patch, manifest, validation and public baseline data hashes. Only selected public fields are exported.', '']
     (args.output / 'report.md').write_text('\n'.join(lines))
     print(json.dumps({'summary': summary, 'initial_state_audit': audit, 'validation': data['validation']}, indent=2))

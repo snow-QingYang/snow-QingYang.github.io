@@ -30,7 +30,7 @@ Initial robot state differs above 1e-6 in 14/160 pairs (23 differ by exact compa
 
 - One batch per setting and five seeds per task; no causal claim from individual outcome changes.
 - Initial robot state and task text checked; full object state and independent VLA sampling are not matched.
-- E07 and NoTaskGT both score 41/160 but remove different information.
+- E07 and E03 No task progress both score 41/160 but remove different information.
 
 ## Task and seed results
 
@@ -85,6 +85,8 @@ Private source audit SHA-256: `8b4bad55bb1d92c1a6a4fca5be5448b0a56a1fae78d371634
 
 Run: `official_main_composite_nomemory_astra_xhigh_20261108T155013Z`. Finished 2026-11-09 08:57 HKT.
 
-Official base: `a744bd5f128ebef3cb8c6736cf7cd98adff681f1` plus the archived NoMemory patch. NoMemory branch is not yet published.
+Official base: `a744bd5f128ebef3cb8c6736cf7cd98adff681f1` plus the archived NoMemory patch.
+
+Published implementation: [no_memory](https://github.com/snow-QingYang/RPent/tree/no_memory), commit [a640f3202d092b0803540dff35521f7996ce0945](https://github.com/snow-QingYang/RPent/commit/a640f3202d092b0803540dff35521f7996ce0945). [Run instructions](https://github.com/snow-QingYang/RPent/blob/a640f3202d092b0803540dff35521f7996ce0945/EXPERIMENT.md). Publication metadata is separate from the archived runtime source-file and patch hashes.
 
 JSON/CSV include per-episode result and states SHA-256 hashes. JSON also records the source-file hashes, patch, manifest, validation and public baseline data hashes. Only selected public fields are exported.

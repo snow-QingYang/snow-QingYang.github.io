@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "experiment": "E07 NoMemory",
-  "generated_utc": "2026-11-09T04:30:41.791728+00:00",
+  "generated_utc": "2026-11-09T04:43:24.005488+00:00",
   "completed_hkt": "2026-11-09T08:57:00+08:00",
   "tasks": {
     "seen": [
@@ -3294,7 +3294,15 @@
       },
       "patch_sha256": "136bc819ccca79eba4607fcddb62b49667c874f60a153bd4fa813b4260963599",
       "manifest_sha256": "eadf098f9d6c6dc8b434126341af7fee68f4b85efabbf55b7c97bdb51faf9e55",
-      "validation_sha256": "9fc404bc4dcaed87deb7ef99be481205a491ed2f80646879e6b43dabd13a1337"
+      "validation_sha256": "9fc404bc4dcaed87deb7ef99be481205a491ed2f80646879e6b43dabd13a1337",
+      "publication": {
+        "branch": "no_memory",
+        "commit": "a640f3202d092b0803540dff35521f7996ce0945",
+        "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_memory",
+        "commit_url": "https://github.com/snow-QingYang/RPent/commit/a640f3202d092b0803540dff35521f7996ce0945",
+        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/a640f3202d092b0803540dff35521f7996ce0945/EXPERIMENT.md",
+        "evaluation_relationship": "The three modified production files and all ten recorded runtime source-file hashes match the evaluated run. Added tests and experiment documentation do not alter runtime source hashes."
+      }
     }
   },
   "initial_state_audit": {
@@ -3321,7 +3329,7 @@
   "comparison_limits": [
     "One batch per setting and five seeds per task; no causal claim from individual outcome changes.",
     "Initial robot state and task text checked; full object state and independent VLA sampling are not matched.",
-    "E07 and NoTaskGT both score 41/160 but remove different information."
+    "E07 and E03 No task progress both score 41/160 but remove different information."
   ],
   "recorded_trajectory_audit": {
     "status": "audited",

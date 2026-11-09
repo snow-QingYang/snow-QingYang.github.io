@@ -21,12 +21,12 @@ function renderTasks() {
       const cells = episodes.map((e) => {
         const category = e.baseline_success === e.notask_success ? '' : e.notask_success ? 'gain' : 'loss';
         const differences = [e.initial_robot_state_max_abs_diff > 1e-6 ? '初始机器人状态不同' : '', !e.initial_task_language_equal ? '初始任务文本不同' : ''].filter(Boolean);
-        const label = `seed ${e.seed}：baseline ${e.baseline_success ? '成功' : '失败'}，NoTaskGT ${e.notask_success ? '成功' : '失败'}${differences.length ? '；' + differences.join('、') : ''}`;
+        const label = `seed ${e.seed}：baseline ${e.baseline_success ? '成功' : '失败'}，No task progress ${e.notask_success ? '成功' : '失败'}${differences.length ? '；' + differences.join('、') : ''}`;
         return `<td><span class="pair ${category}" role="img" title="${label}" aria-label="${label}">${e.baseline_success ? '✓' : '×'} → ${e.notask_success ? '✓' : '×'}${differences.length ? ' *' : ''}</span></td>`;
       }).join('');
       return `<tr><th scope="row">${escapeHTML(task)}</th><td>${baseline}/5</td><td>${notask}/5</td><td class="${delta > 0 ? 'gain-text' : delta < 0 ? 'loss-text' : ''}">${delta > 0 ? '+' : ''}${delta}</td>${cells}</tr>`;
     }).join('');
-    return `<div class="task-group"><h3 id="tasks-${s}">${splitNames[s]}</h3><div class="table"><table class="task-table" aria-labelledby="tasks-${s}"><thead><tr><th>任务</th><th>Baseline</th><th>NoTaskGT</th><th>差值</th><th>seed 1</th><th>seed 2</th><th>seed 3</th><th>seed 4</th><th>seed 5</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
+    return `<div class="task-group"><h3 id="tasks-${s}">${splitNames[s]}</h3><div class="table"><table class="task-table" aria-labelledby="tasks-${s}"><thead><tr><th>任务</th><th>Baseline</th><th>No task progress</th><th>差值</th><th>seed 1</th><th>seed 2</th><th>seed 3</th><th>seed 4</th><th>seed 5</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
   }).join('');
   $('status').textContent = count ? `显示 ${count} 个任务 · ${count * 5} 对运行。筛选不改变上方完整实验统计。` : '没有匹配的任务。';
 }

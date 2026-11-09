@@ -1,4 +1,4 @@
-"""Extract the public NoTaskGT comparison from complete canonical RoboCasa runs.
+"""Extract the public No task progress comparison from complete canonical RoboCasa runs.
 
 Run with --baseline-run, --notask-run, --legacy-baseline-run, --manifest,
 --memory-dir and --output. Inputs stay local; exported sources use run names.
@@ -156,7 +156,7 @@ def public_sources(baseline_root, notask_root, legacy_root):
     require(baseline["memory_version"] == legacy["memory_version"] ==
             Path(notask["memory_dir"]).name == "GPT_6_astra_high", "Memory versions differ")
     require(notask["geometry"] == "official simulator world maps; no DA3",
-            "Unexpected NoTaskGT geometry")
+            "Unexpected No task progress geometry")
     require(notask["task_progress"] == "omitted from agent-facing observation responses",
             "Unexpected task progress setting")
     require(notask["success_and_terminated"] == "retained", "Unexpected success setting")
@@ -207,10 +207,10 @@ def audit_memory(memory_dir, baseline_root, selected_files):
 
 def report_text(data):
     lines = [
-        "# RoboCasa composite：移除任务进度反馈", "",
+        "# E03 · No task progress", "",
         "按相同任务与 seed 比较 160 局。主比较使用网站当前的 11 月 1 日 GPT-6-Astra "
         "重跑 baseline（55/160），两组均为 xhigh。", "",
-        "| 分组 | Baseline | NoTaskGT | NoTaskGT − Baseline |",
+        "| 分组 | Baseline | No task progress | No task progress − Baseline |",
         "|---|---:|---:|---:|",
     ]
     for split, label in (("seen", "Seen"), ("unseen", "Unseen"), ("all", "全部")):
@@ -220,14 +220,14 @@ def report_text(data):
                      f"{d}/{n}（{percentage(d, n)}%） | {percentage(d-b, n, signed=True)} pp |")
     lines += ["", "| 配对结果 | Seen | Unseen | 全部 |", "|---|---:|---:|---:|"]
     for key, label in (("both_success", "双方成功"), ("baseline_only", "仅 Baseline 成功"),
-                       ("notask_only", "仅 NoTaskGT 成功"), ("neither", "双方失败")):
+                       ("notask_only", "仅 No task progress 成功"), ("neither", "双方失败")):
         lines.append("| " + label + " | " + " | ".join(
             str(data["summary"][split][key]) for split in ("seen", "unseen", "all")) + " |")
     audit, memory = data["initial_state_audit"], data["memory_audit"]
     old = data["summary"]["legacy_baseline"]
     lines += [
         "", "## 实际设置", "",
-        "NoTaskGT 使用官方原始模拟器几何，未使用 DA3。`view_env_state` 及动作后的模型观测"
+        "No task progress 使用官方原始模拟器几何，未使用 DA3。`view_env_state` 及动作后的模型观测"
         "不返回 `task_progress`；`read_text_file` 限于当前允许的记忆文件，不能通过该工具读取"
         "`success_criteria.md` 或评分源码；prompt 中要求读取进度与评分规则的说明也相应修改。", "",
         "顶层 `success`、`robocasa_terminated`、原生成功判定及 VLA 成功提前停止仍保留。"
@@ -250,13 +250,13 @@ def report_text(data):
         "不包含原始轨迹、模型提示词或凭证。", "",
         "## 与旧 baseline 的关系", "",
         f"10 月 28 日旧 baseline 为 {old['baseline_success']}/{old['total']}（"
-        f"{percentage(old['baseline_success'], old['total'])}%）；NoTaskGT 为 "
+        f"{percentage(old['baseline_success'], old['total'])}%）；No task progress 为 "
         f"{old['notask_success']}/{old['total']}，相差 {old['delta_success']} 局、"
         f"{old['delta_percentage_points']:+.2f} 个百分点。"
         "该旧批次仅作参考，页面主表与逐 seed 配对始终使用 11 月 1 日 55/160 批次。", "",
         "## 逐任务结果", "",
-        "每个 seed 单元格表示 `Baseline/NoTaskGT`，1 为原生成功，0 为失败。", "",
-        "| 分组 | 任务 | Baseline | NoTaskGT | s1 | s2 | s3 | s4 | s5 |",
+        "每个 seed 单元格表示 `Baseline/No task progress`，1 为原生成功，0 为失败。", "",
+        "| 分组 | 任务 | Baseline | No task progress | s1 | s2 | s3 | s4 | s5 |",
         "|---|---|---:|---:|---|---|---|---|---|",
     ]
     for split in SPLITS:
@@ -268,14 +268,14 @@ def report_text(data):
     lines += [
         "", "## 数据来源与复现", "",
         f"主 baseline：`{data['sources']['baseline']['run']}`。",
-        f"NoTaskGT：`{data['sources']['notask']['run']}`。",
+        f"No task progress：`{data['sources']['notask']['run']}`。",
         f"旧 baseline：`{data['sources']['legacy_baseline']['run']}`。", "",
-        "源码基线提交号分别保存在 JSON 的 sources 中；NoTaskGT 在官方基线之上包含上述本地修改。"
+        "源码基线提交号分别保存在 JSON 的 sources 中；No task progress 在官方基线之上包含上述本地修改。"
         "每个设置仅运行一轮，结果同时包含任务随机性与 planner 执行差异，不能把观察差值当作稳定因果效应。", "",
         "```sh",
-        "python extract.py --baseline-run <11月1日baseline目录> --notask-run <NoTaskGT目录> \\",
+        "python extract.py --baseline-run <11月1日baseline目录> --notask-run <No task progress目录> \\",
         "  --legacy-baseline-run <10月28日baseline目录> --manifest <target50.json> \\",
-        "  --memory-dir <NoTaskGT初始记忆目录> --output <输出目录>",
+        "  --memory-dir <No task progress初始记忆目录> --output <输出目录>",
         "```", "",
     ]
     return "\n".join(lines)

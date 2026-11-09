@@ -31,7 +31,7 @@
 <h2 id="scope-title">实际移除与保留</h2>
 <div class="scope-grid">
 <article><h3>移除的反馈</h3><p><code>rldx_skill</code> 和 <code>rldx_arm</code> 不再返回 <code>grasp_contact</code>、<code>grasp_obj</code>、<code>grasped</code>、<code>grasp_detected</code>，执行封装也不再为这些报告查询模拟器接触。</p><p><code>task_progress</code> 在保存前过滤接触派生标量：25 个任务、60 个任务—字段条目；其余任务进度继续返回。</p></article>
-<article><h3>保留的信息</h3><p><code>held_apart</code> 是闭合命令与夹爪开度的启发式，仍然保留；它不识别物体，也不证明抓取成功。<code>gripper_qpos</code>、末端高度变化 <code>peak_lift</code> 和执行状态也保留。</p><p>原版几何与相机标定、本体状态、其他进度、成功和终止信号、评分规则及历史记忆均可用。Prompt、VLA 与动作控制协议不变，未叠加 DA3 或 NoTaskGT。</p></article>
+<article><h3>保留的信息</h3><p><code>held_apart</code> 是闭合命令与夹爪开度的启发式，仍然保留；它不识别物体，也不证明抓取成功。<code>gripper_qpos</code>、末端高度变化 <code>peak_lift</code> 和执行状态也保留。</p><p>原版几何与相机标定、本体状态、其他进度、成功和终止信号、评分规则及历史记忆均可用。Prompt、VLA 与动作控制协议不变，未叠加 DA3 或 No task progress。</p></article>
 </div>
 <p class="note">按字段来源过滤，而非按名称：<code>PrepareCoffee.contact_check</code> 是距离判据，保留；<code>ScrubCuttingBoard.sweep_range</code> 来自接触位置，移除。顶层成功仍可能依赖接触，这不是完全无真值或文件／RPC 隔离。</p>
 <details><summary>展开全部被过滤的任务进度字段</summary><p class="note">表中列出的字段只在对应任务被过滤；不意味着每个字段在每个 step 都会出现。没有列出的 7 个任务保留其原任务进度。</p><div class="table"><table class="field-table"><thead><tr><th>任务</th><th>移除的进度字段</th></tr></thead><tbody id="field-body"></tbody></table></div></details>

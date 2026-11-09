@@ -126,7 +126,7 @@ def main():
     source_path = args.run_root / "source_revision.json"
     source = read(source_path)
     data = {
-        "schema_version": 1, "experiment": "agent_check_success",
+        "schema_version": 1, "experiment": "agent_check_success", "display_name": "No task progress and agent success",
         "generated_utc": datetime.now(timezone.utc).isoformat(), "completed_at": final["completed_at"],
         "protocol": {"model": "gpt-6-astra", "effort": "xhigh", "vla": "RLDX-1-FT-RC365",
                      "memory": "GPT_6_astra_high", "environment_split": "target", "seeds": [1, 2, 3, 4, 5],
@@ -135,13 +135,14 @@ def main():
                      "score_source": "env.check_success_after_planner",
                      "finish_required_by_prompt": True, "finish_enforced_by_runtime": False},
         "sources": {"agent": {"run": args.run_root.name, "base_commit": source["base_commit"],
-                              "published_commit": "65f7e1b85eba219c28ccb75f94740d75071fca34",
-                              "branch": "agent_check_success", "source_files": source["source_files"],
+                              "published_commit": "412efe9c32e3cac630c77138da86def960968610",
+                              "implementation_commit": "65f7e1b85eba219c28ccb75f94740d75071fca34",
+                              "branch": "no_task_progress_and_agent_success", "source_files": source["source_files"],
                               "final_summary_sha256": digest(final_path), "source_revision_sha256": digest(source_path)},
                     "baseline": reference["sources"]["baseline"], "notask": reference["sources"]["notask"],
                     "reference_data_sha256": digest(args.reference_data), "baseline_data_sha256": digest(args.baseline_data)},
         "comparison_limits": ["Task/seed matching; initial scene and VLA sampling equivalence not audited for E06.",
-                              "Published E03 predates the later NoTaskGT revision that stopped generating success_criteria.md.",
+                              "Published E03 predates the later No task progress revision that stopped generating success_criteria.md.",
                               "Native scoring happens after the planner returns; agent claims are reported separately.",
                               "Prompt requests finish, but the planner can return without calling it."],
         "summary": summary, "tasks": reference["tasks"], "episodes": rows,
@@ -152,9 +153,9 @@ def main():
         writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
         writer.writeheader()
         writer.writerows(rows)
-    lines = ["# E06 · agent_check_success", "", "GPT-6-Astra / xhigh · RoboCasa composite · 32 tasks × seeds 1–5.", "",
+    lines = ["# E06 · No task progress and agent success", "", "GPT-6-Astra / xhigh · RoboCasa composite · 32 tasks × seeds 1–5.", "",
              "Score: native env.check_success after the planner returns. Agent declarations are separate.", "",
-             "| Split | E01 baseline | E03 NoTaskGT | E06 |", "| --- | ---: | ---: | ---: |"]
+             "| Split | E01 baseline | E03 No task progress | E06 |", "| --- | ---: | ---: | ---: |"]
     for split, stats in summary.items():
         n = stats["total"]
         cells = [f'{stats["success"][name]}/{n} ({percent(stats["success"][name], n)}%)'
@@ -178,7 +179,7 @@ def main():
                      for r in rows if r["split"] == split and r["task"] == task]
             lines.append(f"| {split} | {task} | " + " | ".join(cells) + " |")
     lines += ["", "## Provenance", "", f'Run: `{args.run_root.name}`.', "",
-              f'Published implementation: `{data["sources"]["agent"]["published_commit"]}`; branch `agent_check_success`.', "",
+              f'Published commit: `{data["sources"]["agent"]["published_commit"]}` (documentation name update; runtime implementation `{data["sources"]["agent"]["implementation_commit"]}`); branch `no_task_progress_and_agent_success`.', "",
               "JSON and CSV contain per-result SHA-256 hashes. The extractor verifies all canonical cells, runtime/model settings, final summary and E01 reference agreement. It exports only selected structured fields; no raw transcripts or credentials.", ""]
     (args.output / "report.md").write_text("\n".join(lines))
     print(json.dumps(summary, indent=2))
