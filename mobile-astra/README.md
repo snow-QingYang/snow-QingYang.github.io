@@ -6,10 +6,10 @@ Keep this deployment entirely inside `mobile-astra/`. Do not modify or link from
 personal Home, Research, Blog, shared navigation, styles, assets or templates.
 All pages are standalone work interfaces. Public URLs are not access control.
 
-## Completed checklist · 2026-11-09
+## Completed checklist · 2026-11-10
 
-Seven primary GPT-6-Astra / xhigh experiments are complete: 160 valid episodes
-per setting, 1,120 total. Each setting has 80 Seen and 80 Unseen episodes.
+Eight primary GPT-6-Astra / xhigh experiments are complete: 160 valid episodes
+per setting, 1,280 total. Each setting has 80 Seen and 80 Unseen episodes.
 
 - [x] [E01 · Baseline](experiments/baseline/): Seen 34/80, Unseen 21/80; **55/160**.
 - [x] [E02 · DA3 depth replacement](experiments/geometry-da3/): Seen 33/80, Unseen 17/80; **50/160**.
@@ -18,8 +18,9 @@ per setting, 1,120 total. Each setting has 80 Seen and 80 Unseen episodes.
 - [x] [E05 · Geometry-query removal](experiments/geometry-removed/): Seen 22/80, Unseen 17/80; **39/160**.
 - [x] [E06 · No task progress and agent success](experiments/agent-check-success/): Seen 18/80, Unseen 11/80; **29/160**.
 - [x] [E07 · NoMemory](experiments/no-memory/): Seen 24/80, Unseen 17/80; **41/160**.
+- [x] [E08 · Combined information removal, simulator success retained](experiments/no-privileged-info/): Seen 27/80, Unseen 14/80; **41/160**.
 
-The 1,120-episode total excludes the auxiliary Sol run and interrupted smoke runs.
+The 1,280-episode total excludes the auxiliary Sol run and interrupted smoke runs.
 E05 removes the two active geometry-query tools; internal depth and other feedback
 remain. E06 completes removal of live task-progress/success/termination feedback
 and VLA native-success early stopping; the evaluator keeps independent final
@@ -46,7 +47,9 @@ runtime, test, requirements and pyproject files match. All 160 episodes generate
 
 The later variant [no_task_progress](https://github.com/snow-QingYang/RPent/tree/no_task_progress), commit [26d8665d3d394dc77ce90a68d266d370d2384f98](https://github.com/snow-QingYang/RPent/commit/26d8665d3d394dc77ce90a68d266d370d2384f98), also stops generating that file. It was not used for the published E03 result.
 
-Seven experiment settings have seven primary branch links. The E03 branch also
+Seven published experiment settings have seven primary branch links. E08 uses
+local branch `no_privileged_info`, commit `5e612e916c011bcc76431efd1775040f86563fef`;
+its source branch is not published. No GitHub URL is implied for this local commit. The E03 branch also
 contains a later variant; use the immutable evaluated commit for its 160-episode result.
 
 Publication commits may include documentation or launch instructions added after
@@ -106,6 +109,12 @@ analysis export. Branch tips may move; immutable commit links identify this rele
     E01, task/seed filters, CSV, JSON, report and portable extractor.
   - Current-episode history and baseline simulator feedback remain. E03 has
     the same aggregate score but is a separate setting.
+- `experiments/no-privileged-info/`: E08, combined information removal with
+  simulator success retained, 41/160 (Seen 27/80, Unseen 14/80).
+  - `analysis/`: all 160 outcomes against E01 and E05, success-path filters,
+    initial-state comparisons, context audit, JSON, CSV, report and extractor.
+  - The scope and camera tables distinguish Agent-visible information, removed
+    outputs and internally retained artifacts. Source publication is pending.
 - `reference/`: information categories, existing detailed ground-truth access
   guide, and the self-contained original method reference.
 - `project-status.json`: provenance and structured snapshot for the overview.
@@ -190,6 +199,40 @@ this reorganization. Video boundaries are reconstructed from step counts and
 verified returned images, not original per-frame tool timestamps. Empty reasoning
 remains empty; runtime files are distinguished from files the Agent actually read.
 
+## E08 information boundary and recorded evidence
+
+E08 combines geometry-query, historical-memory, task-progress and contact-label
+removal while keeping native simulator success and early stopping. It also stops
+generating success_criteria.md and denies RPent text-file reads. RGB, task language,
+robot EEF/base poses, gripper state, current-episode history, VLA and manual motion
+controllers remain. move_to still uses simulator robot proprioception for servo
+control; this is not removal of all simulator state.
+
+The Planner sees agentview (the left observation camera), navview (base camera)
+and wrist RGB, with names and qualitative roles. It receives no numeric camera
+intrinsics, extrinsics/pose or FOV. The calibration_frame role is only a label.
+The VLA uses 256×256 left/right/wrist RGB, a different three-view selection.
+Depth, world maps, camera metadata and the floor overlay are generated internally;
+depth/world-map NPZ files use the existing 25-step retention window. RGB PNGs and
+camera metadata are not pruned by this window. The recorded Agent
+trajectories did not read these artifacts. These restrictions are
+not an operating-system sandbox.
+
+All 160 results passed validation; 4,632 completed tool returns and 4,327 stored
+states were audited without removed progress/contact fields. Geometry-query,
+file-read and native shell calls were all zero. All 41 successes match saved
+native success. Of those successes, 22 use only VLA actions and 19 include manual
+intervention; 13 of the latter still finish through VLA, six through a manual
+step. Every successful episode used VLA. These are trajectory categories, not
+proof of manual causation.
+
+The 41/160 score is two above E05's 39/160, with 18 added and 16 lost successes.
+Among 132 strictly matching initial observations, the diagnostic totals are
+31/132 versus 32/132. That selected subset is not a replacement benchmark score.
+Some same-seed initial conditions differ, and VLA inference samples noise; one
+batch per configuration does not establish an improvement from removing more
+information. The run completed on 2026-11-10 at 06:07 Hong Kong time.
+
 ## Maintenance
 
 The NoMemory export reads `source-publication.json` (or `--source-publication`)
@@ -201,10 +244,10 @@ catalogs, short experiment pages, comparison examples, smoke audit summary and
 compatibility pages. It uses the existing detailed exports and the original local
 smoke audit. Its assertions intentionally require review if source results change.
 Canonical detailed exports live under their experiment's `analysis/` directory.
-The legacy overview generator predates E06 and E07. Do not use it to regenerate the
-current overview or project-status.json until it supports E06 and E07: it would restore
+The legacy overview generator predates E06, E07 and E08. Do not use it to regenerate the
+current overview or project-status.json until it supports E06, E07 and E08: it would restore
 the older five-group checklist and drop the newer entries. After adding that support,
-verify the seven-group, 1,120-episode total whenever rebuilding a detailed export
+verify the eight-group, 1,280-episode total whenever rebuilding a detailed export
 and the overview. The E03, E04 and E05 detailed HTML and JS
 use the same table/filter layout as E02; check their displayed summaries against the
 new export when changing source runs.

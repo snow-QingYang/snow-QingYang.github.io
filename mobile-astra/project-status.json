@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-09",
+  "as_of": "2026-11-10",
   "completed_experiments": [
     {
       "id": "E01",
@@ -173,10 +173,31 @@
         "instructions_file": "EXPERIMENT.md",
         "instructions_url": "https://github.com/snow-QingYang/RPent/blob/a640f3202d092b0803540dff35521f7996ce0945/EXPERIMENT.md"
       }
+    },
+    {
+      "id": "E08",
+      "name": "组合信息移除（保留 success）",
+      "path": "experiments/no-privileged-info/",
+      "status": "complete",
+      "total": 160,
+      "success": 41,
+      "source": {
+        "id": "E08",
+        "experiment_path": "experiments/no-privileged-info/",
+        "name": "组合信息移除（保留 success）",
+        "branch": "no_privileged_info",
+        "commit": "5e612e916c011bcc76431efd1775040f86563fef",
+        "status": "local_only",
+        "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+        "evaluation_relationship": "Evaluated local commit; all 109 recorded runtime/manifest hashes unchanged. This source branch has not been published to GitHub.",
+        "runtime_source_files_checked": 109,
+        "runtime_source_files_matching": 109,
+        "instructions_file": "EXPERIMENT.md"
+      }
     }
   ],
-  "completed_experiment_count": 7,
-  "completed_valid_episodes": 1120,
+  "completed_experiment_count": 8,
+  "completed_valid_episodes": 1280,
   "baseline": {
     "name": "GPT-6-Astra",
     "model": "gpt-6-astra",
@@ -779,14 +800,15 @@
     "NoContactGT removes contact-derived feedback; other progress, geometry, success, scoring-source access and historical memory remain.",
     "NoGeomTools removes back_project_batch and query_world_map from registered tools and their prompt instructions; internal depth/world maps, task-progress distances, contact, success, file permissions and historical memory remain.",
     "E06 No task progress and agent success builds on No task progress, hides live success/termination/progress and removes native-success VLA early stopping. The independent evaluator scores the final state after the planner returns; geometry, contact and historical memory remain. Agent declarations are not benchmark scores.",
-    "E07 removes historical task/global memory only; current-episode history and baseline feedback remain. Its 41/160 score happens to match E03, a separate setting. Task/seed matching is not proof of identical scenes or causal attribution."
+    "E07 removes historical task/global memory only; current-episode history and baseline feedback remain. Its 41/160 score happens to match E03, a separate setting. Task/seed matching is not proof of identical scenes or causal attribution.",
+    "E08 combines geometry-query, historical-memory, progress and contact-feedback removal and blocks scoring-source access. Native success, robot proprioception and controls remain; internal depth/world maps and camera metadata remain saved. It is not an all-ground-truth-free or OS-isolated system."
   ],
   "latest_result": {
-    "id": "E07",
-    "name": "NoMemory",
-    "path": "experiments/no-memory/",
-    "analysis_path": "experiments/no-memory/analysis/",
-    "completed_at": "2026-11-09T08:57:33+08:00",
+    "id": "E08",
+    "name": "组合信息移除（保留 success）",
+    "path": "experiments/no-privileged-info/",
+    "analysis_path": "experiments/no-privileged-info/analysis/",
+    "completed_at": "2026-11-10T06:07:43+08:00",
     "total": 160,
     "success": 41,
     "success_rate_percent": 25.625
@@ -1044,7 +1066,7 @@
   "source_publication": {
     "metadata": "source-publication.json",
     "repository": "https://github.com/snow-QingYang/RPent",
-    "as_of": "2026-11-09",
+    "as_of": "2026-11-10",
     "experiments": {
       "E01": {
         "id": "E01",
@@ -1166,7 +1188,140 @@
         "implementation_commit": "a640f3202d092b0803540dff35521f7996ce0945",
         "instructions_file": "EXPERIMENT.md",
         "instructions_url": "https://github.com/snow-QingYang/RPent/blob/a640f3202d092b0803540dff35521f7996ce0945/EXPERIMENT.md"
+      },
+      "E08": {
+        "id": "E08",
+        "experiment_path": "experiments/no-privileged-info/",
+        "name": "组合信息移除（保留 success）",
+        "branch": "no_privileged_info",
+        "commit": "5e612e916c011bcc76431efd1775040f86563fef",
+        "status": "local_only",
+        "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+        "evaluation_relationship": "Evaluated local commit; all 109 recorded runtime/manifest hashes unchanged. This source branch has not been published to GitHub.",
+        "runtime_source_files_checked": 109,
+        "runtime_source_files_matching": 109,
+        "instructions_file": "EXPERIMENT.md"
       }
+    },
+    "published_experiment_count": 7,
+    "tracked_experiment_count": 8
+  },
+  "no_privileged_info": {
+    "status": "complete",
+    "valid_benchmark_result": true,
+    "run": "official_main_composite_no_privileged_info_astra_xhigh_20261109T151754Z",
+    "summary": {
+      "seen": {
+        "total": 80,
+        "combined_success": 27,
+        "baseline_success": 34,
+        "geometry_success": 22,
+        "baseline_only": 16,
+        "combined_only_vs_baseline": 9,
+        "geometry_only": 7,
+        "combined_only_vs_geometry": 12
+      },
+      "unseen": {
+        "total": 80,
+        "combined_success": 14,
+        "baseline_success": 21,
+        "geometry_success": 17,
+        "baseline_only": 12,
+        "combined_only_vs_baseline": 5,
+        "geometry_only": 9,
+        "combined_only_vs_geometry": 6
+      },
+      "all": {
+        "total": 160,
+        "combined_success": 41,
+        "baseline_success": 55,
+        "geometry_success": 39,
+        "baseline_only": 28,
+        "combined_only_vs_baseline": 14,
+        "geometry_only": 16,
+        "combined_only_vs_geometry": 18
+      }
+    },
+    "source": {
+      "id": "E08",
+      "experiment_path": "experiments/no-privileged-info/",
+      "name": "组合信息移除（保留 success）",
+      "branch": "no_privileged_info",
+      "commit": "5e612e916c011bcc76431efd1775040f86563fef",
+      "status": "local_only",
+      "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+      "evaluation_relationship": "Evaluated local commit; all 109 recorded runtime/manifest hashes unchanged. This source branch has not been published to GitHub.",
+      "runtime_source_files_checked": 109,
+      "runtime_source_files_matching": 109,
+      "instructions_file": "EXPERIMENT.md"
+    },
+    "retained": [
+      "RGB observations",
+      "task language",
+      "robot EEF/base poses and gripper state",
+      "VLA inputs, history and manual controllers",
+      "current-episode history",
+      "native simulator success and termination",
+      "native-success VLA early stopping",
+      "final native scoring",
+      "fixed scene priors in prompt"
+    ],
+    "removed": [
+      "back_project_batch registration",
+      "query_world_map registration",
+      "historical task/global memory exposure",
+      "task_progress output",
+      "grasp_contact",
+      "grasp_obj",
+      "grasped",
+      "grasp_detected",
+      "success_criteria source generation and read access"
+    ],
+    "internally_saved_not_agent_visible": [
+      "camera intrinsics and cam2world metadata",
+      "depth maps",
+      "world maps",
+      "navview_floor overlay"
+    ],
+    "recorded_trajectory_audit": {
+      "episodes": 160,
+      "completed_tool_returns": 4632,
+      "saved_states": 4327,
+      "hidden_field_hits": 0,
+      "geometry_tool_calls": 0,
+      "file_read_calls": 0,
+      "native_shell_calls": 0,
+      "memory_reads": 0,
+      "scope": "Recorded Agent trajectories and stored states; not operating-system isolation"
+    },
+    "success_paths": {
+      "vla_only": 22,
+      "after_manual_intervention": 19,
+      "after_manual_intervention_final_vla": 13,
+      "after_manual_intervention_final_manual": 6
+    },
+    "camera_information": {
+      "planner_rgb": [
+        "agentview (robot0_agentview_left)",
+        "navview (mobilebase0_navview)",
+        "wrist (robot0_eye_in_hand)"
+      ],
+      "planner_information": "Names, roles and use descriptions; no numeric intrinsics, extrinsics, poses or FOV",
+      "vla_rgb": [
+        "robot0_agentview_left",
+        "robot0_agentview_right",
+        "robot0_eye_in_hand"
+      ],
+      "vla_resolution": [
+        256,
+        256
+      ]
+    },
+    "comparison_limit": "One batch per setting. Some initial conditions differ; VLA inference samples noise. The 41 versus 39 result is not evidence of a reliable improvement.",
+    "artifact_retention": {
+      "depth_world_map_npz": "Existing default rolling window: most recent 25 observation steps",
+      "rgb_png_and_camera_metadata": "Not pruned by the depth/world-map retention window",
+      "raw_episode_records": "Stored locally; site publishes sanitized derived data and hashes"
     }
   }
 }
