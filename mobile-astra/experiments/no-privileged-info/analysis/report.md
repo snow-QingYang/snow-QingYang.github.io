@@ -74,7 +74,7 @@ VLA inference also contains random action sampling without matched per-call nois
 
 ## Provenance
 
-Branch: `no_privileged_info`; commit: `5e612e916c011bcc76431efd1775040f86563fef`. **Code status: recorded locally, pending publication.** No GitHub commit link is claimed. Official base: `a744bd5f128ebef3cb8c6736cf7cd98adff681f1`.
+Branch: `no_privileged_info_with_planner_pose`; commit: `5e612e916c011bcc76431efd1775040f86563fef`. **Code status: recorded locally, pending publication.** No GitHub commit link is claimed. Official base: `a744bd5f128ebef3cb8c6736cf7cd98adff681f1`.
 
 Run IDs:
 

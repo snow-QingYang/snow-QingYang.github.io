@@ -129,7 +129,7 @@
       "id": "E08",
       "experiment_path": "experiments/no-privileged-info/",
       "name": "组合信息移除 · 提供位姿坐标",
-      "branch": "no_privileged_info",
+      "branch": "no_privileged_info_with_planner_pose",
       "commit": "5e612e916c011bcc76431efd1775040f86563fef",
       "status": "local_only",
       "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",

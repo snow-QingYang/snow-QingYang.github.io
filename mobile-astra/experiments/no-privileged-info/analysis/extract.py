@@ -154,7 +154,7 @@ def build(combined, geometry, baseline):
         "generated_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "completed_local": completion["finish_local"],
         "runs": {label: root.name for label, root in roots.items()},
-        "code": {"branch": "no_privileged_info", "commit": source["commit"], "base_commit": source["base_commit"],
+        "code": {"branch": "no_privileged_info_with_planner_pose", "commit": source["commit"], "base_commit": source["base_commit"],
                  "publication_status": "本地已记录，待发布"},
         "protocol": {"model": "gpt-6-astra", "reasoning_effort": "xhigh", "vla": "RLDX-1-FT-RC365",
                      "environment_split": "target", "seeds": [1, 2, 3, 4, 5], "planner_max_turns": 100,

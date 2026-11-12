@@ -52,7 +52,7 @@ runtime, test, requirements and pyproject files match. All 160 episodes generate
 The later variant [no_task_progress](https://github.com/snow-QingYang/RPent/tree/no_task_progress), commit [26d8665d3d394dc77ce90a68d266d370d2384f98](https://github.com/snow-QingYang/RPent/commit/26d8665d3d394dc77ce90a68d266d370d2384f98), also stops generating that file. It was not used for the published E03 result.
 
 Seven published experiment settings have seven primary branch links. E08 uses
-local branch `no_privileged_info`, commit `5e612e916c011bcc76431efd1775040f86563fef`;
+local branch `no_privileged_info_with_planner_pose`, commit `5e612e916c011bcc76431efd1775040f86563fef`;
 its source branch is not published. E09 uses local branch
 `no_privileged_info_no_planner_pose`, commit
 `f2d62d21104f412b5e020931d11d7054b6ef3818`, also unpublished. No GitHub URL is
