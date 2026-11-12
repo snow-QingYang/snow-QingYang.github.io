@@ -14,7 +14,13 @@
     "commit": "f2d62d21104f412b5e020931d11d7054b6ef3818",
     "base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
     "parent_commit": "5e612e916c011bcc76431efd1775040f86563fef",
-    "publication_status": "local_only"
+    "publication_status": "published",
+    "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_privileged_info_no_planner_pose",
+    "commit_url": "https://github.com/snow-QingYang/RPent/commit/f2d62d21104f412b5e020931d11d7054b6ef3818",
+    "evaluated_code_commit": "f2d62d21104f412b5e020931d11d7054b6ef3818",
+    "publication_commit": "f2d62d21104f412b5e020931d11d7054b6ef3818",
+    "publication_commit_url": "https://github.com/snow-QingYang/RPent/commit/f2d62d21104f412b5e020931d11d7054b6ef3818",
+    "instructions_url": "https://github.com/snow-QingYang/RPent/blob/f2d62d21104f412b5e020931d11d7054b6ef3818/EXPERIMENT.md"
   },
   "protocol": {
     "model": "gpt-6-astra",

@@ -2,7 +2,7 @@
   "schema_version": 1,
   "as_of": "2026-11-12",
   "repository": "https://github.com/snow-QingYang/RPent",
-  "note": "Published source revisions are separate from runtime result, source-file and artifact hashes. Branches may advance; commit links are immutable. E08 and E09 are recorded locally and have no published source URLs.",
+  "note": "Published source revisions are separate from runtime result, source-file and artifact hashes. Branches may advance; evaluated commit links are immutable. E08 publication commit only renames the experiment documentation; its evaluated runtime commit is unchanged.",
   "experiments": {
     "E01": {
       "id": "E01",
@@ -131,12 +131,19 @@
       "name": "组合信息移除 · 提供位姿坐标",
       "branch": "no_privileged_info_with_planner_pose",
       "commit": "5e612e916c011bcc76431efd1775040f86563fef",
-      "status": "local_only",
+      "status": "published",
       "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
-      "evaluation_relationship": "Evaluated local commit; all 109 recorded runtime/manifest hashes unchanged. This source branch has not been published to GitHub.",
+      "evaluation_relationship": "Evaluated commit; all 109 recorded runtime/manifest hashes unchanged. The published branch adds only the EXPERIMENT.md rename clarifying that Planner pose coordinates are provided.",
       "runtime_source_files_checked": 109,
       "runtime_source_files_matching": 109,
-      "instructions_file": "EXPERIMENT.md"
+      "instructions_file": "EXPERIMENT.md",
+      "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_privileged_info_with_planner_pose",
+      "commit_url": "https://github.com/snow-QingYang/RPent/commit/5e612e916c011bcc76431efd1775040f86563fef",
+      "evaluated_code_commit": "5e612e916c011bcc76431efd1775040f86563fef",
+      "publication_commit": "cb24eb7c8664e46e6ca50497cc9f77e23282ebea",
+      "publication_commit_url": "https://github.com/snow-QingYang/RPent/commit/cb24eb7c8664e46e6ca50497cc9f77e23282ebea",
+      "instructions_url": "https://github.com/snow-QingYang/RPent/blob/cb24eb7c8664e46e6ca50497cc9f77e23282ebea/EXPERIMENT.md",
+      "publication_changes": "Only EXPERIMENT.md changed from evaluated_code_commit to publication_commit; runtime code is unchanged."
     },
     "E09": {
       "id": "E09",
@@ -144,13 +151,20 @@
       "name": "组合信息移除 · 不提供位姿坐标",
       "branch": "no_privileged_info_no_planner_pose",
       "commit": "f2d62d21104f412b5e020931d11d7054b6ef3818",
-      "status": "local_only",
+      "status": "published",
       "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
       "parent_experiment": "E08",
-      "evaluation_relationship": "Evaluated local commit. Planner pose coordinates and additional motion/gripper/execution feedback are withheld; VLA/controller proprioception remains. This source branch has not been published to GitHub."
+      "evaluation_relationship": "Published evaluated commit. Planner pose coordinates and additional motion/gripper/execution feedback are withheld; VLA/controller proprioception remains.",
+      "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_privileged_info_no_planner_pose",
+      "commit_url": "https://github.com/snow-QingYang/RPent/commit/f2d62d21104f412b5e020931d11d7054b6ef3818",
+      "evaluated_code_commit": "f2d62d21104f412b5e020931d11d7054b6ef3818",
+      "publication_commit": "f2d62d21104f412b5e020931d11d7054b6ef3818",
+      "publication_commit_url": "https://github.com/snow-QingYang/RPent/commit/f2d62d21104f412b5e020931d11d7054b6ef3818",
+      "instructions_file": "EXPERIMENT.md",
+      "instructions_url": "https://github.com/snow-QingYang/RPent/blob/f2d62d21104f412b5e020931d11d7054b6ef3818/EXPERIMENT.md"
     }
   },
-  "published_experiment_count": 7,
-  "published_branch_count": 7,
+  "published_experiment_count": 9,
+  "published_branch_count": 9,
   "tracked_experiment_count": 9
 }

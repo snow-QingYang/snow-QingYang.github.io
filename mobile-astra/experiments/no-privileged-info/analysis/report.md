@@ -74,7 +74,7 @@ VLA inference also contains random action sampling without matched per-call nois
 
 ## Provenance
 
-Branch: `no_privileged_info_with_planner_pose`; commit: `5e612e916c011bcc76431efd1775040f86563fef`. **Code status: recorded locally, pending publication.** No GitHub commit link is claimed. Official base: `a744bd5f128ebef3cb8c6736cf7cd98adff681f1`.
+Published branch: [no_privileged_info_with_planner_pose](https://github.com/snow-QingYang/RPent/tree/no_privileged_info_with_planner_pose); evaluated commit: [5e612e916c011bcc76431efd1775040f86563fef](https://github.com/snow-QingYang/RPent/commit/5e612e916c011bcc76431efd1775040f86563fef). Publication commit [cb24eb7c](https://github.com/snow-QingYang/RPent/commit/cb24eb7c8664e46e6ca50497cc9f77e23282ebea) changes only the experiment-document name; runtime code is unchanged. [Run instructions](https://github.com/snow-QingYang/RPent/blob/cb24eb7c8664e46e6ca50497cc9f77e23282ebea/EXPERIMENT.md). Official base: `a744bd5f128ebef3cb8c6736cf7cd98adff681f1`.
 
 Run IDs:
 
@@ -82,4 +82,4 @@ Run IDs:
 - Geometry removal: `official_main_composite_nogeomtools_astra_xhigh_20261104T093002Z`
 - Baseline: `official_main_composite_astra_xhigh_20261101T150450Z`
 
-Environment split `target`; 100 Planner responses, 3,600 s per episode; VLA 40 chunks × 8 actions; settle patience 999. [data.json](data.json) contains sanitized outcomes, action counts, initial-evidence hashes, source-file hashes and audit-evidence hashes. [episodes.csv](episodes.csv) is the flat numerical export. [extract.py](extract.py) regenerates both from local archived run roots and verifies counts. Raw model streams, credentials, absolute machine paths and complete runtime source are not published.
+Environment split `target`; 100 Planner responses, 3,600 s per episode; VLA 40 chunks × 8 actions; settle patience 999. [data.json](data.json) contains sanitized outcomes, action counts, initial-evidence hashes, source-file hashes and audit-evidence hashes. [episodes.csv](episodes.csv) is the flat numerical export. [extract.py](extract.py) regenerates both from local archived run roots and verifies counts. Raw model streams, credentials and absolute machine paths are not included in this web export. Evaluated source code is linked above.

@@ -44,6 +44,8 @@ Repository: [https://github.com/snow-QingYang/RPent](https://github.com/snow-Qin
 | E05 · 几何查询移除 | [no_geometry_tools](https://github.com/snow-QingYang/RPent/tree/no_geometry_tools) | [19a9ea93](https://github.com/snow-QingYang/RPent/commit/19a9ea934810999428715324507021db51ec06bf) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/19a9ea934810999428715324507021db51ec06bf/NO_GEOMETRY_TOOLS.md) |
 | E06 · No task progress and agent success | [no_task_progress_and_agent_success](https://github.com/snow-QingYang/RPent/tree/no_task_progress_and_agent_success) | [412efe9c](https://github.com/snow-QingYang/RPent/commit/412efe9c32e3cac630c77138da86def960968610) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/412efe9c32e3cac630c77138da86def960968610/EXPERIMENT.md) |
 | E07 · NoMemory | [no_memory](https://github.com/snow-QingYang/RPent/tree/no_memory) | [a640f320](https://github.com/snow-QingYang/RPent/commit/a640f3202d092b0803540dff35521f7996ce0945) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/a640f3202d092b0803540dff35521f7996ce0945/EXPERIMENT.md) |
+| E08 · Combined removal · Planner pose provided | [no_privileged_info_with_planner_pose](https://github.com/snow-QingYang/RPent/tree/no_privileged_info_with_planner_pose) | [5e612e91](https://github.com/snow-QingYang/RPent/commit/5e612e916c011bcc76431efd1775040f86563fef) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/cb24eb7c8664e46e6ca50497cc9f77e23282ebea/EXPERIMENT.md) |
+| E09 · Combined removal · Planner pose withheld | [no_privileged_info_no_planner_pose](https://github.com/snow-QingYang/RPent/tree/no_privileged_info_no_planner_pose) | [f2d62d21](https://github.com/snow-QingYang/RPent/commit/f2d62d21104f412b5e020931d11d7054b6ef3818) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/f2d62d21104f412b5e020931d11d7054b6ef3818/EXPERIMENT.md) |
 
 E03 immutable commit `b7333814` is the evaluated snapshot: all 350 archived tracked
 runtime, test, requirements and pyproject files match. All 160 episodes generated
@@ -51,13 +53,13 @@ runtime, test, requirements and pyproject files match. All 160 episodes generate
 
 The later variant [no_task_progress](https://github.com/snow-QingYang/RPent/tree/no_task_progress), commit [26d8665d3d394dc77ce90a68d266d370d2384f98](https://github.com/snow-QingYang/RPent/commit/26d8665d3d394dc77ce90a68d266d370d2384f98), also stops generating that file. It was not used for the published E03 result.
 
-Seven published experiment settings have seven primary branch links. E08 uses
-local branch `no_privileged_info_with_planner_pose`, commit `5e612e916c011bcc76431efd1775040f86563fef`;
-its source branch is not published. E09 uses local branch
-`no_privileged_info_no_planner_pose`, commit
-`f2d62d21104f412b5e020931d11d7054b6ef3818`, also unpublished. No GitHub URL is
-implied for either local commit. The E03 branch also
-contains a later variant; use the immutable evaluated commit for its 160-episode result.
+Nine published experiment settings have nine primary branch links. E08's evaluated
+commit remains [5e612e91](https://github.com/snow-QingYang/RPent/commit/5e612e916c011bcc76431efd1775040f86563fef); publication commit
+[cb24eb7c](https://github.com/snow-QingYang/RPent/commit/cb24eb7c8664e46e6ca50497cc9f77e23282ebea) changes only `EXPERIMENT.md` to clarify
+that Planner pose coordinates are provided. Its runtime implementation is unchanged.
+E09's published and evaluated commit is [f2d62d21](https://github.com/snow-QingYang/RPent/commit/f2d62d21104f412b5e020931d11d7054b6ef3818).
+The E03 branch also contains a later variant; use its immutable evaluated commit
+for the 160-episode result.
 
 Publication commits may include documentation or launch instructions added after
 evaluation. Runtime source-file, patch and result hashes remain unchanged in each
@@ -121,14 +123,14 @@ analysis export. Branch tips may move; immutable commit links identify this rele
   - `analysis/`: all 160 outcomes against E01 and E05, success-path filters,
     initial-state comparisons, context audit, JSON, CSV, report and extractor.
   - The scope and camera tables distinguish Agent-visible information, removed
-    outputs and internally retained artifacts. Source publication is pending.
+    outputs and internally retained artifacts. Source branch and evaluated commit are linked above.
 - `experiments/no-planner-pose/`: E09, combined information removal with
   Planner pose coordinates withheld, 27/160 (Seen 17/80, Unseen 10/80).
   - `analysis/`: all 160 outcomes against E08 and E01, JSON, CSV and report.
   - E09 also removes gripper width, held_apart, motion feedback and action
     execution status/steps/timing; it is not a pose-only ablation.
   - Native simulator success and early stopping, VLA/controller proprioception,
-    RGB, task language and current-episode history remain. The source is local.
+    RGB, task language and current-episode history remain. Published source and run instructions are linked above.
 - `reference/`: information categories, existing detailed ground-truth access
   guide, and the self-contained original method reference.
 - `project-status.json`: provenance and structured snapshot for the overview.

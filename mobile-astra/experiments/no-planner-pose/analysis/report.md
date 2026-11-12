@@ -62,7 +62,7 @@ Agent 自己的命令参数与 finish 声明不算测量反馈；MCP 框架传�
 
 - [160 局交互对照](index.html)：可按 Seen / Unseen、任务、对照组、结果与成功路径筛选。
 - [CSV](episodes.csv)、[JSON](data.json)、[复算脚本](extract.py)。仅发布派生数值与哈希，不发布原始模型消息或私有路径。
-- 本地分支 `no_privileged_info_no_planner_pose`，提交 `f2d62d21104f412b5e020931d11d7054b6ef3818`，待发布。
+- 已发布分支 [no_privileged_info_no_planner_pose](https://github.com/snow-QingYang/RPent/tree/no_privileged_info_no_planner_pose)，评测提交 [f2d62d21104f412b5e020931d11d7054b6ef3818](https://github.com/snow-QingYang/RPent/commit/f2d62d21104f412b5e020931d11d7054b6ef3818)；[运行说明](https://github.com/snow-QingYang/RPent/blob/f2d62d21104f412b5e020931d11d7054b6ef3818/EXPERIMENT.md)。
 - E08 父提交 `5e612e916c011bcc76431efd1775040f86563fef`；官方基础 `a744bd5f128ebef3cb8c6736cf7cd98adff681f1`。
 - 每局 100 个 Planner 响应、3600 秒；VLA 40 chunks × 8 actions，settle patience=999；环境 split=target。
 
