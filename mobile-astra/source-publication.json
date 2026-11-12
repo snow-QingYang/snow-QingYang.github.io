@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "as_of": "2026-11-10",
+  "as_of": "2026-11-12",
   "repository": "https://github.com/snow-QingYang/RPent",
-  "note": "Published source revisions are separate from runtime result, source-file and artifact hashes. Branches may advance; commit links are immutable. E08 is recorded locally and has no published source URL.",
+  "note": "Published source revisions are separate from runtime result, source-file and artifact hashes. Branches may advance; commit links are immutable. E08 and E09 are recorded locally and have no published source URLs.",
   "experiments": {
     "E01": {
       "id": "E01",
@@ -128,7 +128,7 @@
     "E08": {
       "id": "E08",
       "experiment_path": "experiments/no-privileged-info/",
-      "name": "组合信息移除（保留 success）",
+      "name": "组合信息移除 · 提供位姿坐标",
       "branch": "no_privileged_info",
       "commit": "5e612e916c011bcc76431efd1775040f86563fef",
       "status": "local_only",
@@ -137,9 +137,20 @@
       "runtime_source_files_checked": 109,
       "runtime_source_files_matching": 109,
       "instructions_file": "EXPERIMENT.md"
+    },
+    "E09": {
+      "id": "E09",
+      "experiment_path": "experiments/no-planner-pose/",
+      "name": "组合信息移除 · 不提供位姿坐标",
+      "branch": "no_privileged_info_no_planner_pose",
+      "commit": "f2d62d21104f412b5e020931d11d7054b6ef3818",
+      "status": "local_only",
+      "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+      "parent_experiment": "E08",
+      "evaluation_relationship": "Evaluated local commit. Planner pose coordinates and additional motion/gripper/execution feedback are withheld; VLA/controller proprioception remains. This source branch has not been published to GitHub."
     }
   },
   "published_experiment_count": 7,
   "published_branch_count": 7,
-  "tracked_experiment_count": 8
+  "tracked_experiment_count": 9
 }

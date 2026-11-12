@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-10",
+  "as_of": "2026-11-12",
   "completed_experiments": [
     {
       "id": "E01",
@@ -176,7 +176,7 @@
     },
     {
       "id": "E08",
-      "name": "组合信息移除（保留 success）",
+      "name": "组合信息移除 · 提供位姿坐标",
       "path": "experiments/no-privileged-info/",
       "status": "complete",
       "total": 160,
@@ -184,7 +184,7 @@
       "source": {
         "id": "E08",
         "experiment_path": "experiments/no-privileged-info/",
-        "name": "组合信息移除（保留 success）",
+        "name": "组合信息移除 · 提供位姿坐标",
         "branch": "no_privileged_info",
         "commit": "5e612e916c011bcc76431efd1775040f86563fef",
         "status": "local_only",
@@ -194,10 +194,37 @@
         "runtime_source_files_matching": 109,
         "instructions_file": "EXPERIMENT.md"
       }
+    },
+    {
+      "id": "E09",
+      "name": "组合信息移除 · 不提供位姿坐标",
+      "path": "experiments/no-planner-pose/",
+      "status": "complete",
+      "total": 160,
+      "success": 27,
+      "seen": {
+        "total": 80,
+        "success": 17
+      },
+      "unseen": {
+        "total": 80,
+        "success": 10
+      },
+      "source": {
+        "id": "E09",
+        "experiment_path": "experiments/no-planner-pose/",
+        "name": "组合信息移除 · 不提供位姿坐标",
+        "branch": "no_privileged_info_no_planner_pose",
+        "commit": "f2d62d21104f412b5e020931d11d7054b6ef3818",
+        "status": "local_only",
+        "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+        "parent_experiment": "E08",
+        "evaluation_relationship": "Evaluated local commit. Planner pose coordinates and additional motion/gripper/execution feedback are withheld; VLA/controller proprioception remains. This source branch has not been published to GitHub."
+      }
     }
   ],
-  "completed_experiment_count": 8,
-  "completed_valid_episodes": 1280,
+  "completed_experiment_count": 9,
+  "completed_valid_episodes": 1440,
   "baseline": {
     "name": "GPT-6-Astra",
     "model": "gpt-6-astra",
@@ -801,17 +828,18 @@
     "NoGeomTools removes back_project_batch and query_world_map from registered tools and their prompt instructions; internal depth/world maps, task-progress distances, contact, success, file permissions and historical memory remain.",
     "E06 No task progress and agent success builds on No task progress, hides live success/termination/progress and removes native-success VLA early stopping. The independent evaluator scores the final state after the planner returns; geometry, contact and historical memory remain. Agent declarations are not benchmark scores.",
     "E07 removes historical task/global memory only; current-episode history and baseline feedback remain. Its 41/160 score happens to match E03, a separate setting. Task/seed matching is not proof of identical scenes or causal attribution.",
-    "E08 combines geometry-query, historical-memory, progress and contact-feedback removal and blocks scoring-source access. Native success, robot proprioception and controls remain; internal depth/world maps and camera metadata remain saved. It is not an all-ground-truth-free or OS-isolated system."
+    "E08 combines geometry-query, historical-memory, progress and contact-feedback removal and blocks scoring-source access. Native success, robot proprioception and controls remain; internal depth/world maps and camera metadata remain saved. It is not an all-ground-truth-free or OS-isolated system.",
+    "E08 provides EEF/base pose coordinates to the Planner; E09 withholds them and additional motion, gripper-width, held_apart and execution feedback. Both retain VLA/controller proprioception, native simulator success and native-success early stopping. The 41 versus 27 comparison does not isolate coordinates alone."
   ],
   "latest_result": {
-    "id": "E08",
-    "name": "组合信息移除（保留 success）",
-    "path": "experiments/no-privileged-info/",
-    "analysis_path": "experiments/no-privileged-info/analysis/",
-    "completed_at": "2026-11-10T06:07:43+08:00",
+    "id": "E09",
+    "name": "组合信息移除 · 不提供位姿坐标",
+    "path": "experiments/no-planner-pose/",
+    "analysis_path": "experiments/no-planner-pose/analysis/",
+    "completed_at": "2026-11-12T01:57:18+08:00",
     "total": 160,
-    "success": 41,
-    "success_rate_percent": 25.625
+    "success": 27,
+    "success_rate_percent": 16.875
   },
   "agent_check_success": {
     "id": "E06",
@@ -1064,9 +1092,10 @@
     }
   },
   "source_publication": {
-    "metadata": "source-publication.json",
+    "schema_version": 1,
+    "as_of": "2026-11-12",
     "repository": "https://github.com/snow-QingYang/RPent",
-    "as_of": "2026-11-10",
+    "note": "Published source revisions are separate from runtime result, source-file and artifact hashes. Branches may advance; commit links are immutable. E08 and E09 are recorded locally and have no published source URLs.",
     "experiments": {
       "E01": {
         "id": "E01",
@@ -1192,7 +1221,7 @@
       "E08": {
         "id": "E08",
         "experiment_path": "experiments/no-privileged-info/",
-        "name": "组合信息移除（保留 success）",
+        "name": "组合信息移除 · 提供位姿坐标",
         "branch": "no_privileged_info",
         "commit": "5e612e916c011bcc76431efd1775040f86563fef",
         "status": "local_only",
@@ -1201,10 +1230,23 @@
         "runtime_source_files_checked": 109,
         "runtime_source_files_matching": 109,
         "instructions_file": "EXPERIMENT.md"
+      },
+      "E09": {
+        "id": "E09",
+        "experiment_path": "experiments/no-planner-pose/",
+        "name": "组合信息移除 · 不提供位姿坐标",
+        "branch": "no_privileged_info_no_planner_pose",
+        "commit": "f2d62d21104f412b5e020931d11d7054b6ef3818",
+        "status": "local_only",
+        "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+        "parent_experiment": "E08",
+        "evaluation_relationship": "Evaluated local commit. Planner pose coordinates and additional motion/gripper/execution feedback are withheld; VLA/controller proprioception remains. This source branch has not been published to GitHub."
       }
     },
     "published_experiment_count": 7,
-    "tracked_experiment_count": 8
+    "published_branch_count": 7,
+    "tracked_experiment_count": 9,
+    "metadata": "source-publication.json"
   },
   "no_privileged_info": {
     "status": "complete",
@@ -1245,7 +1287,7 @@
     "source": {
       "id": "E08",
       "experiment_path": "experiments/no-privileged-info/",
-      "name": "组合信息移除（保留 success）",
+      "name": "组合信息移除 · 提供位姿坐标",
       "branch": "no_privileged_info",
       "commit": "5e612e916c011bcc76431efd1775040f86563fef",
       "status": "local_only",
@@ -1322,6 +1364,262 @@
       "depth_world_map_npz": "Existing default rolling window: most recent 25 observation steps",
       "rgb_png_and_camera_metadata": "Not pruned by the depth/world-map retention window",
       "raw_episode_records": "Stored locally; site publishes sanitized derived data and hashes"
+    }
+  },
+  "no_planner_pose": {
+    "id": "E09",
+    "status": "complete",
+    "valid_benchmark_result": true,
+    "run": "official_main_composite_no_planner_feedback_astra_xhigh_20261110T055737Z",
+    "completed_at": "2026-11-12T01:57:18+08:00",
+    "source": {
+      "id": "E09",
+      "experiment_path": "experiments/no-planner-pose/",
+      "name": "组合信息移除 · 不提供位姿坐标",
+      "branch": "no_privileged_info_no_planner_pose",
+      "commit": "f2d62d21104f412b5e020931d11d7054b6ef3818",
+      "status": "local_only",
+      "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+      "parent_experiment": "E08",
+      "evaluation_relationship": "Evaluated local commit. Planner pose coordinates and additional motion/gripper/execution feedback are withheld; VLA/controller proprioception remains. This source branch has not been published to GitHub."
+    },
+    "summary": {
+      "seen": {
+        "total": 80,
+        "successes": {
+          "no_pose": 17,
+          "combined": 27,
+          "baseline": 34
+        },
+        "paired_combined": {
+          "both_success": 14,
+          "no_pose_only": 3,
+          "reference_only": 13,
+          "both_failure": 50
+        },
+        "paired_baseline": {
+          "both_success": 15,
+          "no_pose_only": 2,
+          "reference_only": 19,
+          "both_failure": 44
+        },
+        "no_pose_success_paths": {
+          "vla_only": 13,
+          "manual_then_vla_finish": 4
+        }
+      },
+      "unseen": {
+        "total": 80,
+        "successes": {
+          "no_pose": 10,
+          "combined": 14,
+          "baseline": 21
+        },
+        "paired_combined": {
+          "both_success": 3,
+          "no_pose_only": 7,
+          "reference_only": 11,
+          "both_failure": 59
+        },
+        "paired_baseline": {
+          "both_success": 4,
+          "no_pose_only": 6,
+          "reference_only": 17,
+          "both_failure": 53
+        },
+        "no_pose_success_paths": {
+          "vla_only": 6,
+          "manual_then_vla_finish": 4
+        }
+      },
+      "all": {
+        "total": 160,
+        "successes": {
+          "no_pose": 27,
+          "combined": 41,
+          "baseline": 55
+        },
+        "paired_combined": {
+          "both_success": 17,
+          "no_pose_only": 10,
+          "reference_only": 24,
+          "both_failure": 109
+        },
+        "paired_baseline": {
+          "both_success": 19,
+          "no_pose_only": 8,
+          "reference_only": 36,
+          "both_failure": 97
+        },
+        "no_pose_success_paths": {
+          "vla_only": 19,
+          "manual_then_vla_finish": 8
+        }
+      }
+    },
+    "analysis_path": "experiments/no-planner-pose/analysis/",
+    "retained": [
+      "RGB observations",
+      "task language",
+      "current-episode interaction history",
+      "native simulator success",
+      "native-success VLA early stopping",
+      "VLA/controller internal robot proprioception",
+      "final native scoring"
+    ],
+    "additional_removed_vs_e08": [
+      "Planner-visible EEF/base pose coordinates",
+      "robot motion and distance feedback",
+      "gripper width",
+      "held_apart heuristic",
+      "action execution status",
+      "action steps",
+      "action timing"
+    ],
+    "comparison_limit": "The 14-success decrease versus E08 is not a pose-only ablation: additional gripper/motion/execution feedback was removed. Separate batches can differ in initial conditions and stochastic actions.",
+    "context_audit": {
+      "status": "passed_with_documented_budget_cancellations",
+      "episodes": 160,
+      "saved_snapshots": 4047,
+      "completed_mcp_calls": 4353,
+      "observation_returns": 4045,
+      "tool_counts": {
+        "view_env_state": 160,
+        "rldx_arm": 690,
+        "write_text_file": 154,
+        "finish": 154,
+        "rldx_skill": 1454,
+        "move_delta": 646,
+        "move_base": 943,
+        "set_gripper": 36,
+        "rotate_pitch": 96,
+        "release": 20
+      },
+      "hidden_feedback_fields_checked": 43,
+      "hidden_feedback_field_occurrences": 0,
+      "native_command_calls": 0,
+      "file_read_list_search_calls": 0,
+      "geometry_tool_calls": 0,
+      "file_write_calls": 154,
+      "json_tool_text_blocks": 4353,
+      "nonjson_tool_text_blocks": 0,
+      "tool_transport_errors": 0,
+      "tool_payload_errors": 0,
+      "saved_empty_states": 4047,
+      "saved_normal_empty_results": 3885,
+      "saved_initial_null_results": 160,
+      "saved_cancelled_results": 2,
+      "unfinished_at_budget_stop": 2,
+      "empty_memory_read_logs": 160,
+      "success_criteria_files": 0,
+      "native_scoring_consistent": 160,
+      "observation_image_blocks": 12135,
+      "parser_errors": 0,
+      "unexpected_tools": 0,
+      "scope": "Observed RPent tool/file boundary; not an operating-system sandbox. Command inputs and finish declarations are not hidden feedback; MCP transport status/duration are excluded.",
+      "exception_note": "Two final saved records are tool_cancelled markers at planner budget termination; they are not completed normal observation returns."
+    },
+    "reliability_audit": {
+      "accepted_episodes": 160,
+      "checked_log_files": 640,
+      "missing_or_empty_logs": 0,
+      "native_error_candidates": 0,
+      "nonzero_exit_metadata": 0,
+      "source_matches": true,
+      "preserved_results": 123,
+      "preserved_result_hash_mismatches": 0,
+      "recovered_network_events": 4,
+      "prior_excluded_attempts": 16,
+      "late_contention_replacements": [
+        {
+          "cell": "composite_seen/SearingMeat_s5",
+          "current_attempts": 4,
+          "current_valid": true,
+          "current_success": false,
+          "current_log_has_native_error": false
+        },
+        {
+          "cell": "composite_seen/PackIdenticalLunches_s3",
+          "current_attempts": 4,
+          "current_valid": true,
+          "current_success": false,
+          "current_log_has_native_error": false
+        },
+        {
+          "cell": "composite_seen/PackIdenticalLunches_s5",
+          "current_attempts": 4,
+          "current_valid": true,
+          "current_success": false,
+          "current_log_has_native_error": false
+        },
+        {
+          "cell": "composite_unseen/ArrangeBreadBasket_s4",
+          "current_attempts": 4,
+          "current_valid": true,
+          "current_success": false,
+          "current_log_has_native_error": false
+        },
+        {
+          "cell": "composite_unseen/GatherTableware_s3",
+          "current_attempts": 4,
+          "current_valid": true,
+          "current_success": false,
+          "current_log_has_native_error": false
+        }
+      ],
+      "scope": "Accepted attempts only. Infrastructure-fault attempts are archived and excluded. No logged native error does not prove the absence of silent contention."
+    },
+    "initial_comparison": {
+      "comparisons": {
+        "combined": {
+          "observed_inputs_equal_count": 136,
+          "task_language_equal_count": 158,
+          "rgb_exact_equal_counts": {
+            "agentview": 141,
+            "navview": 140,
+            "wrist": 140
+          },
+          "camera_metadata_equal_counts": {
+            "agentview": 143,
+            "wrist": 143
+          },
+          "subset_successes": {
+            "no_pose": 21,
+            "combined": 32
+          },
+          "subset_paired": {
+            "both_success": 12,
+            "no_pose_only": 9,
+            "reference_only": 20,
+            "both_failure": 95
+          }
+        },
+        "baseline": {
+          "observed_inputs_equal_count": 137,
+          "task_language_equal_count": 156,
+          "rgb_exact_equal_counts": {
+            "agentview": 142,
+            "navview": 141,
+            "wrist": 144
+          },
+          "camera_metadata_equal_counts": {
+            "agentview": 143,
+            "wrist": 143
+          },
+          "subset_successes": {
+            "no_pose": 23,
+            "baseline": 41
+          },
+          "subset_paired": {
+            "both_success": 15,
+            "no_pose_only": 8,
+            "reference_only": 26,
+            "both_failure": 88
+          }
+        }
+      },
+      "robot_state_comparable": false,
+      "scope": "Task text, initial RGB file bytes and retained camera-metadata file bytes only. E09 does not save Planner robot state. Equality of these artifacts does not establish identical simulator initial states or a causal effect."
     }
   }
 }

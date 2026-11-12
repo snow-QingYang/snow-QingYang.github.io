@@ -6,10 +6,10 @@ Keep this deployment entirely inside `mobile-astra/`. Do not modify or link from
 personal Home, Research, Blog, shared navigation, styles, assets or templates.
 All pages are standalone work interfaces. Public URLs are not access control.
 
-## Completed checklist · 2026-11-10
+## Completed checklist · 2026-11-12
 
-Eight primary GPT-6-Astra / xhigh experiments are complete: 160 valid episodes
-per setting, 1,280 total. Each setting has 80 Seen and 80 Unseen episodes.
+Nine primary GPT-6-Astra / xhigh experiments are complete: 160 valid episodes
+per setting, 1,440 total. Each setting has 80 Seen and 80 Unseen episodes.
 
 - [x] [E01 · Baseline](experiments/baseline/): Seen 34/80, Unseen 21/80; **55/160**.
 - [x] [E02 · DA3 depth replacement](experiments/geometry-da3/): Seen 33/80, Unseen 17/80; **50/160**.
@@ -18,14 +18,18 @@ per setting, 1,280 total. Each setting has 80 Seen and 80 Unseen episodes.
 - [x] [E05 · Geometry-query removal](experiments/geometry-removed/): Seen 22/80, Unseen 17/80; **39/160**.
 - [x] [E06 · No task progress and agent success](experiments/agent-check-success/): Seen 18/80, Unseen 11/80; **29/160**.
 - [x] [E07 · NoMemory](experiments/no-memory/): Seen 24/80, Unseen 17/80; **41/160**.
-- [x] [E08 · Combined information removal, simulator success retained](experiments/no-privileged-info/): Seen 27/80, Unseen 14/80; **41/160**.
+- [x] [E08 · Combined information removal, Planner pose coordinates provided](experiments/no-privileged-info/): Seen 27/80, Unseen 14/80; **41/160**.
+- [x] [E09 · Combined information removal, Planner pose coordinates withheld](experiments/no-planner-pose/): Seen 17/80, Unseen 10/80; **27/160**.
 
-The 1,280-episode total excludes the auxiliary Sol run and interrupted smoke runs.
+The 1,440-episode total excludes the auxiliary Sol run and interrupted smoke runs.
 E05 removes the two active geometry-query tools; internal depth and other feedback
 remain. E06 completes removal of live task-progress/success/termination feedback
 and VLA native-success early stopping; the evaluator keeps independent final
 scoring. Camera calibration/pose replacement, visual or tactile contact estimation,
 and validation of visual task-progress/completion estimates remain pending.
+E08 provides robot EEF/base pose coordinates to the Planner; E09 withholds them
+and also removes gripper-width, held_apart and action-execution statistics.
+Both retain VLA/controller proprioception and native-success early stopping.
 
 ## Published experiment code
 
@@ -49,7 +53,10 @@ The later variant [no_task_progress](https://github.com/snow-QingYang/RPent/tree
 
 Seven published experiment settings have seven primary branch links. E08 uses
 local branch `no_privileged_info`, commit `5e612e916c011bcc76431efd1775040f86563fef`;
-its source branch is not published. No GitHub URL is implied for this local commit. The E03 branch also
+its source branch is not published. E09 uses local branch
+`no_privileged_info_no_planner_pose`, commit
+`f2d62d21104f412b5e020931d11d7054b6ef3818`, also unpublished. No GitHub URL is
+implied for either local commit. The E03 branch also
 contains a later variant; use the immutable evaluated commit for its 160-episode result.
 
 Publication commits may include documentation or launch instructions added after
@@ -110,11 +117,18 @@ analysis export. Branch tips may move; immutable commit links identify this rele
   - Current-episode history and baseline simulator feedback remain. E03 has
     the same aggregate score but is a separate setting.
 - `experiments/no-privileged-info/`: E08, combined information removal with
-  simulator success retained, 41/160 (Seen 27/80, Unseen 14/80).
+  Planner pose coordinates provided, 41/160 (Seen 27/80, Unseen 14/80).
   - `analysis/`: all 160 outcomes against E01 and E05, success-path filters,
     initial-state comparisons, context audit, JSON, CSV, report and extractor.
   - The scope and camera tables distinguish Agent-visible information, removed
     outputs and internally retained artifacts. Source publication is pending.
+- `experiments/no-planner-pose/`: E09, combined information removal with
+  Planner pose coordinates withheld, 27/160 (Seen 17/80, Unseen 10/80).
+  - `analysis/`: all 160 outcomes against E08 and E01, JSON, CSV and report.
+  - E09 also removes gripper width, held_apart, motion feedback and action
+    execution status/steps/timing; it is not a pose-only ablation.
+  - Native simulator success and early stopping, VLA/controller proprioception,
+    RGB, task language and current-episode history remain. The source is local.
 - `reference/`: information categories, existing detailed ground-truth access
   guide, and the self-contained original method reference.
 - `project-status.json`: provenance and structured snapshot for the overview.
@@ -199,7 +213,7 @@ this reorganization. Video boundaries are reconstructed from step counts and
 verified returned images, not original per-frame tool timestamps. Empty reasoning
 remains empty; runtime files are distinguished from files the Agent actually read.
 
-## E08 information boundary and recorded evidence
+## E08 · Planner pose coordinates provided
 
 E08 combines geometry-query, historical-memory, task-progress and contact-label
 removal while keeping native simulator success and early stopping. It also stops
@@ -233,6 +247,33 @@ Some same-seed initial conditions differ, and VLA inference samples noise; one
 batch per configuration does not establish an improvement from removing more
 information. The run completed on 2026-11-10 at 06:07 Hong Kong time.
 
+## E09 · Planner pose coordinates withheld
+
+E09 builds on E08 and hides robot EEF/base poses, robot-motion feedback, gripper
+width, held_apart and action execution status, steps and timing from the Planner.
+Both E08 and E09 keep RGB, task language, current-episode interaction history,
+native simulator success, native-success early stopping and internal robot
+proprioception used by VLA and the motion controllers. Withheld Planner poses do
+not mean that the VLA is deprived of its normal robot-state input.
+
+The completed run is **27/160 (16.875%)**, with Seen **17/80** and Unseen **10/80**.
+E08 remains a separate **41/160** result (Seen 27/80, Unseen 14/80). The difference
+is 14 successes, or 8.75 percentage points; multiple feedback fields changed,
+and independent runs can have different initial states and action samples, so
+this result does not isolate the causal effect of pose coordinates. The original
+baseline is 55/160 (Seen 34/80, Unseen 21/80).
+
+E09 completed on **2026-11-12 at 01:57:18 Hong Kong time**. Its run identifier is
+`official_main_composite_no_planner_feedback_astra_xhigh_20261110T055737Z`.
+The public name distinguishes Planner pose exposure; the run identifier retains
+its original no_planner_feedback wording. E08 data and provenance remain intact.
+
+The final audit checked all 160 accepted episodes and 640 logs. Across 4,353
+completed MCP returns, the 43 checked hidden-feedback fields had zero occurrences;
+geometry-query, file-read and native-command calls were zero. Two saved cancellation
+markers at the planner budget limit are documented separately from completed
+returns. The audit covers recorded boundaries, not operating-system isolation.
+
 ## Maintenance
 
 The NoMemory export reads `source-publication.json` (or `--source-publication`)
@@ -244,10 +285,10 @@ catalogs, short experiment pages, comparison examples, smoke audit summary and
 compatibility pages. It uses the existing detailed exports and the original local
 smoke audit. Its assertions intentionally require review if source results change.
 Canonical detailed exports live under their experiment's `analysis/` directory.
-The legacy overview generator predates E06, E07 and E08. Do not use it to regenerate the
-current overview or project-status.json until it supports E06, E07 and E08: it would restore
+The legacy overview generator predates E06–E09. Do not use it to regenerate the
+current overview or project-status.json until it supports E06–E09: it would restore
 the older five-group checklist and drop the newer entries. After adding that support,
-verify the eight-group, 1,280-episode total whenever rebuilding a detailed export
+verify the nine-group, 1,440-episode total whenever rebuilding a detailed export
 and the overview. The E03, E04 and E05 detailed HTML and JS
 use the same table/filter layout as E02; check their displayed summaries against the
 new export when changing source runs.

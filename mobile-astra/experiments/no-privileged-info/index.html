@@ -1,12 +1,14 @@
 <!doctype html>
 <html lang="zh-CN">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="description" content="E08：组合移除主动几何查询、历史记忆、任务进度及接触反馈，保留 simulator success。Seen 27/80，Unseen 14/80。"><link rel="icon" href="data:,"><link rel="stylesheet" href="../../project.css"><title>E08 · 组合信息移除（保留 success）· Mobile Astra</title></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="description" content="E08：组合移除主动几何查询、历史记忆、任务进度及接触反馈，保留 simulator success。Seen 27/80，Unseen 14/80。"><link rel="icon" href="data:,"><link rel="stylesheet" href="../../project.css"><title>E08 · 组合信息移除 · 提供位姿坐标 · Mobile Astra</title></head>
 <body>
 <header class="site-head"><div class="head-inner"><a class="brand" href="../../">Mobile Astra / 实验工作页</a><nav aria-label="项目导航"><a href="../../">项目总览</a><a href="../">实验目录</a><a href="../../reference/">接口与真值</a></nav></div></header>
 <main>
 <nav class="crumbs" aria-label="当前位置"><a href="../../">项目总览</a><span>/</span><a href="../">实验目录</a><span>/ E08</span></nav>
-<div class="hero"><p class="eyebrow">HARNESSVLA / ROBOCASA · E08</p><h1>组合信息移除<br>（保留 success）</h1><p class="lead">同时关闭主动三维查询、历史记忆、任务进度和模拟器接触抓取提示。Agent 仍接收 RGB、机器人本体状态与原生成功信号。</p></div>
+<div class="hero"><p class="eyebrow">HARNESSVLA / ROBOCASA · E08</p><h1>组合信息移除<br>提供位姿坐标</h1><p class="lead">同时关闭主动三维查询、历史记忆、任务进度和模拟器接触抓取提示。Agent 仍接收 RGB、机器人本体状态与原生成功信号。</p></div>
 <section><span class="badge complete">已完成 · 160 个有效 episode</span><p class="meta">2026-11-10 06:07（香港时间）· GPT-6-Astra / xhigh · RLDX-1-FT-RC365</p><div class="links"><a href="#scope">信息边界</a><a href="#cameras">相机输入</a><a href="analysis/">逐任务 / seed</a><a href="#code">代码与证据</a></div></section>
+
+<section><p><strong>这是上次仍提供机器人位姿坐标的版本。</strong>新完成的 <a href="../no-planner-pose/">E09 · 不提供位姿坐标</a> 为 27/160；它还隐藏夹爪状态与动作执行反馈。两组均保留模拟器 success。</p></section>
 
 <section id="results"><h2>完整结果</h2><div class="table-wrap"><table aria-label="三组实验 Seen 与 Unseen 结果"><thead><tr><th>任务组</th><th>E01 · Baseline</th><th>E05 · 仅移除几何查询</th><th>E08 · 组合移除</th></tr></thead><tbody><tr><th scope="row">Seen</th><td>34 / 80 · 42.50%</td><td>22 / 80 · 27.50%</td><td><strong>27 / 80 · 33.75%</strong></td></tr><tr><th scope="row">Unseen</th><td>21 / 80 · 26.25%</td><td>17 / 80 · 21.25%</td><td><strong>14 / 80 · 17.50%</strong></td></tr><tr><th scope="row">总计</th><td>55 / 160 · 34.38%</td><td>39 / 160 · 24.38%</td><td><strong>41 / 160 · 25.63%</strong></td></tr></tbody></table></div><p>比 baseline 少成功 14 局（−8.75 pp）；比仅移除几何查询多 2 局（+1.25 pp）。Seen 多 5 局，Unseen 少 3 局，不能将总计的微小差异视为组合移除更有效。</p><div class="links"><a class="button" href="analysis/">160 局对照与筛选 →</a><a href="analysis/episodes.csv" download>下载 CSV</a><a href="analysis/data.json" download>下载 JSON</a></div></section>
 
@@ -35,4 +37,4 @@
 
 <section id="code"><h2>代码与来源证据</h2><dl class="record"><dt>代码状态</dt><dd><strong>本地已记录，待发布</strong>。分支 <code>no_privileged_info</code>，提交 <code>5e612e916c011bcc76431efd1775040f86563fef</code>；本页不提供尚未发布的 GitHub 提交链接。</dd><dt>官方基础</dt><dd><code>a744bd5f128ebef3cb8c6736cf7cd98adff681f1</code>。运行源码哈希与归档一致。</dd><dt>批次</dt><dd><code>official_main_composite_no_privileged_info_astra_xhigh_20261109T151754Z</code></dd><dt>协议</dt><dd>Seen / Unseen 各 16 个任务、seeds 1–5；环境 split=target；100 个 Planner 响应、每局 3600 秒；VLA 40 chunks × 8 actions，settle patience=999。</dd><dt>公开数据</dt><dd><a href="analysis/data.json">逐局数据及源码 / 证据 SHA-256</a> · <a href="analysis/episodes.csv">CSV</a> · <a href="analysis/extract.py">复算脚本</a> · <a href="analysis/report.md">文字报告</a></dd></dl><p class="note">只公开筛选后的数值、动作统计和哈希，不附原始模型消息、凭据、绝对本机路径或完整运行源码。</p></section>
 <div class="links border-top"><a href="analysis/">查看完整逐局分析 →</a><a href="../geometry-removed/">E05 · 仅移除几何查询 →</a><a href="../baseline/">E01 · baseline →</a></div>
-</main><footer class="site-foot"><span>E08 · 组合信息移除（保留 success）· 2026-11-10</span><a href="../">实验目录</a></footer></body></html>
+</main><footer class="site-foot"><span>E08 · 组合信息移除 · 提供位姿坐标 · 2026-11-10</span><a href="../">实验目录</a></footer></body></html>

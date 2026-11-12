@@ -16,6 +16,7 @@ html{scroll-behavior:smooth;scroll-padding-top:16px}.page-nav{display:flex;flex-
 <nav class="page-nav" aria-label="页内导航"><a href="#interfaces">接口分类</a><a href="#pipeline">整个流程</a><a href="#control">方法内部读取</a><a href="#vla">VLA 输入</a><a href="#feedback">动作反馈</a></nav>
 <p class="lead"><strong>back_project_batch 和 query_world_map 都是几何查询。</strong>前者从像素查三维点，后者从空间范围查点簇。点簇没有物体语义标签，具体是什么仍需 Agent 结合图像判断。</p>
 <p class="note">按来源区分机器人自身状态、几何、接触和任务判据。RGB 是常规视觉观测，历史记忆是已有经验；两者与当前场景的真值单独区分。</p>
+<p class="boundary"><strong>以下接口说明以原版为准。</strong>组合移除实验中，<a href="../experiments/no-privileged-info/">E08 向 Planner 提供末端／底盘位姿坐标（41/160）</a>；<a href="../experiments/no-planner-pose/">E09 不提供这些坐标（27/160）</a>，并额外隐藏夹爪开度、<code>held_apart</code>、动作执行状态、步数与耗时。两组均保留 VLA／控制器内部本体状态、simulator success 和原生成功早停；该对照不是只改变坐标的单变量实验。</p>
 <div id="interfaces" class="table-wrap"><table aria-label="接口与信息来源"><thead><tr><th>信息类别</th><th>接口 / 字段</th><th>提供什么</th></tr></thead><tbody>
 <tr><td class="p">本体状态</td><td><code>view_env_state().state</code></td><td>末端位姿、夹爪开度、底盘位姿。<span class="sub">来自模拟器机器人状态。</span></td></tr>
 <tr><td class="s">视觉语义</td><td><code>view_env_state()</code> 的 RGB 图像</td><td>Agent 看图判断物体身份、外观与关系。<span class="sub">当前没有独立的 segment / locate 工具。</span></td></tr>
