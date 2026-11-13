@@ -1,0 +1,74 @@
+{
+  "split": "unseen",
+  "task": "RecycleBottlesByType",
+  "seed": 1,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 1958.3,
+    "termination_reason": "completed",
+    "finish_status": null,
+    "visual_completion": "incomplete",
+    "judge_calls": 55,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 54,
+    "vla_calls": 9,
+    "manual_calls": 45,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/RecycleBottlesByType.md"
+    ],
+    "result_sha256": "1c7cc796bc924a36e3f8ca7fbb591c47071ec791fc4fea2b9859692d6a5bd4ec",
+    "states_sha256": "6c9d461d803fcd200d129542c2eb145aef52756792c9249a694754aed6dc9a9c",
+    "transcript_sha256": "4e5d6500b3ce89dc0541cc1340b74757256bb394a40f4712f67831ef89089472",
+    "initial": {
+      "task_language": "Move the plastic bottles in the middle to the plastics group, and the glass bottles in the middle to the glass group.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          3.7908487023904534,
+          -3.3314359321734743,
+          1.2975238669638967
+        ],
+        "robot0_eef_quat": [
+          -0.019034632817019004,
+          0.991194795518578,
+          -0.014253454819582616,
+          -0.13025896942671977
+        ],
+        "robot0_gripper_qpos": [
+          0.020554774784940267,
+          -0.020511784532191202
+        ],
+        "robot0_base_pos": [
+          4.026689309116556,
+          -3.339570097391778,
+          0.7000000248997231
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          1.0,
+          1.738557671160379e-06
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "cf902dc303238c01143ae7ab021cb51a6c91b73604cba5dcba5dfd37ecded954",
+        "agentview_right": "4fde20600305335da593263eba46a3dfc3ddd4724d992bda9bee4d344fb0d77e",
+        "navview": "48ce1dbc29288bbd322d63135a2eff5e2145a400ccdcbfe7e4105dc84a71db23",
+        "wrist": "eb4ce297afcf7352d7759f4555a2194376399db248a0e12dff7c9bbbf6632319"
+      }
+    }
+  },
+  "baseline": {
+    "success": true,
+    "elapsed_s": 1552.9
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1594.5,
+    "result_sha256": "895ee526e8b98e9a30edb0b79bf660664b67c410763d6baff075cb83c965afe0"
+  }
+}

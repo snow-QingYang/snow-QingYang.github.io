@@ -1,0 +1,74 @@
+{
+  "split": "seen",
+  "task": "PrepareCoffee",
+  "seed": 5,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 1485.7,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "incomplete",
+    "judge_calls": 29,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 28,
+    "vla_calls": 13,
+    "manual_calls": 15,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/PrepareCoffee.md"
+    ],
+    "result_sha256": "58e026a156ba804a50e4dd409a0b735f56082b14d68ed621f43e732ce654743b",
+    "states_sha256": "f341dae7726bf80af9e8c19d0694342dc2ec742644a908bfd539c768d7ae1bda",
+    "transcript_sha256": "d28d5a1b0ee6773b55590b5646946eb1ab2d99b12c9b5bbd8147d2849988edb0",
+    "initial": {
+      "task_language": "Pick the mug from the cabinet, place it under the coffee machine dispenser, and press the start button.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          0.5880286977074688,
+          -3.101443773212753,
+          1.2862759753166952
+        ],
+        "robot0_eef_quat": [
+          0.040342324683263264,
+          -0.9907582904844423,
+          0.02845831806164959,
+          0.1263353901667968
+        ],
+        "robot0_gripper_qpos": [
+          0.02056302437452556,
+          -0.020503534505009517
+        ],
+        "robot0_base_pos": [
+          0.8318148292635201,
+          -3.102675997670334,
+          0.7000000252555462
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -1.0,
+          1.941452183018555e-06
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "5b00d4993dfb681f94b158f27a65cbe836d70615742a3524a82b23e552e31c5c",
+        "agentview_right": "80989a10aec5f307868d5e580f7c18f853c0e9969970f039c2a931cdd8b7d12b",
+        "navview": "b4fb130a1dbb2cafe655885fb41c777cf0cb0336ef03a439c64aa7f1c97095b1",
+        "wrist": "88c0244860762585aaa168310c445363fc818cd9245073ef513997274e49df89"
+      }
+    }
+  },
+  "baseline": {
+    "success": true,
+    "elapsed_s": 823.5
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1217.7,
+    "result_sha256": "20863569f8021a42aaf675ec2c6fa13550e688d31444adce03e6b0f44f7fdf1c"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "split": "seen",
+  "task": "GetToastedBread",
+  "seed": 2,
+  "current": {
+    "success": true,
+    "valid": true,
+    "elapsed_s": 738.8,
+    "termination_reason": "completed",
+    "finish_status": "success",
+    "visual_completion": "incomplete",
+    "judge_calls": 10,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 9,
+    "vla_calls": 9,
+    "manual_calls": 0,
+    "first_native_success_step": 9,
+    "actions_after_first_success": 0,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/GetToastedBread.md"
+    ],
+    "result_sha256": "9d3582c5fa9b6f9d0076c71b5fa82cf0da458f80007c633e62628ec02d97085e",
+    "states_sha256": "03eb87d2dca7353c1212b7def9b24865e658798ca9cc355e644468b8920c2802",
+    "transcript_sha256": "c5f1cbab0c72a4d23e29c84f37967fde6503a13e61a097c77d80d02325286f46",
+    "initial": {
+      "task_language": "Start the toaster. Once the lever pops up, take the bread to the plate on the dining counter.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          3.3135432827718976,
+          -0.6140523520915856,
+          1.2915328790567782
+        ],
+        "robot0_eef_quat": [
+          0.6645348211007247,
+          0.7352793198031058,
+          0.08511201004966343,
+          -0.10253652597886795
+        ],
+        "robot0_gripper_qpos": [
+          0.020551549630527403,
+          -0.020515010821689158
+        ],
+        "robot0_base_pos": [
+          3.306845104400373,
+          -0.8484639694520397,
+          0.700000023153853
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          0.7071068286895752,
+          0.7071067094802856
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "5cf702631210b841dd7df5579d89f190d43d8f426a5d9dc9773099c687d27069",
+        "agentview_right": "a4d2c40e741bb3ef33fb75aa130dd5d094e30aa86226d4acfb965aa1047a8963",
+        "navview": "257a01d613182c2befc0fe4d338c1160eca4652d7947bcfc0f8cd7da6a32e995",
+        "wrist": "77d4fb3c2a036aa4c56e3240e761167bc9a7b805846cda3f41c43ff1b9804b7b"
+      }
+    }
+  },
+  "baseline": {
+    "success": true,
+    "elapsed_s": 524.2
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1455.3,
+    "result_sha256": "36f769083326c7b9777fb8e7c088a24cbc7d7c703695fbf527b3656378f327bd"
+  }
+}

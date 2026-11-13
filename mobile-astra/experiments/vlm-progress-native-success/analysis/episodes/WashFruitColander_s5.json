@@ -1,0 +1,74 @@
+{
+  "split": "unseen",
+  "task": "WashFruitColander",
+  "seed": 5,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 1344.6,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "incomplete",
+    "judge_calls": 22,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 21,
+    "vla_calls": 13,
+    "manual_calls": 8,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/WashFruitColander_s0.json"
+    ],
+    "result_sha256": "d07f7337603e9d538db5be7adbdb4c58f973f8c1bc66ee35d09bde0dec197227",
+    "states_sha256": "3185067e33cb0dc4045cf5cd4efa6de6c4871b052f64165c706d263969613780",
+    "transcript_sha256": "8dc9706bf209fe0e91899763c8ee7759138498dc76fc01c95b32dbd803ae3f17",
+    "initial": {
+      "task_language": "Put the colander in the sink, put the kiwi in the colander, and turn on the sink faucet and pour water over the colander.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          3.8980969221011934,
+          -1.2820667515921533,
+          1.2802326470973238
+        ],
+        "robot0_eef_quat": [
+          0.9921013569891036,
+          0.054683169534721965,
+          0.10870975563570542,
+          -0.030444005315341457
+        ],
+        "robot0_gripper_qpos": [
+          0.020540237522702853,
+          -0.02052632142726678
+        ],
+        "robot0_base_pos": [
+          3.6441611035723946,
+          -1.3021905312642994,
+          0.7000000223713679
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -1.943384631886147e-06,
+          1.0
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "9647c023761ebcd54e5f0d72b81421206636baa3897c399c83dd72ee80624152",
+        "agentview_right": "a25c878c5f801b6f42893a7ce2a36517322ae40b2d6f73496c36809356dcbbe4",
+        "navview": "d98a7ba51ce6fbfcad4a45cb41b8c79760e18522f36ced35df6a209eb7ddc354",
+        "wrist": "de8e64edb6ccd64870815a9d6ac9490aca42fbc82cff03934c91484c0dedf86e"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 1448.5
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1771.9,
+    "result_sha256": "3576242c4e530c5d9225de5bb77fb61ccea437a12947da3f8fb172e42b470ee5"
+  }
+}

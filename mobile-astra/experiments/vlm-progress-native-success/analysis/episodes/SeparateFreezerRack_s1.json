@@ -1,0 +1,74 @@
+{
+  "split": "unseen",
+  "task": "SeparateFreezerRack",
+  "seed": 1,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 1038.2,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "unknown",
+    "judge_calls": 15,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 14,
+    "vla_calls": 10,
+    "manual_calls": 4,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/SeparateFreezerRack.md"
+    ],
+    "result_sha256": "beb5cfe6cb976a9af57016ef8ea48cb8f7514e77a2c38556a34185c7ef8c6d50",
+    "states_sha256": "c817ef40c2179cfaf1d7d2f28568a8a6c1bc5c0cc97828082414937d13abe376",
+    "transcript_sha256": "b4fe35e04f413ff6a4e7a55d85315a18bd69990f4b8bd7434d5e0a5563c77f8c",
+    "initial": {
+      "task_language": "Take the meat container that has the chicken drumstick and place it on the second highest rack of the freezer. Then take the vegetable container that has the cucumber and garlic and place it on the highest rack of the freezer.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          5.869426148205165,
+          -1.9584428032367351,
+          1.2875033475599378
+        ],
+        "robot0_eef_quat": [
+          0.9907443433778911,
+          0.0418482150046211,
+          0.12845293074556235,
+          0.01319914953749382
+        ],
+        "robot0_gripper_qpos": [
+          0.02050633219800962,
+          -0.020560227317864457
+        ],
+        "robot0_base_pos": [
+          5.621323144625396,
+          -1.9476740751507349,
+          0.7000000241680943
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -1.9397718915570294e-06,
+          1.0
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "f70c9ad863fa7b924adc077bb47733c827bed97681acbbd74a309fc84c170479",
+        "agentview_right": "a0e32390fb506de17d142efd8d4ca0d54ad4f795583f12349b7eefa95381663f",
+        "navview": "c3f74745b705062d7a54aae2a98bb5a45b657fed4973061fea24c8f437d6debf",
+        "wrist": "63f881b873a98d30140bc63ec8a1a7e414360aec8ab653a62f143a2be802e7a5"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 1135.7
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1222.7,
+    "result_sha256": "5b3be5e2ad6c4d3a5ecb522644a32ba164733485044a086f76278ab92134acf9"
+  }
+}

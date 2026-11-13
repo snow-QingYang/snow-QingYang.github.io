@@ -1,0 +1,74 @@
+{
+  "split": "seen",
+  "task": "SteamInMicrowave",
+  "seed": 5,
+  "current": {
+    "success": true,
+    "valid": true,
+    "elapsed_s": 396.3,
+    "termination_reason": "completed",
+    "finish_status": "success",
+    "visual_completion": "unknown",
+    "judge_calls": 7,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 6,
+    "vla_calls": 4,
+    "manual_calls": 2,
+    "first_native_success_step": 6,
+    "actions_after_first_success": 0,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/SteamInMicrowave.md"
+    ],
+    "result_sha256": "ed6671e50d8a858568e00f12eff076bad598e6b75d7b416d83e8bd3da213d9db",
+    "states_sha256": "0790a1a43a9d3c6553f1014de5ebee4d4c8688654750019e8674bedb913e4db7",
+    "transcript_sha256": "edf6257643b65d63eed5e84d22d38e7de6f21da37d6993a7584ee92c42d2d058",
+    "initial": {
+      "task_language": "Pick the garlic from the sink and place it in the bowl. Then pick the bowl and place it in the microwave. Then close the microwave door and press the start button.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          1.2330023915677861,
+          -0.5268354989632243,
+          1.3065326299164683
+        ],
+        "robot0_eef_quat": [
+          0.6836561843893214,
+          0.7118663811080075,
+          0.0781922932003499,
+          -0.14052203485038306
+        ],
+        "robot0_gripper_qpos": [
+          0.020579156699035022,
+          -0.020487403916494878
+        ],
+        "robot0_base_pos": [
+          1.2153703773243818,
+          -0.7806950326287203,
+          0.7000000248800907
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          0.7071067690849304,
+          0.7071067094802856
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "c8f7284e392ae73dbe48bfce423514f13afc9ced2359c61926a6c5a2b67253f5",
+        "agentview_right": "4ea01db660af4d9e8e680ead4d9a13c281629cfb463f132816bf333450ef9983",
+        "navview": "0eb2b5819cc41d6e4874de3e1c5126dab52629654ddb04c1fc28d6d49136e0e6",
+        "wrist": "e1b3d591bee96924c3dc6afbc4438cf295fbae7dd723c98e02db3b0fdaef7018"
+      }
+    }
+  },
+  "baseline": {
+    "success": true,
+    "elapsed_s": 261.1
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1629.4,
+    "result_sha256": "38c73e6e391de3b89391161985315002c1bfaa978e52ba591b456a27e9422e0d"
+  }
+}

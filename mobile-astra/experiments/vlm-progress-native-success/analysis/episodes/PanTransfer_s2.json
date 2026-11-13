@@ -1,0 +1,74 @@
+{
+  "split": "unseen",
+  "task": "PanTransfer",
+  "seed": 2,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 628.5,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "incomplete",
+    "judge_calls": 8,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 7,
+    "vla_calls": 7,
+    "manual_calls": 0,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/PanTransfer.md"
+    ],
+    "result_sha256": "db751deb9b89411fa007649e10be2c66934e410e1bf5e00e55e272f62e2e2378",
+    "states_sha256": "a34153ddbde5f93ba66fa57466beae2cc179615197c981dca38cafa7e3dbd4e4",
+    "transcript_sha256": "a958f932a732005f86ea76dd8dd4da93d8b5ddb58250ae8caeb52a5479282ed2",
+    "initial": {
+      "task_language": "Pick up the pan and dump the vegetables in it onto the plate. Then return the pan to the stove.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          3.8130368777179813,
+          -1.4592414583908033,
+          1.299788729582466
+        ],
+        "robot0_eef_quat": [
+          0.9866552041077201,
+          0.02544841183484159,
+          0.16021953499372546,
+          -0.013913559883494249
+        ],
+        "robot0_gripper_qpos": [
+          0.0205278465013095,
+          -0.02053871313639747
+        ],
+        "robot0_base_pos": [
+          3.5655555886089645,
+          -1.4492713402641526,
+          0.7000000348779506
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -1.9348683508724207e-06,
+          1.0
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "33d1ba1b951ec81b0ea52b41b13f62b15d686fff391127c21eb5211e0a39d949",
+        "agentview_right": "835f2551afe3b6b6aafb01f508f45763a1aa98a97fdc705d54e7ff47e2285f4b",
+        "navview": "d7f159230326f417fb628cde0809b616ba704f80a4a4aea0174bd567b1242283",
+        "wrist": "31d9b6d519ae5d786ceade1dc70835b2c005cff3388dababafc83bf84ec94289"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 558.0
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 465.1,
+    "result_sha256": "a960863ac1bd854f86a7b6581a3264eacc1b467415bf34721ffb3215911df2f5"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "split": "seen",
+  "task": "DeliverStraw",
+  "seed": 2,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 884.3,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "unknown",
+    "judge_calls": 14,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 13,
+    "vla_calls": 8,
+    "manual_calls": 5,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/DeliverStraw.md"
+    ],
+    "result_sha256": "ebcde0fae640a6da2ab3ea8050ecacb8665a6eb9c89526a628e0004f05f608a8",
+    "states_sha256": "d25b17e655ed82b4abc1fcf2527fe1a8847e1a73ddcfa3b5a2c0291aebeb7ccc",
+    "transcript_sha256": "50081787ec15c09cd60a9618f6cadaf1f1541286e38e68ddd1595fc2c27220ad",
+    "initial": {
+      "task_language": "Take a straw from the drawer in front and place it inside the glass cup on the dining counter.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          5.871442567920512,
+          -1.9074936719712543,
+          1.288000367803834
+        ],
+        "robot0_eef_quat": [
+          0.9906869333409563,
+          0.03970190741722762,
+          0.12947265149261641,
+          -0.01414182344662826
+        ],
+        "robot0_gripper_qpos": [
+          0.02052790932684708,
+          -0.020538649962269197
+        ],
+        "robot0_base_pos": [
+          5.634689609161538,
+          -1.9046492175015275,
+          0.7000000292484202
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -1.9383246581128333e-06,
+          1.0
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "ee4d64aaf9cef15a0458f14564ccc33430dd797142d676edf57dc60e056e40bb",
+        "agentview_right": "7d404d7d86ae044207b280ba204c4c49693abd661bb8498fc9bd58ef35900adb",
+        "navview": "39ce9a79e506a28c0a46c3061b6ff402fd233cd55a14089374ded1306d910e80",
+        "wrist": "1484aa52b91484a932bd73870fe0e6f980ed4270acab4aed6100a62977209d4f"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 878.5
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1174.2,
+    "result_sha256": "c89ce065aca9db0179074288b55eae25a088e994e6be9eb71ef30c5b34cc0265"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "split": "unseen",
+  "task": "HeatKebabSandwich",
+  "seed": 5,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 2148.4,
+    "termination_reason": "completed",
+    "finish_status": null,
+    "visual_completion": "unknown",
+    "judge_calls": 30,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 29,
+    "vla_calls": 20,
+    "manual_calls": 9,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/HeatKebabSandwich_s0.json"
+    ],
+    "result_sha256": "b3aed6c8557297130413c0eacf51a1df01dde1125ffa0a874dc0fceff195a964",
+    "states_sha256": "bfdb6174ca102ab7cb8cc70900afafb52d89782749dad8a26eddf6d856d5551e",
+    "transcript_sha256": "e35f58b79bdd2891cc331867f1c8c590f334e1091d1d312bb4eb59ba7b66cd9b",
+    "initial": {
+      "task_language": "Pick up the kebab skewer and baguette bread, and place them inside the toaster oven. Close the toaster oven door and start by setting the timer.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          3.463610720453698,
+          -0.5450771680320697,
+          1.3043411440198693
+        ],
+        "robot0_eef_quat": [
+          0.6578813427480944,
+          0.737180549514753,
+          0.09184722713579396,
+          -0.1237782822168548
+        ],
+        "robot0_gripper_qpos": [
+          0.020558687246355997,
+          -0.020507873453013876
+        ],
+        "robot0_base_pos": [
+          3.471825078768951,
+          -0.7931112224046181,
+          0.7000000254482683
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          0.7071068286895752,
+          0.7071066498756409
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "7b8fba746af75c29c1c164aa1ba9937e3babe31836b1cfa03ffa0de7bf9afbe9",
+        "agentview_right": "7bd4a17c8d14241c46b59c7401b7595bc97ff0234475afcb1be7438419a60054",
+        "navview": "61693258348be4b9f32f3c1937b5c29ab24c4b244db427ef9171d5cbae0e30ce",
+        "wrist": "b5d18c51f2866efe92cd70bb23149566fa5b2e92fd3439cc475a2d092a7779a1"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 1630.7
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1996.1,
+    "result_sha256": "6e808b69d0e6ed615776387daaa043b28d8a49401e3bd2b27045bca48e061303"
+  }
+}

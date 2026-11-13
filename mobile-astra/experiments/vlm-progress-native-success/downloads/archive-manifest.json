@@ -1,0 +1,10 @@
+{
+  "kind": "audit",
+  "filename": "vlm-progress-native-success-audit-20261113.zip",
+  "size_bytes": 16844564,
+  "uncompressed_bytes": 64951448,
+  "files": 9171,
+  "sha256": "fd4937ac09b39640c7ef308f246c826754ab0679de63366c5f37afeb015828b6",
+  "zip_crc_check": "passed",
+  "credential_pattern_scan": "passed"
+}

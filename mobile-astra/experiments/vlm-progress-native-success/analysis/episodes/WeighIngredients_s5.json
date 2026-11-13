@@ -1,0 +1,76 @@
+{
+  "split": "unseen",
+  "task": "WeighIngredients",
+  "seed": 5,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 1290.6,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "incomplete",
+    "judge_calls": 18,
+    "judge_errors": {
+      "InternalServerError": 1
+    },
+    "cancelled_judgments": 0,
+    "action_count": 17,
+    "vla_calls": 12,
+    "manual_calls": 5,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/WeighIngredients.md"
+    ],
+    "result_sha256": "d62166bff1612e47bc71c4d064ba8b8c9cc3ce9743cff9056e7ca6a2771bab3f",
+    "states_sha256": "63b1b00633f0f535c4bd7f54fc6ad4608003fe474ba317d6c6a352da9e8f73a2",
+    "transcript_sha256": "5039c674b7009e216e16188f04e161029b2e9690fc2d5d940879f5a1682ce061",
+    "initial": {
+      "task_language": "Pick the jam and place it on the digital scale for weighing, and close the cabinet.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          5.839860418727725,
+          -2.1588799561025516,
+          1.3197341357476042
+        ],
+        "robot0_eef_quat": [
+          0.9842397722945687,
+          0.017797674280592535,
+          0.17488911769965307,
+          -0.019212233966263467
+        ],
+        "robot0_gripper_qpos": [
+          0.02053275050609824,
+          -0.020533808869065293
+        ],
+        "robot0_base_pos": [
+          5.595298594861149,
+          -2.147683424961807,
+          0.7000000396168302
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -1.9259146029071417e-06,
+          1.0
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "07ea5be19cb927fdf08b0e1400375ee5b3423cd6759f0faefaaee822646e1f83",
+        "agentview_right": "4ca0f7cf1ba6f85bd5afd7220b6bcbbc82792fe4550de5f01b0a47e229bcab7e",
+        "navview": "3bb7273ec7f650f5abedb40f10475a0ea3a169620ef9799dddef176b1bb00019",
+        "wrist": "5d2e5aa7cbece2e7ae3ecec2e8ea80fd424e6b895ac60ac90190511b1eff5d83"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 1879.7
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1486.9,
+    "result_sha256": "ed29f7ec6478e3200ddce8f6373eceefb1364e923197cb263fafd2951298e309"
+  }
+}

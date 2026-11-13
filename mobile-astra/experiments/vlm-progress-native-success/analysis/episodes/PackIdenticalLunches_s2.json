@@ -1,0 +1,74 @@
+{
+  "split": "seen",
+  "task": "PackIdenticalLunches",
+  "seed": 2,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 2644.4,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "incomplete",
+    "judge_calls": 41,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 40,
+    "vla_calls": 14,
+    "manual_calls": 26,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/PackIdenticalLunches.md"
+    ],
+    "result_sha256": "1b1d93d8f3150fea871fb2d280cb08295b782c377f1aac67820eee739e5a86f8",
+    "states_sha256": "cad58f0d83c8c182aea62b93d517d9c9b4e295a56c0c2cba474f37bc68c0fb19",
+    "transcript_sha256": "00db7399d0c159d23c01a92d1e4208b332ef2513f00c312be51c1009937ad83e",
+    "initial": {
+      "task_language": "Place one sweet potato and one fish in each tupperware on the nearby counter, to pack two identical lunches.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          5.510016970504436,
+          -3.006854565832384,
+          1.3014552192810525
+        ],
+        "robot0_eef_quat": [
+          0.989103038667972,
+          0.03515043561209141,
+          0.14182996823673352,
+          -0.017996829832785083
+        ],
+        "robot0_gripper_qpos": [
+          0.02053105754602694,
+          -0.020535501576619864
+        ],
+        "robot0_base_pos": [
+          5.271895908026567,
+          -3.0031038802770023,
+          0.7000000320763604
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -1.9310762127133785e-06,
+          1.0
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "dc8ecb9c1fe92c21a168e2d26ccb8a796eb38ff110e0773e52ecd1678b926f7b",
+        "agentview_right": "c1fb7726477df01d4aab88ab52af4e0487c7b6d59f8d632f12f76d0b0f3c43a7",
+        "navview": "d71fd9a782d01fc6d17f2ad9b34fb995da337d5eca5cd6eb9b2b2d8ff6ae9ea2",
+        "wrist": "43ba5aa73820870db5e7cba6a0a883141b80a4cddfb92fd21ed7b1281890e404"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 2486.6
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1941.8,
+    "result_sha256": "38d4bfbe28f1567290bace2a67fd2777ca4504afc34955975a788bb58221ffa5"
+  }
+}

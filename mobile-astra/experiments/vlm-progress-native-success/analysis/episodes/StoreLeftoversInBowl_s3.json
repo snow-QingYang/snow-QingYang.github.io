@@ -1,0 +1,74 @@
+{
+  "split": "seen",
+  "task": "StoreLeftoversInBowl",
+  "seed": 3,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 1312.9,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "incomplete",
+    "judge_calls": 15,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 14,
+    "vla_calls": 12,
+    "manual_calls": 2,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/StoreLeftoversInBowl.md"
+    ],
+    "result_sha256": "a74507ff23d5835a7f0e0c731d3b8b21fd26c858002d76c5925805c0b989e150",
+    "states_sha256": "7c96623e70a70f18f523747a2576bd095878e1084621862c9ad0abf19b147a3c",
+    "transcript_sha256": "5830beeebfc51461ec3badfd7c171a8a356bdf3337afbeb6c760572764368227",
+    "initial": {
+      "task_language": "Pick the chicken drumstick and cucumber from their plates and place them in the bowl. Then put the bowl in the fridge.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          2.006090789916315,
+          -4.6344513081204,
+          1.3189501850017427
+        ],
+        "robot0_eef_quat": [
+          0.6898087883122209,
+          0.7039978400090394,
+          0.10023910092225219,
+          -0.1360257309340025
+        ],
+        "robot0_gripper_qpos": [
+          0.02056583463595174,
+          -0.020500726018090124
+        ],
+        "robot0_base_pos": [
+          2.000671873616259,
+          -4.8682044818204675,
+          0.7000000296525306
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          0.7070740461349487,
+          0.7071394324302673
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "d0a1bbf5f010fc537107642e32a61ac041676c9bcf5881c9b3ba6c3e4f7b23ae",
+        "agentview_right": "93901381de77202c4c54b0e16b5a6decffa4eaee2c509a7d11a15d50a4b7176d",
+        "navview": "7714cab33a5a0e2c702d242926901665f968a87df88758dcd46d0df0b0dc3aa7",
+        "wrist": "828c16d83ab775bf9b2e0cbbb8659a28978a582780b659285e53a91ab9a9a09a"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 1910.2
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1172.5,
+    "result_sha256": "0542fa1dfeb2f5d73d3c46b8d356e2fcb7646a1684a6e979789d58dd98e29405"
+  }
+}

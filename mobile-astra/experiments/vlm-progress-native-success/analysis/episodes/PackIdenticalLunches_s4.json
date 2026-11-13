@@ -1,0 +1,74 @@
+{
+  "split": "seen",
+  "task": "PackIdenticalLunches",
+  "seed": 4,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 2020.1,
+    "termination_reason": "completed",
+    "finish_status": null,
+    "visual_completion": "incomplete",
+    "judge_calls": 44,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 43,
+    "vla_calls": 13,
+    "manual_calls": 30,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/PackIdenticalLunches.md"
+    ],
+    "result_sha256": "c3c6a8175654f30ba382f27e7321af72d966d1cbfa2786b1e48eeb41c7c420a5",
+    "states_sha256": "330d3bd3066216e05abcc180442df83b5797ee7c29faed23d109d488f50da641",
+    "transcript_sha256": "edcf082883032d287e918dbd73f8bfbfff7c53d702b81f8bfc5981ef3169b174",
+    "initial": {
+      "task_language": "Place one lemon and one chicken drumstick in each tupperware on the nearby counter, to pack two identical lunches.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          4.369568569846308,
+          -3.974622306838217,
+          1.2974824000722522
+        ],
+        "robot0_eef_quat": [
+          0.9882866691309311,
+          0.04689945136496493,
+          0.14072556107249906,
+          -0.03586387514734389
+        ],
+        "robot0_gripper_qpos": [
+          0.02054349407443572,
+          -0.020523065019098737
+        ],
+        "robot0_base_pos": [
+          4.122777964772098,
+          -3.9809964710784476,
+          0.7000000323138016
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -1.9389187855267664e-06,
+          1.0
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "9cfc41f108eb747c0766483fad25910967ddbf9c379a4f4a5ce71ea1538088d9",
+        "agentview_right": "68eebbe818c4447312ace864d7d15338950d594cdef8440d2debae90171c0c7d",
+        "navview": "d7405121fd6f6e74864a171b4cc35f1d6a2c68de1a659caa8ac91178d692b20e",
+        "wrist": "abc123a489810513f44f81872ca2519cffa787e3c2f1f47394632d6a6c4643c4"
+      }
+    }
+  },
+  "baseline": {
+    "success": true,
+    "elapsed_s": 394.8
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1878.8,
+    "result_sha256": "0d6db3e101989ee1e1b7f9db6c61f2f2f2f3e53a75682ab7c3d068320d3681be"
+  }
+}

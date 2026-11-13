@@ -1,0 +1,74 @@
+{
+  "split": "unseen",
+  "task": "WeighIngredients",
+  "seed": 3,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 1204.2,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "incomplete",
+    "judge_calls": 22,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 21,
+    "vla_calls": 11,
+    "manual_calls": 10,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/WeighIngredients.md"
+    ],
+    "result_sha256": "d12ca68c54026596e4f40a1cafb140691d9a86df64464fb64b82d623996edddc",
+    "states_sha256": "a76a19878c433d0cba632ee6806b7e144ca0efc6470c89d59a143e1308114479",
+    "transcript_sha256": "680a266455c131cc4131efd92e3e633517e17e380bc26822ba7a0d4e22e369f5",
+    "initial": {
+      "task_language": "Pick the canned food and place it on the digital scale for weighing, and close the cabinet.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          3.8513435766868147,
+          -0.9256968088807451,
+          1.2972607177820636
+        ],
+        "robot0_eef_quat": [
+          0.990784311157041,
+          0.034104727347966324,
+          0.12880817634888045,
+          -0.024326324080381684
+        ],
+        "robot0_gripper_qpos": [
+          0.02053637641056805,
+          -0.020530182664824096
+        ],
+        "robot0_base_pos": [
+          3.6041090689098914,
+          -0.9284767450771568,
+          0.700000028246616
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -1.9357448763912544e-06,
+          1.0
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "67732f6ef199bcad446a4e3a20e7d283a07efc4e23a650b83be95af1f7349705",
+        "agentview_right": "4e7157fb50e5c306d8f01fda0404c9452ccf25728c8ffad025b1b06349340db0",
+        "navview": "e2971d1e6dbe49a120f11e66c5af1b37677574b5940be27f1f426eceefbdc267",
+        "wrist": "45ddf3bee8c39605ef6b34c2b896aeac11ad23072259bc02678b37e6dd368a21"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 1047.8
+  },
+  "no_progress": {
+    "success": true,
+    "elapsed_s": 628.3,
+    "result_sha256": "6c4f533156ba224a70c59b9de06f24abe972e68b0d8cbb31961b548247eda797"
+  }
+}

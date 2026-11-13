@@ -1,0 +1,76 @@
+{
+  "split": "seen",
+  "task": "ScrubCuttingBoard",
+  "seed": 5,
+  "current": {
+    "success": true,
+    "valid": true,
+    "elapsed_s": 263.9,
+    "termination_reason": "completed",
+    "finish_status": "success",
+    "visual_completion": "unknown",
+    "judge_calls": 3,
+    "judge_errors": {
+      "APITimeoutError": 1
+    },
+    "cancelled_judgments": 0,
+    "action_count": 2,
+    "vla_calls": 2,
+    "manual_calls": 0,
+    "first_native_success_step": 2,
+    "actions_after_first_success": 0,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/ScrubCuttingBoard.md"
+    ],
+    "result_sha256": "15fdf4940cc435c50a453399bff86e28beb10d2c2fc80aa0d337feedb21c5a21",
+    "states_sha256": "113814bb326994acc8c69a707a7c1bcb6f57e4f8933d166ca47055c073b5ea1e",
+    "transcript_sha256": "658e35f6174615bc1e8c5fbc74dd19414d248fdb7d7209cdc52d598fee9edd4b",
+    "initial": {
+      "task_language": "Pick up the sponge from the counter and clean the cutting board by briefly scrubbing or pressing down on the cutting board. Once finished, release the sponge.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          1.022944568629378,
+          -0.5398958663491321,
+          1.311861009145032
+        ],
+        "robot0_eef_quat": [
+          0.6725648939916778,
+          0.7228086820545336,
+          0.10926150257157141,
+          -0.11517810804294824
+        ],
+        "robot0_gripper_qpos": [
+          0.020546500036039396,
+          -0.02052006022053239
+        ],
+        "robot0_base_pos": [
+          1.0177639823315123,
+          -0.7877262644064873,
+          0.7000000285944319
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          0.7071068286895752,
+          0.7071066498756409
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "dd5ef686c235ee1cd2fb9c09bdcff5946a789d46cb7c38f2dda259b0e9b6a121",
+        "agentview_right": "10ab78a33fce4c651046efa0716d8d834a941477672f56f7ddc9d30e25b8e1df",
+        "navview": "483b9055e65b1b2bbe02dbfe25ec8f1c2051ccc609a794c3f05eebc6f9313290",
+        "wrist": "d7b530639a41e976cd78bda747bb68e936d5d8bca066aee50827c9ce4f797176"
+      }
+    }
+  },
+  "baseline": {
+    "success": true,
+    "elapsed_s": 168.6
+  },
+  "no_progress": {
+    "success": true,
+    "elapsed_s": 181.8,
+    "result_sha256": "d90bbba072b665fc5877f9c82af392c8207dd5111fb8e75155888f9f2d85042f"
+  }
+}

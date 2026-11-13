@@ -1,0 +1,74 @@
+{
+  "split": "seen",
+  "task": "KettleBoiling",
+  "seed": 5,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 1036.2,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "incomplete",
+    "judge_calls": 21,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 20,
+    "vla_calls": 9,
+    "manual_calls": 11,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/KettleBoiling.md"
+    ],
+    "result_sha256": "e9597ac82b24f41f9b5ef769cadd0bb86ed0dfaf2d8e4c91f3861c6a467dbd35",
+    "states_sha256": "0e366f9214f17a40f1e20725eda281473d0bdeec92b23f9157691d4fde5dd10c",
+    "transcript_sha256": "12b0a58a61dfcafbd1524b8e8d4dfbf4e9579f57b4695b23eb42728c6a123c5d",
+    "initial": {
+      "task_language": "Pick the kettle from the counter and place it on a stove burner. Then turn the burner on.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          4.57319602877203,
+          -1.4516933726610766,
+          1.2882368602128669
+        ],
+        "robot0_eef_quat": [
+          0.9923246159103918,
+          -0.00043810733443472305,
+          0.12137111937372232,
+          -0.02367944471954163
+        ],
+        "robot0_gripper_qpos": [
+          0.020539117260598722,
+          -0.02052744207375145
+        ],
+        "robot0_base_pos": [
+          4.327338457447065,
+          -1.4337671229478453,
+          0.7000000278345804
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -1.940529955390957e-06,
+          1.0
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "f5f3747a050d5601bda5aa4c69ec6ad5aa7f5042e6004f6fa2d71fe684164dc2",
+        "agentview_right": "4186b52381714c2ada140bf5ffd6292ba7fd684d4721595707b27be6469fb06a",
+        "navview": "e9a9cd34485afbe8dac26a80aef42da07d4cef6fd6033cb65a718fa174955c0e",
+        "wrist": "e27a9228333001fa8de22cbbec3bd026197e2ef17982514ed512c45270826fa3"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 1203.1
+  },
+  "no_progress": {
+    "success": true,
+    "elapsed_s": 306.8,
+    "result_sha256": "a0e8c7acce86d3b7bbdfd2439f620c539434a36803f90e23690b872801c58c2a"
+  }
+}

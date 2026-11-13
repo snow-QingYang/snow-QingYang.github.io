@@ -1,0 +1,74 @@
+{
+  "split": "seen",
+  "task": "SearingMeat",
+  "seed": 2,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 941.6,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "incomplete",
+    "judge_calls": 18,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 17,
+    "vla_calls": 10,
+    "manual_calls": 7,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/SearingMeat.md"
+    ],
+    "result_sha256": "3e35f478c18dbafd69e3ceaaffcd2e92a34ea4363937890c8d90e5425e5264a6",
+    "states_sha256": "68acb1d8ec7edbee1e36d5b05db8016d280be357ee6a15b19955073cab04e531",
+    "transcript_sha256": "714cb97d5e0dd0ca654612c5f003208c7b20e2d10cd47d2a2a257213f194d166",
+    "initial": {
+      "task_language": "Grab the pan from the cabinet and place it on the front left burner on the stove. Then place the chicken drumstick on the stove and turn the burner on.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          4.155251870427524,
+          -0.5923487266562674,
+          1.290674984386758
+        ],
+        "robot0_eef_quat": [
+          0.6799258604686432,
+          0.7213789453872826,
+          0.05788589639625889,
+          -0.11816287241053136
+        ],
+        "robot0_gripper_qpos": [
+          0.020577885585381143,
+          -0.0204886753754998
+        ],
+        "robot0_base_pos": [
+          4.152118223084643,
+          -0.8330269967055075,
+          0.7000000182757683
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          0.7071068286895752,
+          0.7071066498756409
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "9ed97bd7216e3319c0626c4a57b0223064f897e20672dab8d612c237560932a8",
+        "agentview_right": "99deb4ddb573e3b50e9108c5f05f29af6bd560eb82b8416b8aadf41aad99c980",
+        "navview": "4cba81da425b56eaf77e85a32140221650928f2e36e0e879ce7f3d69ba9da691",
+        "wrist": "f0416cf2f916dca15277aee2538b6a300c8f4dcd54d1e87826161e6d83416c8e"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 921.2
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1060.7,
+    "result_sha256": "448453c804767ae6f15a5230dccf328eb8d2c0c138af344d7211df01b9741f06"
+  }
+}

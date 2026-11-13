@@ -1,0 +1,74 @@
+{
+  "split": "unseen",
+  "task": "ArrangeBreadBasket",
+  "seed": 5,
+  "current": {
+    "success": true,
+    "valid": true,
+    "elapsed_s": 419.9,
+    "termination_reason": "completed",
+    "finish_status": "success",
+    "visual_completion": "incomplete",
+    "judge_calls": 6,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 5,
+    "vla_calls": 5,
+    "manual_calls": 0,
+    "first_native_success_step": 5,
+    "actions_after_first_success": 0,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/ArrangeBreadBasket.md"
+    ],
+    "result_sha256": "dc55af6ab6a866a1a5243d883d2c465e9260e30d402ced02fbb37880e4c72683",
+    "states_sha256": "55b718e8ab008817398d3319a07d08f17e5726d529790d56d631f28e67be53eb",
+    "transcript_sha256": "2a1379e714fbe729c02101d572a33899192b29264b24778fbb587fe54ff8537f",
+    "initial": {
+      "task_language": "Open the cabinet, pick up the bread from the cabinet and place it in the basket. Then move the basket to the dining counter.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          4.425387784272603,
+          -0.5969842733082303,
+          1.2985904588419062
+        ],
+        "robot0_eef_quat": [
+          0.6752123621099064,
+          0.721153581361776,
+          0.09466486946059877,
+          -0.12273687560407784
+        ],
+        "robot0_gripper_qpos": [
+          0.02055924864911285,
+          -0.020507312208187595
+        ],
+        "robot0_base_pos": [
+          4.422501987571594,
+          -0.8413403540233229,
+          0.7000000258292903
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          0.7071068286895752,
+          0.7071066498756409
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "541004238cb32b2b1351492044355178c5720887edce1704dcef80b2b779de67",
+        "agentview_right": "d94024f777ddd05e768e110d5690c334e4bdbf4fc1bc8ad1e33af2b58c2686e7",
+        "navview": "2a0de202c7ffcc79765730844656dcd3a9fecce8b84cffe5f01c03f8323de1a1",
+        "wrist": "f4057680f9a92e2beb415d9240d04199aa269395e1e0986a1fb0782b3d389c73"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 833.4
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1173.5,
+    "result_sha256": "2faf5d4622e9b98e6943fd61254c288dbb1bd723799557d40a457ce4992c349e"
+  }
+}

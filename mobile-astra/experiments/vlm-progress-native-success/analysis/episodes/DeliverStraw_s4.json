@@ -1,0 +1,76 @@
+{
+  "split": "seen",
+  "task": "DeliverStraw",
+  "seed": 4,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 1078.3,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "unknown",
+    "judge_calls": 25,
+    "judge_errors": {
+      "APITimeoutError": 1
+    },
+    "cancelled_judgments": 0,
+    "action_count": 24,
+    "vla_calls": 9,
+    "manual_calls": 15,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/DeliverStraw.md"
+    ],
+    "result_sha256": "72cb042d0663e673c6ca261c2d39a20fba7b8ddb6a134b5cf4def03789faa125",
+    "states_sha256": "edd23d3889015e9cec984cbd648ba97a9fb0ef2fc762ccaa78c1ffc24c0b163a",
+    "transcript_sha256": "929dcee4dd88b7eead3ac0a0607d1ea31b8d38ea1b34505cbba6dc97025a62e8",
+    "initial": {
+      "task_language": "Take a straw from the drawer in front and place it inside the glass cup on the dining counter.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          3.984571806280154,
+          -0.5764575485728176,
+          1.3008874060811175
+        ],
+        "robot0_eef_quat": [
+          0.6840763704146517,
+          0.7133309039515106,
+          0.08616228530828343,
+          -0.12559698045132178
+        ],
+        "robot0_gripper_qpos": [
+          0.020566782202279185,
+          -0.02049977842845502
+        ],
+        "robot0_base_pos": [
+          3.975765963184834,
+          -0.8358393396307778,
+          0.7000000223548619
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          0.7071068286895752,
+          0.7071066498756409
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "a5da097ecdb3abfa6920e5c264d429bf5675eee508c4487462c62f9ba8339aee",
+        "agentview_right": "adfbf152b5f0663b63710ab020580da5e14ed78039357f3466b96c2b11dcd7c3",
+        "navview": "3c28b181e17392b82cd5c2c29d918ff3ca494129d1aa9418e7f2ee3b4d8ea2d6",
+        "wrist": "29ea677ebcf0910c591e39f8b0df5107063a3419c71dfd03277a2a50fd58317b"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 1442.3
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 2023.3,
+    "result_sha256": "efa6b034e24408ff94f39ac10bdae8661d51ce54b1e34c160922862cc3ce287e"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "split": "unseen",
+  "task": "GarnishPancake",
+  "seed": 2,
+  "current": {
+    "success": true,
+    "valid": true,
+    "elapsed_s": 1552.0,
+    "termination_reason": "completed",
+    "finish_status": "success",
+    "visual_completion": "incomplete",
+    "judge_calls": 28,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 27,
+    "vla_calls": 11,
+    "manual_calls": 16,
+    "first_native_success_step": 27,
+    "actions_after_first_success": 0,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/GarnishPancake.md"
+    ],
+    "result_sha256": "cb954afca334cfddf4c4bf11182b53016a74bde9ba9b3890137f59d7ccf308ac",
+    "states_sha256": "63de33356c877c3b22ff5887dcf9c6af55366fefecd3932ad8a511a6e4d862db",
+    "transcript_sha256": "3af0d11fe23d21662f7a91abe655a2c8dc8c8565211fa32a937e705bbee96dfc",
+    "initial": {
+      "task_language": "Take the strawberry from the fridge and place it on top of the pancake, located on the dining counter.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          5.183755398800664,
+          -1.6318608305823106,
+          1.27494234533089
+        ],
+        "robot0_eef_quat": [
+          0.9916099785604973,
+          0.053879271750819746,
+          0.11456683422588326,
+          -0.026098179827526824
+        ],
+        "robot0_gripper_qpos": [
+          0.020536683712242182,
+          -0.020529875287137192
+        ],
+        "robot0_base_pos": [
+          4.929073851307495,
+          -1.6386814025850858,
+          0.70000002364573
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -1.947287046277779e-06,
+          1.0
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "e0602674d1de50d68bf0d042a639871a81c0974e70e41740c2bafb879fec4b0e",
+        "agentview_right": "097af90461ca7eae49359340898dc58c044bf51674f0f32aea54b6b2bf1246ab",
+        "navview": "65c254d17f2ec70da7417aec3c319b867ff030ccca0c751136a537a6bd3c9241",
+        "wrist": "2317f26456419b83565b5a282828fa1471c7a1519a17087e54edf31a8a620185"
+      }
+    }
+  },
+  "baseline": {
+    "success": true,
+    "elapsed_s": 1846.0
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 709.1,
+    "result_sha256": "6ea57f9d221c6bcd85fe8acf67acc098f58d3694c58e79f61c5625bbfa474d71"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "split": "unseen",
+  "task": "SeparateFreezerRack",
+  "seed": 4,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 1272.7,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "incomplete",
+    "judge_calls": 19,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 18,
+    "vla_calls": 12,
+    "manual_calls": 6,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/SeparateFreezerRack.md"
+    ],
+    "result_sha256": "56f65a1ffca0ff88b0985d30f912ce9488e5cc0cf42effe56bb28ce3bda889e2",
+    "states_sha256": "84ed454bdb0c06af887c8e94e8c709eb4b711a712c4a984b5960ae5fa2817a31",
+    "transcript_sha256": "1fc327288dc3fd3657be7b5c0882480d7aff45c94c592d1ad6686295a0fc5f46",
+    "initial": {
+      "task_language": "Take the meat container that has the steak and place it on the second highest rack of the freezer. Then take the vegetable container that has the onion and carrot and place it on the highest rack of the freezer.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          5.828156198170303,
+          -1.8553885920042807,
+          1.3020302530007888
+        ],
+        "robot0_eef_quat": [
+          0.990080946233497,
+          0.029850463905099267,
+          0.13629056066054324,
+          -0.016539431213552627
+        ],
+        "robot0_gripper_qpos": [
+          0.02053024198737954,
+          -0.02053631772225813
+        ],
+        "robot0_base_pos": [
+          5.581160851975953,
+          -1.8503817179261182,
+          0.7000000297516833
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -1.9364338186278474e-06,
+          1.0
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "c035cccc720737061e061eae506641794f3ed0e92ce2dcdce3f4d9fe2cebe523",
+        "agentview_right": "cd7a9d008a93896a02c098f28c370396fff1fd6e29a3f245e0820fd320c8ce45",
+        "navview": "476ab606eb2eea366498e4b41554861394484378276245ad1cce72b3b80c4be2",
+        "wrist": "adb3b67acdc949d328f6b7183ea4fa1e1cc1fdf6810fc7832f3182d1aee41ebe"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 553.6
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1639.4,
+    "result_sha256": "c9ac1b9c2455451f43b8d7c0dd9856dd2a6e07626144d7122ff1ffa6b7af6b3a"
+  }
+}

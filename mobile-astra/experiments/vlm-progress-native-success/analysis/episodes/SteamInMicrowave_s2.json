@@ -1,0 +1,74 @@
+{
+  "split": "seen",
+  "task": "SteamInMicrowave",
+  "seed": 2,
+  "current": {
+    "success": true,
+    "valid": true,
+    "elapsed_s": 364.1,
+    "termination_reason": "completed",
+    "finish_status": "success",
+    "visual_completion": "unknown",
+    "judge_calls": 5,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 4,
+    "vla_calls": 4,
+    "manual_calls": 0,
+    "first_native_success_step": 4,
+    "actions_after_first_success": 0,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/SteamInMicrowave.md"
+    ],
+    "result_sha256": "8191362d360aee4ad90bb29b9620e9f4da724d8b8782602aa71049425d9c47ef",
+    "states_sha256": "7c15a36aade9ae5ac76abe188527cae261c095777872813a1a92b472ccd00594",
+    "transcript_sha256": "4a6351e924d57a1e5b7ec6360f16c6f951ba5165734f73f555bf808e8248e23f",
+    "initial": {
+      "task_language": "Pick the lime from the sink and place it in the bowl. Then pick the bowl and place it in the microwave. Then close the microwave door and press the start button.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          2.8567719445382718,
+          -2.032993397192122,
+          1.2805558165759061
+        ],
+        "robot0_eef_quat": [
+          0.7413133183060319,
+          -0.662725818570632,
+          0.1004985020867703,
+          0.03389844510152819
+        ],
+        "robot0_gripper_qpos": [
+          0.020550326956244928,
+          -0.02051623431642617
+        ],
+        "robot0_base_pos": [
+          2.847445989041323,
+          -1.7978708886960235,
+          0.7000000399769675
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -0.7071396112442017,
+          0.7070739269256592
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "fdd4362245b17c06ac524e7e251fa5f1af495dd1a2bb34fb858ed547e6137e6d",
+        "agentview_right": "dca2c5661698e7047c278d3eaa002b8a9b9d9a2f2857ea23933bc0ec30f1e431",
+        "navview": "eb735e3053f7aa6f419086acd2ca57a83656383e10ecd8f46969344aaf4c08cd",
+        "wrist": "37a2273470a3ef32f15ed45730d09044c3caf657fba769228f0e2778aec6c58d"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 413.6
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 738.0,
+    "result_sha256": "cad9465673358a7befbe8232f70758d07636d7f857e9764a26beca2d417f0e5d"
+  }
+}

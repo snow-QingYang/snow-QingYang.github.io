@@ -1,0 +1,74 @@
+{
+  "split": "unseen",
+  "task": "MakeIceLemonade",
+  "seed": 5,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 1473.3,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "unknown",
+    "judge_calls": 23,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 22,
+    "vla_calls": 14,
+    "manual_calls": 8,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/MakeIceLemonade.md"
+    ],
+    "result_sha256": "e83204cbbd7d1f6090b57a55be925335068319645ff6ed5f3a441d6178c96a3d",
+    "states_sha256": "e6e67040db25a54b3e86d29da20cda6943dfc331e912b81fc829855485dc3ef9",
+    "transcript_sha256": "0aec1b1a719f0834e55ffda9840a958396af16e43616b95471e7df362912edd8",
+    "initial": {
+      "task_language": "Grab a lemon wedge from the fridge and one ice cube from the ice bowl, and put them in the glass of lemonade.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          4.184340161354731,
+          -0.9073952264091396,
+          1.3039094122358568
+        ],
+        "robot0_eef_quat": [
+          0.6703044431814469,
+          0.7246472767148333,
+          0.0957358248001741,
+          -0.12811295660789115
+        ],
+        "robot0_gripper_qpos": [
+          0.02056082969042734,
+          -0.020505730857206743
+        ],
+        "robot0_base_pos": [
+          4.191893167938089,
+          -1.1563393272384395,
+          0.700000026902661
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          0.7071068286895752,
+          0.7071066498756409
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "b775d5ad450f128b4e2a37d33836178957dc84846f2651fb8b13314716b90ccf",
+        "agentview_right": "87bc45cada9e508afa6453913d674b6d05da260faad5659f4309fb7d8254fa72",
+        "navview": "4bb95ae5b26b6d3652b4a46ed2c1ce6d66cb2f7263399f9e18ee97b2a9626053",
+        "wrist": "3afb7dab9fecb0557637702ff2a72298b31cacba4a31df03a307427e7748f575"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 1450.9
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 897.2,
+    "result_sha256": "9ed0df4363753d456d7374a0b50e2c0e25fa5a67c4998219a047ac34d9f82f70"
+  }
+}

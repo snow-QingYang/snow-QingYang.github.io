@@ -1,0 +1,74 @@
+{
+  "split": "unseen",
+  "task": "BreadSelection",
+  "seed": 1,
+  "current": {
+    "success": true,
+    "valid": true,
+    "elapsed_s": 2070.5,
+    "termination_reason": "completed",
+    "finish_status": "success",
+    "visual_completion": "apparently_complete",
+    "judge_calls": 48,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 47,
+    "vla_calls": 11,
+    "manual_calls": 36,
+    "first_native_success_step": 47,
+    "actions_after_first_success": 0,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/BreadSelection.md"
+    ],
+    "result_sha256": "0ef23eba38f942327aeb56cb75d30e222d5344853e1138a72054bdcdb7a11132",
+    "states_sha256": "881b088530a23211ee6aaaa2a277007750a4040eb0368d47d5dc56e0961c136c",
+    "transcript_sha256": "701d7a0dedc48d995b90eec51dd4a8ebea92634be33177779d8ef64c357e6d28",
+    "initial": {
+      "task_language": "From the different types of pastries on the counter, select a croissant and place it on the cutting board. Then retrieve a jar of jam from the cabinet and place it alongside the croissant on the cutting board.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          5.84496417345679,
+          -2.160211260693614,
+          1.280227092187504
+        ],
+        "robot0_eef_quat": [
+          0.991596933525255,
+          0.05816198234150294,
+          0.1106400135136407,
+          -0.03333905582223636
+        ],
+        "robot0_gripper_qpos": [
+          0.02054186571141501,
+          -0.020524693499597752
+        ],
+        "robot0_base_pos": [
+          5.607247224474064,
+          -2.160575203122172,
+          0.700000029416283
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -1.9526376036083093e-06,
+          1.0
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "d8471510e40f6192f117ecd4b0fa72c40975cb39588c04f7ee670b31eb61e68b",
+        "agentview_right": "2975127e771e118a4f726d6fe37c734ae8b8f7e914e854dbc8c97e8076835320",
+        "navview": "324cd2869e447ca5978192231eff2db91c622d71c9b63e642852d3784e7bd076",
+        "wrist": "41d9a3155ff9a93c7d043781ddc17cc725b3448e01afe11ba482b35550106212"
+      }
+    }
+  },
+  "baseline": {
+    "success": true,
+    "elapsed_s": 1198.1
+  },
+  "no_progress": {
+    "success": true,
+    "elapsed_s": 869.3,
+    "result_sha256": "29a0ff927c8b9705f6e67b48e16a775f0a9c860d9816d0ec78aa66d772140595"
+  }
+}

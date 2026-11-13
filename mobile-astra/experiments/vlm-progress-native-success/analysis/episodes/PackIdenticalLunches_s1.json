@@ -1,0 +1,74 @@
+{
+  "split": "seen",
+  "task": "PackIdenticalLunches",
+  "seed": 1,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 1622.1,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "incomplete",
+    "judge_calls": 28,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 27,
+    "vla_calls": 15,
+    "manual_calls": 12,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/PackIdenticalLunches.md"
+    ],
+    "result_sha256": "b625282c8940e75ea6d690e9b7beaab1911b9c742fde1f482996af36bfaa0218",
+    "states_sha256": "c7c44893b4c5f1e551939a5b2dd01799c73b9bd0eebda9f5822f5c3308d62790",
+    "transcript_sha256": "f6ff5aff9510980919ecd56587247f83a20a0b470c8d4b86ca28c54b25286f9b",
+    "initial": {
+      "task_language": "Place one garlic and one fish in each tupperware on the nearby counter, to pack two identical lunches.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          4.307423589617398,
+          -3.9713702682142893,
+          1.2826737265712893
+        ],
+        "robot0_eef_quat": [
+          0.9927454329619969,
+          0.04767160454943403,
+          0.10516743164363884,
+          -0.033522153484809115
+        ],
+        "robot0_gripper_qpos": [
+          0.020543438758938652,
+          -0.020523120144005817
+        ],
+        "robot0_base_pos": [
+          4.058063805738513,
+          -3.973770240960187,
+          0.7000000242695663
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -1.945934172908892e-06,
+          1.0
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "15638cd3009704746dec0313bfadbafa18606a58dc25ee86b91a14e552f04c69",
+        "agentview_right": "10d49acc0e8162c6942ae72ae6d3e4f633b090ff7c8b7a1f7366ebf324f973ab",
+        "navview": "ff7a5741b1e44cd0e38a6739c4754de80d7128a8390273fffe0aec51b44f8f80",
+        "wrist": "8814a932665c97878c4565b84f5290f7d4bd5edcacf5ec7634a333dfb60e6a48"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 1833.5
+  },
+  "no_progress": {
+    "success": true,
+    "elapsed_s": 744.8,
+    "result_sha256": "520bed0537864ce15e9f36766a5583bea0bb5839fd8777679b98f69801fe33f3"
+  }
+}

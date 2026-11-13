@@ -1,0 +1,74 @@
+{
+  "split": "seen",
+  "task": "SetUpCuttingStation",
+  "seed": 4,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 1728.6,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "incomplete",
+    "judge_calls": 30,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 29,
+    "vla_calls": 14,
+    "manual_calls": 15,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/SetUpCuttingStation.md"
+    ],
+    "result_sha256": "fcb908e523cf98174a6eb55a48709b55856d8996dff8dbbd79c98c3d89e9a51e",
+    "states_sha256": "e8d82bc1fa7a44041af98d919a5e116222cde90eb5278f001858975c7ff48f03",
+    "transcript_sha256": "5639d41941195dc0e0abfa9516e29c56f1bd7c3cfc435f784cced884eca096cf",
+    "initial": {
+      "task_language": "Pick up the knife from the drawer and place it on the cutting board. Then place the meat from the plate to the cutting board.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          0.7076160223791389,
+          -4.604435527866867,
+          1.3029543477759997
+        ],
+        "robot0_eef_quat": [
+          0.04198002248991162,
+          -0.9875319847105113,
+          0.029104793937074318,
+          0.1488998584799333
+        ],
+        "robot0_gripper_qpos": [
+          0.02056280802946152,
+          -0.020503751016320692
+        ],
+        "robot0_base_pos": [
+          0.9443217144233345,
+          -4.6109410759070855,
+          0.7000000199261531
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -1.0,
+          1.9352971776243066e-06
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "2d016880585f8e8f9868dba9cae3aa43febc44fd910e13ab0c142281897c38dd",
+        "agentview_right": "ea3d08c86057e3ea492b1ea647676205cb0e5ecb4ed716a34cb20ab748d07165",
+        "navview": "d5e4b594a8ff2edf672079e9ba0341e4fa6ea6079c740d43c6f89b718015256a",
+        "wrist": "94bc052c373f3369b2a475acf05f8fbc30e1fab1cd34dbdc23a9598a075066e9"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 2136.5
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1862.7,
+    "result_sha256": "b864a9303a19b20db9be3558559e7882658a5fbe30004e9cb641640da78c3a26"
+  }
+}

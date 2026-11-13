@@ -1,0 +1,74 @@
+{
+  "split": "unseen",
+  "task": "SeparateFreezerRack",
+  "seed": 2,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 870.4,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "incomplete",
+    "judge_calls": 14,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 13,
+    "vla_calls": 9,
+    "manual_calls": 4,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/SeparateFreezerRack.md"
+    ],
+    "result_sha256": "046aea7e324c5e5ca8b0b45bfbfe86e982e14479512f8e84eaa3affa7eac13f4",
+    "states_sha256": "157b6d9dd29073f14e05a5701a7b8b858bd3c1976709ccf8e71e07de8eb6ce32",
+    "transcript_sha256": "9c39ec7da6ed749056a7c1c6984e824a5b5a1305645cbf2314ce1b88664adf91",
+    "initial": {
+      "task_language": "Take the meat container that has the fish and place it on the second highest rack of the freezer. Then take the vegetable container that has the corns and place it on the highest rack of the freezer.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          4.711156341499802,
+          -0.5524494994616219,
+          1.3029078107136205
+        ],
+        "robot0_eef_quat": [
+          0.6811725640099988,
+          0.7167145413057682,
+          0.07916683865091705,
+          -0.12671549226091092
+        ],
+        "robot0_gripper_qpos": [
+          0.02057086073020873,
+          -0.020495700126556618
+        ],
+        "robot0_base_pos": [
+          4.713907117078471,
+          -0.7901271197737352,
+          0.7000000244533235
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          0.7071068286895752,
+          0.7071066498756409
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "3b480365606fc431ad3e950b376fb02a600dfe1dd60f5b68f9cf00cfac36e399",
+        "agentview_right": "d1ef717440c1d538bfc6752c5663bc722877350559c9d050fee36e7273f23497",
+        "navview": "cbd2759a067a32a27e348335b0937ad4f0508289abc475a555d33dbe85c63645",
+        "wrist": "37971a9dffcee9262b6b914863927aa33ced167b6412a53794b5c786bc5950e6"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 650.6
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1006.8,
+    "result_sha256": "9a681d97afc18adc9917a35aba7b3b68c038016238f1fe4c6278d2acf976cd16"
+  }
+}

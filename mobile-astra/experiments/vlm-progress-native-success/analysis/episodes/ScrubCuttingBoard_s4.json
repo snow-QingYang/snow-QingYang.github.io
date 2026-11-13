@@ -1,0 +1,74 @@
+{
+  "split": "seen",
+  "task": "ScrubCuttingBoard",
+  "seed": 4,
+  "current": {
+    "success": true,
+    "valid": true,
+    "elapsed_s": 194.6,
+    "termination_reason": "completed",
+    "finish_status": "success",
+    "visual_completion": "incomplete",
+    "judge_calls": 3,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 2,
+    "vla_calls": 2,
+    "manual_calls": 0,
+    "first_native_success_step": 2,
+    "actions_after_first_success": 0,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/ScrubCuttingBoard.md"
+    ],
+    "result_sha256": "47c30ecd5d59bcd67e3f7a9507d31718bd81a32f7a8238466531b758818db7ee",
+    "states_sha256": "9475dfe057bc2ee4a67eca7ca42d0a9d7546e565d6eb308de7978df705b43dc4",
+    "transcript_sha256": "92ef15904993e49edeb31295528aad7a92166a67bc5f477af9df412ef47bf4cf",
+    "initial": {
+      "task_language": "Pick up the sponge from the counter and clean the cutting board by briefly scrubbing or pressing down on the cutting board. Once finished, release the sponge.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          4.083933776498353,
+          -2.0736738511653394,
+          1.304597949120659
+        ],
+        "robot0_eef_quat": [
+          0.7184211234450344,
+          -0.6789493802900967,
+          0.12883601737383457,
+          0.07937322608358809
+        ],
+        "robot0_gripper_qpos": [
+          0.02054174110882,
+          -0.020524819916310354
+        ],
+        "robot0_base_pos": [
+          4.075436354861427,
+          -1.826854320284563,
+          0.7000000269175001
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -0.7071396112442017,
+          0.7070739269256592
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "2e41ac0a687c102511665a74e66a05fcf90d63eecd2a803620a523e419789876",
+        "agentview_right": "ebdef86b6b269780b82693959f2cfad18c443eb032abf9239262567126e0f709",
+        "navview": "38d4bfa62564fc57dca3ba97872bb2ac3994d0cbc0f0456e4cba0ef319c73409",
+        "wrist": "c15f773817bddce1abab1192306a67e9f25835ab2d0f1f5964dafe98b7392061"
+      }
+    }
+  },
+  "baseline": {
+    "success": true,
+    "elapsed_s": 170.8
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1603.1,
+    "result_sha256": "f5d549d37bce79de1e5be482a622aefef18573fbd0f5d9d6b134f178fda23f38"
+  }
+}

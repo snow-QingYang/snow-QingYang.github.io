@@ -1,0 +1,74 @@
+{
+  "split": "seen",
+  "task": "RinseSinkBasin",
+  "seed": 2,
+  "current": {
+    "success": true,
+    "valid": true,
+    "elapsed_s": 292.9,
+    "termination_reason": "completed",
+    "finish_status": "success",
+    "visual_completion": "unknown",
+    "judge_calls": 4,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 3,
+    "vla_calls": 3,
+    "manual_calls": 0,
+    "first_native_success_step": 3,
+    "actions_after_first_success": 0,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/RinseSinkBasin.md"
+    ],
+    "result_sha256": "e286ad7f834b11b031d2aaa4ef7495c35b4d1bf68edfeb3bfbc9c6d8643dcd2a",
+    "states_sha256": "b22304762eb9a3341e940083b355efedfded4bf3e120b1ce6f2989865907c47b",
+    "transcript_sha256": "41a7d33ecac11750ec95b247a671dfdf83a49622e051b634a6448cc32b84b80c",
+    "initial": {
+      "task_language": "Turn on the sink and manuever the spout to wash all locations of the sink basin.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          1.5815994278840761,
+          -0.5813314037971415,
+          1.274706795728855
+        ],
+        "robot0_eef_quat": [
+          0.6596030241865846,
+          0.7428877760472843,
+          0.06653892314313975,
+          -0.09281257668216189
+        ],
+        "robot0_gripper_qpos": [
+          0.020556766436264473,
+          -0.020509794008242772
+        ],
+        "robot0_base_pos": [
+          1.5876241173256325,
+          -0.8242949387929901,
+          0.7000000203880247
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          0.7071068286895752,
+          0.7071066498756409
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "e3ea94c8aeea21093d9f1c07de8a5cedead14baf91586b61c06b14a1056ac095",
+        "agentview_right": "a9e3a68176ec4763c887db93a4fdfdb0441ee70a7c11b62da8b084dc462a8db0",
+        "navview": "ee1ac2d38e30a98b14ebac6ae4c43d2d15d758e13335d9577447347095c5c6f7",
+        "wrist": "77dad9415fa5d0061b127693361e1f38ed5f34eae7b94b2c7f3f54e5e026921f"
+      }
+    }
+  },
+  "baseline": {
+    "success": true,
+    "elapsed_s": 1094.3
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1639.6,
+    "result_sha256": "bbf553e31bb4c29fcc0c51e78e8a0159bb007241e97ed1d453d7557682d197b1"
+  }
+}

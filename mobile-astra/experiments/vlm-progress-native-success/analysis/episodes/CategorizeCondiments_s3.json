@@ -1,0 +1,74 @@
+{
+  "split": "unseen",
+  "task": "CategorizeCondiments",
+  "seed": 3,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 1677.3,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "incomplete",
+    "judge_calls": 28,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 27,
+    "vla_calls": 12,
+    "manual_calls": 15,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/CategorizeCondiments.md"
+    ],
+    "result_sha256": "546783415e67e10e4eebe7d3bc1571e32e5d06a4e3760a39e9883321b2df8c21",
+    "states_sha256": "07c9c37f4ad8ca1c4720381119c83477c8bb4ada1300affa2b9b59290c3cd5f7",
+    "transcript_sha256": "ff930a2168a041f6aed1cce24aad5e76a3b883ef1d935a805da10944a94fea3a",
+    "initial": {
+      "task_language": "Put the shaker and condiment bottle from the counter next to their counterparts in the cabinet.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          0.5716412407318204,
+          -0.9060918510864303,
+          1.3084821919659302
+        ],
+        "robot0_eef_quat": [
+          0.015847870285630006,
+          -0.9886539780681012,
+          0.0376792508170847,
+          0.14454214165906978
+        ],
+        "robot0_gripper_qpos": [
+          0.020572484652267027,
+          -0.020494074388076627
+        ],
+        "robot0_base_pos": [
+          0.8179842289694592,
+          -0.9117476097801065,
+          0.7000000201642054
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -1.0,
+          1.9354390587977832e-06
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "20f2f87f9ac9ec51863dfe223464863f1f7ea494c5c32eb569286c26375b86af",
+        "agentview_right": "5a7a4d2d3111276f8ddd9cd97e340bda105c79e0cdceee666b6a990a49d9b7eb",
+        "navview": "229e77b8f71fd99dcabc99c481ef66d67fd33a30135f10ab71d28b7c6ec1ab88",
+        "wrist": "76ec69ec19e6c17e661349bb4e03cf9679cace9c37ef7ec99532c417925d85cf"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 1907.5
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1314.1,
+    "result_sha256": "dcf5066547b72b22684fef7d49e5264b4b747e979ed2358cef11a3528e427e17"
+  }
+}

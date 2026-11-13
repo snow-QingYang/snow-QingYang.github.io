@@ -1,0 +1,74 @@
+{
+  "split": "seen",
+  "task": "SteamInMicrowave",
+  "seed": 1,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 681.5,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "incomplete",
+    "judge_calls": 9,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 8,
+    "vla_calls": 8,
+    "manual_calls": 0,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/SteamInMicrowave.md"
+    ],
+    "result_sha256": "9b67d999dd09c926ce31ca21230d7167ce0f371904ef568f2382744f49d0ab17",
+    "states_sha256": "961bc54205ead20c4b0c965119b8815e71de9b3d8f6b46e7aafada753bacbea6",
+    "transcript_sha256": "736cf4b046743b54d1ec7cedd8f8ce45e86d3bf18013c459b69d1deb71170e49",
+    "initial": {
+      "task_language": "Pick the lemon wedge from the sink and place it in the bowl. Then pick the bowl and place it in the microwave. Then close the microwave door and press the start button.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          3.3312003122599942,
+          -2.062649188469139,
+          1.2974058153568115
+        ],
+        "robot0_eef_quat": [
+          0.734476041106306,
+          -0.6670991997039986,
+          0.1002860500847738,
+          0.07393450448528888
+        ],
+        "robot0_gripper_qpos": [
+          0.020528886536029172,
+          -0.020537674051536968
+        ],
+        "robot0_base_pos": [
+          3.339564244162748,
+          -1.827033938634996,
+          0.7000000341632643
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -0.7071396112442017,
+          0.7070739269256592
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "6b9b67a61b0a388f228672f21ed78f3ad0814752969ec914f1747ccda5df46bd",
+        "agentview_right": "72e111c601f6280366de45f0dc4c819ef16fa63688077f36e02fd7089a1d0e26",
+        "navview": "7828574d01d66edb32cf2b8b6e95f0da53b22bb0acd905eb842ca49eb4525372",
+        "wrist": "5918206f97ebef89085d4bce624fb2738d7b5a00e93b0071ff3f8a69b2b40ae9"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 672.1
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 2032.5,
+    "result_sha256": "84440123f1cb32beae355bd5e38fc988f66968905a8dffd9af35c686bb96e7e7"
+  }
+}

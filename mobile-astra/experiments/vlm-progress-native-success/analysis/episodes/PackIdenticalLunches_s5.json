@@ -1,0 +1,74 @@
+{
+  "split": "seen",
+  "task": "PackIdenticalLunches",
+  "seed": 5,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 1553.6,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "unknown",
+    "judge_calls": 26,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 25,
+    "vla_calls": 18,
+    "manual_calls": 7,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/PackIdenticalLunches.md"
+    ],
+    "result_sha256": "eef08006bf7cf8ab06585e53376b5ddbe1457182bb020181ac38206eb5ba728c",
+    "states_sha256": "3957e199d662c33e41a73f460c89c71ae9b184cd0e8ad1f43f62a371ab2c4b26",
+    "transcript_sha256": "68ef5492921b996a4bf34fdd38c530750886329dba86a84d4d8d421bb9d6185d",
+    "initial": {
+      "task_language": "Place one corn and one steak in each tupperware on the nearby counter, to pack two identical lunches.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          0.029141728952724544,
+          -0.9193488483139332,
+          1.3070351874895119
+        ],
+        "robot0_eef_quat": [
+          0.6733463471208161,
+          0.721643958795664,
+          0.10768512697741622,
+          -0.11932563421424555
+        ],
+        "robot0_gripper_qpos": [
+          0.020549622266802528,
+          -0.020516938267599278
+        ],
+        "robot0_base_pos": [
+          0.025532558771317104,
+          -1.160741506102532,
+          0.7000000293059592
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          0.7071068286895752,
+          0.7071067094802856
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "c958f99c0cf7afc7b4a54f921b89ec9dd3162d27140a9044cdf8b5fb91469ab3",
+        "agentview_right": "d397bb31314c86c5a20bd52c4ef209307c5b1ec04c0da99c226f3ed83e01bae7",
+        "navview": "f064c601bdbe550f3e579994f9c2fcee7516ab5c1bb361e3384e31ca8f49fdd5",
+        "wrist": "7bce24443f09a55f02fdd3914ec34b90ff720b66391cefe623d9a20e29261da6"
+      }
+    }
+  },
+  "baseline": {
+    "success": true,
+    "elapsed_s": 1225.2
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1401.1,
+    "result_sha256": "7f61bcff02832ca7d8c96145389b20da886f490e0db1e223a126684e24ed9c0a"
+  }
+}

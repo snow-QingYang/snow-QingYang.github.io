@@ -1,0 +1,74 @@
+{
+  "split": "unseen",
+  "task": "GatherTableware",
+  "seed": 5,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 1677.6,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "unknown",
+    "judge_calls": 33,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 32,
+    "vla_calls": 9,
+    "manual_calls": 23,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/GatherTableware.md"
+    ],
+    "result_sha256": "b026a315bfdcda5ce3b4a26a15a7434a7b1336a0c686cbecd065bd114ae5eaf5",
+    "states_sha256": "d5917bef252a7314587942deb82bb5db64c7109a83548db8173b3e8b32dbe2db",
+    "transcript_sha256": "9dd70c388a36688fdc3dbe47285276817b88d70e62e9605fe727a9274191e3ec",
+    "initial": {
+      "task_language": "Gather all objects into one cabinet and sort the glasses and bowls to opposite sides.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          2.0991131384410626,
+          -0.6150537371916442,
+          1.306418366067437
+        ],
+        "robot0_eef_quat": [
+          0.678104520352478,
+          0.7179112544693385,
+          0.0949687795920522,
+          -0.12553334651235593
+        ],
+        "robot0_gripper_qpos": [
+          0.020560850819672762,
+          -0.020505709867427196
+        ],
+        "robot0_base_pos": [
+          2.0844076202828146,
+          -0.8479019342158942,
+          0.700000025861273
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          0.7071068286895752,
+          0.7071067094802856
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "aa864ae837d0477dc3c0d9256b5e9124d798f3d111659cc795fbfa374a5c29f3",
+        "agentview_right": "5a36c1f4030dfafcd626973f32b066f4ee46815f203b99aa21aa4aa83485a5ea",
+        "navview": "31d029f674249615fb79f5adf2e7b733f01718fcd9a4eb4363b6c5ea740dcf21",
+        "wrist": "1fd0ff96a4a2966d2cc5f63ee043740cae34e133bb602f247f2ea832624ee08b"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 1457.9
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1073.1,
+    "result_sha256": "5cc1ce739802f71fdd389416d502afdc58855233803eb65960514db467324efa"
+  }
+}

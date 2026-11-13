@@ -1,0 +1,74 @@
+{
+  "split": "unseen",
+  "task": "BreadSelection",
+  "seed": 2,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 1858.4,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "incomplete",
+    "judge_calls": 39,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 38,
+    "vla_calls": 14,
+    "manual_calls": 24,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/BreadSelection.md"
+    ],
+    "result_sha256": "2053b44a84260934fa4933b94f83e4e5209e2cfd2b4bacf5c93a83e87df505b9",
+    "states_sha256": "b2a688ee20e73b6f0f6d6198cf0a15846344edd8961cd6d661128710e0b69f86",
+    "transcript_sha256": "2afe226b74b8ac1129a4c14b7d7fd5b39bf792da6373155d5d55ff05acec29fe",
+    "initial": {
+      "task_language": "From the different types of pastries on the counter, select a croissant and place it on the cutting board. Then retrieve a jar of jam from the cabinet and place it alongside the croissant on the cutting board.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          2.150064477973756,
+          -0.5322414506157197,
+          1.2955199281505634
+        ],
+        "robot0_eef_quat": [
+          0.6829998177461111,
+          0.7180939255789761,
+          0.09377245009507598,
+          -0.09517925513745354
+        ],
+        "robot0_gripper_qpos": [
+          0.020545370760005687,
+          -0.020521189535762194
+        ],
+        "robot0_base_pos": [
+          2.134191510824233,
+          -0.7809437569193498,
+          0.7000000229888023
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          0.7071068286895752,
+          0.7071066498756409
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "45a1c57550f092cb8023777b6bf420baaec3391c36fbca6ac8c5556c744d7713",
+        "agentview_right": "90fcc571e4e45fad44dc263eee05259caf6043869c76521148773a6c78442a41",
+        "navview": "c6141808c16767d54de21a1f932a18f142505f4d985eaf0f514ef3af2c1b645c",
+        "wrist": "89baa4f1ea64bdb0fe411a8000fb655ebfb0f9c3ed91328705f55093a029b3eb"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 1823.3
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1708.2,
+    "result_sha256": "7e2fde06ceee53a72cc9bebd7623c395c3034fed5ef85f57aebfd64262554f2f"
+  }
+}

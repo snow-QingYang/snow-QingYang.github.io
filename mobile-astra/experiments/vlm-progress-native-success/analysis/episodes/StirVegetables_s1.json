@@ -1,0 +1,74 @@
+{
+  "split": "seen",
+  "task": "StirVegetables",
+  "seed": 1,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 2571.4,
+    "termination_reason": "completed",
+    "finish_status": null,
+    "visual_completion": "unknown",
+    "judge_calls": 40,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 39,
+    "vla_calls": 19,
+    "manual_calls": 20,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/StirVegetables.md"
+    ],
+    "result_sha256": "c8102551e4386b14611f6474efa40e0003a11cd07b0b15e977a6f2ba70a1038c",
+    "states_sha256": "8047a7a5509d6d741c980b755da065445410b1abbaaa6570efdd2c338169cec9",
+    "transcript_sha256": "2a5f8eb3183b6fdcc9fe1b43aa99a812c3ae90a5ae427796f5d4ca70f8fb6bc5",
+    "initial": {
+      "task_language": "Put the avocado and lime in the pot. Retrieve the spatula and lightly stir the vegetables in the pot.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          2.270138777504007,
+          -0.5717302055990735,
+          1.2983885251187035
+        ],
+        "robot0_eef_quat": [
+          0.6682535277510298,
+          0.7313278895301356,
+          0.08037218195570779,
+          -0.1101682940386172
+        ],
+        "robot0_gripper_qpos": [
+          0.02055919255647464,
+          -0.020507368148368
+        ],
+        "robot0_base_pos": [
+          2.2638352937676998,
+          -0.8097767095754098,
+          0.7000000225179864
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          0.7071068286895752,
+          0.7071066498756409
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "9ca93c91408919cc8953f8ada915037475d5fdd46f36286d7970b08dc748bb71",
+        "agentview_right": "3edb53aac0ae6dd3ef2c813f74350604e3e7ce7e45e2d29a91d3ae9f1b1ef4da",
+        "navview": "621b9ff83a0de9bbbf22e979af394a1c18a9d9b0a6fb53947ad1a6d3a7421522",
+        "wrist": "99ccf246f9421d2bce94c80cd47454497bcc79dba743f76cd59dadc082fb2699"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 605.8
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 516.1,
+    "result_sha256": "11f88311ef210e99c4cf63a83898d619c7ed63ae6cf68f4dd1641ba52e935033"
+  }
+}

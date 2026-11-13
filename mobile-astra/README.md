@@ -6,10 +6,10 @@ Keep this deployment entirely inside `mobile-astra/`. Do not modify or link from
 personal Home, Research, Blog, shared navigation, styles, assets or templates.
 All pages are standalone work interfaces. Public URLs are not access control.
 
-## Completed checklist · 2026-11-12
+## Completed checklist · 2026-11-13
 
-Nine primary GPT-6-Astra / xhigh experiments are complete: 160 valid episodes
-per setting, 1,440 total. Each setting has 80 Seen and 80 Unseen episodes.
+Ten primary GPT-6-Astra / xhigh experiments are complete: 160 valid episodes
+per setting, 1,600 total. Each setting has 80 Seen and 80 Unseen episodes.
 
 - [x] [E01 · Baseline](experiments/baseline/): Seen 34/80, Unseen 21/80; **55/160**.
 - [x] [E02 · DA3 depth replacement](experiments/geometry-da3/): Seen 33/80, Unseen 17/80; **50/160**.
@@ -21,12 +21,15 @@ per setting, 1,440 total. Each setting has 80 Seen and 80 Unseen episodes.
 - [x] [E08 · Combined information removal, Planner pose coordinates provided](experiments/no-privileged-info/): Seen 27/80, Unseen 14/80; **41/160**.
 - [x] [E09 · Combined information removal, Planner pose coordinates withheld](experiments/no-planner-pose/): Seen 17/80, Unseen 10/80; **27/160**.
 
-The 1,440-episode total excludes the auxiliary Sol run and interrupted smoke runs.
+- [x] [E10 · VLM task progress + native success](experiments/vlm-progress-native-success/): Seen 26/80, Unseen 18/80; **44/160**.
+
+The 1,600-episode total excludes the auxiliary Sol run and interrupted smoke runs.
 E05 removes the two active geometry-query tools; internal depth and other feedback
 remain. E06 completes removal of live task-progress/success/termination feedback
 and VLA native-success early stopping; the evaluator keeps independent final
 scoring. Camera calibration/pose replacement, visual or tactile contact estimation,
-and validation of visual task-progress/completion estimates remain pending.
+remain pending. E10 completes a four-view visual task-progress run with native
+completion feedback; visual judgment reliability remains an open issue.
 E08 provides robot EEF/base pose coordinates to the Planner; E09 withholds them
 and also removes gripper-width, held_apart and action-execution statistics.
 Both retain VLA/controller proprioception and native-success early stopping.
@@ -287,10 +290,10 @@ catalogs, short experiment pages, comparison examples, smoke audit summary and
 compatibility pages. It uses the existing detailed exports and the original local
 smoke audit. Its assertions intentionally require review if source results change.
 Canonical detailed exports live under their experiment's `analysis/` directory.
-The legacy overview generator predates E06–E09. Do not use it to regenerate the
-current overview or project-status.json until it supports E06–E09: it would restore
+The legacy overview generator predates E06–E10. Do not use it to regenerate the
+current overview or project-status.json until it supports E06–E10: it would restore
 the older five-group checklist and drop the newer entries. After adding that support,
-verify the nine-group, 1,440-episode total whenever rebuilding a detailed export
+verify the ten-group, 1,600-episode total whenever rebuilding a detailed export
 and the overview. The E03, E04 and E05 detailed HTML and JS
 use the same table/filter layout as E02; check their displayed summaries against the
 new export when changing source runs.
@@ -313,3 +316,36 @@ planning documents have not been published here.
 To remove this deployment, delete only `mobile-astra/`, commit and push. No shared
 navigation, assets or templates need cleanup. The separate historical
 `snow-QingYang/astra-robocasa-replay` repository is unaffected.
+
+## E10 · VLM task progress with native success
+
+Completed 2026-11-13 15:13:19 UTC+8: **44/160**, Seen **26/80**, Unseen **18/80**.
+Astra / xhigh retains original memory, geometry/contact tools and native success.
+Terra / medium supplies cached four-camera visual condition judgments. Native
+success stops VLA calls and authorizes finish(success); final scoring is native.
+
+All 160 results match final recorded native state; memory audits pass. All 44
+successes call finish(success) without additional actions after the first recorded
+success. In 41 of them the final VLM judgment does not confirm completion.
+4059 VLM request audits include 9 API errors; 6 more observations were cancelled
+before requesting a judgment. Those valid failed episodes remain in the denominator.
+
+The overview, interactive 160-pair analysis, a real video/four-camera case, CSV,
+JSON, report, portable extractor and downloadable result/audit ZIP live under
+`experiments/vlm-progress-native-success/`. The public ZIP includes all native
+states, results, memory audits, VLM judgments/request audits and production source.
+The separately delivered full local ZIP also retains saved RGB, videos, depth/world
+maps, raw Planner traces and logs. Credentials, worker configuration and downloaded
+weights/memory corpus are excluded. ZIP member and archive SHA-256 checks are supplied.
+
+E10 is +3 successes against E03 and -11 against baseline. Task/seed pairing
+is provided for both existing references. Initial-state equality against these
+references was not fully audited, and VLA random samples were not fixed.
+Fixed condition knowledge and extra model compute are additional differences
+against E03. This update publishes only the native-success E10 batch.
+
+E10 source is a frozen working tree based on `fee5dfac` plus recorded changes.
+The branch has not been separately published. `source-publication.json` tracks
+10 experiments but still 9 published branches; E10 has `snapshot_available` status.
+Do not label the base commit as the evaluated implementation or link to a nonexistent
+published branch. Keep the 9 pre-existing experiment entries and their artifacts intact.

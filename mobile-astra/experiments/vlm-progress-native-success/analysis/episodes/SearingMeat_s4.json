@@ -1,0 +1,74 @@
+{
+  "split": "seen",
+  "task": "SearingMeat",
+  "seed": 4,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 2048.3,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "incomplete",
+    "judge_calls": 40,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 39,
+    "vla_calls": 18,
+    "manual_calls": 21,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/SearingMeat.md"
+    ],
+    "result_sha256": "5efc5cdfa1b3a5d04aec83f7f3a725eba9c594d59b4903a58cc5d6b533823785",
+    "states_sha256": "16f880f8d3022d0443741d426c981d4bc559bf188cd24da33bc2379a9f1e1fc4",
+    "transcript_sha256": "ed347acceb8484cc055d4b5e6928264b946bfd58b51670eafae6bb170a8ad070",
+    "initial": {
+      "task_language": "Grab the pan from the cabinet and place it on the front left burner on the stove. Then place the steak on the stove and turn the burner on.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          2.3468769701253818,
+          -0.5810205945857964,
+          1.295188281746792
+        ],
+        "robot0_eef_quat": [
+          0.6803204604061982,
+          0.7210664284408054,
+          0.07035859705184579,
+          -0.11080137521355005
+        ],
+        "robot0_gripper_qpos": [
+          0.020566831675021525,
+          -0.020499728572207207
+        ],
+        "robot0_base_pos": [
+          2.337645060666614,
+          -0.8221845450953952,
+          0.7000000200431864
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          0.7071068286895752,
+          0.7071066498756409
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "abfa115f4e4b3af34eec797743e729f6fd5eec0ef5c064426bf7921ffafab839",
+        "agentview_right": "b63e0f442dcbec0ce87dad51d294ff723ec25a1371608ad24489b0fb1277120a",
+        "navview": "8a4dea9a8333231cf1541091dd0ed37489c391837e46bccf94dafa6d6b67b024",
+        "wrist": "701811d9119e1601016d6ce9c410c331d6fda75201b5b632e93092af0f41aa5e"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 618.9
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 910.9,
+    "result_sha256": "236b6ea66429d3cff75637b97d3f5b72170f6a440205244323e1aaaa672241b8"
+  }
+}

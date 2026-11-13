@@ -1,0 +1,74 @@
+{
+  "split": "seen",
+  "task": "GetToastedBread",
+  "seed": 1,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 2648.2,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "unknown",
+    "judge_calls": 46,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 45,
+    "vla_calls": 21,
+    "manual_calls": 24,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/GetToastedBread.md"
+    ],
+    "result_sha256": "1e84b2d67f29b69c9427a2e6f71031ee38dd9d3f51f82c0c29f8fdaf3a2fea8e",
+    "states_sha256": "4838d49c7734106e53de59075a0092ad75ff6e9d7df56346f1d9f609196db91b",
+    "transcript_sha256": "3e9170e010afeefc3c891eb9b4372b4a3e8fe3ed419993a6de4de363f851670a",
+    "initial": {
+      "task_language": "Start the toaster. Once the lever pops up, take the bread to the plate on the dining counter.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          3.0650157450719964,
+          -0.5728417124595705,
+          1.296178866305613
+        ],
+        "robot0_eef_quat": [
+          0.658208768840427,
+          0.7396845278318597,
+          0.10384726652828985,
+          -0.09404127361073475
+        ],
+        "robot0_gripper_qpos": [
+          0.020535598777706863,
+          -0.020530961495256243
+        ],
+        "robot0_base_pos": [
+          3.069284841774019,
+          -0.8221217629999478,
+          0.7000000268464917
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          0.7071068286895752,
+          0.7071066498756409
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "50e6481122541a85a7ebe9d5ed3d5487c0e8fc77200207da10fdbd9e6dd8f119",
+        "agentview_right": "e3f27bf2c48b333aee0a1902d709780cfd8c051843e1969b328bb313f224c233",
+        "navview": "1ffb722e88b10030c323bef9dc68bf50aeccdafcb88df2831a8ad86d54b2a413",
+        "wrist": "334ccc968f2d25cf0ae2bb7039487b25538020d956aceea1bef6ed0092292700"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 2594.9
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1694.8,
+    "result_sha256": "0d8f717dccbb70e6f5d087a0bd6e5e3c42035857526ed8801771151b85296b79"
+  }
+}

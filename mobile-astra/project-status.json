@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-12",
+  "as_of": "2026-11-13",
   "completed_experiments": [
     {
       "id": "E01",
@@ -235,10 +235,29 @@
         "instructions_file": "EXPERIMENT.md",
         "instructions_url": "https://github.com/snow-QingYang/RPent/blob/f2d62d21104f412b5e020931d11d7054b6ef3818/EXPERIMENT.md"
       }
+    },
+    {
+      "id": "E10",
+      "path": "experiments/vlm-progress-native-success/",
+      "status": "complete",
+      "total": 160,
+      "success": 44,
+      "source": {
+        "id": "E10",
+        "experiment_path": "experiments/vlm-progress-native-success/",
+        "name": "VLM 任务进度 + 原生成功",
+        "branch": "vlm_progress_native_success",
+        "status": "snapshot_available",
+        "runtime_base_commit": "fee5dfacb939ee1ca09220710d4586da9e5a5a41",
+        "evaluated_working_tree": true,
+        "snapshot_url": "experiments/vlm-progress-native-success/downloads/vlm-progress-native-success-audit-20261113.zip",
+        "analysis_url": "experiments/vlm-progress-native-success/analysis/data.json",
+        "evaluation_relationship": "Frozen working tree, base commit plus recorded modifications. Production source and hashes are in the downloadable audit ZIP. Branch has not been separately published."
+      }
     }
   ],
-  "completed_experiment_count": 9,
-  "completed_valid_episodes": 1440,
+  "completed_experiment_count": 10,
+  "completed_valid_episodes": 1600,
   "baseline": {
     "name": "GPT-6-Astra",
     "model": "gpt-6-astra",
@@ -843,17 +862,18 @@
     "E06 No task progress and agent success builds on No task progress, hides live success/termination/progress and removes native-success VLA early stopping. The independent evaluator scores the final state after the planner returns; geometry, contact and historical memory remain. Agent declarations are not benchmark scores.",
     "E07 removes historical task/global memory only; current-episode history and baseline feedback remain. Its 41/160 score happens to match E03, a separate setting. Task/seed matching is not proof of identical scenes or causal attribution.",
     "E08 combines geometry-query, historical-memory, progress and contact-feedback removal and blocks scoring-source access. Native success, robot proprioception and controls remain; internal depth/world maps and camera metadata remain saved. It is not an all-ground-truth-free or OS-isolated system.",
-    "E08 provides EEF/base pose coordinates to the Planner; E09 withholds them and additional motion, gripper-width, held_apart and execution feedback. Both retain VLA/controller proprioception, native simulator success and native-success early stopping. The 41 versus 27 comparison does not isolate coordinates alone."
+    "E08 provides EEF/base pose coordinates to the Planner; E09 withholds them and additional motion, gripper-width, held_apart and execution feedback. Both retain VLA/controller proprioception, native simulator success and native-success early stopping. The 41 versus 27 comparison does not isolate coordinates alone.",
+    "E10 uses VLM intermediate progress and retains native success and VLA early stop. Only this 160-episode batch is added, with comparisons to the existing E01 and E03 results."
   ],
   "latest_result": {
-    "id": "E09",
-    "name": "组合信息移除 · 不提供位姿坐标",
-    "path": "experiments/no-planner-pose/",
-    "analysis_path": "experiments/no-planner-pose/analysis/",
-    "completed_at": "2026-11-12T01:57:18+08:00",
+    "id": "E10",
+    "name": "VLM 任务进度 + 原生成功",
+    "path": "experiments/vlm-progress-native-success/",
+    "analysis_path": "experiments/vlm-progress-native-success/analysis/",
+    "completed_at": "2026-11-13T15:13:19+08:00",
     "total": 160,
-    "success": 27,
-    "success_rate_percent": 16.875
+    "success": 44,
+    "success_rate_percent": 27.5
   },
   "agent_check_success": {
     "id": "E06",
@@ -1107,7 +1127,7 @@
   },
   "source_publication": {
     "schema_version": 1,
-    "as_of": "2026-11-12",
+    "as_of": "2026-11-13",
     "repository": "https://github.com/snow-QingYang/RPent",
     "note": "Published source revisions are separate from runtime result, source-file and artifact hashes. Branches may advance; evaluated commit links are immutable. E08 publication commit only renames the experiment documentation; its evaluated runtime commit is unchanged.",
     "experiments": {
@@ -1269,11 +1289,23 @@
         "publication_commit_url": "https://github.com/snow-QingYang/RPent/commit/f2d62d21104f412b5e020931d11d7054b6ef3818",
         "instructions_file": "EXPERIMENT.md",
         "instructions_url": "https://github.com/snow-QingYang/RPent/blob/f2d62d21104f412b5e020931d11d7054b6ef3818/EXPERIMENT.md"
+      },
+      "E10": {
+        "id": "E10",
+        "experiment_path": "experiments/vlm-progress-native-success/",
+        "name": "VLM 任务进度 + 原生成功",
+        "branch": "vlm_progress_native_success",
+        "status": "snapshot_available",
+        "runtime_base_commit": "fee5dfacb939ee1ca09220710d4586da9e5a5a41",
+        "evaluated_working_tree": true,
+        "snapshot_url": "experiments/vlm-progress-native-success/downloads/vlm-progress-native-success-audit-20261113.zip",
+        "analysis_url": "experiments/vlm-progress-native-success/analysis/data.json",
+        "evaluation_relationship": "Frozen working tree, base commit plus recorded modifications. Production source and hashes are in the downloadable audit ZIP. Branch has not been separately published."
       }
     },
     "published_experiment_count": 9,
     "published_branch_count": 9,
-    "tracked_experiment_count": 9
+    "tracked_experiment_count": 10
   },
   "no_privileged_info": {
     "status": "complete",
@@ -1662,5 +1694,222 @@
       "robot_state_comparable": false,
       "scope": "Task text, initial RGB file bytes and retained camera-metadata file bytes only. E09 does not save Planner robot state. Equality of these artifacts does not establish identical simulator initial states or a causal effect."
     }
+  },
+  "vlm_progress_native_success": {
+    "id": "E10",
+    "name": "VLM 任务进度 + 原生成功",
+    "status": "complete",
+    "valid_benchmark_result": true,
+    "run": "composite-native-success-4gpu-20261112-182509",
+    "completed_at": "2026-11-13T15:13:19+08:00",
+    "source": {
+      "id": "E10",
+      "experiment_path": "experiments/vlm-progress-native-success/",
+      "name": "VLM 任务进度 + 原生成功",
+      "branch": "vlm_progress_native_success",
+      "status": "snapshot_available",
+      "runtime_base_commit": "fee5dfacb939ee1ca09220710d4586da9e5a5a41",
+      "evaluated_working_tree": true,
+      "snapshot_url": "experiments/vlm-progress-native-success/downloads/vlm-progress-native-success-audit-20261113.zip",
+      "analysis_url": "experiments/vlm-progress-native-success/analysis/data.json",
+      "evaluation_relationship": "Frozen working tree, base commit plus recorded modifications. Production source and hashes are in the downloadable audit ZIP. Branch has not been separately published."
+    },
+    "summary": {
+      "seen": {
+        "total": 80,
+        "successes": {
+          "current": 26,
+          "baseline": 34,
+          "no_progress": 24
+        },
+        "paired": {
+          "baseline": {
+            "both_success": 19,
+            "current_only": 7,
+            "reference_only": 15,
+            "both_failure": 39
+          },
+          "no_progress": {
+            "both_success": 12,
+            "current_only": 14,
+            "reference_only": 12,
+            "both_failure": 42
+          }
+        },
+        "final_visual": {
+          "incomplete": 47,
+          "unknown": 33
+        },
+        "native_visual": {
+          "True:incomplete": 16,
+          "False:incomplete": 31,
+          "True:unknown": 10,
+          "False:unknown": 23
+        },
+        "finish_status": {
+          "success": 26,
+          "stuck": 48,
+          "missing": 6
+        },
+        "actions_after_success": 0,
+        "mean_elapsed_s": 1202.71625
+      },
+      "unseen": {
+        "total": 80,
+        "successes": {
+          "current": 18,
+          "baseline": 21,
+          "no_progress": 17
+        },
+        "paired": {
+          "baseline": {
+            "both_success": 9,
+            "current_only": 9,
+            "reference_only": 12,
+            "both_failure": 50
+          },
+          "no_progress": {
+            "both_success": 8,
+            "current_only": 10,
+            "reference_only": 9,
+            "both_failure": 53
+          }
+        },
+        "final_visual": {
+          "incomplete": 52,
+          "unknown": 23,
+          "apparently_complete": 5
+        },
+        "native_visual": {
+          "True:incomplete": 15,
+          "False:incomplete": 37,
+          "False:unknown": 23,
+          "True:apparently_complete": 3,
+          "False:apparently_complete": 2
+        },
+        "finish_status": {
+          "success": 18,
+          "stuck": 49,
+          "missing": 13
+        },
+        "actions_after_success": 0,
+        "mean_elapsed_s": 1600.03875
+      },
+      "all": {
+        "total": 160,
+        "successes": {
+          "current": 44,
+          "baseline": 55,
+          "no_progress": 41
+        },
+        "paired": {
+          "baseline": {
+            "both_success": 28,
+            "current_only": 16,
+            "reference_only": 27,
+            "both_failure": 89
+          },
+          "no_progress": {
+            "both_success": 20,
+            "current_only": 24,
+            "reference_only": 21,
+            "both_failure": 95
+          }
+        },
+        "final_visual": {
+          "incomplete": 99,
+          "unknown": 56,
+          "apparently_complete": 5
+        },
+        "native_visual": {
+          "True:incomplete": 31,
+          "False:incomplete": 68,
+          "True:unknown": 10,
+          "False:unknown": 46,
+          "True:apparently_complete": 3,
+          "False:apparently_complete": 2
+        },
+        "finish_status": {
+          "success": 44,
+          "stuck": 97,
+          "missing": 19
+        },
+        "actions_after_success": 0,
+        "mean_elapsed_s": 1401.3775
+      }
+    },
+    "protocol": {
+      "environment_split": "target",
+      "planner": {
+        "backend": "codex",
+        "model": "gpt-6-astra",
+        "reasoning_effort": "xhigh",
+        "max_turns": 100,
+        "timeout_s": 3600
+      },
+      "progress": {
+        "model": "gpt-6.1-terra",
+        "reasoning_effort": "medium",
+        "prompt_version": "robocasa-four-view-v3",
+        "cameras": [
+          "agentview",
+          "agentview_right",
+          "navview",
+          "wrist"
+        ],
+        "timeout_s": 60
+      },
+      "vla": {
+        "checkpoint": "RLDX-1-FT-RC365",
+        "max_chunks": 40,
+        "action_steps_per_chunk": 8,
+        "settle_patience": 999,
+        "stop_on_success": true
+      },
+      "agent_success_source": "native",
+      "task_progress_source": "vlm",
+      "gpus": [
+        0,
+        2,
+        3,
+        7
+      ]
+    },
+    "validation": {
+      "valid_episodes": 160,
+      "native_final_state_matches": 160,
+      "memory_audits_ok": 160,
+      "memory_files_unchanged": 148,
+      "frozen_source_files_verified": 502,
+      "offline_tests_passed": 291,
+      "full_agent_smoke_passed": true,
+      "judge_request_input_and_four_camera_checks": true
+    },
+    "comparisons": {
+      "matched_by": [
+        "task",
+        "seed"
+      ],
+      "initial_state_equality_audited_against_references": false,
+      "limits": [
+        "One batch per setting; task/seed pairing does not establish causal improvement.",
+        "Reference initial states and VLA noise were not fully matched in this export.",
+        "E03 archived run generated success_criteria.md, with file-tool reading restricted to memory; E10 does not generate it.",
+        "E10 adds fixed task-condition knowledge and extra VLM compute; it is not a conditions-only control.",
+        "Terminal visual/native disagreement measures this run, not independent VLM accuracy."
+      ]
+    },
+    "judge": {
+      "judge_records": 4059,
+      "judge_responses": 4050,
+      "input_tokens": 23192795,
+      "output_tokens": 960747,
+      "total_tokens": 24153542,
+      "cancelled_before_judge_request": 6,
+      "judge_errors": 9,
+      "latency_median_s": 6.339,
+      "latency_p95_s": 9.912
+    },
+    "analysis_path": "experiments/vlm-progress-native-success/analysis/"
   }
 }

@@ -1,0 +1,226 @@
+{
+  "task": "ScrubCuttingBoard",
+  "seed": 1,
+  "timeline": [
+    {
+      "step": 0,
+      "command": null,
+      "native_success": false,
+      "task_progress": {
+        "source": "vlm",
+        "step": 0,
+        "status": "ok",
+        "completion": "unknown",
+        "conditions": [
+          {
+            "id": "board_contact_timer",
+            "state": "unknown",
+            "evidence": [
+              {
+                "step": 0,
+                "camera": "wrist",
+                "description": "The sponge is on the counter beside the board; this single image does not show a history of grasped contacts or establish a contact count."
+              }
+            ]
+          },
+          {
+            "id": "sweep_range",
+            "state": "unknown",
+            "evidence": [
+              {
+                "step": 0,
+                "camera": "wrist",
+                "description": "No board contact positions or sweep history are visible in this single image."
+              }
+            ]
+          },
+          {
+            "id": "gripper_obj_far",
+            "state": "satisfied",
+            "evidence": [
+              {
+                "step": 0,
+                "camera": "agentview_right",
+                "description": "The gripper is raised well above the sponge, with a visible separation greater than the estimated 0.15 m threshold relative to the cutting board's dimensions."
+              }
+            ]
+          }
+        ],
+        "uncertainties": [
+          "The supplied image is a single observation and cannot establish the number or range of any past grasped board contacts."
+        ]
+      }
+    },
+    {
+      "step": 1,
+      "command": {
+        "action": "rldx_arm",
+        "prompt": "Pick up the sponge from the counter and clean the cutting board by briefly scrubbing or pressing down on the cutting board. Once finished, release the sponge."
+      },
+      "native_success": false,
+      "task_progress": {
+        "source": "vlm",
+        "step": 1,
+        "status": "ok",
+        "completion": "incomplete",
+        "conditions": [
+          {
+            "id": "board_contact_timer",
+            "state": "unknown",
+            "evidence": [
+              {
+                "step": 1,
+                "camera": "wrist",
+                "description": "The sponge is beside the board at step 0 and close to the gripper and board at step 1. These observations do not establish five distinct grasped contact positions."
+              }
+            ]
+          },
+          {
+            "id": "sweep_range",
+            "state": "unknown",
+            "evidence": [
+              {
+                "step": 1,
+                "camera": "agentview_right",
+                "description": "The endpoint view shows the sponge near the board, but does not establish the positions of grasped board contacts or their range."
+              }
+            ]
+          },
+          {
+            "id": "gripper_obj_far",
+            "state": "unsatisfied",
+            "evidence": [
+              {
+                "step": 1,
+                "camera": "agentview_right",
+                "description": "The gripper is immediately adjacent to the sponge at the near edge of the board, visibly much less than 0.15 m away relative to the board's dimensions."
+              }
+            ]
+          }
+        ],
+        "uncertainties": [
+          "The two supplied observations do not establish the count or spatial extent of any intervening grasped board contacts."
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "command": {
+        "action": "rldx_arm",
+        "prompt": "Pick up the sponge from the counter and clean the cutting board by briefly scrubbing or pressing down on the cutting board. Once finished, release the sponge."
+      },
+      "native_success": false,
+      "task_progress": {
+        "source": "vlm",
+        "step": 2,
+        "status": "ok",
+        "completion": "incomplete",
+        "conditions": [
+          {
+            "id": "board_contact_timer",
+            "state": "unknown",
+            "evidence": [
+              {
+                "step": 2,
+                "camera": "wrist",
+                "description": "The sponge is over the board at this observation, but the images do not establish five distinct grasped contact positions."
+              }
+            ]
+          },
+          {
+            "id": "sweep_range",
+            "state": "unknown",
+            "evidence": [
+              {
+                "step": 2,
+                "camera": "wrist",
+                "description": "The endpoint shows the sponge over the board, but the images do not establish the range of grasped board contact positions."
+              }
+            ]
+          },
+          {
+            "id": "gripper_obj_far",
+            "state": "unsatisfied",
+            "evidence": [
+              {
+                "step": 2,
+                "camera": "agentview_right",
+                "description": "The gripper is immediately adjacent to the sponge on the board, visibly less than 0.15 m away relative to the board's dimensions."
+              }
+            ]
+          }
+        ],
+        "uncertainties": [
+          "The supplied observations do not establish the count or spatial extent of any intervening grasped board contacts."
+        ]
+      }
+    },
+    {
+      "step": 3,
+      "command": {
+        "action": "rldx_arm",
+        "prompt": "Pick up the sponge from the counter and clean the cutting board by briefly scrubbing or pressing down on the cutting board. Once finished, release the sponge."
+      },
+      "native_success": true,
+      "task_progress": {
+        "source": "vlm",
+        "step": 3,
+        "status": "ok",
+        "completion": "incomplete",
+        "conditions": [
+          {
+            "id": "board_contact_timer",
+            "state": "unknown",
+            "evidence": [
+              {
+                "step": 2,
+                "camera": "wrist",
+                "description": "The sponge is over the board, but this observation does not establish five distinct grasped contact positions."
+              },
+              {
+                "step": 3,
+                "camera": "agentview",
+                "description": "The sponge is now on the counter away from the board; the intervening contact history is not visible."
+              }
+            ]
+          },
+          {
+            "id": "sweep_range",
+            "state": "unknown",
+            "evidence": [
+              {
+                "step": 2,
+                "camera": "wrist",
+                "description": "The visible board position does not establish the spatial range of grasped board contacts."
+              },
+              {
+                "step": 3,
+                "camera": "agentview",
+                "description": "The sponge has moved away from the board, but its intervening board contact positions are not visible."
+              }
+            ]
+          },
+          {
+            "id": "gripper_obj_far",
+            "state": "unsatisfied",
+            "evidence": [
+              {
+                "step": 3,
+                "camera": "wrist",
+                "description": "The sponge is immediately in front of the gripper fingers, visibly less than 0.15 m away."
+              }
+            ]
+          }
+        ],
+        "uncertainties": [
+          "The images do not establish the number or spatial extent of grasped board contacts between observations."
+        ]
+      }
+    }
+  ],
+  "finish": {
+    "_finish": true,
+    "status": "success",
+    "summary": "The sponge was grasped, moved onto the cutting board for scrubbing, and released. The final arm skill stopped with native simulator success=true and robocasa_terminated=true at step 3; the audit and recipe were saved."
+  }
+}

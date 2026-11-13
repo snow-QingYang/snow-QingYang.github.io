@@ -1,0 +1,74 @@
+{
+  "split": "seen",
+  "task": "StirVegetables",
+  "seed": 5,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 901.1,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "unknown",
+    "judge_calls": 12,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 11,
+    "vla_calls": 9,
+    "manual_calls": 2,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/StirVegetables.md"
+    ],
+    "result_sha256": "068d65240f4e5d26c2f7dd192bcc4796b196787704dc6d859705c7624b253b68",
+    "states_sha256": "b435e6ca2f681f99500a574cd7f998484a3ecc3116d1a0207b56a60c337c47d5",
+    "transcript_sha256": "0d31a7f4afeb89b3a3d2ee72ef1825b3b8cce9b9152f5b98e4ce90b5ac372ef3",
+    "initial": {
+      "task_language": "Put the bell pepper and carrot in the pot. Retrieve the spatula and lightly stir the vegetables in the pot.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          0.6066600534786499,
+          -1.673703545353788,
+          1.3148462184130345
+        ],
+        "robot0_eef_quat": [
+          0.008941042086583362,
+          -0.9822166205462577,
+          0.04485254164506578,
+          0.1820956276165656
+        ],
+        "robot0_gripper_qpos": [
+          0.02057833835553215,
+          -0.02048822072695701
+        ],
+        "robot0_base_pos": [
+          0.8439830252357047,
+          -1.696138793089492,
+          0.7000000132153179
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -1.0,
+          1.93303662854305e-06
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "dd6840310a3713b5f7e19214f9b773c2a0faa0390d054c1595e7ee75676c4b3e",
+        "agentview_right": "27346cb3ba0bf6fa0945312c5c81b6271cd7f05949ddd0836fa57a6cb5e1c8fe",
+        "navview": "b80490619a4a591cbc8f5ebef2f91b5045498ac62e7005dd23e0eae7b83dc8ad",
+        "wrist": "a0403237096810518f30ea86b59b4ba293afa4b5012172cbd9030e8e4bfee32e"
+      }
+    }
+  },
+  "baseline": {
+    "success": true,
+    "elapsed_s": 483.8
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1523.0,
+    "result_sha256": "a55b9987d3644115e8ed35e7d7df6a4b6ab2310761d31044e38a7beaf85e3998"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "split": "unseen",
+  "task": "CuttingToolSelection",
+  "seed": 1,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 1248.3,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "incomplete",
+    "judge_calls": 27,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 26,
+    "vla_calls": 9,
+    "manual_calls": 17,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/CuttingToolSelection.md"
+    ],
+    "result_sha256": "79d70c016e229b61f152bb93ae5d30bf497e4f2b5884049a776162a89e0c0c57",
+    "states_sha256": "0e06568eb3efefe858077bfad86ccf2c069c8f8e0a2ce4550645a9445a3daef2",
+    "transcript_sha256": "a64d4d988297cc6cb550ea60ce72daf21a8218b68068f47566aa5fec5d242ca7",
+    "initial": {
+      "task_language": "Place the appropriate cutting tool for cutting the cucumber skin on the cutting board.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          4.099362316494571,
+          -0.828780133430298,
+          1.3125758413734985
+        ],
+        "robot0_eef_quat": [
+          0.6505971758736289,
+          0.7408364194052921,
+          0.11158113080046086,
+          -0.12423512255917492
+        ],
+        "robot0_gripper_qpos": [
+          0.020546472558814522,
+          -0.020520088137473805
+        ],
+        "robot0_base_pos": [
+          4.113430064860319,
+          -1.0730499556513589,
+          0.7000000315100131
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          0.7071068286895752,
+          0.7071067094802856
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "453cc92faa70cae6f94032ff6d5d839439a2f3101e22b8457f45b633715de32d",
+        "agentview_right": "a5ac4442221f32223594ec26eca22d7117d2e76bf373f76b1918a2bf1d0293c1",
+        "navview": "61d539c8de73cbfdd89bf0fa8c144249d19d90cc18bb8f77c0741cef9d2c081a",
+        "wrist": "00c79f7412e8bfbc609e1ab8f637fcd76922364995e1941d6ea024627ac1afcb"
+      }
+    }
+  },
+  "baseline": {
+    "success": true,
+    "elapsed_s": 664.9
+  },
+  "no_progress": {
+    "success": true,
+    "elapsed_s": 128.3,
+    "result_sha256": "646495daa1d300d391b6ed96c3885edf83792ee3c8b85c00e3e801740c81e290"
+  }
+}

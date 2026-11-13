@@ -1,0 +1,74 @@
+{
+  "split": "unseen",
+  "task": "WeighIngredients",
+  "seed": 2,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 2299.3,
+    "termination_reason": "completed",
+    "finish_status": null,
+    "visual_completion": "unknown",
+    "judge_calls": 43,
+    "judge_errors": {},
+    "cancelled_judgments": 1,
+    "action_count": 43,
+    "vla_calls": 18,
+    "manual_calls": 25,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/WeighIngredients.md"
+    ],
+    "result_sha256": "a4e8becb1f37f3ba80648361ab1ddf8de009128986ddae95acd55977102a2b59",
+    "states_sha256": "73ccb2dcfd8255703c6979c4a54b25506e072f8593f9297cf96dee7987c606d8",
+    "transcript_sha256": "69d532a28772b851f142a56e5a21173558674880aa5b63fa9cae7e13c9083fab",
+    "initial": {
+      "task_language": "Pick the honey bottle and place it on the digital scale for weighing, and close the cabinet.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          0.574128072922141,
+          -3.071224723598219,
+          1.2895035347094816
+        ],
+        "robot0_eef_quat": [
+          0.02815166445260303,
+          -0.9916267504706334,
+          0.030333364170564675,
+          0.12232644259396686
+        ],
+        "robot0_gripper_qpos": [
+          0.020566130468157293,
+          -0.02050042856916885
+        ],
+        "robot0_base_pos": [
+          0.8193204437983032,
+          -3.0962568873357696,
+          0.700000019239393
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -1.0,
+          1.949949364643544e-06
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "1c3cf267d2d04e06efa50dd7734a69e24e5769bbeb297b0c8382444c1e6503f4",
+        "agentview_right": "749321b9e5df566ae61c50651840d84b5f1b15595837beeed47987994a7bcdf6",
+        "navview": "303333a2fe322a21a57f41cd66ee67e1dddba8231b718c5bb7dd66c335d4f320",
+        "wrist": "50a4f3293e9204cd16a29933ba6d7cb76743d9b499a8de97b22b5f46aee3a796"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 1094.7
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1853.9,
+    "result_sha256": "9617b2d0a723f6897d21022d27e1d022db3794ba59d4b5990ba0667b73d82774"
+  }
+}

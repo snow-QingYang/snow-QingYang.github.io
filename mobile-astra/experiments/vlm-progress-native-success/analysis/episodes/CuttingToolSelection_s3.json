@@ -1,0 +1,74 @@
+{
+  "split": "unseen",
+  "task": "CuttingToolSelection",
+  "seed": 3,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 1846.4,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "incomplete",
+    "judge_calls": 33,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 32,
+    "vla_calls": 14,
+    "manual_calls": 18,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/CuttingToolSelection.md"
+    ],
+    "result_sha256": "f834a28f4d6e435fa7b1b0f5474b6ec9078285dcb28b4955fc3a755cdea3ab51",
+    "states_sha256": "a3fb73ff3a17b0bd6003b63761c9678f19169c883b0be9bedc76cc99acdc630d",
+    "transcript_sha256": "bab7a95c9480a4c52b4b7107cc116968d176d64e76167c676ecc3ecae0cd1241",
+    "initial": {
+      "task_language": "Place the appropriate cutting tool for cutting the avocado skin on the cutting board.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          2.5649013792719892,
+          -0.6263201081848827,
+          1.3056220298537693
+        ],
+        "robot0_eef_quat": [
+          0.6854329805864366,
+          0.7131554479520346,
+          0.08966531047633183,
+          -0.11640905582431282
+        ],
+        "robot0_gripper_qpos": [
+          0.020559975663778696,
+          -0.020506584922481502
+        ],
+        "robot0_base_pos": [
+          2.543108373993497,
+          -0.87365264419144,
+          0.7000000225511235
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          0.7071068286895752,
+          0.7071067094802856
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "378622352825837cdf6b5379ff2ed7a84c623e0d292f1d1ddfe3dc721bf59b29",
+        "agentview_right": "19fcb258f37191455d126a13a6c7f758dbb9e6bab4e06e05de35cc4c06c61ea7",
+        "navview": "c0fcea664a22a24d1aae71f30f0b5894bdbacbac2dfb1bf9f0fc62fa4a757b5b",
+        "wrist": "473d9bc20a49b59f1b48516050926abc996af84d03f585fa0f0d58105baef311"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 1837.0
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 2253.9,
+    "result_sha256": "f7bd33e7ea70dac36b9b46bf4fdf6edb48db9bcc4cfb45834ca1c4e9f0ecef31"
+  }
+}

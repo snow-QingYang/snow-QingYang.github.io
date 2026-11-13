@@ -1,0 +1,74 @@
+{
+  "split": "seen",
+  "task": "LoadDishwasher",
+  "seed": 1,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 2010.3,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "incomplete",
+    "judge_calls": 33,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 32,
+    "vla_calls": 13,
+    "manual_calls": 19,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/LoadDishwasher.md"
+    ],
+    "result_sha256": "fd23f816bdd1be2b1c5dd27d03e62ab14f171f5569276e5f0473006e27ed0305",
+    "states_sha256": "52b8bacaba7614da37da3a3581c5d37d042b346cd2a869451ecc6bb772896c2b",
+    "transcript_sha256": "09af595cc950658d0ea6b6452ea123857c1012a2d4b6f2c3b41f6dc9e805c261",
+    "initial": {
+      "task_language": "Pick up the cup and bowl from the counter, place them in the dishwasher, and close the dishwasher door.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          5.21281743972752,
+          -2.098364296849539,
+          1.3075562726720482
+        ],
+        "robot0_eef_quat": [
+          0.989797712485656,
+          0.03088734325264647,
+          0.13682231330476163,
+          -0.025022289401428165
+        ],
+        "robot0_gripper_qpos": [
+          0.020536832095161404,
+          -0.02052972709877447
+        ],
+        "robot0_base_pos": [
+          4.973192141387923,
+          -2.094302762841004,
+          0.700000032402933
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -1.933826069944189e-06,
+          1.0
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "098d6571cde187b739b6aad90251757b552770486ea9752def36a596ee6a10ad",
+        "agentview_right": "a6bfa079a272ff5fcf0587d034000d6a2741fe660805af45ee59eadaebf88ec3",
+        "navview": "8db421bcf9e0f66caaae42a147520f7d12ebbe86f4ffe9d895190f246dac6aae",
+        "wrist": "e4ebd8dde40413f3ae80353c614ca795ea0b5238f9e60460c20a2028dc658e80"
+      }
+    }
+  },
+  "baseline": {
+    "success": true,
+    "elapsed_s": 361.0
+  },
+  "no_progress": {
+    "success": true,
+    "elapsed_s": 268.1,
+    "result_sha256": "e5551b8767383dc15c09f52101f8a8e70b37b840ffcc9af23f0a0bc1c5653eff"
+  }
+}

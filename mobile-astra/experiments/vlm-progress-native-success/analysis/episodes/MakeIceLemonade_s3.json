@@ -1,0 +1,74 @@
+{
+  "split": "unseen",
+  "task": "MakeIceLemonade",
+  "seed": 3,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 1470.7,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "unknown",
+    "judge_calls": 23,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 22,
+    "vla_calls": 16,
+    "manual_calls": 6,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/MakeIceLemonade.md"
+    ],
+    "result_sha256": "70ac40eafc3639c574563b99280a6bfcbff72ccc782769ee2184ee85c8c3071c",
+    "states_sha256": "d126d77dca77995fa03d3b4605b78ecbc6f88f0a174c2e6380d9af065e48ac86",
+    "transcript_sha256": "ffb6fc0da8c44dcd31cf966ed7e6c2d595ae2d9de1cef2db4c6682bcdfd7dfc1",
+    "initial": {
+      "task_language": "Grab a lemon wedge from the fridge and one ice cube from the ice bowl, and put them in the glass of lemonade.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          4.69196959960977,
+          -0.8711391084095476,
+          1.3136624401860353
+        ],
+        "robot0_eef_quat": [
+          0.6924547999956231,
+          0.7042240800162567,
+          0.09246025820779724,
+          -0.12659342692424758
+        ],
+        "robot0_gripper_qpos": [
+          0.02056536674571258,
+          -0.02050119400102398
+        ],
+        "robot0_base_pos": [
+          4.667056479512532,
+          -1.1089482241433195,
+          0.7000000242852805
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          0.7071068286895752,
+          0.7071067094802856
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "9ce5a1298162a07f86556a3f3dac5c0b4e4693b1a9fd721d1555d1d790d6e327",
+        "agentview_right": "5e4ca13080cdc030b330b43f2b0705f5ff4056c14ee5e5977fec93cb1059d725",
+        "navview": "787eac0282130fccb6a82f214eab0fbe9cf6f8d8bb731e0aa12f5cef421ed426",
+        "wrist": "0460025aefa1d5a103a8a0ba6947b222b7dd40a0e400b30534bb90596355640f"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 1336.4
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1381.4,
+    "result_sha256": "2c39c57a2c9b005ad0afa425c564619485e60a3a25d1d90a0a138437efbcae30"
+  }
+}

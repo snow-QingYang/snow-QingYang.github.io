@@ -1,0 +1,74 @@
+{
+  "split": "unseen",
+  "task": "PortionHotDogs",
+  "seed": 4,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 2195.5,
+    "termination_reason": "completed",
+    "finish_status": null,
+    "visual_completion": "incomplete",
+    "judge_calls": 41,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 40,
+    "vla_calls": 13,
+    "manual_calls": 27,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/PortionHotDogs.md"
+    ],
+    "result_sha256": "2c437fe0db2107a989bfd754874fdaf7de6c98241c007e22499bff4633e8e41e",
+    "states_sha256": "bc4cce039090f1419136b39e0f8ffbf09425f84b130e336beecedcdc97bd60bc",
+    "transcript_sha256": "dc07f11f2d8db04e43f878c5df35d7a8553801240bb512c8ff75ba5b65cbfee6",
+    "initial": {
+      "task_language": "Place one bun and one sausage from the bowl on each plate.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          4.867254685619019,
+          -3.777048268786773,
+          1.273624819848497
+        ],
+        "robot0_eef_quat": [
+          0.663993759182677,
+          0.7397392662940081,
+          0.06341193463554075,
+          -0.08875264624244433
+        ],
+        "robot0_gripper_qpos": [
+          0.020557326861491178,
+          -0.020509234119540042
+        ],
+        "robot0_base_pos": [
+          4.876148674515566,
+          -4.039798164054422,
+          0.7000000172999987
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          0.7070741057395935,
+          0.7071393728256226
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "c0ef2530e024a1ec20c18c2ac14f60ecd0460d732dfe1b1c567d812017f4025a",
+        "agentview_right": "e18bca12ee99006b2a1faa96ff06041747435399177d059bf1de2b330d552f5a",
+        "navview": "1777233eb3efd8eb1377bfa139b283b1da8cbf7e104e3a0b87e4a7d9515b1d14",
+        "wrist": "84d030335dedb406bba5ee308c6b43055dc2d751532608499e495df4f80e394a"
+      }
+    }
+  },
+  "baseline": {
+    "success": true,
+    "elapsed_s": 2160.4
+  },
+  "no_progress": {
+    "success": true,
+    "elapsed_s": 1293.3,
+    "result_sha256": "9c91bb850c14993bdd166db0d9f824b2456a6d6adede517d045250cbb26ac8a0"
+  }
+}

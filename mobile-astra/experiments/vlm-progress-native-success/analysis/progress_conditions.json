@@ -1,0 +1,689 @@
+{
+  "version": "robocasa-conditions-v1",
+  "tasks": {
+    "OpenDrawer": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/atomic/kitchen_drawer.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "718c4bb0a71318f864ae7ccb9dcc21babd35606525c4955bcc18f506d9720dfe",
+      "conditions": [
+        {
+          "id": "drawer_open",
+          "description": "The target drawer is fully open: every drawer slide has reached at least 95% of its travel. Estimate from visible drawer extension; use unknown if the travel cannot be established."
+        }
+      ]
+    },
+    "ArrangeBreadBasket": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/setting_the_table/arrange_bread_basket.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "c7ae3ea9d7bf4b80679fd0c7a840e5f60364f7dde864d8f8c131914c47190585",
+      "conditions": [
+        {
+          "id": "gripper_obj_far",
+          "description": "The gripper is at least 0.25 m from the basket."
+        },
+        {
+          "id": "bread_in_basket",
+          "description": "The bread is inside the basket."
+        },
+        {
+          "id": "basket_on_counter",
+          "description": "The basket rests in contact with the dining counter/table."
+        }
+      ]
+    },
+    "ArrangeTea": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/brewing/arrange_tea.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "9fb6373cfdff7ae205efccb5bd1b4ffb89374da7db9ce89af3e623ae3de2c1bf",
+      "conditions": [
+        {
+          "id": "obj1_container_contact",
+          "description": "The kettle is on/in the tray."
+        },
+        {
+          "id": "obj2_container_contact",
+          "description": "The mug is on/in the tray."
+        },
+        {
+          "id": "gripper_obj_far",
+          "description": "The gripper is at least 0.25 m from the kettle."
+        },
+        {
+          "id": "cab_closed",
+          "description": "The cabinet doors are closed."
+        }
+      ]
+    },
+    "BreadSelection": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/making_toast/bread_selection.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "245f75a10145b660b3de610f62147bc8ea3bf801da2fce386a02294b159fb057",
+      "conditions": [
+        {
+          "id": "croissant_on_board",
+          "description": "The croissant is on the cutting board."
+        },
+        {
+          "id": "gripper_obj_far",
+          "description": "The gripper is at least 0.25 m from the croissant."
+        },
+        {
+          "id": "jam_on_board",
+          "description": "The jam jar is on the cutting board."
+        }
+      ]
+    },
+    "CategorizeCondiments": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/arranging_condiments/categorize_condiments.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "7075f60a93e0dde65c05f7f1ab883ab0a0d013505856db8ea33b543aecb9a5cd",
+      "conditions": [
+        {
+          "id": "obj1_in_cab",
+          "description": "The moved condiment bottle is inside the cabinet."
+        },
+        {
+          "id": "obj2_in_cab",
+          "description": "The moved condiment shaker is inside the cabinet."
+        },
+        {
+          "id": "bottles_close",
+          "description": "The moved bottle is within 0.15 m horizontally of the reference bottle."
+        },
+        {
+          "id": "shakers_close",
+          "description": "The moved shaker is within 0.15 m horizontally of the reference shaker."
+        },
+        {
+          "id": "gripper_far",
+          "description": "The gripper is at least 0.25 m from both moved objects."
+        }
+      ]
+    },
+    "CuttingToolSelection": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/chopping_vegetables/cutting_tool_selection.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "327e3254ad5d22bdd86982bf27649f25f7c2dfc4b35b63e20d83c77e4ff89e0e",
+      "conditions": [
+        {
+          "id": "correct_tool_chosen",
+          "description": "Exactly the correct tool is on the food cutting board, and the other tool is absent from it. Use knife for garlic, broccoli or avocado; peeler for eggplant, carrot, cucumber or potato. Identify the food from the task instruction and RGB."
+        },
+        {
+          "id": "gripper_obj_far",
+          "description": "The gripper is at least 0.25 m from the food cutting board."
+        }
+      ]
+    },
+    "DeliverStraw": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/serving_beverages/deliver_straw.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "d7da5b443d8b5e8127c6d5022106e826069d3d86d038246a1eae939bf9024afb",
+      "conditions": [
+        {
+          "id": "straw_in_glass_cup",
+          "description": "The straw is inside the glass cup (native receptacle check uses th=0.5)."
+        },
+        {
+          "id": "gripper_far",
+          "description": "The gripper is at least 0.25 m from the straw."
+        }
+      ]
+    },
+    "GarnishPancake": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/garnishing_dishes/garnish_pancake.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "d1a62992317e58b7e3be99a0827ee5ff7ac8dcf558aaf9beaca094a7fd6e812b",
+      "conditions": [
+        {
+          "id": "strawberry_on_pancake",
+          "description": "The strawberry is on the pancake."
+        },
+        {
+          "id": "pancake_on_plate",
+          "description": "The pancake is on its plate."
+        },
+        {
+          "id": "plate_on_table",
+          "description": "The plate is resting on the dining counter."
+        },
+        {
+          "id": "gripper_far_strawberry",
+          "description": "The gripper is at least 0.25 m from the strawberry."
+        }
+      ]
+    },
+    "GatherTableware": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/arranging_cabinets/gather_tableware.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "5ceedaca526e6ae4d8792b7ab03d550c0277c8290fe3b5dcb9b31c2b06e1aeea",
+      "conditions": [
+        {
+          "id": "grippers_far",
+          "description": "The gripper is at least 0.25 m from each of the three glasses."
+        },
+        {
+          "id": "relative_clustering",
+          "description": "The maximum distance between any two glasses, multiplied by 1.5, is less than the maximum distance between the bowl and any glass. The native predicate does not separately require cabinet containment."
+        }
+      ]
+    },
+    "GetToastedBread": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/toasting_bread/get_toasted_bread.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "f0b3e56ef5191768c4e90257dc31b56b1aac491858e56fb0ffd1583857cd1155",
+      "conditions": [
+        {
+          "id": "toaster_on",
+          "description": "At some earlier observation, the bread was in a toaster slot while that slot was turned on. This is a historical condition; a bread-on-plate image alone cannot establish it."
+        },
+        {
+          "id": "bread_on_plate",
+          "description": "The bread is now on the plate."
+        },
+        {
+          "id": "gripper_obj_far",
+          "description": "The gripper is at least 0.25 m from the bread."
+        }
+      ]
+    },
+    "HeatKebabSandwich": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/preparing_sandwiches/heat_kebab_sandwich.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "ce513c75a5c6455bb6fbf45829318097680cbf6ce2e39699ca773984e06fc094",
+      "conditions": [
+        {
+          "id": "baguette_in_toaster",
+          "description": "The baguette rests on either rack 0 OR rack 1 of the toaster oven."
+        },
+        {
+          "id": "kebab_in_toaster",
+          "description": "The kebab rests on either rack 0 OR rack 1 of the toaster oven."
+        },
+        {
+          "id": "toaster_closed",
+          "description": "The toaster oven door is not open."
+        },
+        {
+          "id": "timer_on",
+          "description": "The toaster oven timer has been set to at least 0.1 in its native normalized state; judge the visible control, use unknown if unreadable."
+        }
+      ]
+    },
+    "KettleBoiling": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/brewing/kettle_boiling.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "90c6eada25face9c401bfbfb6328c27c490f5c3f3422120c60524aa575efbbc6",
+      "conditions": [
+        {
+          "id": "kettle_on_active_burner",
+          "description": "The kettle contacts the stove and is centered within 0.15 m horizontally of an active burner; the same burner under the kettle must be on."
+        },
+        {
+          "id": "gripper_obj_far",
+          "description": "The gripper is at least 0.25 m from the kettle."
+        }
+      ]
+    },
+    "LoadDishwasher": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/loading_dishwasher/load_dishwasher.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "219815980ebe8a66566c0cde863acfa066ace9c453953b5a80f4061ef1626dba",
+      "conditions": [
+        {
+          "id": "are_dishes_correctly_placed",
+          "description": "Both target dishes contact the dishwasher top rack."
+        },
+        {
+          "id": "is_dishwasher_closed",
+          "description": "The dishwasher door is fully closed (normalized opening at most 0.05)."
+        }
+      ]
+    },
+    "MakeIceLemonade": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/adding_ice_to_beverages/make_ice_lemonade.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "84f1ffdfe13517f7d552249d71d8fcb3394d014f19276cd1c81a6a1f2bd6f6c4",
+      "conditions": [
+        {
+          "id": "lemon_in_cup",
+          "description": "The lemon wedge is inside the glass cup (native receptacle check th=0.5)."
+        },
+        {
+          "id": "ice_in_cup",
+          "description": "At least one of the two ice cubes is inside the glass cup (OR, not both required)."
+        },
+        {
+          "id": "gripper_far_lemon",
+          "description": "The gripper is at least 0.15 m from the lemon wedge."
+        },
+        {
+          "id": "gripper_far_ice",
+          "description": "The gripper is at least 0.15 m from each of the two ice cubes."
+        }
+      ]
+    },
+    "PackIdenticalLunches": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/packing_lunches/pack_identical_lunches.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "8a98911920959c10aab3df41bef01a605508f110ed940b1614faabca374e803e",
+      "conditions": [
+        {
+          "id": "tupper0_valid",
+          "description": "The first tupperware contains exactly one target vegetable and one target meat portion."
+        },
+        {
+          "id": "tupper1_valid",
+          "description": "The second tupperware contains exactly one target vegetable and one target meat portion."
+        },
+        {
+          "id": "no_duplicates",
+          "description": "Each of the four portions is assigned to only one container; no object counts in both containers."
+        },
+        {
+          "id": "gripper_far",
+          "description": "The gripper is at least 0.25 m from every packed portion."
+        }
+      ]
+    },
+    "PanTransfer": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/serving_food/pan_transfer.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "658da6294c338ecdafe2c6d2363fd5dbb689b83b83baec2018f42aeae273fdc6",
+      "conditions": [
+        {
+          "id": "vegetable_on_plate",
+          "description": "The vegetable is on the plate."
+        },
+        {
+          "id": "pan_on_stove",
+          "description": "The vegetable pan is on a stove burner."
+        },
+        {
+          "id": "gripper_obj_far",
+          "description": "The gripper is at least 0.25 m from the pan."
+        },
+        {
+          "id": "food_never_touched",
+          "description": "The robot gripper has never contacted the food during this episode. Endpoint images cannot prove the absence of contact between observations; return unknown without sufficient visual history."
+        }
+      ]
+    },
+    "PortionHotDogs": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/portioning_meals/portion_hot_dogs.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "5c100c044801bc16022b29fbf78e098667164544a83a55a23a85ece5091d8aa5",
+      "conditions": [
+        {
+          "id": "plate1_portion",
+          "description": "Plate 1 contains exactly one bun and exactly one sausage."
+        },
+        {
+          "id": "plate2_portion",
+          "description": "Plate 2 contains exactly one bun and exactly one sausage."
+        },
+        {
+          "id": "gripper_far",
+          "description": "The gripper is at least 0.25 m from each of the two buns and two sausages."
+        }
+      ]
+    },
+    "PreSoakPan": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/washing_dishes/pre_soak_pan.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "b783784fe0b8722fcc5187f95f1b0fddd88bbcef1dcdeb2728c06db5eaae41a8",
+      "conditions": [
+        {
+          "id": "water_on",
+          "description": "The sink faucet is running."
+        },
+        {
+          "id": "pan_in_sink",
+          "description": "The entire pan is inside the sink, not merely overlapping its boundary."
+        },
+        {
+          "id": "sponge_in_sink",
+          "description": "The entire sponge is inside the sink."
+        },
+        {
+          "id": "grippers_far",
+          "description": "The gripper is at least 0.25 m from both the pan and sponge."
+        }
+      ]
+    },
+    "PrepareCoffee": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/brewing/prepare_coffee.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "fdb4993a65a3d86cdda68feebf54668824b379929f7177c8324b6400e3da2125",
+      "conditions": [
+        {
+          "id": "contact_check",
+          "description": "The cup is correctly placed on the coffee machine receptacle beneath the dispenser."
+        },
+        {
+          "id": "gripper_obj_far",
+          "description": "The gripper is at least 0.25 m from the cup."
+        },
+        {
+          "id": "machine_turned_on",
+          "description": "The coffee machine is turned on."
+        },
+        {
+          "id": "gripper_button_far",
+          "description": "The gripper has moved away from the coffee-machine button, as required by the native fixture predicate."
+        }
+      ]
+    },
+    "RecycleBottlesByType": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/organizing_recycling/recycle_bottles_by_type.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "2137df2de655fa4e6bbeea21e3dd74d580c9ee956409cf7f86765800bae53892",
+      "conditions": [
+        {
+          "id": "plastic_ok",
+          "description": "Each movable plastic bottle is within 0.30 m horizontally of at least one plastic reference bottle. Include the mystery bottle here when it is not alcohol."
+        },
+        {
+          "id": "glass_ok",
+          "description": "Each movable glass bottle is within 0.30 m horizontally of at least one glass reference bottle. Include the mystery bottle here when it is alcohol. Use task text and visible appearance to infer its type; otherwise unknown."
+        },
+        {
+          "id": "on_table",
+          "description": "All seven bottles rest on the dining counter."
+        },
+        {
+          "id": "all_far",
+          "description": "The gripper is at least 0.25 m from every bottle."
+        }
+      ]
+    },
+    "RinseSinkBasin": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/cleaning_sink/rinse_sink_basin.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "656dba25de3775e09b7d263a04061d6f228af519a4faa88556f7102fc588cee9",
+      "conditions": [
+        {
+          "id": "washed_left",
+          "description": "The faucet has run with the spout directed left at some time in this episode."
+        },
+        {
+          "id": "washed_center",
+          "description": "The faucet has run with the spout directed center at some time in this episode."
+        },
+        {
+          "id": "washed_right",
+          "description": "The faucet has run with the spout directed right at some time in this episode."
+        }
+      ]
+    },
+    "ScrubCuttingBoard": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/sanitizing_cutting_board/scrub_cutting_board.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "542c1c46bc5c821bd96624c8e7b83ecf7b5adba70bb203fdffe58f0cc4c025e0",
+      "conditions": [
+        {
+          "id": "board_contact_timer",
+          "description": "While grasped, the sponge has contacted at least five distinct board positions, each recorded point at least 0.02 m from earlier recorded points. Do not infer an exact contact count from endpoint images alone."
+        },
+        {
+          "id": "sweep_range",
+          "description": "The diagonal between min/max XY of those board contact positions is at least 0.1 m."
+        },
+        {
+          "id": "gripper_obj_far",
+          "description": "The gripper is at least 0.15 m from the sponge."
+        }
+      ]
+    },
+    "SearingMeat": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/frying/searing_meat.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "d3ba65b975236782ac2188b6412f68d1ce829c2960a8505dc7bfdce5175be3bf",
+      "conditions": [
+        {
+          "id": "gripper_obj_far",
+          "description": "The gripper is at least 0.25 m from the meat."
+        },
+        {
+          "id": "pan_loc",
+          "description": "The pan is on the designated stove burner, within 0.15 m of its center. Use the task description to identify the designated burner; unknown if unspecified."
+        },
+        {
+          "id": "meat_in_pan",
+          "description": "The meat is inside the pan (native receptacle check th=0.07)."
+        }
+      ]
+    },
+    "SeparateFreezerRack": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/managing_freezer_space/separate_freezer_rack.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "c0219d60086d043ae8092e30e4cc0b3a75b5d196c2141d9bd378c9d11f2f15d7",
+      "conditions": [
+        {
+          "id": "meat_in_tupperware",
+          "description": "The meat is in the meat container."
+        },
+        {
+          "id": "veg1_in_tupperware",
+          "description": "The first vegetable is in the vegetable container."
+        },
+        {
+          "id": "veg2_in_tupperware",
+          "description": "The second vegetable is in the vegetable container."
+        },
+        {
+          "id": "veg_tupperware_top_rack",
+          "description": "The vegetable container rests on the highest freezer rack."
+        },
+        {
+          "id": "meat_tupperware_second_rack",
+          "description": "The meat container rests on the second-highest freezer rack."
+        },
+        {
+          "id": "grippers_far",
+          "description": "The gripper is at least 0.25 m from both containers."
+        }
+      ]
+    },
+    "SetUpCuttingStation": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/slicing_meat/set_up_cutting_station.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "90b6111f3db108cc7c491d5631522eb12ffc457c81b9a84937b88a2c354744ad",
+      "conditions": [
+        {
+          "id": "meat_on_board",
+          "description": "The meat is on the cutting board."
+        },
+        {
+          "id": "knife_on_board",
+          "description": "The knife is on the cutting board."
+        },
+        {
+          "id": "gripper_far",
+          "description": "The gripper is at least 0.25 m from both the knife and the cutting board."
+        }
+      ]
+    },
+    "StackBowlsCabinet": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/organizing_dishes_and_containers/stack_bowls_cabinet.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "9f65606b7bde5e8bc40268756831463489e67051879e13f44628bcfe76eb2769",
+      "conditions": [
+        {
+          "id": "bowl1_in_cabinet",
+          "description": "The first bowl is inside the cabinet."
+        },
+        {
+          "id": "bowl2_in_cabinet",
+          "description": "The second bowl is inside the cabinet."
+        },
+        {
+          "id": "bowls_nested",
+          "description": "Either bowl is nested in/on the other bowl. The native condition accepts either nesting direction."
+        },
+        {
+          "id": "grippers_far",
+          "description": "The gripper is at least 0.25 m from both bowls."
+        }
+      ]
+    },
+    "SteamInMicrowave": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/steaming_food/steam_in_microwave.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "2148c4bf307205bee22ee449614d29adbaa120e671de4e93a657b932cced913e",
+      "conditions": [
+        {
+          "id": "vegetable_in_bowl",
+          "description": "The vegetable is in the bowl."
+        },
+        {
+          "id": "bowl_in_microwave",
+          "description": "The bowl is inside the microwave."
+        },
+        {
+          "id": "door_closed",
+          "description": "The microwave door is closed."
+        },
+        {
+          "id": "button_pressed",
+          "description": "The microwave is turned on."
+        }
+      ]
+    },
+    "StirVegetables": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/sauteing_vegetables/stir_vegetables.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "09c894167aea0593f2887fb5cb16d5836d658ee73e782b6e34a35cc1715493c5",
+      "conditions": [
+        {
+          "id": "success_time",
+          "description": "At least five simulation updates have detected both vegetables being stirred with a grasped spatula, while both are in the pot and the pot is on the designated burner. This is a historical counter, not five seconds; endpoint images do not establish the exact count. Return unknown if evidence is insufficient."
+        }
+      ]
+    },
+    "StoreLeftoversInBowl": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/storing_leftovers/store_leftovers_in_bowl.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "30d6f742b4e65c435ae295f589647edbdd7b7d9c1f3f29a899d47885cdaa78f3",
+      "conditions": [
+        {
+          "id": "chicken_in_bowl",
+          "description": "The chicken drumstick is in the bowl."
+        },
+        {
+          "id": "vegetable_in_bowl",
+          "description": "The vegetable is in the bowl."
+        },
+        {
+          "id": "bowl_in_fridge",
+          "description": "The bowl rests on a fridge rack."
+        },
+        {
+          "id": "gripper_far",
+          "description": "The gripper is at least 0.25 m from the bowl."
+        }
+      ]
+    },
+    "WaffleReheat": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/reheating_food/waffle_reheat.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "2e12f51f3d7aff1baebaa079db90cef6b7278567eade81643e09c9c7d231c4d5",
+      "conditions": [
+        {
+          "id": "waffle_in_bowl",
+          "description": "The waffle is in its bowl/container."
+        },
+        {
+          "id": "bowl_in_microwave",
+          "description": "The bowl/container is inside the microwave."
+        },
+        {
+          "id": "microwave_on",
+          "description": "The microwave is turned on."
+        }
+      ]
+    },
+    "WashFruitColander": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/washing_fruits_and_vegetables/wash_fruit_colander.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "c09e96ca1a7c7e432a7e1c49182947df35ce8906f5566e329562da5341f730b5",
+      "conditions": [
+        {
+          "id": "fruit_in_colander",
+          "description": "Every target fruit is in the colander."
+        },
+        {
+          "id": "colander_under_water",
+          "description": "The colander is underneath the running sink water."
+        }
+      ]
+    },
+    "WashLettuce": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/making_salads/wash_lettuce.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "6dd2a286fb81e13d0ba07b7b9972a61b9afc60da37230a6ac723a0054c14adf5",
+      "conditions": [
+        {
+          "id": "washed_time",
+          "description": "The lettuce has been underneath running sink water for at least 25 simulation updates. This is a hidden accumulated counter, not 25 seconds; use unknown when RGB history cannot establish the count."
+        }
+      ]
+    },
+    "WeighIngredients": {
+      "operator": "all",
+      "source_path": "robocasa/environments/kitchen/composite/measuring_ingredients/weigh_ingredients.py",
+      "source_revision": "2692d8fc5fd86708a1b2028dcbce892ec418a9e7",
+      "success_source_sha256": "dc93d5428eb6426f3c747a6fba5381c5a7897078b7ae574226900580d8f83b06",
+      "conditions": [
+        {
+          "id": "gripper_obj_far",
+          "description": "The gripper is at least 0.25 m from the packaged food."
+        },
+        {
+          "id": "packaged_food_on_digital_scale",
+          "description": "The packaged food is on the digital scale."
+        },
+        {
+          "id": "cabinet_closed",
+          "description": "The cabinet doors are closed."
+        },
+        {
+          "id": "obj_upright",
+          "description": "The packaged food is upright."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "split": "seen",
+  "task": "StackBowlsCabinet",
+  "seed": 4,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 1406.8,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "incomplete",
+    "judge_calls": 19,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 18,
+    "vla_calls": 17,
+    "manual_calls": 1,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/StackBowlsCabinet.md"
+    ],
+    "result_sha256": "70d4b468136ed309017ce3d86fe00249bf5f942e2fa7f2e107a35f7055f12756",
+    "states_sha256": "ed6ddcc0c554f1c98e72168cccf4fe05852843639724539cecc40d8f0949d72c",
+    "transcript_sha256": "be394bdd23b50dc80ff3cdd633eda272ccfa4d498b046c5e5d9e85173b7f0d04",
+    "initial": {
+      "task_language": "Pick up the bowls on the counter and stack them on top of one another in the open cabinet. Place the smaller bowl on top of the larger bowl.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          5.373166461571646,
+          -0.545768224108345,
+          1.3036817919892991
+        ],
+        "robot0_eef_quat": [
+          0.6826459358480752,
+          0.7156267771577497,
+          0.07688611906580525,
+          -0.12633830290104656
+        ],
+        "robot0_gripper_qpos": [
+          0.0205721860932928,
+          -0.020494374707977537
+        ],
+        "robot0_base_pos": [
+          5.360095565710899,
+          -0.7942198662725393,
+          0.7000000209906444
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          0.7071068286895752,
+          0.7071066498756409
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "8846b1c192d59b136c1af5d9fa82d3f7a98d3a09ecf0bd20ec69be58ea13439c",
+        "agentview_right": "8192b9496f0cc042b5149f53becb42ec8350cfc668ddfc393d5d5b618f8181a5",
+        "navview": "7830a397be97dc7e11caae6f5dc7a5d76a5a1ca221b75c00d17f8c944f4da609",
+        "wrist": "19e3f7fe2e464bf952e26166252bad5d648b83edc0efc37dc8460263fbdcedea"
+      }
+    }
+  },
+  "baseline": {
+    "success": true,
+    "elapsed_s": 991.8
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1289.0,
+    "result_sha256": "5a6ea6cfe373e110eaf8576e8946ff978b88d0d55af831e1825b1c44b892bab2"
+  }
+}

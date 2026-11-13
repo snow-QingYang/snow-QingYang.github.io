@@ -1,0 +1,74 @@
+{
+  "split": "unseen",
+  "task": "ArrangeTea",
+  "seed": 2,
+  "current": {
+    "success": true,
+    "valid": true,
+    "elapsed_s": 1790.8,
+    "termination_reason": "completed",
+    "finish_status": "success",
+    "visual_completion": "incomplete",
+    "judge_calls": 36,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 35,
+    "vla_calls": 18,
+    "manual_calls": 17,
+    "first_native_success_step": 35,
+    "actions_after_first_success": 0,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/ArrangeTea.md"
+    ],
+    "result_sha256": "c16bd2c2f8126a1fc4bcc890555707f76aac9a06844bb96116a89b68150cfdc8",
+    "states_sha256": "20858772a560505b4ccabdcc4326d5c6f97f764ccdb0f90e001791f5b5231d37",
+    "transcript_sha256": "d094eed67f8dbc7235bff797adbb9659a1dc2f2b9dc8d30eef908a8fb152abcc",
+    "initial": {
+      "task_language": "Pick the kettle from the counter and place it on the tray. Then pick the mug from the cabinet and place it on the tray. Then close the cabinet doors.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          2.68035298909215,
+          -1.6076578625140676,
+          1.2982635347851625
+        ],
+        "robot0_eef_quat": [
+          0.9888292156934668,
+          0.053299550585344024,
+          0.1385019733060845,
+          -0.013897607303547402
+        ],
+        "robot0_gripper_qpos": [
+          0.020525778700078517,
+          -0.020540780525988876
+        ],
+        "robot0_base_pos": [
+          2.4256824141233024,
+          -1.6166771804919484,
+          0.7000000275519752
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -1.9368164885236183e-06,
+          1.0
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "300e7418c52ce826a9dcc3819f49ca6d74926f90791ff37a041428d0c146e3e6",
+        "agentview_right": "b6dccdd8d8e0689d2e80de052c97869f96cc3c84064d0c81a21f2df3747feb56",
+        "navview": "d1e1ef071f6c83474d0a58a5c58f0cd30005d9d58a08f7a1bb62f5243fff3ff8",
+        "wrist": "879f0df20532395458bc3e8cbbfca4ac74d619df0cd4b10fb20fc9c07911eca3"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 934.5
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 844.2,
+    "result_sha256": "e5e7d8e9adea97a2fe409b2628b02c062079aa039f6c4acd4d57e8c16008a393"
+  }
+}

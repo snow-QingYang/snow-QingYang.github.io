@@ -1,0 +1,74 @@
+{
+  "split": "seen",
+  "task": "WashLettuce",
+  "seed": 3,
+  "current": {
+    "success": true,
+    "valid": true,
+    "elapsed_s": 394.5,
+    "termination_reason": "completed",
+    "finish_status": "success",
+    "visual_completion": "unknown",
+    "judge_calls": 7,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 6,
+    "vla_calls": 5,
+    "manual_calls": 1,
+    "first_native_success_step": 6,
+    "actions_after_first_success": 0,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/WashLettuce.md"
+    ],
+    "result_sha256": "5daab072124a2b9c848f52196863efb9a6766df676efc60dafe78927102db42f",
+    "states_sha256": "c8ff736da9edb81c660b308f14e552e1335ed2bf0d706b23572e8577b73edac1",
+    "transcript_sha256": "f6a1bd40743b41864d71ca76813d34e90532d0fda35b97d39e34f7403b1d0bb4",
+    "initial": {
+      "task_language": "Wash the lettuce in the sink by running water over it.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          0.5770982959789417,
+          -1.951116511882552,
+          1.2851997876443884
+        ],
+        "robot0_eef_quat": [
+          0.032938550741385186,
+          -0.99305470485756,
+          0.015552562990442373,
+          0.1118727974967523
+        ],
+        "robot0_gripper_qpos": [
+          0.020554926225626782,
+          -0.02051163316903131
+        ],
+        "robot0_base_pos": [
+          0.8213920666455949,
+          -1.9571850667828605,
+          0.7000000261470543
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -1.0,
+          1.9457991129456786e-06
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "cf72facbc8a9e9540f7050d6bbafc46b56eef90e3844826bf55beeba9876001c",
+        "agentview_right": "a4b60fc4387643efa2e2d46877c05cf06f05e03183502718e49c42981ae45667",
+        "navview": "8009006d395ccfbe039e341a3a3b5bd54adc1184c7e54de8b1164554bb4869bf",
+        "wrist": "f2dd3e4bb034a1a59499c8cf64ea658db2c7609254f5d77019a2143724ca10ff"
+      }
+    }
+  },
+  "baseline": {
+    "success": true,
+    "elapsed_s": 390.7
+  },
+  "no_progress": {
+    "success": true,
+    "elapsed_s": 380.3,
+    "result_sha256": "bb3817ed1a87ea753246be8d1b83309dbceb13827ddc67e2f242074783f99df5"
+  }
+}

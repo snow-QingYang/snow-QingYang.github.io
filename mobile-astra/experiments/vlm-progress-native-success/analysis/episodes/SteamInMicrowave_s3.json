@@ -1,0 +1,74 @@
+{
+  "split": "seen",
+  "task": "SteamInMicrowave",
+  "seed": 3,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 896.3,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "unknown",
+    "judge_calls": 17,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 16,
+    "vla_calls": 6,
+    "manual_calls": 10,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/SteamInMicrowave.md"
+    ],
+    "result_sha256": "15fff550375c36557430317801b851acef9912b9b50c8458f13a416f6da4443a",
+    "states_sha256": "86bbc8989ffe304db3b5390f06d624756a3256fe5866fc10a76b96d257b28357",
+    "transcript_sha256": "0263ed029bc19751370e730d64680b677eec70fb57d3a34ad044c11fc474498b",
+    "initial": {
+      "task_language": "Pick the cucumber from the sink and place it in the bowl. Then pick the bowl and place it in the microwave. Then close the microwave door and press the start button.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          0.5934983952642116,
+          -2.2425279225485135,
+          1.28726656556864
+        ],
+        "robot0_eef_quat": [
+          0.038816353299994555,
+          -0.9902211629858716,
+          0.032467310026453554,
+          0.1300046648049306
+        ],
+        "robot0_gripper_qpos": [
+          0.02056637396350706,
+          -0.020500185178997165
+        ],
+        "robot0_base_pos": [
+          0.8385407299950488,
+          -2.2350853032638187,
+          0.7000000245934619
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -1.0,
+          1.942207745742053e-06
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "bae5c7ed6bbacf26f6c9534e58a6da6845dcde95a0879b9ca0557450c8764c19",
+        "agentview_right": "359e6ec66effededb14847703523dea5a5b3be9106f5c1da32287ebd6f9d62de",
+        "navview": "a03ecc431d09496d36295e7cb2a2c2fb4623a0416a2f194b577e1507fdb353b4",
+        "wrist": "6b5c3e8855070d9011292a5c3f0095b4f903eb49a96758a6385f500646da643e"
+      }
+    }
+  },
+  "baseline": {
+    "success": true,
+    "elapsed_s": 487.2
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 647.5,
+    "result_sha256": "0b22fe9894db42d3a58efee5b0fdc7a2cbc8de8e905833422a1903186b7b6ebf"
+  }
+}

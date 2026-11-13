@@ -1,0 +1,74 @@
+{
+  "split": "seen",
+  "task": "SearingMeat",
+  "seed": 1,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 448.3,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "incomplete",
+    "judge_calls": 8,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 7,
+    "vla_calls": 5,
+    "manual_calls": 2,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/SearingMeat.md"
+    ],
+    "result_sha256": "8e5c66050ccf220b2f0f07fbb92eeb6c95f4c6aa40117b9c2a8b0b42ca800f15",
+    "states_sha256": "c2aa589b7638fdde266840e4419ef7d3ea6c131e6e976e46ef215e033aebcf77",
+    "transcript_sha256": "c83a7b1d629ebaef07496dc6f171be439f7521fa61309bb7f8797489f0baa470",
+    "initial": {
+      "task_language": "Grab the pan from the cabinet and place it on the front right burner on the stove. Then place the fish on the stove and turn the burner on.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          2.1552153621313472,
+          -0.5448744126527425,
+          1.2778156146558968
+        ],
+        "robot0_eef_quat": [
+          0.6809130970744935,
+          0.7226199777055843,
+          0.06841160476913771,
+          -0.09745549951702003
+        ],
+        "robot0_gripper_qpos": [
+          0.02056080730653306,
+          -0.020505753422829263
+        ],
+        "robot0_base_pos": [
+          2.1411900240560415,
+          -0.8037454031170841,
+          0.7000000169437787
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          0.7071068286895752,
+          0.7071066498756409
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "87cc619fbe2e040d7189ecfbf47fc62c94ded1ae84994b2e5566a2d4aa75044e",
+        "agentview_right": "2bd8d408c881320dfe3b59047f11a2b6d7d748614ba0fdc47ff3988cdfce4723",
+        "navview": "b4072d3acaaa5eb3a4b49f1cc745e249b6ce7b38111ca6ff76c1cec34a89ff8d",
+        "wrist": "56ded2fa86f139e22d070dfda669734190d15b66a025ef2c576e503937c76fc3"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 1500.0
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1179.9,
+    "result_sha256": "d6fac5df7969dc609c3fc37ceb36a45b8563775d2962b6d2a5f9ce1c9dc5d320"
+  }
+}

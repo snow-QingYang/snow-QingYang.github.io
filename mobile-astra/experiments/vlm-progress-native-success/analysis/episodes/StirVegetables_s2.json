@@ -1,0 +1,75 @@
+{
+  "split": "seen",
+  "task": "StirVegetables",
+  "seed": 2,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 1421.2,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "unknown",
+    "judge_calls": 22,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 21,
+    "vla_calls": 13,
+    "manual_calls": 8,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/StirVegetables.md",
+      "task-specific/StirVegetables_s0.json"
+    ],
+    "result_sha256": "29f94a8467b8f3029c3f6dd58eca6daefe0d687b3c6b59db2845990699d3f469",
+    "states_sha256": "3200acc87f35054acfa938847c692746f19d13fa07c8d59ab780f1359ae24ccf",
+    "transcript_sha256": "87ba6c1a94b95995019b7156ea24ba2c113c82b62f2f17ea874c1745598d0400",
+    "initial": {
+      "task_language": "Put the mushroom and eggplant in the pot. Retrieve the spatula and lightly stir the vegetables in the pot.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          0.6415351017880826,
+          -1.537347408797836,
+          1.2929854974163253
+        ],
+        "robot0_eef_quat": [
+          0.044958847818169834,
+          -0.989444098896743,
+          0.02407323327806591,
+          0.13564496526157455
+        ],
+        "robot0_gripper_qpos": [
+          0.020558956124036482,
+          -0.020507602795032016
+        ],
+        "robot0_base_pos": [
+          0.8878949915561178,
+          -1.541738937991485,
+          0.7000000236389804
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -1.0,
+          1.938464492923231e-06
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "39f017080ec3fb111254bf61df95d6d4d289eb3ff62dd9d9bbd8e30e33c9dc8d",
+        "agentview_right": "afcab470977ee955c0883f63b46f29933c069f831b9ce06478da7fa36496ed6f",
+        "navview": "1be89fd41aa2e4cea9e5f22093322b02bf179ca8eb871ebaae6c83b5b5f2e121",
+        "wrist": "ce232122e6772996b1b1f3dd5c5a362e456926075604167fc49136f0a204cda0"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 1605.8
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1250.1,
+    "result_sha256": "0a9f341a95d4ce21ac3c3bb9a1ff8d87f221aefa64d374b11a3f1334b5a026a2"
+  }
+}

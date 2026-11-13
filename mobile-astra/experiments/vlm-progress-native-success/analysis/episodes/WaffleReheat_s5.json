@@ -1,0 +1,74 @@
+{
+  "split": "unseen",
+  "task": "WaffleReheat",
+  "seed": 5,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 2071.5,
+    "termination_reason": "completed",
+    "finish_status": null,
+    "visual_completion": "unknown",
+    "judge_calls": 35,
+    "judge_errors": {},
+    "cancelled_judgments": 1,
+    "action_count": 35,
+    "vla_calls": 23,
+    "manual_calls": 12,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/WaffleReheat.md"
+    ],
+    "result_sha256": "79529f1502ab09df3d1f027396eaedec87896807b446a0e53ac02fe8e10d1498",
+    "states_sha256": "e47cda1402c5747735833bb5dcdf9055f6a8fec7530fb8cb91954152bc1ef962",
+    "transcript_sha256": "29b9068714f3160d20ed8780a72f2610434f2362b3a88f6fc411b37b76c89638",
+    "initial": {
+      "task_language": "Open the microwave, place the bowl with waffle inside the microwave, then close the microwave door and turn it on.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          0.6276215099806322,
+          -2.9715927854384154,
+          1.29162370627885
+        ],
+        "robot0_eef_quat": [
+          0.018861249477441666,
+          -0.990101643883871,
+          0.027947839893267448,
+          0.13624208707996946
+        ],
+        "robot0_gripper_qpos": [
+          0.020565062301180166,
+          -0.0205014969661997
+        ],
+        "robot0_base_pos": [
+          0.8701164930333294,
+          -2.9807201030381014,
+          0.7000000220138568
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -1.0,
+          1.9411888843023917e-06
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "e604b03e689eea3168dde9766e94d19950a5692c1f0fe032d768968b83d7889b",
+        "agentview_right": "d657f6aa12484e03bd153d01128623834a0197f74955a99881b7545d32f0c0c8",
+        "navview": "d61d64061110cc3e623aface3418d811f93d8f95b560112239b4794a7b505279",
+        "wrist": "d559fcd9f6328ab88a0af972517b75c7177c8ee52f1c8ca848b96297d3817af5"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 839.5
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1769.7,
+    "result_sha256": "c14c9596eb37c1fbddd5de12db51f2bf61d66eb5cc0701bd9c5d04f375a3c35f"
+  }
+}

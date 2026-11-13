@@ -1,0 +1,74 @@
+{
+  "split": "seen",
+  "task": "PreSoakPan",
+  "seed": 2,
+  "current": {
+    "success": true,
+    "valid": true,
+    "elapsed_s": 375.4,
+    "termination_reason": "completed",
+    "finish_status": "success",
+    "visual_completion": "incomplete",
+    "judge_calls": 5,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 4,
+    "vla_calls": 3,
+    "manual_calls": 1,
+    "first_native_success_step": 4,
+    "actions_after_first_success": 0,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/PreSoakPan.md"
+    ],
+    "result_sha256": "bf11321ab92570270c5ff1525c1881d66c31c41f6366f8e1d66447e69902f369",
+    "states_sha256": "d431cc83d84236b00456d05745b2aa59c1b81b42a9a657120c05996778d6771a",
+    "transcript_sha256": "e65a44d5fe4ced27313aceea0bdfcdfef412d28910de8fd2d3ab4f784db875ea",
+    "initial": {
+      "task_language": "Pick the pan and sponge and place them into the sink. Then turn on the water.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          0.5690015983274217,
+          -2.037634813315247,
+          1.2922068308583576
+        ],
+        "robot0_eef_quat": [
+          0.014908019955152951,
+          -0.9895291947237982,
+          0.04245532208708054,
+          0.1371395980625929
+        ],
+        "robot0_gripper_qpos": [
+          0.02057613853666704,
+          -0.020490420391111177
+        ],
+        "robot0_base_pos": [
+          0.823998254953067,
+          -2.051703362722168,
+          0.700000020157125
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -1.0,
+          1.94490985450102e-06
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "61f6e1012d0e29d50efeb57e80358b63099665746644eb72909e9f887667d0c6",
+        "agentview_right": "d53faef9ec197e2fc1eeaa1ced348b0ac3251e3f3e57f76bd3034192f486edf6",
+        "navview": "08903ad2483d10e920628f13029118cfa06c4617782e97da849ccf3bba964c2c",
+        "wrist": "bf34c1d901ab057e5b166c998a8f444984df2edf8ffb0e25d5eaaa72bb9c8e0f"
+      }
+    }
+  },
+  "baseline": {
+    "success": true,
+    "elapsed_s": 1524.1
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1461.3,
+    "result_sha256": "37d35e662ca76137d239887d8cfc17187a60b97a5b4b96b3d17e7430e20002b1"
+  }
+}

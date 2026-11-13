@@ -1,0 +1,74 @@
+{
+  "split": "unseen",
+  "task": "WashFruitColander",
+  "seed": 1,
+  "current": {
+    "success": true,
+    "valid": true,
+    "elapsed_s": 1671.2,
+    "termination_reason": "completed",
+    "finish_status": "success",
+    "visual_completion": "incomplete",
+    "judge_calls": 33,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 32,
+    "vla_calls": 13,
+    "manual_calls": 19,
+    "first_native_success_step": 32,
+    "actions_after_first_success": 0,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/WashFruitColander_s0.json"
+    ],
+    "result_sha256": "ef1957a7f775bfefe015da7304f5f546b2ed50663c0273396add9498d972d389",
+    "states_sha256": "6c9b1648ae025c22b031b013d6592b32aa7cfc2d722ead53858cf8361a55f3ac",
+    "transcript_sha256": "56459764861ffbb7e4bba7a841ddc78d7ec38ab8639fadf6a14897c937e214aa",
+    "initial": {
+      "task_language": "Put the colander in the sink, put the orange, apple in the colander, and turn on the sink faucet and pour water over the colander.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          2.753324161769199,
+          -2.026445959638271,
+          1.3193248685232695
+        ],
+        "robot0_eef_quat": [
+          0.7181167676354183,
+          -0.6759499340057572,
+          0.14097091232694206,
+          0.0867594181410858
+        ],
+        "robot0_gripper_qpos": [
+          0.020543549317363557,
+          -0.020523011734561867
+        ],
+        "robot0_base_pos": [
+          2.7572801484111795,
+          -1.7796611443020147,
+          0.7000000271726287
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -0.7071396112442017,
+          0.7070739269256592
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "79daa727b8430397dc8f7571fe5ccabe4a11aa9b751de0d1b3fa23908a1b012b",
+        "agentview_right": "cb6c71ddd27ab31bc7006aa2454d232b1431f7362880e8ff0cf17efdf7a63332",
+        "navview": "58fbc3ee052881bf56246cf0a048509d05ccd328b884e91ffb8939db1a1b857e",
+        "wrist": "27b093f994ade07c46f87b6d9677960807f0b1847162714fc720640efa486754"
+      }
+    }
+  },
+  "baseline": {
+    "success": true,
+    "elapsed_s": 690.4
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 2052.6,
+    "result_sha256": "28486eb0ab9be1dbdb7a9f6621c3e2b01b21b3b1d8a44d153dc24d753bc05951"
+  }
+}

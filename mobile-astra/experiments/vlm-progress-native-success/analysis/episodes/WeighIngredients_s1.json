@@ -1,0 +1,74 @@
+{
+  "split": "unseen",
+  "task": "WeighIngredients",
+  "seed": 1,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 1210.3,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "incomplete",
+    "judge_calls": 20,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 19,
+    "vla_calls": 13,
+    "manual_calls": 6,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/WeighIngredients.md"
+    ],
+    "result_sha256": "709d7ad1fea97b32412f963414150a01caab6ab51762ff166126720885d68157",
+    "states_sha256": "c8742b13fe62e2509fc09cd75a8c5ef4ae02b27d11d7952b1f5befc89f4be83f",
+    "transcript_sha256": "d3abf6ca7d994369277cb2b9b18efafd54df51f9f22a41c677ed896d9d82fef9",
+    "initial": {
+      "task_language": "Pick the boxed food and place it on the digital scale for weighing, and close the cabinet.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          0.5774239372381156,
+          -2.2010423510157255,
+          1.2896453470770497
+        ],
+        "robot0_eef_quat": [
+          0.04772420097177715,
+          -0.9904122158589105,
+          0.037992799201067635,
+          0.12394591775413491
+        ],
+        "robot0_gripper_qpos": [
+          0.02056952713720071,
+          -0.02049703163652089
+        ],
+        "robot0_base_pos": [
+          0.8341500650447633,
+          -2.191139108784958,
+          0.7000000254823057
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -1.0,
+          1.9423675894358894e-06
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "76294afc14a227267a888327c620b992dfa4aa192560827a11bc6b62c6edd1a6",
+        "agentview_right": "eb3ac255382d04decd43be4a89a701c24e65c82ef8f5a9b30c304b068dd69d52",
+        "navview": "3d21b8006d994162232e83f7b977a0b1d82cbabb9c594b1e3a7559c704e31fab",
+        "wrist": "515eb565e3209b51fc0336876214d6461011f6c87d3960253ebb899c57f1bfbe"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 953.0
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1032.4,
+    "result_sha256": "46a4d51087e0e5af613e2e3d0865c395f17e35f3a92b3ba122d9d43fefdfd50c"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "split": "seen",
+  "task": "LoadDishwasher",
+  "seed": 5,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 1409.7,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "incomplete",
+    "judge_calls": 31,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 30,
+    "vla_calls": 13,
+    "manual_calls": 17,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/LoadDishwasher.md"
+    ],
+    "result_sha256": "7efa267487592c0f3f33bd76e0475efbe2073d1713222ca6b6668b0e382f417f",
+    "states_sha256": "96fcf5253c64b2a4929ebda8374cc089918d3db0b8dff320a2fed0a34b66f231",
+    "transcript_sha256": "f226cd040d0f83fbb7ac11d536141bc957c48e475ef516be737bdade62deea18",
+    "initial": {
+      "task_language": "Pick up the cup and bowl from the counter, place them in the dishwasher, and close the dishwasher door.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          3.2687678398604394,
+          -0.6800014241796494,
+          1.2956906014892697
+        ],
+        "robot0_eef_quat": [
+          0.681489817822536,
+          0.7171447150310104,
+          0.08359076475038926,
+          -0.11953104180814919
+        ],
+        "robot0_gripper_qpos": [
+          0.02056446603984994,
+          -0.020502094701109704
+        ],
+        "robot0_base_pos": [
+          3.2640752611090353,
+          -0.9268844804834935,
+          0.7000000228787019
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          0.7071068286895752,
+          0.7071066498756409
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "65a3b5cb228b3a842c1153be491c2d58aca22e7bf1852007f9b489344203c59a",
+        "agentview_right": "8d9d8c9077056fecaa719163bd7a3148de02bf13a75d2d0f5db1fdc28f12b17a",
+        "navview": "914e5b0777abb8faeb0df0b75ba005452a1b485964d05bce112f2bbc12df863c",
+        "wrist": "17c10e5e9a06c4561708fffba5002b97b26e5731ff105e41849713604b4c3b9e"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 983.3
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1861.6,
+    "result_sha256": "3924181b03a98bd348baa7b92410b51452d8fe538128b55f99276aeee8b2ce29"
+  }
+}

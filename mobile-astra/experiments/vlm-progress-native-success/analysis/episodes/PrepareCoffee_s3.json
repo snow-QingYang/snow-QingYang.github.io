@@ -1,0 +1,77 @@
+{
+  "split": "seen",
+  "task": "PrepareCoffee",
+  "seed": 3,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 1027.7,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "incomplete",
+    "judge_calls": 18,
+    "judge_errors": {
+      "InternalServerError": 1
+    },
+    "cancelled_judgments": 0,
+    "action_count": 17,
+    "vla_calls": 9,
+    "manual_calls": 8,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/PrepareCoffee.md",
+      "task-specific/PrepareCoffee_s0_recipe.jsonl"
+    ],
+    "result_sha256": "3afaed21d3dab27288411ad52ce72e66e688de5551f646a1e6f1575132939989",
+    "states_sha256": "e301fb074255c716f3c4102dff358c9cf187e87a92cc47a62450d0a4085c7a9f",
+    "transcript_sha256": "8405e67ca57ad9c5d44a65e6eb1f9be733b0687261dd80d9d096800b66a4bbd5",
+    "initial": {
+      "task_language": "Pick the mug from the cabinet, place it under the coffee machine dispenser, and press the start button.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          0.5791884472964026,
+          -2.981669129428909,
+          1.3027786949715394
+        ],
+        "robot0_eef_quat": [
+          0.04276788293195022,
+          -0.9884500002127042,
+          0.025401828350222748,
+          0.14315115223248712
+        ],
+        "robot0_gripper_qpos": [
+          0.020560061130257292,
+          -0.020506497843206076
+        ],
+        "robot0_base_pos": [
+          0.8216272346858455,
+          -2.980770957600194,
+          0.7000000228060655
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          -1.0,
+          1.933503426698735e-06
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "c17af5b7daaaa28d851014b5129fc03df2ff1e1d316fade5ae521eb42fdb8a0f",
+        "agentview_right": "bd77f46947a625598306db30082909c2ec2ec111bfa60b0ff8e0c8de75f9ca66",
+        "navview": "b8d12275c5f53f1189b2b386c3042785cd3fcb023a660681fe2a68eb4cd30f95",
+        "wrist": "927596dd324a9b9846ee9d9ea5aa02067cd5185fabad273f5f04293d240751e9"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 2175.8
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1387.4,
+    "result_sha256": "f0d1e05aa8c8b1c73e7f0def1daac29138ef802a58f4e4dfe1b3924355fec459"
+  }
+}

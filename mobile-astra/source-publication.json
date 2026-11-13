@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "as_of": "2026-11-12",
+  "as_of": "2026-11-13",
   "repository": "https://github.com/snow-QingYang/RPent",
   "note": "Published source revisions are separate from runtime result, source-file and artifact hashes. Branches may advance; evaluated commit links are immutable. E08 publication commit only renames the experiment documentation; its evaluated runtime commit is unchanged.",
   "experiments": {
@@ -162,9 +162,21 @@
       "publication_commit_url": "https://github.com/snow-QingYang/RPent/commit/f2d62d21104f412b5e020931d11d7054b6ef3818",
       "instructions_file": "EXPERIMENT.md",
       "instructions_url": "https://github.com/snow-QingYang/RPent/blob/f2d62d21104f412b5e020931d11d7054b6ef3818/EXPERIMENT.md"
+    },
+    "E10": {
+      "id": "E10",
+      "experiment_path": "experiments/vlm-progress-native-success/",
+      "name": "VLM 任务进度 + 原生成功",
+      "branch": "vlm_progress_native_success",
+      "status": "snapshot_available",
+      "runtime_base_commit": "fee5dfacb939ee1ca09220710d4586da9e5a5a41",
+      "evaluated_working_tree": true,
+      "snapshot_url": "experiments/vlm-progress-native-success/downloads/vlm-progress-native-success-audit-20261113.zip",
+      "analysis_url": "experiments/vlm-progress-native-success/analysis/data.json",
+      "evaluation_relationship": "Frozen working tree, base commit plus recorded modifications. Production source and hashes are in the downloadable audit ZIP. Branch has not been separately published."
     }
   },
   "published_experiment_count": 9,
   "published_branch_count": 9,
-  "tracked_experiment_count": 9
+  "tracked_experiment_count": 10
 }

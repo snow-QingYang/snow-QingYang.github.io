@@ -1,0 +1,74 @@
+{
+  "split": "unseen",
+  "task": "WeighIngredients",
+  "seed": 4,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 2247.9,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "incomplete",
+    "judge_calls": 34,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 33,
+    "vla_calls": 15,
+    "manual_calls": 18,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/WeighIngredients.md"
+    ],
+    "result_sha256": "f747156be0cafc20743102ed3c72e917d6095cdef53162fdf49618f1eff73245",
+    "states_sha256": "674bf3b55899e6fecd1da49ca20e865e920bdc69fb7d447e66c6a422a1b2cade",
+    "transcript_sha256": "6bf810add12b2faff156bd9ab8711d1770eebda7f70dfa5dcd506a0428a23f4d",
+    "initial": {
+      "task_language": "Pick the cereal and place it on the digital scale for weighing, and close the cabinet.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          1.3468769637922546,
+          -0.5810205946554345,
+          1.295188282271378
+        ],
+        "robot0_eef_quat": [
+          0.6803204990369751,
+          0.7210663921021243,
+          0.07035859252676231,
+          -0.11080137737662885
+        ],
+        "robot0_gripper_qpos": [
+          0.020566832233711453,
+          -0.020499728513028694
+        ],
+        "robot0_base_pos": [
+          1.337645061173122,
+          -0.8221845450710609,
+          0.7000000200107782
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          0.7071068286895752,
+          0.7071066498756409
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "0f624e7d536872cd3bcc725fa1f145dba2e65f0a56a48e0cf9f907d2e9d9bed8",
+        "agentview_right": "5d4b38fbaccd69cb93f7d3155790bca7d06685588f7a2f247dfbac72de3818db",
+        "navview": "9c4fa0b83b5c6fd529b8b78e466636104a4594e13c18b65902255351ad31b1b6",
+        "wrist": "c9237d3b19441363fa3cdd304af08a9bb6a0a9f3deecafdb1d51c08a2e3f6d3c"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 975.2
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 1367.3,
+    "result_sha256": "2d3331d0120344506b9bb16e806f28c47b6bfb38b741d8dda8aaea5ca425d9fb"
+  }
+}

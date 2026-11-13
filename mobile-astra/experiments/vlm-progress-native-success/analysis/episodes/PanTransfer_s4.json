@@ -1,0 +1,74 @@
+{
+  "split": "unseen",
+  "task": "PanTransfer",
+  "seed": 4,
+  "current": {
+    "success": false,
+    "valid": true,
+    "elapsed_s": 1543.0,
+    "termination_reason": "completed",
+    "finish_status": "stuck",
+    "visual_completion": "incomplete",
+    "judge_calls": 27,
+    "judge_errors": {},
+    "cancelled_judgments": 0,
+    "action_count": 26,
+    "vla_calls": 12,
+    "manual_calls": 14,
+    "first_native_success_step": null,
+    "actions_after_first_success": null,
+    "memory_audit": "ok",
+    "memory_read_files": [
+      "task-specific/PanTransfer.md"
+    ],
+    "result_sha256": "41777f81b42c6e87c453f70169389c90a8a8b9bdbe832007664d8151740a66a6",
+    "states_sha256": "742ace51c64846ad8016f8c36706a70f0dd9e7b241d1d9f0efdf85600d2b2341",
+    "transcript_sha256": "45b4e8208c920d2982d690c0d92a79be25c2f494d259c23097ed89ac913beaf5",
+    "initial": {
+      "task_language": "Pick up the pan and dump the vegetables in it onto the plate. Then return the pan to the stove.",
+      "robot_state": {
+        "robot0_eef_pos": [
+          2.307203936430794,
+          -0.5473148879764007,
+          1.2972182222162474
+        ],
+        "robot0_eef_quat": [
+          0.6809061586017152,
+          0.7171435977638796,
+          0.07757428693896118,
+          -0.12670474880779029
+        ],
+        "robot0_gripper_qpos": [
+          0.020571404588043615,
+          -0.0204951555264852
+        ],
+        "robot0_base_pos": [
+          2.3052289112152624,
+          -0.7861183542460766,
+          0.700000022712478
+        ],
+        "robot0_base_quat": [
+          0.0,
+          0.0,
+          0.7071068286895752,
+          0.7071067094802856
+        ]
+      },
+      "rgb_sha256": {
+        "agentview": "5a7b14c45b8529e9331b7f6d148717107ad1e183e7a0089212693ddbfbae8d09",
+        "agentview_right": "2460ead6a10eeac9f21f358b5a5bd6f7f09ea679e3f6ac641c8780e95a409296",
+        "navview": "b1b096c07cd632f12c4661d70d30255b9fdbc23f969ea83c4ba6b4068423880a",
+        "wrist": "d65f8fa5299ee5d4e34098ad3b7ea9a34be161c482a3c64f1fc44f1fcd5c44cc"
+      }
+    }
+  },
+  "baseline": {
+    "success": false,
+    "elapsed_s": 669.1
+  },
+  "no_progress": {
+    "success": false,
+    "elapsed_s": 2086.4,
+    "result_sha256": "a5d24098ae003051518324ae58391cae36f95ac1c65599400edbe03bad9c6d03"
+  }
+}
