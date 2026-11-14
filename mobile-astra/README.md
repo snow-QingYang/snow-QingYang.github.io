@@ -27,8 +27,7 @@ The 1,600-episode total excludes the auxiliary Sol run and interrupted smoke run
 E05 removes the two active geometry-query tools; internal depth and other feedback
 remain. E06 completes removal of live task-progress/success/termination feedback
 and VLA native-success early stopping; the evaluator keeps independent final
-scoring. Camera calibration/pose replacement, visual or tactile contact estimation,
-remain pending. E10 completes a four-view visual task-progress run with native
+scoring. Visual or tactile contact estimation remains pending. E10 completes a four-view visual task-progress run with native
 completion feedback; visual judgment reliability remains an open issue.
 E08 provides robot EEF/base pose coordinates to the Planner; E09 withholds them
 and also removes gripper-width, held_apart and action-execution statistics.
