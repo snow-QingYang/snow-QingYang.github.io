@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-13",
+  "as_of": "2026-11-14",
   "completed_experiments": [
     {
       "id": "E01",
@@ -86,21 +86,30 @@
       "path": "experiments/contact-feedback/",
       "status": "complete",
       "total": 160,
-      "success": 46,
+      "success": 44,
       "source": {
         "id": "E04",
         "experiment_path": "experiments/contact-feedback/",
-        "name": "接触反馈移除",
+        "name": "VLA 接触反馈移除，完整任务进度",
         "branch": "no_contact_gt",
-        "commit": "e33f97430972135de2208a83fc27dece7af4510c",
+        "commit": "092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804",
         "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_contact_gt",
-        "commit_url": "https://github.com/snow-QingYang/RPent/commit/e33f97430972135de2208a83fc27dece7af4510c",
+        "commit_url": "https://github.com/snow-QingYang/RPent/commit/092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804",
         "status": "published",
-        "evaluation_relationship": "Experiment implementation; detailed analysis retains the runtime source-file and result hashes.",
+        "evaluation_relationship": "Evaluated upstream commit. Only four explicit VLA grasp/contact reports and their wrapper queries are removed; all native task progress and native success remain. Replaces the older filtered-progress E04 result.",
         "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
-        "implementation_commit": "e33f97430972135de2208a83fc27dece7af4510c",
+        "implementation_commit": "092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804",
         "instructions_file": "NO_CONTACT_GT.md",
-        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/e33f97430972135de2208a83fc27dece7af4510c/NO_CONTACT_GT.md"
+        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804/NO_CONTACT_GT.md",
+        "evaluated_code_commit": "092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804",
+        "historical_result": {
+          "run": "official_main_composite_nocontactgt_astra_xhigh_20261104T014440Z",
+          "commit": "e33f97430972135de2208a83fc27dece7af4510c",
+          "success": 46,
+          "total": 160,
+          "archive_path": "experiments/contact-feedback/archive/",
+          "scope": "Also filtered contact-derived progress; not the current E04 result."
+        }
       }
     },
     {
@@ -517,43 +526,36 @@
   "contact_feedback": {
     "status": "complete",
     "valid_benchmark_result": true,
-    "run": "official_main_composite_nocontactgt_astra_xhigh_20261104T014440Z",
+    "run": "composite-nocontact-full-progress-3gpu-20261114-010523",
+    "completed_at": "2026-11-14T10:58:09+08:00",
     "summary": {
       "seen": {
         "total": 80,
         "baseline_success": 34,
-        "nocontact_success": 26,
-        "both_success": 20,
-        "baseline_only": 14,
-        "nocontact_only": 6,
-        "neither": 40
+        "nocontact_success": 29,
+        "both_success": 18,
+        "baseline_only": 16,
+        "nocontact_only": 11,
+        "neither": 35
       },
       "unseen": {
         "total": 80,
         "baseline_success": 21,
-        "nocontact_success": 20,
-        "both_success": 9,
-        "baseline_only": 12,
-        "nocontact_only": 11,
-        "neither": 48
+        "nocontact_success": 15,
+        "both_success": 6,
+        "baseline_only": 15,
+        "nocontact_only": 9,
+        "neither": 50
       },
       "all": {
         "total": 160,
         "baseline_success": 55,
-        "nocontact_success": 46,
-        "both_success": 29,
-        "baseline_only": 26,
-        "nocontact_only": 17,
-        "neither": 88
+        "nocontact_success": 44,
+        "both_success": 24,
+        "baseline_only": 31,
+        "nocontact_only": 20,
+        "neither": 85
       }
-    },
-    "initial_state_audit": {
-      "pairs_checked": 160,
-      "robot_state_threshold": 1e-06,
-      "robot_state_differences": 11,
-      "exact_robot_state_differences": 17,
-      "task_language_differences": 2,
-      "scope": "Step-0 robot state and task_language; task_progress excluded, full object state not checked"
     },
     "protocol": {
       "benchmark": "RoboCasa composite",
@@ -578,150 +580,187 @@
         4,
         5
       ],
-      "tasks_per_split": 16,
       "vla": "RLDX-1-FT-RC365",
       "memory_profile": "local",
       "memory_version": "GPT_6_astra_high",
-      "geometry": "Original simulator depth and world maps; known camera calibration retained",
-      "da3": false,
-      "notaskgt": false,
+      "geometry": "Original simulator depth and world maps",
       "removed_vla_result_fields": [
         "grasp_contact",
         "grasp_obj",
         "grasped",
         "grasp_detected"
       ],
-      "removed_progress_fields_by_task": {
-        "ArrangeBreadBasket": [
-          "basket_on_counter",
-          "bread_in_basket"
-        ],
-        "ArrangeTea": [
-          "obj1_container_contact",
-          "obj2_container_contact"
-        ],
-        "CuttingToolSelection": [
-          "correct_tool_chosen",
-          "knife_on_cutting_board",
-          "peeler_on_cutting_board"
-        ],
-        "DeliverStraw": [
-          "straw_in_glass_cup"
-        ],
-        "GarnishPancake": [
-          "pancake_on_plate",
-          "plate_on_table",
-          "strawberry_on_pancake"
-        ],
-        "GetToastedBread": [
-          "slot_pair",
-          "toast_in_slot",
-          "toast_slot",
-          "toaster_on"
-        ],
-        "HeatKebabSandwich": [
-          "baguette_in_toaster",
-          "kebab_in_toaster"
-        ],
-        "KettleBoiling": [
-          "burner_on",
-          "dist",
-          "kettle_on_site",
-          "obj_on_stove"
-        ],
-        "LoadDishwasher": [
-          "all_checks_passed",
-          "are_dishes_correctly_placed",
-          "check1",
-          "check2"
-        ],
-        "MakeIceLemonade": [
-          "ice1_in_cup",
-          "ice2_in_cup",
-          "ice_in_cup",
-          "lemon_in_cup",
-          "success"
-        ],
-        "PackIdenticalLunches": [
-          "gripper_far",
-          "no_duplicates",
-          "tupper0_valid",
-          "tupper1_valid"
-        ],
-        "PanTransfer": [
-          "_robot_touched_food",
-          "pan_on_stove",
-          "vegetable_on_plate"
-        ],
-        "PortionHotDogs": [
-          "buns_in_plate1",
-          "buns_in_plate2",
-          "sausages_in_plate1",
-          "sausages_in_plate2"
-        ],
-        "RecycleBottlesByType": [
-          "on_table"
-        ],
-        "ScrubCuttingBoard": [
-          "board_contact_timer",
-          "sweep_range"
-        ],
-        "SearingMeat": [
-          "meat_in_pan",
-          "pan_loc"
-        ],
-        "SeparateFreezerRack": [
-          "meat_in_tupperware",
-          "veg1_in_tupperware",
-          "veg2_in_tupperware"
-        ],
-        "SetUpCuttingStation": [
-          "knife_on_board",
-          "meat_on_board"
-        ],
-        "StackBowlsCabinet": [
-          "bowl1_in_bowl2",
-          "bowl2_in_bowl1"
-        ],
-        "SteamInMicrowave": [
-          "vegetable_in_bowl"
-        ],
-        "StirVegetables": [
-          "success_time"
-        ],
-        "StoreLeftoversInBowl": [
-          "chicken_in_bowl",
-          "vegetable_in_bowl"
-        ],
-        "WaffleReheat": [
-          "waffle_in_bowl"
-        ],
-        "WashFruitColander": [
-          "fruit_in_colander"
-        ],
-        "WeighIngredients": [
-          "packaged_food_on_digital_scale"
-        ]
-      },
-      "filtered_tasks": 25,
-      "filtered_task_field_pairs": 60,
+      "removed_progress_fields_by_task": {},
+      "filtered_tasks": 0,
+      "filtered_task_field_pairs": 0,
       "retained_skill_feedback": [
         "held_apart",
         "gripper_qpos",
         "peak_lift",
         "status"
       ],
-      "task_progress": "Reviewed contact-derived fields removed before persistence; other progress retained",
-      "read_text_file": "Baseline permissions; static scoring rules and historical memory retained",
-      "prompt_changes": "None",
-      "success": "Retained",
-      "robocasa_terminated": "Retained",
+      "task_progress": "All native task progress retained, including contact-derived predicates",
+      "success": "Native, visible to Agent",
       "native_success_and_vla_early_stop": "Retained",
-      "success_source": "state.success",
-      "states_crosschecked": 320,
-      "manifest_sha256": "395dc7d5d47d0ac78d45613f29858d87c4dd06326ec99a091c0e9a5c053b0614",
-      "comparison": "One run per setting, paired by task and seed; not full-scene equivalence"
-    }
+      "read_text_file": "Baseline permissions and scoring-source access retained",
+      "prompt_changes": "None",
+      "vlm_enabled": false
+    },
+    "initial_state_audit": {
+      "pairs_checked_for_task_language": 160,
+      "task_language_differences": 3,
+      "robot_state_comparison": "not_audited",
+      "full_scene_comparison": "not_audited",
+      "scope": "Task language from published E01 details and current step 0. Baseline raw robot/object states were not available; do not reuse the old E04 initial-state audit."
+    },
+    "memory_audit": {
+      "episodes_ok": 160,
+      "matching_launch_sha256_files": 148,
+      "unique_selected_files": 95,
+      "selected_file_sha256": {
+        "global/GLOBAL_MEMORY.md": "5f232dbfed30d78c45b2ce2cafd1c727d962800c8fff6ee2de1ef647fcf8ae83",
+        "task-specific/ArrangeBreadBasket.md": "e81af7b927168667abaf3ddfe15177d3960d5f710f4e48c56b67133089d12634",
+        "task-specific/ArrangeBreadBasket_s0.json": "fd9afca601bcec70e3ad728eee2ac91f568d0391175a6ec166f2157053da2b17",
+        "task-specific/ArrangeBreadBasket_s0_recipe.jsonl": "031d3d5640b032c5fb4ca42b3ebf529c1b3cfc3dfd8e5b57b94ad1d17dee6739",
+        "task-specific/ArrangeTea.md": "3fb8a9a90595799d100ecddc78b6da93d154b1a7e784ef797804838bd175f7b4",
+        "task-specific/ArrangeTea_s0.json": "0db8abff3b3b65763322430ad1309bd1c38157d9afad5a6cd473f48d767b1c71",
+        "task-specific/ArrangeTea_s0_recipe.jsonl": "4f6162ad3c9c2ebb6c3b1631c1a696ad9e9e45e36d18b2fbc5d69c4aa9c7dfb7",
+        "task-specific/BreadSelection.md": "f5ae3761d87171e6a27a8b275a9ff7f7aaedeed881a959c6439f71060e362770",
+        "task-specific/BreadSelection_s0.json": "53855c60b4f3952505b457379ce3e171a338ca588e0b791ecef9a7868902219e",
+        "task-specific/BreadSelection_s0_recipe.jsonl": "9e854a8e4ca92c5de1371107040b70ba12f9874666cfad054844836f2820eb86",
+        "task-specific/CategorizeCondiments.md": "e62f5fbe0a713c7effbedba6d76dd29167a9c681086c5fc32f8a4dba518f75d5",
+        "task-specific/CategorizeCondiments_s0.json": "bdea7228aad3e8863578837c9384cd7d58c85100164b78527f63c6f2047b62d4",
+        "task-specific/CategorizeCondiments_s0_recipe.jsonl": "98e79dc740c95de08eca8af4f185f13648bdbbe1b6b28bb4b72078eb513c238d",
+        "task-specific/CuttingToolSelection.md": "4ef2b19e772527374ce9823b5dc8aa7bc8289727ba7d91f5b549cc54dfd3cab6",
+        "task-specific/CuttingToolSelection_s0.json": "e04f6a114b8e72afc95127c618cc049cef28b2e18499e1e35cb4a5b2498f013a",
+        "task-specific/CuttingToolSelection_s0_recipe.jsonl": "6397d5c6257761504e790a42688fc4e8be6541013800f8d519f3414488b4bd8e",
+        "task-specific/DeliverStraw.md": "9fbe09ecf053f0b58923251659f949908bfdd7d08393f5923925430a16c68ae5",
+        "task-specific/DeliverStraw_s0.json": "2a75f594c395d49bc37db20c58be1dc497e86471ffbecb9a073c5110cb439592",
+        "task-specific/DeliverStraw_s0_recipe.jsonl": "7a7b99de9afa19ce2914573a5ad6b5cbdd377a67682dd069dac7d4b6e9beebd9",
+        "task-specific/GarnishPancake.md": "709966e523c57d14b7f0abad4fa98d4d04dac104b6de141902c4671321910622",
+        "task-specific/GarnishPancake_s0.json": "3f9f85e23a4bb324891fa8a31831602db396727db7cd7cdd11d94477400e1d47",
+        "task-specific/GarnishPancake_s0_recipe.jsonl": "f6c113ff9c417c95f87592544fee07810c16367dccb298530ba53e365f7a2d2d",
+        "task-specific/GatherTableware.md": "3403fee5cdc7f212e5b2fffe0b5e1e9e05b799a66a2d4b8d7c8312a2966996e8",
+        "task-specific/GatherTableware_s0.json": "159b7704a764684b4133353c8ceb106119d44b1f920f986a01adf414c9b71928",
+        "task-specific/GatherTableware_s0_recipe.jsonl": "fc73eeb060e35f6ddbd4f1dadc014f9020bf78bc47292a9edd221aaf3a64cfce",
+        "task-specific/GetToastedBread.md": "77cd94af03ce0eac9392c3c9f587dd88d03b61eeeba73ec465170fe793404acc",
+        "task-specific/GetToastedBread_s0.json": "7c6252067d9d0539ab261ab8f3fc81dffe55f5b47e80edc6a92d31a1c1d6fa26",
+        "task-specific/GetToastedBread_s0_recipe.jsonl": "acf9b398a034f66d2525294f85b678d433bc6e2a5c17a0b51d877e084b194b65",
+        "task-specific/HeatKebabSandwich_s0.json": "aa284170ebf4bbcf0beacbde3c1735323e7e2dd3316b631cfc057e303e7a3c88",
+        "task-specific/HeatKebabSandwich_s0_recipe.jsonl": "f1afc416604193ce0b320d12f9782c3017e07a3b345fb47dbbb83197ec8980cc",
+        "task-specific/KettleBoiling.md": "c5dc3653d01354537ffed0d09a11d21fad87fbea9a5266021e0e7e7159a9875e",
+        "task-specific/KettleBoiling_s0.json": "7f451e240026440c981d1080550b01dc24dd7dfd0a70c2731907165ce2e334cc",
+        "task-specific/KettleBoiling_s0_recipe.jsonl": "71a94d3311b22b3a0dee6bc6c5568a9388c9e6a3ab204df445eb275bd58dc42a",
+        "task-specific/LoadDishwasher.md": "c6041efb526eb0a83d8e9e439c2f8616b126a47c02d6e5cccb3938f6a35d51e5",
+        "task-specific/LoadDishwasher_s0.json": "7a1da5f9a5a3034770591d28811200eb842c3bc1098329040a1dd70ac029f114",
+        "task-specific/LoadDishwasher_s0_recipe.jsonl": "696153ae288b4e3c911740001995e257884830aa859b5150c2b0671b01e868c8",
+        "task-specific/MakeIceLemonade.md": "914e73f60d7206d287e937f0b8688acd721148c3aa12fc1c5753c08f9f4d4b02",
+        "task-specific/MakeIceLemonade_s0.json": "a8d640eb67969f857d3a57aecc4876f771665706f267ec20e2d630b49723b11b",
+        "task-specific/MakeIceLemonade_s0_recipe.jsonl": "7dbfaac5f976e9797ac1f1f3345f06a388dd7f0e4a1acb9a38be96ebfcce8d51",
+        "task-specific/PackIdenticalLunches.md": "5cde3d79833cd214da19ab99ccdf92e482e2d7b2cef9492bc0a134ef2c5d67fd",
+        "task-specific/PackIdenticalLunches_s0.json": "dc47b30e891374b8375a5604e10af466ffb17b89192e9a40935f96673975e07f",
+        "task-specific/PackIdenticalLunches_s0_recipe.jsonl": "7c2ed5d6c8fbf17bc7f5924dbbdbd0d70c774dffb905447c6292153d71827c5e",
+        "task-specific/PanTransfer.md": "142e36c803c34b4e6c65899c52d0168cb28a7df8a68a416feb17177bd57e4116",
+        "task-specific/PanTransfer_s0.json": "b2671f8a6fcb81758d828ce47eadfb208c4f45081b3beeeb621940c539865fd7",
+        "task-specific/PanTransfer_s0_recipe.jsonl": "13dc04f22c5fc364ab7bf443b63905b90225c33727b730c9c76e78a974b5de38",
+        "task-specific/PortionHotDogs.md": "a3d627297ac471c8c276a0a234cadaa47cff6056d832b1a55513b28d36056cd6",
+        "task-specific/PortionHotDogs_s0.json": "069ad8e8f503a2d2358319981bdb31e2dc66ca8594d881ac8a695172515d9d2d",
+        "task-specific/PortionHotDogs_s0_recipe.jsonl": "50e2e45725daad26e561d13307bde942324e80c714a831518bb83d5e43a5376a",
+        "task-specific/PreSoakPan.md": "0b1043831ea3b9bf9a147c8934f69024ae127d57da5ff403ca935c86e6d92bdd",
+        "task-specific/PreSoakPan_s0.json": "2cae92e75f854a912b09d70bad761cf2cbe60606005874c64e013c2f9b4b2ee8",
+        "task-specific/PreSoakPan_s0_recipe.jsonl": "213a1433432231b7c1d004d8601fde27658d49ff30a7005d1ed7737627cbbb1e",
+        "task-specific/PrepareCoffee.md": "0481550d5e6f677ddd842db624115e73f59179b77c7829cf86454597e102feaa",
+        "task-specific/PrepareCoffee_s0.json": "c02e9532f3b99545212619faeaf8867e9d69a73497b7faf405fd96ae31d13efd",
+        "task-specific/PrepareCoffee_s0_recipe.jsonl": "aeb21b7fc0205f8682c6078f7b93ad669f130f4b0ac056689670ba8497245c4c",
+        "task-specific/RecycleBottlesByType.md": "3b58d694bf405f190cb2d843769ac3086061e948a39fc618b07241b6d7ada6dc",
+        "task-specific/RecycleBottlesByType_s0.json": "5b3c1563f34cc9d65d17400949d9b781fe6919bf04669d6f5c016457c346c556",
+        "task-specific/RecycleBottlesByType_s0_recipe.jsonl": "bd28c647c4eb772c96eae5df931266b9df9670832142327345e72a629626b067",
+        "task-specific/RinseSinkBasin.md": "cc4814a5f60b06d13b85b6cc476c74d23b5863b1141b87e5458bddc67b59eaea",
+        "task-specific/RinseSinkBasin_s0.json": "0e7c449f5fd0bcf181231afcdba2791b6d730da0659aaeedd7ae6c62a9604835",
+        "task-specific/RinseSinkBasin_s0_recipe.jsonl": "a5aa6cf170aa3e9a717dd3b63caebd8ecaae5f0318942acd1a268e2987b191b2",
+        "task-specific/ScrubCuttingBoard.md": "73d0b21e8c8edb9b146496312606a9395e7a95df51c3a91a557e0ec3890a6199",
+        "task-specific/ScrubCuttingBoard_s0.json": "f319720840eb233a184995c5b5cfba37557a26a31f725844e29d66e268f0e017",
+        "task-specific/ScrubCuttingBoard_s0_recipe.jsonl": "8c3350783514d154f6878b4a6d9a1c2f080d510b2bc335c2e2a4055dc686ba50",
+        "task-specific/SearingMeat.md": "a458050199bafc946ecf8f38c90cb3d3e7a16280f9f6854b9d296f5a76a204ef",
+        "task-specific/SearingMeat_s0.json": "579e27aec4b8edeef8b446ffeca9acc500fe8d150f4baa2c52f7df97a82872db",
+        "task-specific/SearingMeat_s0_recipe.jsonl": "03362428c817b92a85c739af30cf1e435e0192265d7518dd999f7bec04869666",
+        "task-specific/SeparateFreezerRack.md": "f4c6b77ad758dd32f127b963b2fc26802c52eca20486179882b1ee2417cb00e2",
+        "task-specific/SeparateFreezerRack_s0.json": "3b6244da0768875fe1441b3ed83bd77a536fbaba4cb0ca49755c17f9c3a61c2c",
+        "task-specific/SeparateFreezerRack_s0_recipe.jsonl": "a01f600e76a9445186cb6dcfee9c08704722fb30af3515970e85617472b977c8",
+        "task-specific/SetUpCuttingStation.md": "0acbdd8d1d8a889f1b9976578f3ee8f2f90863cdba8944fd70184fca3e4f8ab6",
+        "task-specific/SetUpCuttingStation_s0.json": "d50fd6d8c878a52b482c6c9d0cde0aaf1c19187f003f4fb6a5c55e24245062ca",
+        "task-specific/SetUpCuttingStation_s0_recipe.jsonl": "3475d7b78edbc2b0a667deabd5098b9514a15d239037cb836c01863d32fd67ec",
+        "task-specific/StackBowlsCabinet.md": "b80b1f95ea860e33abebcd5728ad27d9183de3fc73790bde33bd943036618d13",
+        "task-specific/StackBowlsCabinet_s0.json": "d6e1a7dba2ed51b6f4d67fb11a857f1bc50404595764857b577a15ac86cf4940",
+        "task-specific/StackBowlsCabinet_s0_recipe.jsonl": "bbba7f4d6b93e13f23cd4a698404ca63d6059ebdd017ee5263d653014d282a85",
+        "task-specific/SteamInMicrowave.md": "6ae896a50166f81c0a349215a35488453c9482d21bb0cbdffb94d5030a599a13",
+        "task-specific/SteamInMicrowave_s0.json": "4e573946d06865525b46b5f78e4fb9c82435a1da53f44227300038eb78b7a342",
+        "task-specific/SteamInMicrowave_s0_recipe.jsonl": "1fc3e6d1cee627f24bc2ad2d29dc8c22ef8772777bb7634810429ead60de5811",
+        "task-specific/StirVegetables.md": "073bb0430a516e7cbc9588640e0715b08cdb7f33c7bcc9e05a7099622c691c78",
+        "task-specific/StirVegetables_s0.json": "6724d56e36fb1e50610e3eaef283970b77bcbbaccafa96a3a1593edb10d6e0f0",
+        "task-specific/StirVegetables_s0_recipe.jsonl": "b55e1313b606865e7e38f7379d89ff84ec4ef274f19a257989a1b9f926435eab",
+        "task-specific/StoreLeftoversInBowl.md": "c002c3b5e47b2be9669bdfd1dfc602366b505bed4aefaff1ead7db0185372660",
+        "task-specific/StoreLeftoversInBowl_s0.json": "db835bc50bfbefb238046e5b3842ed689661ab710393789c57ba701bf46b0468",
+        "task-specific/StoreLeftoversInBowl_s0_recipe.jsonl": "335272dce5dea0933689ed46252724fc0992ec352327dba43fc55adc00021f1a",
+        "task-specific/WaffleReheat.md": "2d31e1d4dcf00f57e89c1ecce3c526346fa1d08f7aca95fb9ba6ff151710daeb",
+        "task-specific/WaffleReheat_s0.json": "64df3a8012d40301a373976309b5a88a2c141b67290b5cc77cd5fdbd99290460",
+        "task-specific/WaffleReheat_s0_recipe.jsonl": "41d8be78a2c441c5a69b7c5e277d4dcb72297a87b8eeaf4d9482985bffcf40da",
+        "task-specific/WashFruitColander_s0.json": "7ecc35f020f1729f5c12e50b5d230b3d3fce31499ef8ce7a1e1b8463a1b96bc5",
+        "task-specific/WashFruitColander_s0_recipe.jsonl": "68bcc77197efaabc6167795397a7f70e86d2c9d603ebf4a9471c10e7cb57089e",
+        "task-specific/WashLettuce.md": "6c34c83c6c08d03392406865daa09252b22d95a9a356da7a249ba8098879069c",
+        "task-specific/WashLettuce_s0.json": "8e94e82ee8d99a847f46aeea6c5454d99bdb40dece9033691a03e23a4d224031",
+        "task-specific/WashLettuce_s0_recipe.jsonl": "146e4684c1df05104e2dfedaa2717c8ee406e84deb435197bbf0ee8b5c93f45c",
+        "task-specific/WeighIngredients.md": "5b9a9b15399e6cfa9d74936bb4f30c8366902064f07a3d0d924a0b453e9f4b39",
+        "task-specific/WeighIngredients_s0.json": "85a4597750e0c5dc42f98d54c5ca947fce0a2af931632a0478895e81f0ee84a2",
+        "task-specific/WeighIngredients_s0_recipe.jsonl": "42d1dd306a3cb67d41a036083f824a74908b56a7e39fac28c4683274fb65402e"
+      },
+      "memory_revision": "47f301ef33bf8d0e8c770342f16b3c39c6a0e8c1",
+      "reference_selection_comparison": "not_reaudited"
+    },
+    "feedback_audit": {
+      "observations": 4343,
+      "observations_with_nonempty_progress": 4024,
+      "vla_action_records": 1869,
+      "vla_records_with_held_apart": 1866,
+      "interrupted_vla_records": 3,
+      "episodes_checked": 160,
+      "forbidden_vla_result_fields_found": 0
+    },
+    "validation": {
+      "valid_episodes": 160,
+      "native_final_state_matches": 160,
+      "exit_zero": 160,
+      "frozen_source_files_verified": 493,
+      "runtime_guard_logs_checked": 160,
+      "runtime_guard_alerts": [],
+      "final_protocol_check": "passed",
+      "baseline_reference": "Published E01 export and per-episode source hashes; raw E01 logs not reaudited"
+    },
+    "source": {
+      "id": "E04",
+      "experiment_path": "experiments/contact-feedback/",
+      "name": "VLA 接触反馈移除，完整任务进度",
+      "branch": "no_contact_gt",
+      "commit": "092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804",
+      "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_contact_gt",
+      "commit_url": "https://github.com/snow-QingYang/RPent/commit/092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804",
+      "status": "published",
+      "evaluation_relationship": "Evaluated upstream commit. Only four explicit VLA grasp/contact reports and their wrapper queries are removed; all native task progress and native success remain. Replaces the older filtered-progress E04 result.",
+      "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+      "implementation_commit": "092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804",
+      "instructions_file": "NO_CONTACT_GT.md",
+      "instructions_url": "https://github.com/snow-QingYang/RPent/blob/092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804/NO_CONTACT_GT.md",
+      "evaluated_code_commit": "092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804",
+      "historical_result": {
+        "run": "official_main_composite_nocontactgt_astra_xhigh_20261104T014440Z",
+        "commit": "e33f97430972135de2208a83fc27dece7af4510c",
+        "success": 46,
+        "total": 160,
+        "archive_path": "experiments/contact-feedback/archive/",
+        "scope": "Also filtered contact-derived progress; not the current E04 result."
+      }
+    },
+    "analysis_path": "experiments/contact-feedback/analysis/"
   },
   "geometry_removed": {
     "status": "complete",
@@ -857,7 +896,7 @@
   "notes": [
     "The historical DA3 smoke is interrupted and excluded from the 160 valid No task progress episodes.",
     "DA3 only replaces depth for back_project_batch and query_world_map.",
-    "NoContactGT removes contact-derived feedback; other progress, geometry, success, scoring-source access and historical memory remain.",
+    "E04 now removes only four explicit VLA grasp/contact labels and their wrapper queries. Full native task_progress, geometry, native success, scoring-source access and original memory remain. The older filtered-progress 46/160 run is archived separately.",
     "NoGeomTools removes back_project_batch and query_world_map from registered tools and their prompt instructions; internal depth/world maps, task-progress distances, contact, success, file permissions and historical memory remain.",
     "E06 No task progress and agent success builds on No task progress, hides live success/termination/progress and removes native-success VLA early stopping. The independent evaluator scores the final state after the planner returns; geometry, contact and historical memory remain. Agent declarations are not benchmark scores.",
     "E07 removes historical task/global memory only; current-episode history and baseline feedback remain. Its 41/160 score happens to match E03, a separate setting. Task/seed matching is not proof of identical scenes or causal attribution.",
@@ -866,11 +905,11 @@
     "E10 uses VLM intermediate progress and retains native success and VLA early stop. Only this 160-episode batch is added, with comparisons to the existing E01 and E03 results."
   ],
   "latest_result": {
-    "id": "E10",
-    "name": "VLM 任务进度 + 原生成功",
-    "path": "experiments/vlm-progress-native-success/",
-    "analysis_path": "experiments/vlm-progress-native-success/analysis/",
-    "completed_at": "2026-11-13T15:13:19+08:00",
+    "id": "E04",
+    "name": "VLA 接触反馈移除，完整任务进度",
+    "path": "experiments/contact-feedback/",
+    "analysis_path": "experiments/contact-feedback/analysis/",
+    "completed_at": "2026-11-14T10:58:09+08:00",
     "total": 160,
     "success": 44,
     "success_rate_percent": 27.5
@@ -1127,7 +1166,7 @@
   },
   "source_publication": {
     "schema_version": 1,
-    "as_of": "2026-11-13",
+    "as_of": "2026-11-14",
     "repository": "https://github.com/snow-QingYang/RPent",
     "note": "Published source revisions are separate from runtime result, source-file and artifact hashes. Branches may advance; evaluated commit links are immutable. E08 publication commit only renames the experiment documentation; its evaluated runtime commit is unchanged.",
     "experiments": {
@@ -1192,17 +1231,26 @@
       "E04": {
         "id": "E04",
         "experiment_path": "experiments/contact-feedback/",
-        "name": "接触反馈移除",
+        "name": "VLA 接触反馈移除，完整任务进度",
         "branch": "no_contact_gt",
-        "commit": "e33f97430972135de2208a83fc27dece7af4510c",
+        "commit": "092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804",
         "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_contact_gt",
-        "commit_url": "https://github.com/snow-QingYang/RPent/commit/e33f97430972135de2208a83fc27dece7af4510c",
+        "commit_url": "https://github.com/snow-QingYang/RPent/commit/092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804",
         "status": "published",
-        "evaluation_relationship": "Experiment implementation; detailed analysis retains the runtime source-file and result hashes.",
+        "evaluation_relationship": "Evaluated upstream commit. Only four explicit VLA grasp/contact reports and their wrapper queries are removed; all native task progress and native success remain. Replaces the older filtered-progress E04 result.",
         "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
-        "implementation_commit": "e33f97430972135de2208a83fc27dece7af4510c",
+        "implementation_commit": "092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804",
         "instructions_file": "NO_CONTACT_GT.md",
-        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/e33f97430972135de2208a83fc27dece7af4510c/NO_CONTACT_GT.md"
+        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804/NO_CONTACT_GT.md",
+        "evaluated_code_commit": "092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804",
+        "historical_result": {
+          "run": "official_main_composite_nocontactgt_astra_xhigh_20261104T014440Z",
+          "commit": "e33f97430972135de2208a83fc27dece7af4510c",
+          "success": 46,
+          "total": 160,
+          "archive_path": "experiments/contact-feedback/archive/",
+          "scope": "Also filtered contact-derived progress; not the current E04 result."
+        }
       },
       "E05": {
         "id": "E05",

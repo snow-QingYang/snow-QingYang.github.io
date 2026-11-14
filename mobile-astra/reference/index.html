@@ -8,7 +8,7 @@
 <section><h2>这项工作关心的几类信息</h2><div class="table-wrap stack-small"><table><thead><tr><th>信息</th><th>入口 / 字段</th><th>当前工作</th></tr></thead><tbody>
 <tr><td data-label="信息">几何位置与点簇</td><td data-label="入口 / 字段">back_project_batch / query_world_map</td><td data-label="当前工作"><a href="../experiments/geometry-da3/">E02：DA3 替代，50/160</a>；<a href="../experiments/geometry-removed/">E05：移除两个查询入口，39/160</a>。E05 内部深度及其他距离反馈保留。</td></tr>
 <tr><td data-label="信息">任务进度</td><td data-label="入口 / 字段">观测里的 task_progress</td><td data-label="当前工作"><a href="../experiments/task-progress/">E03：160 局完成，41 局成功</a></td></tr>
-<tr><td data-label="信息">接触与抓持</td><td data-label="入口 / 字段">VLA 接触／抓持返回及部分接触派生进度</td><td data-label="当前工作"><a href="../experiments/contact-feedback/">E04：160 局完成，46 局成功</a>；夹爪启发式、其他进度和原生评分保留</td></tr>
+<tr><td data-label="信息">接触与抓持</td><td data-label="入口 / 字段">VLA 接触／抓持返回及部分接触派生进度</td><td data-label="当前工作"><a href="../experiments/contact-feedback/">E04：160 局完成，44 局成功</a>；仅移除 VLA 显式反馈；夹爪启发式、完整任务进度和原生评分保留</td></tr>
 <tr><td data-label="信息">机器人状态与运动反馈</td><td data-label="入口 / 字段">末端 / 底盘位置、夹爪状态、final_dist、moved、base_drift</td><td data-label="当前工作">当前保留；真机对应编码器、正运动学、里程计等测量</td></tr>
 <tr><td data-label="信息">成功信号与评分规则</td><td data-label="入口 / 字段">success、提前停止、可读取的评分源码</td><td data-label="当前工作">E03 保留 success；评分源码的 read_text_file 访问已限制</td></tr>
 </tbody></table></div><p class="note">RGB 图像是常规视觉输入；历史任务记忆是已有信息，需单独记录其内容与使用范围。query_world_map 的点簇本身没有物体语义标签。</p></section>

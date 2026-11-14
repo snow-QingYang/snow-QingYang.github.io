@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "as_of": "2026-11-13",
+  "as_of": "2026-11-14",
   "repository": "https://github.com/snow-QingYang/RPent",
   "note": "Published source revisions are separate from runtime result, source-file and artifact hashes. Branches may advance; evaluated commit links are immutable. E08 publication commit only renames the experiment documentation; its evaluated runtime commit is unchanged.",
   "experiments": {
@@ -65,17 +65,26 @@
     "E04": {
       "id": "E04",
       "experiment_path": "experiments/contact-feedback/",
-      "name": "接触反馈移除",
+      "name": "VLA 接触反馈移除，完整任务进度",
       "branch": "no_contact_gt",
-      "commit": "e33f97430972135de2208a83fc27dece7af4510c",
+      "commit": "092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804",
       "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_contact_gt",
-      "commit_url": "https://github.com/snow-QingYang/RPent/commit/e33f97430972135de2208a83fc27dece7af4510c",
+      "commit_url": "https://github.com/snow-QingYang/RPent/commit/092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804",
       "status": "published",
-      "evaluation_relationship": "Experiment implementation; detailed analysis retains the runtime source-file and result hashes.",
+      "evaluation_relationship": "Evaluated upstream commit. Only four explicit VLA grasp/contact reports and their wrapper queries are removed; all native task progress and native success remain. Replaces the older filtered-progress E04 result.",
       "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
-      "implementation_commit": "e33f97430972135de2208a83fc27dece7af4510c",
+      "implementation_commit": "092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804",
       "instructions_file": "NO_CONTACT_GT.md",
-      "instructions_url": "https://github.com/snow-QingYang/RPent/blob/e33f97430972135de2208a83fc27dece7af4510c/NO_CONTACT_GT.md"
+      "instructions_url": "https://github.com/snow-QingYang/RPent/blob/092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804/NO_CONTACT_GT.md",
+      "evaluated_code_commit": "092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804",
+      "historical_result": {
+        "run": "official_main_composite_nocontactgt_astra_xhigh_20261104T014440Z",
+        "commit": "e33f97430972135de2208a83fc27dece7af4510c",
+        "success": 46,
+        "total": 160,
+        "archive_path": "experiments/contact-feedback/archive/",
+        "scope": "Also filtered contact-derived progress; not the current E04 result."
+      }
     },
     "E05": {
       "id": "E05",

@@ -1,0 +1,12 @@
+{
+  "status": "historical_superseded",
+  "run": "official_main_composite_nocontactgt_astra_xhigh_20261104T014440Z",
+  "scope": "Removed four VLA contact labels AND contact-derived task progress; superseded by full-progress E04.",
+  "success": 46,
+  "total": 160,
+  "seen_success": 26,
+  "unseen_success": 20,
+  "filename": "e04-filtered-progress-20261105.zip",
+  "files": 13,
+  "sha256": "6700b3fc34ff932b11b533c0ab7d83cb7876c39e9538c9c163d6a6d142192773"
+}

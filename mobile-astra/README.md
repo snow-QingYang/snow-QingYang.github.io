@@ -6,7 +6,7 @@ Keep this deployment entirely inside `mobile-astra/`. Do not modify or link from
 personal Home, Research, Blog, shared navigation, styles, assets or templates.
 All pages are standalone work interfaces. Public URLs are not access control.
 
-## Completed checklist · 2026-11-13
+## Completed checklist · 2026-11-14
 
 Ten primary GPT-6-Astra / xhigh experiments are complete: 160 valid episodes
 per setting, 1,600 total. Each setting has 80 Seen and 80 Unseen episodes.
@@ -14,7 +14,7 @@ per setting, 1,600 total. Each setting has 80 Seen and 80 Unseen episodes.
 - [x] [E01 · Baseline](experiments/baseline/): Seen 34/80, Unseen 21/80; **55/160**.
 - [x] [E02 · DA3 depth replacement](experiments/geometry-da3/): Seen 33/80, Unseen 17/80; **50/160**.
 - [x] [E03 · No task progress](experiments/task-progress/): Seen 24/80, Unseen 17/80; **41/160**.
-- [x] [E04 · Contact-feedback removal](experiments/contact-feedback/): Seen 26/80, Unseen 20/80; **46/160**.
+- [x] [E04 · VLA contact-feedback removal, full task progress](experiments/contact-feedback/): Seen 29/80, Unseen 15/80; **44/160**.
 - [x] [E05 · Geometry-query removal](experiments/geometry-removed/): Seen 22/80, Unseen 17/80; **39/160**.
 - [x] [E06 · No task progress and agent success](experiments/agent-check-success/): Seen 18/80, Unseen 11/80; **29/160**.
 - [x] [E07 · NoMemory](experiments/no-memory/): Seen 24/80, Unseen 17/80; **41/160**.
@@ -43,7 +43,7 @@ Repository: [https://github.com/snow-QingYang/RPent](https://github.com/snow-Qin
 | E01 · Baseline | [baseline_composite](https://github.com/snow-QingYang/RPent/tree/baseline_composite) | [eebdfcd7](https://github.com/snow-QingYang/RPent/commit/eebdfcd79b6f292003093be5dd1ce8fe639a4f82) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/eebdfcd79b6f292003093be5dd1ce8fe639a4f82/EXPERIMENT.md) |
 | E02 · DA3 深度替代 | [da3](https://github.com/snow-QingYang/RPent/tree/da3) | [bc35d937](https://github.com/snow-QingYang/RPent/commit/bc35d93728e3678404b63f9cc78e5e98764dbbb7) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/bc35d93728e3678404b63f9cc78e5e98764dbbb7/EXPERIMENT.md) |
 | E03 · No task progress | [no_task_progress](https://github.com/snow-QingYang/RPent/tree/no_task_progress) | [b7333814](https://github.com/snow-QingYang/RPent/commit/b7333814fcb1178442057b231e267d4dcfba4554) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/b7333814fcb1178442057b231e267d4dcfba4554/EXPERIMENT.md) |
-| E04 · 接触反馈移除 | [no_contact_gt](https://github.com/snow-QingYang/RPent/tree/no_contact_gt) | [e33f9743](https://github.com/snow-QingYang/RPent/commit/e33f97430972135de2208a83fc27dece7af4510c) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/e33f97430972135de2208a83fc27dece7af4510c/NO_CONTACT_GT.md) |
+| E04 · 接触反馈移除，完整进度 | [no_contact_gt](https://github.com/snow-QingYang/RPent/tree/no_contact_gt) | [092d8b8d](https://github.com/snow-QingYang/RPent/commit/092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804/NO_CONTACT_GT.md) |
 | E05 · 几何查询移除 | [no_geometry_tools](https://github.com/snow-QingYang/RPent/tree/no_geometry_tools) | [19a9ea93](https://github.com/snow-QingYang/RPent/commit/19a9ea934810999428715324507021db51ec06bf) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/19a9ea934810999428715324507021db51ec06bf/NO_GEOMETRY_TOOLS.md) |
 | E06 · No task progress and agent success | [no_task_progress_and_agent_success](https://github.com/snow-QingYang/RPent/tree/no_task_progress_and_agent_success) | [412efe9c](https://github.com/snow-QingYang/RPent/commit/412efe9c32e3cac630c77138da86def960968610) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/412efe9c32e3cac630c77138da86def960968610/EXPERIMENT.md) |
 | E07 · NoMemory | [no_memory](https://github.com/snow-QingYang/RPent/tree/no_memory) | [a640f320](https://github.com/snow-QingYang/RPent/commit/a640f3202d092b0803540dff35521f7996ce0945) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/a640f3202d092b0803540dff35521f7996ce0945/EXPERIMENT.md) |
@@ -96,13 +96,13 @@ analysis export. Branch tips may move; immutable commit links identify this rele
     Actual geometry was DA3, while the requested setting was original depth.
     No result.json; do not label this episode successful or failed or include it
     in the benchmark denominator. Direct file checks are not Agent calls.
-- `experiments/contact-feedback/`: E04, completed NoContactGT run, 46/160.
-  - `analysis/`: Seen 26/80 and Unseen 20/80; all 160 pairs against E01,
-    initial-state and memory audits, native-success checks, CSV, JSON, report
-    and a portable extractor. One valid planner-timeout failure is included.
-  - `cases/`: six selected Unseen gains, action comparisons, image montages,
-    initial-image hashes and the earliest observed execution divergence.
-    These examples do not establish that removing feedback caused improvement.
+- `experiments/contact-feedback/`: E04, full native task progress retained, 44/160.
+  - `analysis/`: Seen 29/80, Unseen 15/80; 160 task/seed pairs against E01,
+    current native-score and memory audits, CSV, JSON, report and extractor.
+    Baseline reference uses existing public exports; full initial states were not compared.
+  - `downloads/`: all 160 results/native states/memory audits, production source and analysis ZIP.
+  - `archive/`: old 46/160 filtered-progress result and original 13 published files.
+    `cases/` explicitly labels its examples as historical, not current E04 evidence.
 - `experiments/geometry-removed/`: E05, completed NoGeomTools run, 39/160.
   - `analysis/`: Seen 22/80 and Unseen 17/80; all 160 matched pairs against
     E01's 55/160, task/seed filters, native-success and memory checks,
@@ -157,16 +157,18 @@ recorded hashes. Ten paired initial robot states and four task descriptions
 differ; the audit does not establish identical complete scenes. The historical
 DA3 smoke remains separate from the 160 valid episodes.
 
-NoContactGT removes four VLA grasp/contact result fields and the corresponding
-wrapper queries, plus 60 task/field entries across 25 tasks' contact-derived
-progress. It retains the held_apart gripper-width heuristic, other progress,
-geometry, success, native scoring, file access, memory and the baseline prompt.
-It is independent of DA3 and No task progress. All 148 launch memory hashes and 95 selected
-files match E01. Eleven paired initial robot states differ above 1e-6 (17 differ
-at exact precision), and two task descriptions differ. The 4,772-state output
-scan does not establish isolation of all historical memory or shell/file channels.
-Scene seeds do not fix independent VLA action sampling in this run; case-level
-outcome flips cannot be attributed solely to contact-feedback removal.
+E04 now removes only four explicit VLA grasp/contact reports and their wrapper
+queries. All native task_progress remains, including contact-derived conditions.
+The 2026-11-14 batch is 44/160: Seen 29/80, Unseen 15/80, versus E01 55/160.
+The evaluated commit is 092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804 on no_contact_gt.
+All 160 results match native final state and have exit0. The scan covers 4,343
+observations and 1,869 VLA action records; four removed labels have zero occurrences.
+Three interrupted VLA action records are retained within normally completed episodes.
+All 493 frozen source and 148 original memory hashes match. There are three task-text
+differences against published E01; robot/full-scene initial equality was not audited.
+Do not reuse the old E04 initial-state, memory-selection or case metrics.
+The old 46/160 batch additionally filtered 60 progress entries across 25 tasks;
+its original public snapshot is preserved in archive/, outside the current denominator.
 
 NoGeomTools removes back_project_batch and query_world_map from the registered
 Agent tools and removes their instructions from the evaluation prompt and view
@@ -297,8 +299,8 @@ verify the ten-group, 1,600-episode total whenever rebuilding a detailed export
 and the overview. The E03, E04 and E05 detailed HTML and JS
 use the same table/filter layout as E02; check their displayed summaries against the
 new export when changing source runs.
-The E04 case builder also uses the local six-case audit under
-`analyses/nocontact_unseen_gains_20261104/`. It publishes only selected evidence
+The historical E04 case builder used the local six-case audit under
+`analyses/nocontact_unseen_gains_20261104/`. It published only selected evidence
 fields and images; incomplete snapshot totals and local server paths are omitted.
 Replay builder source is `presentations/rpent-interaction-record/` in the local
 workspace; pass the new canonical output directory when rebuilding.
@@ -349,3 +351,12 @@ The branch has not been separately published. `source-publication.json` tracks
 10 experiments but still 9 published branches; E10 has `snapshot_available` status.
 Do not label the base commit as the evaluated implementation or link to a nonexistent
 published branch. Keep the 9 pre-existing experiment entries and their artifacts intact.
+
+## E04 replacement maintenance
+
+The current E04 extractor reads the completed dynamic controller state and the
+original run manifest separately. The original three-GPU manifest was superseded
+by dynamic scheduling; do not infer incompletion from that historical marker.
+Never regenerate current E04 from the old filtered-progress source or old case builder.
+The main experiment count remains ten and the current valid-episode total remains
+1,600; the historical E04 archive is not an eleventh experiment.

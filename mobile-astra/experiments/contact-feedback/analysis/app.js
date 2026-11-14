@@ -6,8 +6,7 @@ const escapeHTML = (value) => String(value).replace(/[&<>"']/g, (char) => ({'&':
 let data;
 
 function differences(episode) {
-  return [episode.initial_robot_state_max_abs_diff > data.initial_state_audit.robot_state_threshold ? '初始机器人状态不同（最大差 >1e-6）' : '',
-    !episode.initial_task_language_equal ? '初始任务文本不同' : ''].filter(Boolean);
+  return episode.initial_task_language_equal ? [] : ['初始任务文本不同'];
 }
 
 function showEpisode(index) {
@@ -22,10 +21,10 @@ function showEpisode(index) {
     ['末条原生 success', String(episode.baseline_final_native_success), String(episode.nocontact_final_native_success)],
   ];
   const initial = differences(episode);
-  $('episode-content').innerHTML = `<div class="table"><table><thead><tr><th>记录</th><th>Baseline</th><th>NoContactGT</th></tr></thead><tbody>${rows.map((row) => `<tr><th scope="row">${escapeHTML(row[0])}</th><td>${escapeHTML(row[1])}</td><td>${escapeHTML(row[2])}</td></tr>`).join('')}</tbody></table></div>
-    <p class="note">${escapeHTML(initial.length ? initial.join('；') : '初始机器人状态差值未超过 1e-6，任务文本相同。')} 未检查全部场景物体。</p>
-    <p class="note">初始机器人状态最大绝对差：<code>${escapeHTML(episode.initial_robot_state_max_abs_diff.toExponential(4))}</code></p>
-    <details><summary>来源与 SHA-256</summary>${['baseline', 'nocontact'].map((label) => `<h3>${label === 'baseline' ? 'Baseline' : 'NoContactGT'}</h3><p class="hash"><code>${escapeHTML(data.sources[label].run)}</code></p><dl><dt>result.json</dt><dd class="hash"><code>${escapeHTML(episode[`${label}_result_sha256`])}</code></dd><dt>states.json</dt><dd class="hash"><code>${escapeHTML(episode[`${label}_states_sha256`])}</code></dd></dl>`).join('')}</details>`;
+  $('episode-content').innerHTML = `<div class="table"><table><thead><tr><th>记录</th><th>Baseline</th><th>E04 完整进度</th></tr></thead><tbody>${rows.map((row) => `<tr><th scope="row">${escapeHTML(row[0])}</th><td>${escapeHTML(row[1])}</td><td>${escapeHTML(row[2])}</td></tr>`).join('')}</tbody></table></div>
+    <p class="note">${escapeHTML(initial.length ? initial.join('；') : '任务文本相同。')} 初始机器人与全部物体状态未核对。</p>
+    <p>新版 E04 动作数：VLA ${episode.nocontact_vla_calls}，手工 ${episode.nocontact_manual_calls}。</p><p>观测到的原生进度字段：${episode.nocontact_progress_keys.map(escapeHTML).join(" · ") || "无"}</p>
+    <details><summary>来源与 SHA-256</summary>${['baseline', 'nocontact'].map((label) => `<h3>${label === 'baseline' ? 'Baseline' : 'E04 完整进度'}</h3><p class="hash"><code>${escapeHTML(data.sources[label].run)}</code></p><dl><dt>result.json</dt><dd class="hash"><code>${escapeHTML(episode[`${label}_result_sha256`])}</code></dd><dt>states.json</dt><dd class="hash"><code>${escapeHTML(episode[`${label}_states_sha256`])}</code></dd></dl>`).join('')}</details>`;
   $('episode-dialog').showModal();
 }
 
@@ -45,19 +44,19 @@ function renderTasks() {
       const cells = episodes.map((e) => {
         const category = e.baseline_success === e.nocontact_success ? '' : e.nocontact_success ? 'gain' : 'loss';
         const initial = differences(e);
-        const timeout = e.nocontact_termination_reason === 'planner_timeout' ? '；NoContactGT 超时失败' : '';
-        const label = `${task} seed ${e.seed}：baseline ${e.baseline_success ? '成功' : '失败'}，NoContactGT ${e.nocontact_success ? '成功' : '失败'}${timeout}${initial.length ? '；' + initial.join('、') : ''}。查看详情`;
+        const timeout = e.nocontact_termination_reason === 'planner_timeout' ? '；E04 完整进度 超时失败' : '';
+        const label = `${task} seed ${e.seed}：baseline ${e.baseline_success ? '成功' : '失败'}，E04 完整进度 ${e.nocontact_success ? '成功' : '失败'}${timeout}${initial.length ? '；' + initial.join('、') : ''}。查看详情`;
         return `<td><button type="button" class="pair ${category}" data-episode="${data.episodes.indexOf(e)}" title="${escapeHTML(label)}" aria-label="${escapeHTML(label)}">${e.baseline_success ? '✓' : '×'} → ${e.nocontact_success ? '✓' : '×'}${initial.length ? ' *' : ''}</button></td>`;
       }).join('');
       return `<tr><th scope="row">${escapeHTML(task)}</th><td>${baseline}/5</td><td>${nocontact}/5</td><td class="${delta > 0 ? 'gain-text' : delta < 0 ? 'loss-text' : ''}">${delta > 0 ? '+' : ''}${delta}</td>${cells}</tr>`;
     }).join('');
-    return `<div class="task-group"><h3 id="tasks-${s}">${splitNames[s]}</h3><div class="table" tabindex="0" role="region" aria-labelledby="tasks-${s}"><table class="task-table"><thead><tr><th>任务</th><th>Baseline</th><th>NoContactGT</th><th>差值</th><th>seed 1</th><th>seed 2</th><th>seed 3</th><th>seed 4</th><th>seed 5</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
+    return `<div class="task-group"><h3 id="tasks-${s}">${splitNames[s]}</h3><div class="table" tabindex="0" role="region" aria-labelledby="tasks-${s}"><table class="task-table"><thead><tr><th>任务</th><th>Baseline</th><th>E04 完整进度</th><th>差值</th><th>seed 1</th><th>seed 2</th><th>seed 3</th><th>seed 4</th><th>seed 5</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
   }).join('');
   $('status').textContent = count ? `显示 ${count} 个任务 · ${count * 5} 对运行。筛选不改变上方完整实验统计。` : '没有匹配的任务。';
 }
 
 function validateData(value) {
-  if (!Array.isArray(value.episodes) || value.episodes.length !== 160
+  if (!Array.isArray(value.episodes) || value.episodes.length !== 160 || value.variant !== 'full-native-task-progress'
       || ['seen', 'unseen'].some((s) => !Array.isArray(value.tasks[s]) || value.tasks[s].length !== 16)) throw new Error('数据不完整');
   const keys = new Set(value.episodes.map((e) => `${e.split}/${e.task}/${e.seed}`));
   if (keys.size !== 160) throw new Error('存在重复 episode');
@@ -85,7 +84,6 @@ async function init() {
       const row = data.summary[s];
       return `<tr><th scope="row">${splitNames[s]}</th><td>${row.both_success}</td><td>${row.baseline_only}</td><td>${row.nocontact_only}</td><td>${row.neither}</td></tr>`;
     }).join('');
-    $('field-body').innerHTML = Object.entries(data.protocol.removed_progress_fields_by_task).map(([task, fields]) => `<tr><th scope="row">${escapeHTML(task)}</th><td>${fields.map((field) => `<code>${escapeHTML(field)}</code>`).join(' · ')}</td></tr>`).join('');
     $('generated').textContent = new Date(data.generated_utc).toLocaleString('zh-CN', {timeZone: 'Asia/Hong_Kong', hour12: false}) + '（香港时间）';
     $('split').addEventListener('change', renderTasks);
     $('search').addEventListener('input', renderTasks);

@@ -1,92 +1,12 @@
-<!doctype html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,nofollow">
-<meta name="description" content="NoContactGT 完整实验：Seen 26/80，Unseen 20/80；与 Astra baseline 的 160 对任务和 seed 逐项比较，并说明移除的接触反馈及保留信息。">
-<link rel="icon" href="data:,">
-<link rel="stylesheet" href="style.css">
-<script src="app.js" defer></script>
-<title>NoContactGT · 接触反馈移除对照 · Mobile Astra</title>
-</head>
-<body>
-<header><a href="../../../">项目总览</a><span>/</span><a href="../">E04 · 接触反馈</a><span>/ 详细对照</span><nav aria-label="数据下载"><a href="episodes.csv" download>CSV</a><a href="data.json" download>JSON</a><a href="report.md">文字报告</a></nav></header>
-<main>
-<h1>移除接触反馈后的表现</h1>
-<p class="intro">官方 RPent · GPT-6-Astra / xhigh · RLDX-1-FT-RC365<br>32 个 RoboCasa composite 任务 × seeds 1–5，两组各 160 个有效 episode。</p>
-
-<section aria-labelledby="summary-title">
-<h2 id="summary-title">完整结果</h2>
-<div class="table"><table aria-labelledby="summary-title"><thead><tr><th>任务组</th><th>E01 · baseline 重跑</th><th>NoContactGT</th><th>成功率差</th></tr></thead><tbody id="summary-body">
-<tr><th scope="row">Seen</th><td>34 / 80 · 42.50%</td><td>26 / 80 · 32.50%</td><td>−10.00 个百分点</td></tr>
-<tr><th scope="row">Unseen</th><td>21 / 80 · 26.25%</td><td>20 / 80 · 25.00%</td><td>−1.25 个百分点</td></tr>
-<tr><th scope="row">总计</th><td>55 / 160 · 34.38%</td><td>46 / 160 · 28.75%</td><td>−5.63 个百分点</td></tr>
-</tbody></table></div>
-<p>总计少成功 9 局，其中 Seen 少 8 局、Unseen 少 1 局。同任务、同 seed 对齐后，17 局仅 NoContactGT 成功，26 局仅 baseline 成功。</p>
-<p class="note">参照为本站 E01 的 11 月 1–2 日重跑（55/160）。NoContactGT 的 160 局包含一局有效超时失败：<code>PortionHotDogs s2</code>；它仍计入分母。百分比保留两位小数，pp 表示百分点。</p>
-</section>
-
-<section aria-labelledby="scope-title">
-<h2 id="scope-title">实际移除与保留</h2>
-<div class="scope-grid">
-<article><h3>移除的反馈</h3><p><code>rldx_skill</code> 和 <code>rldx_arm</code> 不再返回 <code>grasp_contact</code>、<code>grasp_obj</code>、<code>grasped</code>、<code>grasp_detected</code>，执行封装也不再为这些报告查询模拟器接触。</p><p><code>task_progress</code> 在保存前过滤接触派生标量：25 个任务、60 个任务—字段条目；其余任务进度继续返回。</p></article>
-<article><h3>保留的信息</h3><p><code>held_apart</code> 是闭合命令与夹爪开度的启发式，仍然保留；它不识别物体，也不证明抓取成功。<code>gripper_qpos</code>、末端高度变化 <code>peak_lift</code> 和执行状态也保留。</p><p>原版几何与相机标定、本体状态、其他进度、成功和终止信号、评分规则及历史记忆均可用。Prompt、VLA 与动作控制协议不变，未叠加 DA3 或 No task progress。</p></article>
-</div>
-<p class="note">按字段来源过滤，而非按名称：<code>PrepareCoffee.contact_check</code> 是距离判据，保留；<code>ScrubCuttingBoard.sweep_range</code> 来自接触位置，移除。顶层成功仍可能依赖接触，这不是完全无真值或文件／RPC 隔离。</p>
-<details><summary>展开全部被过滤的任务进度字段</summary><p class="note">表中列出的字段只在对应任务被过滤；不意味着每个字段在每个 step 都会出现。没有列出的 7 个任务保留其原任务进度。</p><div class="table"><table class="field-table"><thead><tr><th>任务</th><th>移除的进度字段</th></tr></thead><tbody id="field-body"></tbody></table></div></details>
-</section>
-
-<section aria-labelledby="changes-title">
-<h2 id="changes-title">任务之间的变化并不一致</h2>
-<div class="scope-grid">
-<article><h3>各少成功 2 局</h3><p><code>PackIdenticalLunches</code>、<code>PrepareCoffee</code>、<code>SteamInMicrowave</code>：2/5 → 0/5。</p><p><code>StackBowlsCabinet</code>：5/5 → 3/5。<br><code>RecycleBottlesByType</code>：2/5 → 0/5。</p></article>
-<article><h3>也有任务提高</h3><p><code>PreSoakPan</code>：3/5 → 4/5。<br><code>StirVegetables</code>：2/5 → 3/5。<br><code>WeighIngredients</code>、<code>CategorizeCondiments</code>：0/5 → 1/5。</p><p>其余变化见下方完整表；每个任务只有 5 个 seed，单轮结果尚不能确认稳定性。</p></article>
-</div>
-<p class="note" id="initial-audit">初始机器人状态最大绝对差超过 1e-6 的有 11 对，任务文本不同的有 2 对。检查未覆盖全部场景物体；同任务、同 seed 不保证场景完全一致。VLA 动作采样也未随场景 seed 固定。不能将个别轨迹的成功或失败直接归因于移除某条反馈。</p>
-</section>
-
-<section aria-labelledby="paired-title">
-<h2 id="paired-title">相同任务与 seed 的配对结果</h2>
-<div class="table"><table aria-labelledby="paired-title"><thead><tr><th>任务组</th><th>两者成功</th><th>仅 baseline 成功</th><th>仅 NoContactGT 成功</th><th>两者失败</th></tr></thead><tbody id="paired-body">
-<tr><th scope="row">Seen</th><td>20</td><td>14</td><td>6</td><td>40</td></tr>
-<tr><th scope="row">Unseen</th><td>9</td><td>12</td><td>11</td><td>48</td></tr>
-<tr><th scope="row">总计</th><td>29</td><td>26</td><td>17</td><td>88</td></tr>
-</tbody></table></div>
-</section>
-
-<section aria-labelledby="cases-title">
-<h2 id="cases-title">代表案例</h2>
-<div class="scope-grid">
-<article><h3>WeighIngredients · seed 5</h3><p>Baseline 失败 → NoContactGT 成功。最后完成的这一局用了 9 次 VLA 与 3 次手工移动，耗时 790.9 秒。</p><p>最终 <code>move_to</code> 的 <code>ok=false</code>，但环境判定任务成功，随后 Agent 调用 <code>finish(success)</code>。动作是否到达目标与任务是否成功是不同判据。</p></article>
-<article><h3>PackIdenticalLunches · seed 4</h3><p>Baseline 用 6 次 VLA 成功；NoContactGT 用了 16 次 VLA 与 39 次其他动作，2375.9 秒后仍失败。</p><p>此任务的接触派生进度被过滤后为空。这条轨迹展示了结果变化，不能单独证明缺少进度导致失败。</p></article>
-<article><h3>MakeIceLemonade · seed 3</h3><p>Baseline 失败 → NoContactGT 成功。NoContactGT 在 474.4 秒内通过 7 次 <code>rldx_skill</code> 完成，未插入手工动作。</p></article>
-<article><h3>PanTransfer · seed 3</h3><p>Baseline 成功 → NoContactGT 失败。NoContactGT 执行 21 次 VLA 与 5 次其他动作，1984.0 秒后仍未完成。</p></article>
-</div>
-<p class="note">这里统计 <code>states.json</code> 中的动作记录，不含读图、几何查询、读文件等只读工具调用。<a href="../cases/">查看六个新增成功的动作过程与图片 →</a></p>
-</section>
-
-<section aria-labelledby="tasks-title">
-<h2 id="tasks-title">逐任务与 seed 对照</h2>
-<div class="filters"><label>任务组<select id="split"><option value="all">Seen + Unseen</option><option value="seen">Seen</option><option value="unseen">Unseen</option></select></label><label class="search">搜索任务<input id="search" type="search" placeholder="例如 WeighIngredients" autocomplete="off"></label><button id="reset" type="button">重置</button></div>
-<p class="note">每个 seed 为 <strong>baseline → NoContactGT</strong>：✓ 成功，× 失败。绿色表示仅 NoContactGT 成功，红色表示仅 baseline 成功。* 标记初始状态或文本差异；点击 seed 可看耗时、终止原因与来源哈希。窄屏可左右滑动。</p>
-<p id="status" role="status">正在加载 160 对运行记录…</p>
-<div id="task-tables"></div>
-<noscript><p>启用 JavaScript 可筛选任务，也可直接<a href="episodes.csv">下载完整 CSV</a>或阅读<a href="report.md">文字报告</a>。</p></noscript>
-</section>
-
-<section aria-labelledby="validation-title">
-<h2 id="validation-title">核验范围</h2>
-<ul>
-<li>两组 320 个 canonical 结果全部有效，均与各自最后一条观测的原生成功信号一致。</li>
-<li>检查 NoContactGT 的 4,772 条保存观测：四个禁用结果字段、对应任务的被过滤进度字段均为零命中。</li>
-<li>两组启动记忆的 148 个文件 SHA-256 一致；160 对结果选择相同的记忆，涉及 95 个唯一文件，当前哈希也一致。读取顺序可不同。</li>
-<li>仅统计 canonical 结果，归档与中断重试不重复计入；完整 JSON 保留每局结果、状态和来源元数据的 SHA-256。</li>
-</ul>
-<p class="note">检查保存的当前反馈，不代表历史记忆或所有原生 Planner 通道已隔离。初始状态的逐值完全相等检查有 17 对不同，其中 6 对最大差值低于 1e-6；页面标记采用上述 1e-6 阈值。</p>
-</section>
-<footer>统计来自环境 <code>result.json.success</code>，并核对最后一条 <code>states.json</code> 观测。原始提示词、模型消息、凭据和运行日志不随本页发布。<br>数据生成：<span id="generated">—</span> · <a href="extract.py" download>下载统计脚本</a> · <a href="../">实验概览</a> · <a href="../../baseline/analysis/">Baseline 详细分析</a></footer>
-</main>
-<dialog id="episode-dialog" aria-labelledby="episode-title"><div class="dialog-head"><h2 id="episode-title">Episode 对照</h2><button id="close-dialog" type="button" aria-label="关闭 episode 对照">关闭</button></div><div id="episode-content"></div></dialog>
-</body>
-</html>
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="description" content="新版 E04：Seen 29/80，Unseen 15/80，合计44/160。保留完整原生任务进度的接触反馈消融。"><link rel="icon" href="data:,"><link rel="stylesheet" href="style.css"><script src="app.js" defer></script><title>E04 · 完整进度 · 160局对照</title></head><body>
+<header><a href="../../../">项目总览</a><span>/</span><a href="../">E04 · 接触反馈</a><span>/ 详细对照</span><nav aria-label="数据下载"><a href="episodes.csv" download>CSV</a><a href="data.json" download>JSON</a><a href="report.md">报告</a></nav></header><main><h1>移除 VLA 接触反馈，保留完整任务进度</h1><p class="intro">GPT-6-Astra / xhigh · RLDX-1-FT-RC365 · 原版记忆<br>32个任务 × seeds 1–5；2026-11-14完成160局。</p>
+<section><h2>完整结果</h2><div class="table-wrap table"><table><thead><tr><th>任务组</th><th>E01 · baseline</th><th>E04 · 完整进度</th><th>成功率差</th></tr></thead><tbody id="summary-body">
+<tr><th scope="row">Seen</th><td>34 / 80 · 42.50%</td><td>29 / 80 · 36.25%</td><td>−6.25 个百分点</td></tr>
+<tr><th scope="row">Unseen</th><td>21 / 80 · 26.25%</td><td>15 / 80 · 18.75%</td><td>−7.50 个百分点</td></tr>
+<tr><th scope="row">总计</th><td>55 / 160 · 34.38%</td><td><strong>44 / 160 · 27.50%</strong></td><td>−6.88 个百分点</td></tr></tbody></table></div><p>净少成功11局（−6.88个百分点）。本页对应新版完整进度实验；旧版46/160已单独归档。</p></section>
+<section><h2>实际移除与保留</h2><div class="cards scope-grid"><article class="card"><h3>移除的反馈</h3><p><code>rldx_skill</code> / <code>rldx_arm</code> 不再返回 <code>grasp_contact</code>、<code>grasp_obj</code>、<code>grasped</code>、<code>grasp_detected</code>，并停止为这些报告查询模拟器接触。</p></article><article class="card"><h3>完整保留任务进度</h3><p><strong>所有原生 <code>task_progress</code> 均保留，包括接触派生条件；没有按任务过滤进度字段。</strong></p><p><code>held_apart</code>、<code>gripper_qpos</code>、<code>peak_lift</code>、执行状态、几何查询、相机标定、本体状态、评分源码访问和历史记忆保留。</p></article></div><p>模拟器 <code>success</code> 和终止信号继续返回 Agent，VLA 原生成功早停保留。提示词、VLA 输入与权重、控制预算与原版一致；本次没有使用 VLM。</p></section>
+<section><h2>同任务、同 seed 的配对结果</h2><div class="table"><table><thead><tr><th>任务组</th><th>双方成功</th><th>仅 baseline 成功</th><th>仅 E04 成功</th><th>双方失败</th></tr></thead><tbody id="paired-body"><tr><th scope="row">Seen</th><td>18</td><td>16</td><td>11</td><td>35</td></tr><tr><th scope="row">Unseen</th><td>6</td><td>15</td><td>9</td><td>50</td></tr><tr><th scope="row">总计</th><td>24</td><td>31</td><td>20</td><td>85</td></tr></tbody></table></div><p class="note">这是单批实验的观察差值，不代表统计显著性或逐局因果关系。对照按 task / seed 配对；任务文本有3对不同，初始机器人及全部物体状态未核对。场景 seed 未同时固定独立 VLA 服务的动作采样。E01 结果来自已发布导出，本次未重新审计其原始日志。</p></section>
+<section><h2>逐任务与 seed 对照</h2><div class="filters"><label>任务组<select id="split"><option value="all">Seen + Unseen</option><option value="seen">Seen</option><option value="unseen">Unseen</option></select></label><label class="search">搜索任务<input id="search" type="search" placeholder="例如 WeighIngredients" autocomplete="off"></label><button id="reset" type="button">重置</button></div><p class="note">每格为 baseline → 新版 E04：✓ 成功，× 失败。绿色为仅 E04 成功，红色为仅 baseline 成功。* 只表示任务文字不同；未核对完整初态。点击 seed 查看耗时、动作数、进度字段与来源哈希。</p><p id="status" role="status" aria-live="polite">正在加载160对记录…</p><div id="task-tables"></div><noscript><p>可直接下载<a href="episodes.csv">CSV</a>或阅读<a href="report.md">报告</a>。</p></noscript></section>
+<section><h2>核验范围</h2><p>160局结果均匹配最后保存的原生 <code>success</code>，160个退出码均为0，最终协议校验通过。扫描4,343条保存观测、1,869条 VLA 动作记录，四个移除字段零命中；其中3条 VLA 记录有中断标记，episode 仍正常结束并保留在统计中。</p><p>493个冻结源码文件和148个原版记忆文件通过哈希核验；160局 memory audit 均通过。日志监控检查160份 launcher 日志，未记录显存不足或崩溃告警。</p><p class="note">基线数据沿用已发布 E01 的逐局导出与原始文件哈希。原始基线机器人状态未在本次复查，因此不显示旧实验的初态差值。</p></section>
+<footer>数据生成：<span id="generated">—</span> · <a href="extract.py" download>统计脚本</a> · <a href="../#downloads">结果 ZIP</a> · <a href="../archive/">旧版归档</a></footer></main>
+<dialog id="episode-dialog" aria-labelledby="episode-title"><div class="dialog-head"><h2 id="episode-title">Episode 对照</h2><button id="close-dialog" type="button" aria-label="关闭 episode 对照">关闭</button></div><div id="episode-content"></div></dialog></body></html>

@@ -1,513 +1,247 @@
-"""Build the public NoContactGT comparison from two completed canonical runs.
+"""Export E04 with full native progress from a completed canonical run.
 
-Inputs are local paths supplied on the command line. Exports contain run names,
-selected outcomes, aggregate action counts and SHA-256 hashes, not absolute
-paths, model messages, prompts, raw trajectories, credentials or image data.
-The script performs no simulator, model, network or Git operations.
+Usage: python extract.py --run RUN --site SITE_CHECKOUT --output OUTPUT
+The E01 reference is the existing public export, not newly reread raw logs.
+Only selected fields and hashes are exported; no model messages or credentials.
 """
-
 import argparse
-import ast
-import csv
-import hashlib
-import json
-import math
-import re
 from collections import Counter
 from datetime import datetime, timezone
 from decimal import Decimal, ROUND_HALF_UP
+import csv
+import hashlib
+import json
 from pathlib import Path
 
-
-SPLITS = ("seen", "unseen")
-SEEDS = (1, 2, 3, 4, 5)
-BASE_REVISION = "a744bd5f128ebef3cb8c6736cf7cd98adff681f1"
-REMOVED = ("grasp_contact", "grasp_obj", "grasped", "grasp_detected")
-VLA_ACTIONS = {"rldx_skill", "rldx_arm"}
-PLANNER = {
-    "backend": "codex", "model": "gpt-6-astra", "reasoning_effort": "xhigh",
-    "max_turns": 100,
-}
-RUNTIME = {
-    "cell_timeout_seconds": 3600, "rldx_max_chunks": 40,
-    "rldx_settle_patience": 999, "rldx_action_steps_per_chunk": 8,
-}
-ROBOT_STATE_THRESHOLD = 1e-6
-CASE_CELLS = (
-    ("unseen", "WeighIngredients", 5),
-    ("unseen", "MakeIceLemonade", 3),
-    ("seen", "PackIdenticalLunches", 4),
-    ("unseen", "PanTransfer", 3),
-)
-CSV_FIELDS = (
-    "split", "task", "seed", "baseline_success", "nocontact_success",
-    "baseline_elapsed_s", "nocontact_elapsed_s", "baseline_termination_reason",
-    "nocontact_termination_reason", "baseline_final_native_success",
-    "nocontact_final_native_success", "baseline_final_terminated",
-    "nocontact_final_terminated", "baseline_result_sha256", "nocontact_result_sha256",
-    "baseline_states_sha256", "nocontact_states_sha256",
-    "initial_robot_state_max_abs_diff", "initial_robot_state_exact_equal",
-    "initial_task_language_equal",
-)
+REMOVED = ('grasp_contact', 'grasp_obj', 'grasped', 'grasp_detected')
+VLA = {'rldx_skill', 'rldx_arm'}
+COMMIT = '092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804'
+BASE = 'a744bd5f128ebef3cb8c6736cf7cd98adff681f1'
+PLANNER = {'backend': 'codex', 'model': 'gpt-6-astra', 'reasoning_effort': 'xhigh', 'max_turns': 100}
+RUNTIME = {'cell_timeout_seconds': 3600, 'rldx_max_chunks': 40,
+           'rldx_settle_patience': 999, 'rldx_action_steps_per_chunk': 8}
 
 
-def require(condition, message):
-    if not condition:
-        raise ValueError(message)
+def load(path):
+    return json.loads(path.read_text())
 
 
-def read_json(path):
-    return json.loads(path.read_text(encoding="utf-8"))
-
-
-def file_sha256(path):
+def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def safe_relative(name):
-    path = Path(name)
-    require(isinstance(name, str) and not path.is_absolute() and ".." not in path.parts,
-            "Expected a relative source or memory filename")
-    return path
+def require(ok, message):
+    if not ok:
+        raise ValueError(message)
 
 
-def task_matrix(manifest):
-    tasks = {}
-    for split in SPLITS:
-        spec = manifest["splits"][f"composite_{split}"]
-        names = spec["tasks"]
-        require(spec["seeds"] == list(SEEDS), f"{split}: expected seeds 1–5")
-        require(len(names) == len(set(names)) == 16, f"{split}: expected 16 tasks")
-        require(all(re.fullmatch(r"[A-Za-z][A-Za-z0-9]*", t) for t in names),
-                f"{split}: invalid task name")
-        tasks[split] = names
-    require(not set(tasks["seen"]) & set(tasks["unseen"]), "Task splits overlap")
-    return tasks
-
-
-def check_cells(root, tasks):
-    expected = {f"composite_{s}/{t}_s{seed}"
-                for s in SPLITS for t in tasks[s] for seed in SEEDS}
-    actual = {str(p.parent.relative_to(root))
-              for p in root.glob("composite_*/*/result.json")}
-    require(actual == expected,
-            f"{root.name}: canonical cells differ; missing={sorted(expected - actual)}, "
-            f"extra={sorted(actual - expected)}")
-
-
-def progress_filter(source_repo, tasks):
-    """Read the published filter declaration without importing simulator code."""
-    tree = ast.parse((source_repo / "robots/robocasa/primitives.py").read_text())
-    declaration = next((n.value for n in tree.body if isinstance(n, ast.AnnAssign)
-                        and isinstance(n.target, ast.Name)
-                        and n.target.id == "_CONTACT_PROGRESS_FIELDS"), None)
-    require(isinstance(declaration, ast.Dict), "Missing contact-progress filter")
-    result = {}
-    for key, value in zip(declaration.keys, declaration.values):
-        require(isinstance(value, ast.Call) and isinstance(value.func, ast.Name)
-                and value.func.id == "frozenset" and len(value.args) == 1,
-                "Unexpected filter declaration")
-        task, fields = ast.literal_eval(key), ast.literal_eval(value.args[0])
-        require(isinstance(fields, set) and all(isinstance(f, str) for f in fields),
-                "Invalid contact-progress field set")
-        result[task] = fields
-    require(set(result) <= set(tasks["seen"] + tasks["unseen"]), "Unexpected filtered task")
-    require(len(result) == 25 and sum(map(len, result.values())) == 60,
-            "Contact-progress scope differs from the reviewed experiment")
-    return result
-
-
-def dictionary_keys(value):
+def keys(value):
     if isinstance(value, dict):
         for key, child in value.items():
             yield key
-            yield from dictionary_keys(child)
+            yield from keys(child)
     elif isinstance(value, list):
         for child in value:
-            yield from dictionary_keys(child)
+            yield from keys(child)
 
 
-def read_episode(root, split, task, seed, protocol_id, filters=None):
-    cell = root / f"composite_{split}" / f"{task}_s{seed}"
-    result_path, states_path = cell / "result.json", cell / "states.json"
-    result, document = read_json(result_path), read_json(states_path)
-    label = f"{root.name}: {split}/{task}_s{seed}"
-    require(result["valid"] is True, f"{label}: invalid result")
-    require(type(result["success"]) is bool, f"{label}: success must be boolean")
-    require(result["task_name"] == task and type(result["seed"]) is int
-            and result["seed"] == seed, f"{label}: task or seed mismatch")
-    require(result["evaluation_split"] == f"composite_{split}", f"{label}: split mismatch")
-    require(result["environment_split"] == "target", f"{label}: environment mismatch")
-    require(result["protocol_id"] == protocol_id, f"{label}: protocol mismatch")
-    require(result["success_source"] == "state.success", f"{label}: success source mismatch")
-    require(result["termination_reason"] in {"completed", "planner_timeout"},
-            f"{label}: unexpected termination reason")
-    require(all(result["planner"].get(k) == v for k, v in PLANNER.items()),
-            f"{label}: planner configuration mismatch")
-    require(all(result["runtime"].get(k) == v for k, v in RUNTIME.items()),
-            f"{label}: runtime configuration mismatch")
-    memory = result["memory"]
-    require(memory["profile"] == "local" and memory["policy"] == "task-global"
-            and memory["audit_status"] == "ok", f"{label}: memory configuration/audit mismatch")
-    require(len(memory["selected_files"]) == len(set(memory["selected_files"])),
-            f"{label}: duplicate memory file selection")
-    steps = document["steps"]
-    require(steps and [s["step_idx"] for s in steps] == list(range(len(steps))),
-            f"{label}: missing or noncontiguous observation history")
-    require(all(type(s.get("extras", {}).get("success")) is bool for s in steps),
-            f"{label}: missing native success signals")
-    final = steps[-1]
-    require(type(final["terminated"]) is bool, f"{label}: invalid terminated flag")
-    require(final["extras"]["success"] == result["success"],
-            f"{label}: final native success disagrees with result")
-    require(any(s["extras"]["success"] for s in steps) == result["success"],
-            f"{label}: transient native success disagrees with final result")
-    elapsed = result["elapsed_s"]
-    require(type(elapsed) in (int, float) and math.isfinite(elapsed) and elapsed >= 0,
-            f"{label}: invalid duration")
-    audit = Counter(observations=len(steps))
-    actions = Counter()
-    for step in steps:
-        action = step.get("command", {}).get("action")
-        output = step.get("result", {})
-        progress = step["extras"].get("task_progress", {})
-        require(isinstance(progress, dict), f"{label}: task progress is not an object")
-        if action:
-            require(bool(re.fullmatch(r"[a-z_]+", action)), f"{label}: invalid action name")
-            actions[action] += 1
-        if filters is not None:
-            require(not set(REMOVED).intersection(dictionary_keys(output)),
-                    f"{label}, step {step['step_idx']}: forbidden VLA result field")
-            require(not filters.get(task, set()).intersection(progress),
-                    f"{label}, step {step['step_idx']}: forbidden progress field")
-            audit["observations_with_nonempty_progress"] += bool(progress)
-            if action in VLA_ACTIONS:
-                audit["vla_action_records"] += 1
-                audit["vla_records_with_held_apart"] += "held_apart" in output
-                audit["interrupted_vla_records"] += output.get("interrupted") is True
-    first = next((s for s in steps if s["extras"]["success"]), None)
-    return {
-        "success": result["success"], "elapsed_s": elapsed,
-        "termination_reason": result["termination_reason"],
-        "final_native_success": final["extras"]["success"],
-        "final_terminated": final["terminated"],
-        "result_sha256": file_sha256(result_path), "states_sha256": file_sha256(states_path),
-        "memory_files": memory["selected_files"], "initial": steps[0],
-        "feedback_audit": audit,
-        "case": {
-            "success": result["success"], "elapsed_s": elapsed,
-            "action_records": sum(actions.values()), "actions": dict(actions),
-            "vla_action_records": sum(actions.get(a, 0) for a in VLA_ACTIONS),
-            "other_action_records": sum(n for a, n in actions.items() if a not in VLA_ACTIONS),
-            "first_native_success": None if first is None else {
-                "step": first["step_idx"], "action": first.get("command", {}).get("action"),
-                "action_ok": first.get("result", {}).get("ok"),
-            },
-            "final_progress_keys": sorted(final["extras"].get("task_progress", {})),
-        },
-    }
+def summary(rows):
+    return {'total': len(rows),
+            'baseline_success': sum(r['baseline_success'] for r in rows),
+            'nocontact_success': sum(r['nocontact_success'] for r in rows),
+            'both_success': sum(r['baseline_success'] and r['nocontact_success'] for r in rows),
+            'baseline_only': sum(r['baseline_success'] and not r['nocontact_success'] for r in rows),
+            'nocontact_only': sum(not r['baseline_success'] and r['nocontact_success'] for r in rows),
+            'neither': sum(not r['baseline_success'] and not r['nocontact_success'] for r in rows)}
 
 
-def compare_initial(baseline, nocontact):
-    a, b = baseline["initial"], nocontact["initial"]
-    require(a["state"].keys() == b["state"].keys(), "Initial robot-state fields differ")
-    differences = []
-    for key in a["state"]:
-        x, y = a["state"][key], b["state"][key]
-        require(isinstance(x, list) and isinstance(y, list) and len(x) == len(y),
-                f"Initial robot-state shape differs: {key}")
-        require(all(type(v) in (int, float) and math.isfinite(v) for v in x + y),
-                f"Invalid initial robot-state value: {key}")
-        differences.extend(abs(xi - yi) for xi, yi in zip(x, y))
-    require(bool(differences), "Empty initial robot state")
-    require(isinstance(a["extras"]["task_language"], str)
-            and isinstance(b["extras"]["task_language"], str), "Invalid task language")
-    return {
-        "initial_robot_state_max_abs_diff": max(differences),
-        "initial_robot_state_exact_equal": a["state"] == b["state"],
-        "initial_task_language_equal": a["extras"]["task_language"] == b["extras"]["task_language"],
-    }
+def build(run, site):
+    manifest = load(run / 'manifest.json')
+    controller = load(run / 'dynamic-control/state.json')
+    guard = load(run / 'dynamic-control/runtime-guard-state.json')
+    validation = load(run / 'dynamic-control/final-validation.log')
+    require(controller['status'] == 'completed' and controller['final_validation_exit_code'] == 0,
+            'Batch or validation incomplete')
+    require(not controller['errors'] and not guard['alerts'] and guard['launcher_logs_checked'] == 160,
+            'Unreviewed infrastructure error')
+    require(manifest['evaluated_commit'] == COMMIT and manifest['base_commit'] == BASE, 'Wrong code revision')
+    require(manifest['task_progress_source'] == 'native_unfiltered'
+            and manifest['agent_success_source'] == 'native' and manifest['vlm_enabled'] is False,
+            'Wrong experiment scope')
+    for name, expected in manifest['source_files_sha256'].items():
+        require(sha(run / 'source' / name) == expected, 'Frozen source changed: ' + name)
+    memory = load(Path(manifest['memory_manifest']))
+    for name, expected in memory['files'].items():
+        require(sha(Path(manifest['memory_root']) / name) == expected, 'Memory changed: ' + name)
+    target = load(run / 'source/robots/robocasa/eval/target50.json')
+    tasks = {s: target['splits']['composite_' + s]['tasks'] for s in ('seen', 'unseen')}
+    expected = {(s, t, seed) for s in tasks for t in tasks[s] for seed in range(1, 6)}
+    actual = {(p.parent.parent.name.removeprefix('composite_'),
+               p.parent.name.rsplit('_s', 1)[0], int(p.parent.name.rsplit('_s', 1)[1]))
+              for p in (run / 'results').glob('composite_*/*/result.json')}
+    require(actual == expected and len(actual) == 160, 'Task/seed coverage mismatch')
+    refdir = site / 'mobile-astra/experiments/baseline/analysis'
+    reference = load(refdir / 'data.json')
+    baseline = {(r['split'], r['task'], r['seed']): r for r in reference['episodes'] if r['model'] == 'astra'}
+    require(set(baseline) == expected, 'Baseline task/seed coverage mismatch')
+    rows, selected, audit, progress = [], set(), Counter(), {}
+    for split in tasks:
+        for task in tasks[split]:
+            progress[task] = set()
+            for seed in range(1, 6):
+                cell = run / 'results' / ('composite_' + split) / f'{task}_s{seed}'
+                result = load(cell / 'result.json')
+                states = load(cell / 'states.json')['steps']
+                b = baseline[split, task, seed]
+                bp = refdir / 'cases' / f'astra--{task}--{seed}.json'
+                detail = load(bp)
+                require(detail['success'] == b['success'] and detail['valid'] is True, 'Baseline export mismatch')
+                require(result['task_name'] == task and result['seed'] == seed
+                        and result['evaluation_split'] == 'composite_' + split, 'Result identity mismatch')
+                require(result['valid'] is True and result['environment_split'] == 'target'
+                        and result['protocol_id'] == 'robocasa-harness-vla-v2', 'Invalid result protocol')
+                require(result['planner'] == PLANNER and result['runtime'] == RUNTIME, 'Runtime configuration changed')
+                require(result['memory']['profile'] == 'local' and result['memory']['policy'] == 'task-global'
+                        and result['memory']['audit_status'] == 'ok', 'Memory audit failed')
+                selected.update(result['memory']['selected_files'])
+                require(result['termination_reason'] == 'completed', 'Unexpected termination')
+                require((cell / 'launcher_exit_code.txt').read_text().strip() == '0', 'Nonzero episode exit')
+                require(result['success_source'] == 'state.success' and type(result['success']) is bool,
+                        'Invalid success source')
+                require(states and [s['step_idx'] for s in states] == list(range(len(states))), 'Incomplete history')
+                require(all(type(s['extras'].get('success')) is bool for s in states), 'Native success missing')
+                require(states[-1]['extras']['success'] == result['success']
+                        == any(s['extras']['success'] for s in states), 'Native score mismatch')
+                actions = Counter()
+                for state in states:
+                    output = state.get('result') or {}
+                    action = (state.get('command') or {}).get('action')
+                    p = state['extras'].get('task_progress')
+                    require(isinstance(p, dict), 'Missing native task progress')
+                    require(not set(REMOVED).intersection(keys(output)), 'Removed label leaked into action result')
+                    progress[task].update(p)
+                    audit['observations'] += 1
+                    audit['observations_with_nonempty_progress'] += bool(p)
+                    if action:
+                        actions[action] += 1
+                    if action in VLA:
+                        audit['vla_action_records'] += 1
+                        audit['vla_records_with_held_apart'] += 'held_apart' in output
+                        audit['interrupted_vla_records'] += output.get('interrupted') is True
+                first = next((s['step_idx'] for s in states if s['extras']['success']), None)
+                row = {'split': split, 'task': task, 'seed': seed,
+                       'baseline_success': b['success'], 'nocontact_success': result['success'],
+                       'baseline_elapsed_s': b['elapsed_s'], 'nocontact_elapsed_s': result['elapsed_s'],
+                       'baseline_termination_reason': detail['termination_reason'],
+                       'nocontact_termination_reason': result['termination_reason'],
+                       'baseline_final_native_success': b['success'],
+                       'nocontact_final_native_success': states[-1]['extras']['success'],
+                       'nocontact_final_terminated': states[-1]['terminated'],
+                       'baseline_result_sha256': detail['source']['files']['result.json'],
+                       'baseline_states_sha256': detail['source']['files']['states.json'],
+                       'baseline_export_sha256': sha(bp),
+                       'nocontact_result_sha256': sha(cell / 'result.json'),
+                       'nocontact_states_sha256': sha(cell / 'states.json'),
+                       'initial_task_language_equal': detail['task_language'] == states[0]['extras']['task_language'],
+                       'initial_robot_state_max_abs_diff': None,
+                       'initial_robot_state_exact_equal': None,
+                       'nocontact_vla_calls': sum(actions[a] for a in VLA),
+                       'nocontact_manual_calls': sum(n for a, n in actions.items() if a not in VLA),
+                       'nocontact_first_success_step': first,
+                       'nocontact_actions_after_success': len(states) - 1 - first if first is not None else None,
+                       'nocontact_progress_keys': sorted({k for s in states for k in s['extras']['task_progress']}),
+                       'memory_audit_status': 'ok', 'exit_code': 0}
+                rows.append(row)
+    for name in selected:
+        require(name in memory['files'], 'Selected memory missing from immutable corpus')
+    summaries = {s: summary([r for r in rows if s == 'all' or r['split'] == s]) for s in ('seen','unseen','all')}
+    require([summaries[s]['nocontact_success'] for s in ('seen','unseen','all')] == [29,15,44],
+            'Unexpected outcome; review before publication')
+    require(summaries['all']['baseline_success'] == 55, 'Wrong baseline')
+    require(validation['valid_cells'] == 160 and validation['splits']['composite_seen']['successes'] == 29
+            and validation['splits']['composite_unseen']['successes'] == 15, 'Built-in validation disagrees')
+    audit.update({'episodes_checked': 160, 'forbidden_vla_result_fields_found': 0})
+    return {'schema_version': 2, 'experiment': 'E04', 'variant': 'full-native-task-progress',
+            'generated_utc': datetime.now(timezone.utc).isoformat(), 'run': run.name,
+            'started_at': manifest['started_at'], 'completed_at': controller['ended_at'],
+            'tasks': tasks, 'summary': summaries, 'episodes': rows,
+            'protocol': {'benchmark': 'RoboCasa composite', 'environment_split': 'target',
+                'protocol_id': 'robocasa-harness-vla-v2', 'planner': PLANNER, 'runtime': RUNTIME,
+                'seeds': [1,2,3,4,5], 'vla': 'RLDX-1-FT-RC365', 'memory_profile': 'local',
+                'memory_version': memory['version'], 'geometry': 'Original simulator depth and world maps',
+                'removed_vla_result_fields': list(REMOVED), 'removed_progress_fields_by_task': {},
+                'filtered_tasks': 0, 'filtered_task_field_pairs': 0,
+                'retained_skill_feedback': manifest['retained_vla_fields'],
+                'task_progress': 'All native task progress retained, including contact-derived predicates',
+                'success': 'Native, visible to Agent', 'native_success_and_vla_early_stop': 'Retained',
+                'read_text_file': 'Baseline permissions and scoring-source access retained',
+                'prompt_changes': 'None', 'vlm_enabled': False},
+            'feedback_audit': dict(audit), 'observed_progress_fields_by_task': {t: sorted(v) for t,v in progress.items()},
+            'initial_state_audit': {'pairs_checked_for_task_language': 160,
+                'task_language_differences': sum(not r['initial_task_language_equal'] for r in rows),
+                'robot_state_comparison': 'not_audited', 'full_scene_comparison': 'not_audited',
+                'scope': 'Task language from published E01 details and current step 0. Baseline raw robot/object states were not available; do not reuse the old E04 initial-state audit.'},
+            'memory_audit': {'episodes_ok': 160, 'matching_launch_sha256_files': len(memory['files']),
+                'unique_selected_files': len(selected), 'selected_file_sha256': {n: memory['files'][n] for n in sorted(selected)},
+                'memory_revision': memory['revision'], 'reference_selection_comparison': 'not_reaudited'},
+            'validation': {'valid_episodes':160, 'native_final_state_matches':160, 'exit_zero':160,
+                'frozen_source_files_verified': len(manifest['source_files_sha256']),
+                'runtime_guard_logs_checked':160, 'runtime_guard_alerts':[], 'final_protocol_check':'passed',
+                'baseline_reference':'Published E01 export and per-episode source hashes; raw E01 logs not reaudited'},
+            'sources': {'baseline': {'run': 'composite_main_astra_rerun_20261101T150450Z',
+                    'revision':BASE, 'export_sha256':sha(refdir/'data.json')},
+                'nocontact': {'run':run.name, 'revision':COMMIT, 'base_revision':BASE, 'branch':'no_contact_gt',
+                    'source_files_sha256':manifest['source_files_sha256'],
+                    'manifest_sha256':sha(run/'manifest.json'), 'controller_sha256':sha(run/'dynamic-control/state.json')}},
+            'comparison_limits': ['One batch per condition; task/seed alignment does not establish identical scenes.',
+                'VLA action sampling was not fixed across independent runs.',
+                'This result removes only explicit VLA grasp/contact reports; full native progress remains.']}
 
 
-def public_sources(args):
-    baseline = read_json(args.baseline_run / "run-info.json")
-    nocontact = read_json(args.nocontact_run / "run_manifest.json")
-    require(baseline["repository_revision"] == nocontact["git_head"] == BASE_REVISION,
-            "Unexpected official experiment base")
-    require(nocontact["status"] == "completed", "NoContactGT suite is not completed")
-    for info in (baseline, nocontact):
-        require(info["model"] == PLANNER["model"]
-                and info["reasoning_effort"] == PLANNER["reasoning_effort"],
-                "Planner source metadata differs")
-    require(baseline["memory_version"] == Path(nocontact["memory_dir"]).name
-            == "GPT_6_astra_high", "Memory versions differ")
-    require(nocontact["geometry"] == "original simulator world maps; no DA3",
-            "Unexpected NoContactGT geometry")
-    require(nocontact["task_progress"]
-            == "contact-derived fields removed for reviewed 32 tasks; other progress retained",
-            "Unexpected task-progress configuration")
-    require(nocontact["success_and_terminated"] == "retained", "Unexpected success configuration")
-    require(nocontact["read_text_file"]
-            == "baseline behavior; static scoring rules and historical memory retained",
-            "Unexpected file-reading configuration")
-    require(set(nocontact["removed_vla_result_fields"]) == set(REMOVED),
-            "Unexpected removed VLA result fields")
-    source_hashes = {}
-    for name, expected in nocontact["source_sha256"].items():
-        if name.startswith("robots/"):
-            path = safe_relative(name)
-            actual = file_sha256(args.source_repo / path)
-            require(actual == expected, f"Source differs from launch snapshot: {name}")
-            source_hashes[name] = actual
-    require(len(source_hashes) == 7, "Incomplete runtime source snapshot")
-    sources = {}
-    for name, root, metadata in (
-        ("baseline", args.baseline_run, "run-info.json"),
-        ("nocontact", args.nocontact_run, "run_manifest.json"),
-    ):
-        require(bool(re.fullmatch(r"[A-Za-z0-9_-]+", root.name)), "Invalid public run name")
-        sources[name] = {
-            "run": root.name, "revision": BASE_REVISION,
-            "metadata_file": metadata, "metadata_sha256": file_sha256(root / metadata),
-        }
-    sources["nocontact"].update({
-        "revision_scope": "Official base with the local contact-feedback ablation",
-        "source_files_sha256": source_hashes,
-        "finished_at": nocontact["finished_at"],
-    })
-    return sources, nocontact
+def pct(a, n):
+    return str((Decimal(a)*100/Decimal(n)).quantize(Decimal('.01'), rounding=ROUND_HALF_UP))
 
 
-def audit_memory(args, nocontact_manifest, selected_files, pairs):
-    baseline_path = args.baseline_run / "memory_sha256.json"
-    baseline = read_json(baseline_path)
-    launch = nocontact_manifest["initial_memory_sha256"]
-    require(baseline == launch, "Launch memory corpora differ")
-    hashes = {}
-    for name in sorted(selected_files):
-        rel = safe_relative(name)
-        require(name in baseline, f"Missing launch memory hash: {name}")
-        actual = file_sha256(args.memory_dir / rel)
-        require(actual == baseline[name], f"Selected memory changed since launch: {name}")
-        hashes[name] = actual
-    return {
-        "selected_files_equal_pairs": pairs,
-        "matching_launch_sha256_files": len(launch),
-        "unique_selected_files": len(hashes), "matching_sha256_files": len(hashes),
-        "hash_reference": "Baseline memory_sha256.json and NoContactGT run_manifest.json",
-        "baseline_hash_manifest_sha256": file_sha256(baseline_path),
-        "selected_file_sha256": hashes,
-        "scope": "Launch corpus and selected files; actual reading order is not constrained to match",
-    }
-
-
-def summarize(episodes):
-    result = {
-        "total": len(episodes),
-        "baseline_success": sum(e["baseline_success"] for e in episodes),
-        "nocontact_success": sum(e["nocontact_success"] for e in episodes),
-        "both_success": sum(e["baseline_success"] and e["nocontact_success"] for e in episodes),
-        "baseline_only": sum(e["baseline_success"] and not e["nocontact_success"] for e in episodes),
-        "nocontact_only": sum(not e["baseline_success"] and e["nocontact_success"] for e in episodes),
-        "neither": sum(not e["baseline_success"] and not e["nocontact_success"] for e in episodes),
-    }
-    return result
-
-
-def percentage(numerator, denominator, signed=False):
-    value = (Decimal(numerator) * 100 / Decimal(denominator)).quantize(
-        Decimal("0.01"), rounding=ROUND_HALF_UP)
-    return f"{value:+.2f}" if signed else f"{value:.2f}"
-
-
-def report_text(data):
-    lines = [
-        "# RoboCasa composite：接触反馈移除对照", "",
-        "官方 RPent · GPT-6-Astra / xhigh · RLDX-1-FT-RC365。"
-        "主对照为网站 E01 的 11 月 1 日 baseline 重跑；两组各 160 个有效 episode。", "",
-        "| 任务组 | Baseline | NoContactGT | 成功率差 |",
-        "|---|---:|---:|---:|",
-    ]
-    for split, label in (("seen", "Seen"), ("unseen", "Unseen"), ("all", "总计")):
-        s = data["summary"][split]
-        n, b, c = s["total"], s["baseline_success"], s["nocontact_success"]
-        lines.append(f"| {label} | {b}/{n} · {percentage(b, n)}% | "
-                     f"{c}/{n} · {percentage(c, n)}% | {percentage(c-b, n, True)} pp |")
-    lines += ["", "| 配对结果 | Seen | Unseen | 总计 |", "|---|---:|---:|---:|"]
-    for key, label in (("both_success", "双方成功"), ("baseline_only", "仅 baseline 成功"),
-                       ("nocontact_only", "仅 NoContactGT 成功"), ("neither", "双方失败")):
-        lines.append("| " + label + " | " + " | ".join(
-            str(data["summary"][s][key]) for s in ("seen", "unseen", "all")) + " |")
-    audit, memory, feedback = data["initial_state_audit"], data["memory_audit"], data["feedback_audit"]
-    lines += [
-        "", "## 实际移除与保留", "",
-        "两个 RLDX 技能不再返回 `grasp_contact`、`grasp_obj`、`grasped`、`grasp_detected`，"
-        "执行封装也不再为这些字段查询模拟器接触。`task_progress` 按任务过滤接触派生标量："
-        "25 个任务、60 个任务—字段条目。过滤发生在保存状态之前，其他进度保留。", "",
-        "保留 `held_apart`（闭合命令与夹爪开度启发式）、`gripper_qpos`、末端高度变化 `peak_lift`，"
-        "以及原版模拟器深度和世界坐标图、相机标定、本体状态、顶层成功与终止信号、"
-        "评分规则访问和历史记忆。Prompt、VLA 输入与权重、动作转换、历史连续性和预算不变。"
-        "没有叠加 DA3 或 NoTaskGT。", "",
-        "`PrepareCoffee.contact_check` 是几何距离判据，因此仍保留。相反，"
-        "`ScrubCuttingBoard.sweep_range` 来自接触位置，因此被过滤。过滤按已审核来源，"
-        "不按字段名是否含 contact。完整任务—字段表保存在 JSON 的 protocol 中。", "",
-        "顶层成功仍可能依赖接触；评分源码、历史记忆、原生 Planner 能力仍保留。"
-        "这是显式接触反馈的消融，不是完全无真值或文件／RPC 隔离。", "",
-        "## 数据与比较核验", "",
-        f"320 个结果均有效，逐一与末条保存观测的原生 success 核对一致。NoContactGT 有 159 局"
-        "正常完成及 1 局有效超时失败（PortionHotDogs seed 2，3631.6 秒）；超时局保留在分母中。"
-        "只统计 canonical 目录，归档与中断重试不重复计入。", "",
-        f"检查 NoContactGT 的 {feedback['observations']} 条保存观测，未发现上述 4 个结果字段，"
-        "也未发现各任务应过滤的实时进度字段。此检查不覆盖历史记忆内容或所有原生 Planner 通道。", "",
-        f"两组的 {memory['matching_launch_sha256_files']} 个启动记忆文件 SHA-256 一致；160 对结果的"
-        f"记忆选择相同，涉及 {memory['unique_selected_files']} 个唯一文件，其当前 SHA-256 也一致。"
-        "实际读取顺序可以不同。", "",
-        f"初始机器人状态最大绝对差 >1e-6 的有 {audit['robot_state_differences']} 对，"
-        f"任务文本不同的有 {audit['task_language_differences']} 对。逐值完全相等口径下有 "
-        f"{audit['exact_robot_state_differences']} 对机器人状态不同，其中部分差异低于阈值。"
-        "检查仅覆盖 step 0 的本体状态和任务文本，未覆盖所有物体；不比较按实验设置过滤的进度。", "",
-        "每个任务只有 5 个 seed，每种设置只运行一轮；VLA 动作采样未随场景 seed 固定。"
-        "这些同任务、同 seed 的结果变化不等于"
-        "稳定的因果效应；不能从单个失败反推某条被移除信息必不可少。", "",
-        "## 代表案例", "",
-        "以下动作数来自 states.json 的动作记录，不包括读图、读文件等只读工具调用。"
-        "[六个新增成功的动作过程与图片](../cases/)。", "",
-        "| 任务 / seed | Baseline | NoContactGT | NoContactGT 动作 | 首次原生成功 |",
-        "|---|---|---|---|---|",
-    ]
-    for case in data["cases"]:
-        b, c = case["baseline"], case["nocontact"]
-        first = c["first_native_success"]
-        location = "未成功" if first is None else f"step {first['step']} / {first['action']}"
-        lines.append(f"| {case['task']} s{case['seed']} | {'成功' if b['success'] else '失败'}，"
-                     f"{b['elapsed_s']} s | {'成功' if c['success'] else '失败'}，{c['elapsed_s']} s | "
-                     f"{c['vla_action_records']} VLA + {c['other_action_records']} 其他动作 | {location} |")
-    lines += [
-        "", "最后完成的 WeighIngredients seed 5：9 次 rldx_arm 加 3 次 move_to 后原生任务成功，"
-        "随后 Agent 调用 finish(success)。最后一次 move_to 的 ok=false，只代表没有达到该动作的"
-        "位置容差；它不覆盖环境任务的成功判定。该局不返回 packaged_food_on_digital_scale，"
-        "仍返回 gripper_obj_far、obj_upright、cabinet_closed。", "",
-        "PackIdenticalLunches seed 4：baseline 用 6 次 VLA 完成；NoContactGT 的进度为空，"
-        "16 次 VLA 与 39 次其他动作后仍失败。这是轨迹差异，不能单独证明缺少进度导致失败。", "",
-        "## 逐任务与 seed", "",
-        "每个 seed 为 `Baseline/NoContactGT`，1 表示原生成功，0 表示失败。", "",
-        "| 分组 | 任务 | Baseline | NoContactGT | s1 | s2 | s3 | s4 | s5 |",
-        "|---|---|---:|---:|---|---|---|---|---|",
-    ]
-    for split in SPLITS:
-        for task in data["tasks"][split]:
-            rows = [e for e in data["episodes"] if e["split"] == split and e["task"] == task]
-            cells = [f"{int(e['baseline_success'])}/{int(e['nocontact_success'])}" for e in rows]
-            lines.append(f"| {split.title()} | {task} | {sum(e['baseline_success'] for e in rows)}/5 | "
-                         f"{sum(e['nocontact_success'] for e in rows)}/5 | " + " | ".join(cells) + " |")
-    lines += ["", "## 数据来源与重建", ""]
-    for label in ("baseline", "nocontact"):
-        source = data["sources"][label]
-        lines.append(f"{label}：`{source['run']}`；官方基线 `{source['revision']}`。")
-    lines += [
-        "", "JSON / CSV 保存逐局 result.json 与 states.json 的 SHA-256；JSON 另含启动元数据、"
-        "实际源文件、任务清单、记忆和本统计脚本的 SHA-256。NoContactGT 的 revision 表示官方"
-        "基线，具体本地修改由 source_files_sha256 标识。原始运行文件不随网页发布。", "",
-        "```sh", "python extract.py --baseline-run <baseline目录> --nocontact-run <NoContactGT目录> \\",
-        "  --manifest <target50.json> --source-repo <NoContactGT源码目录> \\",
-        "  --memory-dir <原任务记忆目录> --output <本分析输出目录>", "```", "",
-    ]
-    return "\n".join(lines)
+def report(data):
+    lines = ['# E04：移除 VLA 接触反馈，保留完整 task progress', '',
+        '2026-11-14 完成；32 个任务 × seeds 1–5，共 160 个有效 episode。', '',
+        '| 分组 | E01 baseline | 新版 E04 | 成功率差 |', '|---|---:|---:|---:|']
+    for s, label in [('seen','Seen'),('unseen','Unseen'),('all','总计')]:
+        r=data['summary'][s]; n=r['total']; b=r['baseline_success']; c=r['nocontact_success']
+        lines.append(f'| {label} | {b}/{n} · {pct(b,n)}% | {c}/{n} · {pct(c,n)}% | {pct(c-b,n)} pp |')
+    a=data['summary']['all']; audit=data['feedback_audit']
+    lines += ['', f"双方成功 {a['both_success']} 局；仅 baseline 成功 {a['baseline_only']} 局；仅新版 E04 成功 {a['nocontact_only']} 局；双方失败 {a['neither']} 局。", '',
+        '## 实验范围', '',
+        '仅从 rldx_skill / rldx_arm 返回中移除 grasp_contact、grasp_obj、grasped、grasp_detected，并停止对应的封装接触查询。', '',
+        '**完整保留所有原生 task_progress，包括接触派生条件。** 保留 held_apart、gripper_qpos、peak_lift、执行状态、几何查询、原版记忆、评分源码访问、simulator success 和 VLA 原生成功早停。无 VLM；提示词与控制预算保留原版设置。', '',
+        'GPT-6-Astra / xhigh；100 个模型响应、3600 秒每局；RLDX-1-FT-RC365，每次最多 40 chunks × 8 steps。', '',
+        '## 核验与限制', '',
+        f"160 个结果逐一匹配末条原生 success；160 个进程退出码为 0；最终协议校验通过。扫描 {audit['observations']} 条观测、{audit['vla_action_records']} 条 VLA 动作记录，四个移除字段零命中。日志监控未记录显存不足或崩溃告警。", '',
+        f"493 个源码文件哈希和 148 个原版记忆文件哈希通过核验；160 局 memory audit 均通过，涉及 {data['memory_audit']['unique_selected_files']} 个选中记忆文件。", '',
+        f"E01 对照来自已发布的逐局导出；本次没有重新审计 E01 原始日志。任务文本有 {data['initial_state_audit']['task_language_differences']} 对不同；未核对初始机器人及全部物体状态，不能沿用旧 E04 的初态检查数字。", '',
+        '单批差值不建立统计显著性或逐局因果关系。同 task/seed 不保证初态相同，VLA 动作采样也未固定。', '',
+        '## 版本与历史', '',
+        f"评测提交：`{COMMIT}`；分支 `no_contact_gt`；批次 `{data['run']}`。", '',
+        '本页 E04 已替换为保留完整进度的 44/160。旧 46/160 批次还过滤了 25 个任务、60 项接触派生进度，作为历史归档保存，不混入当前 160 局。', '',
+        '## 重新导出', '',
+        '`python extract.py --run RUN --site SITE_CHECKOUT --output OUTPUT`', '',
+        'RUN 需含原始 manifest、dynamic-control、results、冻结 source，且 manifest 指向原记忆审计文件。公开 ZIP 提供逐局结果、原生状态、记忆审计、生产源码和本报告；不包含模型原始对话、运行配置或凭据。', '']
+    return '\n'.join(lines)
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    for name in ("baseline-run", "nocontact-run", "manifest", "source-repo", "memory-dir", "output"):
-        parser.add_argument(f"--{name}", type=Path, required=True)
-    args = parser.parse_args()
-    manifest = read_json(args.manifest)
-    tasks = task_matrix(manifest)
-    sources, launch = public_sources(args)
-    filters = progress_filter(args.source_repo, tasks)
-    for root in (args.baseline_run, args.nocontact_run):
-        check_cells(root, tasks)
-    episodes, cases, selected_files, feedback = [], [], set(), Counter()
-    for split in SPLITS:
-        for task in tasks[split]:
-            for seed in SEEDS:
-                baseline = read_episode(args.baseline_run, split, task, seed, manifest["protocol_id"])
-                nocontact = read_episode(args.nocontact_run, split, task, seed, manifest["protocol_id"], filters)
-                require(baseline["memory_files"] == nocontact["memory_files"],
-                        f"{split}/{task}_s{seed}: selected memory files differ")
-                selected_files.update(nocontact["memory_files"])
-                row = {"split": split, "task": task, "seed": seed, **compare_initial(baseline, nocontact)}
-                for label, value in (("baseline", baseline), ("nocontact", nocontact)):
-                    for key in ("success", "elapsed_s", "termination_reason", "final_native_success",
-                                "final_terminated", "result_sha256", "states_sha256"):
-                        row[f"{label}_{key}"] = value[key]
-                episodes.append(row)
-                feedback.update(nocontact["feedback_audit"])
-                if (split, task, seed) in CASE_CELLS:
-                    cases.append({"split": split, "task": task, "seed": seed,
-                                  "baseline": baseline["case"], "nocontact": nocontact["case"]})
-    cases.sort(key=lambda c: CASE_CELLS.index((c["split"], c["task"], c["seed"])))
-    summary = {s: summarize([e for e in episodes if e["split"] == s]) for s in SPLITS}
-    summary["all"] = summarize(episodes)
-    data = {
-        "schema_version": 1, "generated_utc": datetime.now(timezone.utc).isoformat(),
-        "protocol": {
-            "benchmark": "RoboCasa composite", "environment_split": "target",
-            "protocol_id": manifest["protocol_id"], "planner": PLANNER, "runtime": RUNTIME,
-            "seeds": list(SEEDS), "tasks_per_split": 16, "vla": "RLDX-1-FT-RC365",
-            "memory_profile": "local", "memory_version": "GPT_6_astra_high",
-            "geometry": "Original simulator depth and world maps; known camera calibration retained",
-            "da3": False, "notaskgt": False,
-            "removed_vla_result_fields": list(REMOVED),
-            "removed_progress_fields_by_task": {t: sorted(fs) for t, fs in sorted(filters.items())},
-            "filtered_tasks": len(filters), "filtered_task_field_pairs": sum(map(len, filters.values())),
-            "retained_skill_feedback": ["held_apart", "gripper_qpos", "peak_lift", "status"],
-            "task_progress": "Reviewed contact-derived fields removed before persistence; other progress retained",
-            "read_text_file": "Baseline permissions; static scoring rules and historical memory retained",
-            "prompt_changes": "None", "success": "Retained", "robocasa_terminated": "Retained",
-            "native_success_and_vla_early_stop": "Retained", "success_source": "state.success",
-            "states_crosschecked": 320, "manifest_sha256": file_sha256(args.manifest),
-            "comparison": "One run per setting, paired by task and seed; not full-scene equivalence",
-        },
-        "sources": sources,
-        "initial_state_audit": {
-            "pairs_checked": len(episodes), "robot_state_threshold": ROBOT_STATE_THRESHOLD,
-            "robot_state_differences": sum(e["initial_robot_state_max_abs_diff"] > ROBOT_STATE_THRESHOLD for e in episodes),
-            "exact_robot_state_differences": sum(not e["initial_robot_state_exact_equal"] for e in episodes),
-            "task_language_differences": sum(not e["initial_task_language_equal"] for e in episodes),
-            "scope": "Step-0 robot state and task_language; task_progress excluded, full object state not checked",
-        },
-        "memory_audit": audit_memory(args, launch, selected_files, len(episodes)),
-        "feedback_audit": {
-            **feedback, "episodes_checked": len(episodes), "forbidden_vla_result_fields_found": 0,
-            "forbidden_progress_fields_found": 0,
-            "scope": "Saved current action results and task_progress; not historical memory or all native planner channels",
-        },
-        "validation": {
-            "canonical_results_checked": 320, "all_results_valid": True,
-            "final_native_success_matches": 320, "any_recorded_success_matches": 320,
-            "archived_attempts_included": False, "source_snapshot_matches": True,
-            "extractor_sha256": file_sha256(Path(__file__)),
-            "termination_reasons": {label: dict(Counter(e[f"{label}_termination_reason"]
-                                                        for e in episodes))
-                                    for label in ("baseline", "nocontact")},
-        },
-        "summary": summary, "tasks": tasks, "episodes": episodes, "cases": cases,
-    }
-    serialized = json.dumps(data, ensure_ascii=False, indent=2, allow_nan=False) + "\n"
-    report = report_text(data)
-    for content in (serialized, report):
-        require(not re.search(r"/(?:home|mnt)/|sk-[A-Za-z0-9_-]{16,}|gh[pousr]_[A-Za-z0-9]{20,}", content),
-                "Private path or credential-like text in public output")
-    args.output.mkdir(parents=True, exist_ok=True)
-    (args.output / "data.json").write_text(serialized, encoding="utf-8")
-    with (args.output / "episodes.csv").open("w", encoding="utf-8-sig", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=CSV_FIELDS, lineterminator="\n")
-        writer.writeheader()
-        writer.writerows(episodes)
-    (args.output / "report.md").write_text(report, encoding="utf-8")
-    print(json.dumps({"summary": summary, "initial_state_audit": data["initial_state_audit"],
-                      "feedback_audit": data["feedback_audit"]}, ensure_ascii=False, indent=2))
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--run',type=Path,required=True); p.add_argument('--site',type=Path,required=True)
+    p.add_argument('--output',type=Path,required=True)
+    args=p.parse_args(); data=build(args.run,args.site); args.output.mkdir(parents=True,exist_ok=True)
+    (args.output/'data.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+    with (args.output/'episodes.csv').open('w',newline='') as f:
+        fields=[k for k in data['episodes'][0] if k!='nocontact_progress_keys']
+        w=csv.DictWriter(f,fieldnames=fields,extrasaction='ignore',lineterminator='\n'); w.writeheader(); w.writerows(data['episodes'])
+    (args.output/'report.md').write_text(report(data))
+    print(json.dumps({'summary':data['summary'],'feedback_audit':data['feedback_audit'],
+                      'initial_state_audit':data['initial_state_audit']},ensure_ascii=False,indent=2))
 
 
-if __name__ == "__main__":
+if __name__=='__main__':
     main()
