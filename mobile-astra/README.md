@@ -27,11 +27,30 @@ The 1,600-episode total excludes the auxiliary Sol run and interrupted smoke run
 E05 removes the two active geometry-query tools; internal depth and other feedback
 remain. E06 completes removal of live task-progress/success/termination feedback
 and VLA native-success early stopping; the evaluator keeps independent final
-scoring. Visual or tactile contact estimation remains pending. E10 completes a four-view visual task-progress run with native
+scoring. E11 visual contact estimation is in progress (Partial results); tactile replacement remains pending. E10 completes a four-view visual task-progress run with native
 completion feedback; visual judgment reliability remains an open issue.
 E08 provides robot EEF/base pose coordinates to the Planner; E09 withholds them
 and also removes gripper-width, held_apart and action-execution statistics.
 Both retain VLA/controller proprioception and native-success early stopping.
+
+## Partial results · 2026-11-17
+
+- [ ] [E11 · VLM contact and grasp feedback](experiments/vlm-contact/): **143/160 evaluated**,
+  Seen **28/80**, Unseen **13/63**; **41/143 (28.67%)**. The remaining 17 cells
+  are pending, not failures. This snapshot is separate from the ten completed
+  settings and their 1,600 valid episodes.
+
+E11 replaces four explicit VLA grasp/contact fields with RGB-only estimates from
+GPT-6.1-Terra / medium. Full native task_progress (including contact-derived
+predicates), simulator success and early stopping, geometry, memory, robot pose,
+gripper width and held_apart remain. It is separate from E10 visual task progress.
+Matched completed cells: E01 **51/143**, corrected E04 **41/143**, E11 **41/143**.
+These descriptive comparisons do not control scene identity or VLA randomness.
+
+The E11 page includes a 160-cell seed matrix, CSV, JSON, artifact hashes and a
+portable extractor. Earlier `ab24d508` and retry-enabled `97cb19bd` revisions are
+recorded per episode. Request retries preserve the same RGB and do not replay VLA
+actions; unrecovered infrastructure failures are requeued, ordinary failures kept.
 
 ## Published experiment code
 
@@ -48,6 +67,7 @@ Repository: [https://github.com/snow-QingYang/RPent](https://github.com/snow-Qin
 | E07 · NoMemory | [no_memory](https://github.com/snow-QingYang/RPent/tree/no_memory) | [a640f320](https://github.com/snow-QingYang/RPent/commit/a640f3202d092b0803540dff35521f7996ce0945) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/a640f3202d092b0803540dff35521f7996ce0945/EXPERIMENT.md) |
 | E08 · Combined removal · Planner pose provided | [no_privileged_info_with_planner_pose](https://github.com/snow-QingYang/RPent/tree/no_privileged_info_with_planner_pose) | [5e612e91](https://github.com/snow-QingYang/RPent/commit/5e612e916c011bcc76431efd1775040f86563fef) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/cb24eb7c8664e46e6ca50497cc9f77e23282ebea/EXPERIMENT.md) |
 | E09 · Combined removal · Planner pose withheld | [no_privileged_info_no_planner_pose](https://github.com/snow-QingYang/RPent/tree/no_privileged_info_no_planner_pose) | [f2d62d21](https://github.com/snow-QingYang/RPent/commit/f2d62d21104f412b5e020931d11d7054b6ef3818) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/f2d62d21104f412b5e020931d11d7054b6ef3818/EXPERIMENT.md) |
+| E11 · VLM contact feedback · Partial results | [vlm_contact_feedback](https://github.com/snow-QingYang/RPent/tree/vlm_contact_feedback) | [97cb19bd](https://github.com/snow-QingYang/RPent/commit/97cb19bd55399777d9868bf44378d0c226abd64e) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/97cb19bd55399777d9868bf44378d0c226abd64e/EXPERIMENT_VLM_CONTACT.md) |
 
 E03 immutable commit `b7333814` is the evaluated snapshot: all 350 archived tracked
 runtime, test, requirements and pyproject files match. All 160 episodes generated
@@ -55,7 +75,7 @@ runtime, test, requirements and pyproject files match. All 160 episodes generate
 
 The later variant [no_task_progress](https://github.com/snow-QingYang/RPent/tree/no_task_progress), commit [26d8665d3d394dc77ce90a68d266d370d2384f98](https://github.com/snow-QingYang/RPent/commit/26d8665d3d394dc77ce90a68d266d370d2384f98), also stops generating that file. It was not used for the published E03 result.
 
-Nine published experiment settings have nine primary branch links. E08's evaluated
+E01–E09 and E11 have ten published branch links; E11 is still a partial result. E08's evaluated
 commit remains [5e612e91](https://github.com/snow-QingYang/RPent/commit/5e612e916c011bcc76431efd1775040f86563fef); publication commit
 [cb24eb7c](https://github.com/snow-QingYang/RPent/commit/cb24eb7c8664e46e6ca50497cc9f77e23282ebea) changes only `EXPERIMENT.md` to clarify
 that Planner pose coordinates are provided. Its runtime implementation is unchanged.
@@ -292,9 +312,9 @@ compatibility pages. It uses the existing detailed exports and the original loca
 smoke audit. Its assertions intentionally require review if source results change.
 Canonical detailed exports live under their experiment's `analysis/` directory.
 The legacy overview generator predates E06–E10. Do not use it to regenerate the
-current overview or project-status.json until it supports E06–E10: it would restore
+current overview or project-status.json until it supports E06–E11 and partial results: it would restore
 the older five-group checklist and drop the newer entries. After adding that support,
-verify the ten-group, 1,600-episode total whenever rebuilding a detailed export
+verify the ten-completed-group, 1,600-episode total and separate E11 partial entry whenever rebuilding a detailed export
 and the overview. The E03, E04 and E05 detailed HTML and JS
 use the same table/filter layout as E02; check their displayed summaries against the
 new export when changing source runs.
@@ -347,7 +367,7 @@ against E03. This update publishes only the native-success E10 batch.
 
 E10 source is a frozen working tree based on `fee5dfac` plus recorded changes.
 The branch has not been separately published. `source-publication.json` tracks
-10 experiments but still 9 published branches; E10 has `snapshot_available` status.
+11 experiments and 10 published branches; E10 has `snapshot_available` status. E11 adds a tenth published branch and is tracked separately as partial; there are eleven tracked settings.
 Do not label the base commit as the evaluated implementation or link to a nonexistent
 published branch. Keep the 9 pre-existing experiment entries and their artifacts intact.
 
@@ -357,5 +377,6 @@ The current E04 extractor reads the completed dynamic controller state and the
 original run manifest separately. The original three-GPU manifest was superseded
 by dynamic scheduling; do not infer incompletion from that historical marker.
 Never regenerate current E04 from the old filtered-progress source or old case builder.
-The main experiment count remains ten and the current valid-episode total remains
-1,600; the historical E04 archive is not an eleventh experiment.
+The completed experiment count remains ten and its valid-episode total remains
+1,600. E11 is tracked separately as a partial result; the historical E04 archive
+is not an additional experiment.

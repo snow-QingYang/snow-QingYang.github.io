@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "as_of": "2026-11-14",
+  "as_of": "2026-11-17",
   "repository": "https://github.com/snow-QingYang/RPent",
   "note": "Published source revisions are separate from runtime result, source-file and artifact hashes. Branches may advance; evaluated commit links are immutable. E08 publication commit only renames the experiment documentation; its evaluated runtime commit is unchanged.",
   "experiments": {
@@ -183,9 +183,28 @@
       "snapshot_url": "experiments/vlm-progress-native-success/downloads/vlm-progress-native-success-audit-20261113.zip",
       "analysis_url": "experiments/vlm-progress-native-success/analysis/data.json",
       "evaluation_relationship": "Frozen working tree, base commit plus recorded modifications. Production source and hashes are in the downloadable audit ZIP. Branch has not been separately published."
+    },
+    "E11": {
+      "id": "E11",
+      "experiment_path": "experiments/vlm-contact/",
+      "name": "VLM 接触与抓持反馈",
+      "branch": "vlm_contact_feedback",
+      "commit": "97cb19bd55399777d9868bf44378d0c226abd64e",
+      "branch_url": "https://github.com/snow-QingYang/RPent/tree/vlm_contact_feedback",
+      "commit_url": "https://github.com/snow-QingYang/RPent/commit/97cb19bd55399777d9868bf44378d0c226abd64e",
+      "status": "published",
+      "evaluation_status": "partial",
+      "runtime_base_commit": "092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804",
+      "evaluated_commits": [
+        "ab24d50809b6c860c69f118bf4d20bacfb2cb2a6",
+        "97cb19bd55399777d9868bf44378d0c226abd64e"
+      ],
+      "evaluation_relationship": "Partial snapshot. Adds RGB grasp feedback on corrected E04 with full task_progress. Earlier ab24d508 and 97cb19bd (transient-request retries) are recorded per episode. Model, images, prompt and scoring protocol are unchanged by the retry fix.",
+      "instructions_file": "EXPERIMENT_VLM_CONTACT.md",
+      "instructions_url": "https://github.com/snow-QingYang/RPent/blob/97cb19bd55399777d9868bf44378d0c226abd64e/EXPERIMENT_VLM_CONTACT.md"
     }
   },
-  "published_experiment_count": 9,
-  "published_branch_count": 9,
-  "tracked_experiment_count": 10
+  "published_experiment_count": 10,
+  "published_branch_count": 10,
+  "tracked_experiment_count": 11
 }

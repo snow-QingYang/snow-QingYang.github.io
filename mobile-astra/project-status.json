@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-14",
+  "as_of": "2026-11-17",
   "completed_experiments": [
     {
       "id": "E01",
@@ -902,17 +902,88 @@
     "E07 removes historical task/global memory only; current-episode history and baseline feedback remain. Its 41/160 score happens to match E03, a separate setting. Task/seed matching is not proof of identical scenes or causal attribution.",
     "E08 combines geometry-query, historical-memory, progress and contact-feedback removal and blocks scoring-source access. Native success, robot proprioception and controls remain; internal depth/world maps and camera metadata remain saved. It is not an all-ground-truth-free or OS-isolated system.",
     "E08 provides EEF/base pose coordinates to the Planner; E09 withholds them and additional motion, gripper-width, held_apart and execution feedback. Both retain VLA/controller proprioception, native simulator success and native-success early stopping. The 41 versus 27 comparison does not isolate coordinates alone.",
-    "E10 uses VLM intermediate progress and retains native success and VLA early stop. Only this 160-episode batch is added, with comparisons to the existing E01 and E03 results."
+    "E10 uses VLM intermediate progress and retains native success and VLA early stop. Only this 160-episode batch is added, with comparisons to the existing E01 and E03 results.",
+    "E11 is partial: 143/160 valid episodes, 41 successes (28 Seen / 13 Unseen). Pending episodes are excluded from the rate denominator. References use the same completed cells; the ten completed experiments and their 1,600-episode total are unchanged."
   ],
   "latest_result": {
-    "id": "E04",
-    "name": "VLA 接触反馈移除，完整任务进度",
-    "path": "experiments/contact-feedback/",
-    "analysis_path": "experiments/contact-feedback/analysis/",
-    "completed_at": "2026-11-14T10:58:09+08:00",
-    "total": 160,
-    "success": 44,
-    "success_rate_percent": 27.5
+    "id": "E11",
+    "name": "VLM 接触与抓持反馈",
+    "path": "experiments/vlm-contact/",
+    "status": "partial",
+    "snapshot_at": "2026-11-17T22:42:53+08:00",
+    "planned_total": 160,
+    "completed_valid_episodes": 143,
+    "remaining_episodes": 17,
+    "success": 41,
+    "success_rate_percent": 28.67,
+    "summary": {
+      "seen": {
+        "planned": 80,
+        "completed": 80,
+        "pending": 0,
+        "success": 28,
+        "success_rate_percent": 35.0,
+        "matched_baseline_success": 34,
+        "matched_no_contact_success": 29
+      },
+      "unseen": {
+        "planned": 80,
+        "completed": 63,
+        "pending": 17,
+        "success": 13,
+        "success_rate_percent": 20.63,
+        "matched_baseline_success": 17,
+        "matched_no_contact_success": 12
+      },
+      "all": {
+        "planned": 160,
+        "completed": 143,
+        "pending": 17,
+        "success": 41,
+        "success_rate_percent": 28.67,
+        "matched_baseline_success": 51,
+        "matched_no_contact_success": 41
+      }
+    },
+    "source": {
+      "id": "E11",
+      "experiment_path": "experiments/vlm-contact/",
+      "name": "VLM 接触与抓持反馈",
+      "branch": "vlm_contact_feedback",
+      "commit": "97cb19bd55399777d9868bf44378d0c226abd64e",
+      "branch_url": "https://github.com/snow-QingYang/RPent/tree/vlm_contact_feedback",
+      "commit_url": "https://github.com/snow-QingYang/RPent/commit/97cb19bd55399777d9868bf44378d0c226abd64e",
+      "status": "published",
+      "evaluation_status": "partial",
+      "runtime_base_commit": "092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804",
+      "evaluated_commits": [
+        "ab24d50809b6c860c69f118bf4d20bacfb2cb2a6",
+        "97cb19bd55399777d9868bf44378d0c226abd64e"
+      ],
+      "evaluation_relationship": "Partial snapshot. Adds RGB grasp feedback on corrected E04 with full task_progress. Earlier ab24d508 and 97cb19bd (transient-request retries) are recorded per episode. Model, images, prompt and scoring protocol are unchanged by the retry fix.",
+      "instructions_file": "EXPERIMENT_VLM_CONTACT.md",
+      "instructions_url": "https://github.com/snow-QingYang/RPent/blob/97cb19bd55399777d9868bf44378d0c226abd64e/EXPERIMENT_VLM_CONTACT.md"
+    },
+    "run": "composite_vlm_contact_astra_xhigh_20261115T162926Z",
+    "analysis_path": "experiments/vlm-contact/",
+    "data_path": "experiments/vlm-contact/data.json",
+    "success_rate_denominator": "valid completed episodes only",
+    "retained": [
+      "full native task_progress",
+      "native success and early stopping",
+      "geometry queries",
+      "memory",
+      "robot pose",
+      "gripper width",
+      "held_apart",
+      "success-criteria source access"
+    ],
+    "replaced": [
+      "grasp_contact",
+      "grasped",
+      "grasp_detected",
+      "grasp_obj"
+    ]
   },
   "agent_check_success": {
     "id": "E06",
@@ -1166,7 +1237,7 @@
   },
   "source_publication": {
     "schema_version": 1,
-    "as_of": "2026-11-14",
+    "as_of": "2026-11-17",
     "repository": "https://github.com/snow-QingYang/RPent",
     "note": "Published source revisions are separate from runtime result, source-file and artifact hashes. Branches may advance; evaluated commit links are immutable. E08 publication commit only renames the experiment documentation; its evaluated runtime commit is unchanged.",
     "experiments": {
@@ -1349,11 +1420,30 @@
         "snapshot_url": "experiments/vlm-progress-native-success/downloads/vlm-progress-native-success-audit-20261113.zip",
         "analysis_url": "experiments/vlm-progress-native-success/analysis/data.json",
         "evaluation_relationship": "Frozen working tree, base commit plus recorded modifications. Production source and hashes are in the downloadable audit ZIP. Branch has not been separately published."
+      },
+      "E11": {
+        "id": "E11",
+        "experiment_path": "experiments/vlm-contact/",
+        "name": "VLM 接触与抓持反馈",
+        "branch": "vlm_contact_feedback",
+        "commit": "97cb19bd55399777d9868bf44378d0c226abd64e",
+        "branch_url": "https://github.com/snow-QingYang/RPent/tree/vlm_contact_feedback",
+        "commit_url": "https://github.com/snow-QingYang/RPent/commit/97cb19bd55399777d9868bf44378d0c226abd64e",
+        "status": "published",
+        "evaluation_status": "partial",
+        "runtime_base_commit": "092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804",
+        "evaluated_commits": [
+          "ab24d50809b6c860c69f118bf4d20bacfb2cb2a6",
+          "97cb19bd55399777d9868bf44378d0c226abd64e"
+        ],
+        "evaluation_relationship": "Partial snapshot. Adds RGB grasp feedback on corrected E04 with full task_progress. Earlier ab24d508 and 97cb19bd (transient-request retries) are recorded per episode. Model, images, prompt and scoring protocol are unchanged by the retry fix.",
+        "instructions_file": "EXPERIMENT_VLM_CONTACT.md",
+        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/97cb19bd55399777d9868bf44378d0c226abd64e/EXPERIMENT_VLM_CONTACT.md"
       }
     },
-    "published_experiment_count": 9,
-    "published_branch_count": 9,
-    "tracked_experiment_count": 10
+    "published_experiment_count": 10,
+    "published_branch_count": 10,
+    "tracked_experiment_count": 11
   },
   "no_privileged_info": {
     "status": "complete",
@@ -1959,5 +2049,179 @@
       "latency_p95_s": 9.912
     },
     "analysis_path": "experiments/vlm-progress-native-success/analysis/"
+  },
+  "latest_completed_result": {
+    "id": "E04",
+    "name": "VLA 接触反馈移除，完整任务进度",
+    "path": "experiments/contact-feedback/",
+    "analysis_path": "experiments/contact-feedback/analysis/",
+    "completed_at": "2026-11-14T10:58:09+08:00",
+    "total": 160,
+    "success": 44,
+    "success_rate_percent": 27.5
+  },
+  "partial_experiments": [
+    {
+      "id": "E11",
+      "name": "VLM 接触与抓持反馈",
+      "path": "experiments/vlm-contact/",
+      "status": "partial",
+      "snapshot_at": "2026-11-17T22:42:53+08:00",
+      "planned_total": 160,
+      "completed_valid_episodes": 143,
+      "remaining_episodes": 17,
+      "success": 41,
+      "success_rate_percent": 28.67,
+      "summary": {
+        "seen": {
+          "planned": 80,
+          "completed": 80,
+          "pending": 0,
+          "success": 28,
+          "success_rate_percent": 35.0,
+          "matched_baseline_success": 34,
+          "matched_no_contact_success": 29
+        },
+        "unseen": {
+          "planned": 80,
+          "completed": 63,
+          "pending": 17,
+          "success": 13,
+          "success_rate_percent": 20.63,
+          "matched_baseline_success": 17,
+          "matched_no_contact_success": 12
+        },
+        "all": {
+          "planned": 160,
+          "completed": 143,
+          "pending": 17,
+          "success": 41,
+          "success_rate_percent": 28.67,
+          "matched_baseline_success": 51,
+          "matched_no_contact_success": 41
+        }
+      },
+      "source": {
+        "id": "E11",
+        "experiment_path": "experiments/vlm-contact/",
+        "name": "VLM 接触与抓持反馈",
+        "branch": "vlm_contact_feedback",
+        "commit": "97cb19bd55399777d9868bf44378d0c226abd64e",
+        "branch_url": "https://github.com/snow-QingYang/RPent/tree/vlm_contact_feedback",
+        "commit_url": "https://github.com/snow-QingYang/RPent/commit/97cb19bd55399777d9868bf44378d0c226abd64e",
+        "status": "published",
+        "evaluation_status": "partial",
+        "runtime_base_commit": "092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804",
+        "evaluated_commits": [
+          "ab24d50809b6c860c69f118bf4d20bacfb2cb2a6",
+          "97cb19bd55399777d9868bf44378d0c226abd64e"
+        ],
+        "evaluation_relationship": "Partial snapshot. Adds RGB grasp feedback on corrected E04 with full task_progress. Earlier ab24d508 and 97cb19bd (transient-request retries) are recorded per episode. Model, images, prompt and scoring protocol are unchanged by the retry fix.",
+        "instructions_file": "EXPERIMENT_VLM_CONTACT.md",
+        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/97cb19bd55399777d9868bf44378d0c226abd64e/EXPERIMENT_VLM_CONTACT.md"
+      },
+      "run": "composite_vlm_contact_astra_xhigh_20261115T162926Z",
+      "analysis_path": "experiments/vlm-contact/",
+      "data_path": "experiments/vlm-contact/data.json",
+      "success_rate_denominator": "valid completed episodes only",
+      "retained": [
+        "full native task_progress",
+        "native success and early stopping",
+        "geometry queries",
+        "memory",
+        "robot pose",
+        "gripper width",
+        "held_apart",
+        "success-criteria source access"
+      ],
+      "replaced": [
+        "grasp_contact",
+        "grasped",
+        "grasp_detected",
+        "grasp_obj"
+      ]
+    }
+  ],
+  "partial_experiment_count": 1,
+  "partial_valid_episodes": 143,
+  "vlm_contact_feedback": {
+    "id": "E11",
+    "name": "VLM 接触与抓持反馈",
+    "path": "experiments/vlm-contact/",
+    "status": "partial",
+    "snapshot_at": "2026-11-17T22:42:53+08:00",
+    "planned_total": 160,
+    "completed_valid_episodes": 143,
+    "remaining_episodes": 17,
+    "success": 41,
+    "success_rate_percent": 28.67,
+    "summary": {
+      "seen": {
+        "planned": 80,
+        "completed": 80,
+        "pending": 0,
+        "success": 28,
+        "success_rate_percent": 35.0,
+        "matched_baseline_success": 34,
+        "matched_no_contact_success": 29
+      },
+      "unseen": {
+        "planned": 80,
+        "completed": 63,
+        "pending": 17,
+        "success": 13,
+        "success_rate_percent": 20.63,
+        "matched_baseline_success": 17,
+        "matched_no_contact_success": 12
+      },
+      "all": {
+        "planned": 160,
+        "completed": 143,
+        "pending": 17,
+        "success": 41,
+        "success_rate_percent": 28.67,
+        "matched_baseline_success": 51,
+        "matched_no_contact_success": 41
+      }
+    },
+    "source": {
+      "id": "E11",
+      "experiment_path": "experiments/vlm-contact/",
+      "name": "VLM 接触与抓持反馈",
+      "branch": "vlm_contact_feedback",
+      "commit": "97cb19bd55399777d9868bf44378d0c226abd64e",
+      "branch_url": "https://github.com/snow-QingYang/RPent/tree/vlm_contact_feedback",
+      "commit_url": "https://github.com/snow-QingYang/RPent/commit/97cb19bd55399777d9868bf44378d0c226abd64e",
+      "status": "published",
+      "evaluation_status": "partial",
+      "runtime_base_commit": "092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804",
+      "evaluated_commits": [
+        "ab24d50809b6c860c69f118bf4d20bacfb2cb2a6",
+        "97cb19bd55399777d9868bf44378d0c226abd64e"
+      ],
+      "evaluation_relationship": "Partial snapshot. Adds RGB grasp feedback on corrected E04 with full task_progress. Earlier ab24d508 and 97cb19bd (transient-request retries) are recorded per episode. Model, images, prompt and scoring protocol are unchanged by the retry fix.",
+      "instructions_file": "EXPERIMENT_VLM_CONTACT.md",
+      "instructions_url": "https://github.com/snow-QingYang/RPent/blob/97cb19bd55399777d9868bf44378d0c226abd64e/EXPERIMENT_VLM_CONTACT.md"
+    },
+    "run": "composite_vlm_contact_astra_xhigh_20261115T162926Z",
+    "analysis_path": "experiments/vlm-contact/",
+    "data_path": "experiments/vlm-contact/data.json",
+    "success_rate_denominator": "valid completed episodes only",
+    "retained": [
+      "full native task_progress",
+      "native success and early stopping",
+      "geometry queries",
+      "memory",
+      "robot pose",
+      "gripper width",
+      "held_apart",
+      "success-criteria source access"
+    ],
+    "replaced": [
+      "grasp_contact",
+      "grasped",
+      "grasp_detected",
+      "grasp_obj"
+    ]
   }
 }
