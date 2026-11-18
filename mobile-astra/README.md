@@ -8,8 +8,9 @@ All pages are standalone work interfaces. Public URLs are not access control.
 
 ## Completed checklist · 2026-11-18
 
-Twelve experiments are complete: 160 valid episodes per setting, 1,920 total.
-E01–E11 use GPT-6-Astra / xhigh; E12 is a separate pure-VLA baseline with no
+Eleven completed experiments are currently displayed: 160 valid episodes per setting, 1,760 total.
+E09 is withheld pending review of its experimental setting; its records and code remain preserved.
+E01–E08, E10 and E11 use GPT-6-Astra / xhigh; E12 is a separate pure-VLA baseline with no
 Planner. Each setting has 80 Seen and 80 Unseen episodes. E12 uses its own
 explicit native-action budget and cumulative-success protocol.
 
@@ -21,7 +22,6 @@ explicit native-action budget and cumulative-success protocol.
 - [x] [E06 · No task progress and agent success](experiments/agent-check-success/): Seen 18/80, Unseen 11/80; **29/160**.
 - [x] [E07 · NoMemory](experiments/no-memory/): Seen 24/80, Unseen 17/80; **41/160**.
 - [x] [E08 · Combined information removal, Planner pose coordinates provided](experiments/no-privileged-info/): Seen 27/80, Unseen 14/80; **41/160**.
-- [x] [E09 · Combined information removal, Planner pose coordinates withheld](experiments/no-planner-pose/): Seen 17/80, Unseen 10/80; **27/160**.
 
 - [x] [E10 · VLM task progress + native success](experiments/vlm-progress-native-success/): Seen 26/80, Unseen 18/80; **44/160**.
 
@@ -29,15 +29,14 @@ explicit native-action budget and cumulative-success protocol.
 
 - [x] [E12 · Pure VLA](experiments/pure-vla/): Seen **19/80**, Unseen **6/80**; **25/160 (15.625%)**. Completed 2026-11-14, published 2026-11-18.
 
-The 1,920-episode total excludes the auxiliary Sol run and interrupted smoke runs.
+The displayed 1,760-episode total excludes E09, the auxiliary Sol run and interrupted smoke runs.
 E05 removes the two active geometry-query tools; internal depth and other feedback
 remain. E06 completes removal of live task-progress/success/termination feedback
 and VLA native-success early stopping; the evaluator keeps independent final
 scoring. E11 visual contact estimation is complete; tactile replacement remains pending. E10 completes a four-view visual task-progress run with native
 completion feedback; visual judgment reliability remains an open issue.
-E08 provides robot EEF/base pose coordinates to the Planner; E09 withholds them
-and also removes gripper-width, held_apart and action-execution statistics.
-Both retain VLA/controller proprioception and native-success early stopping.
+E08 provides robot EEF/base pose coordinates to the Planner and retains
+VLA/controller proprioception and native-success early stopping.
 
 ## E11 · VLM contact and grasp feedback
 
@@ -78,7 +77,7 @@ Repository: [https://github.com/snow-QingYang/RPent](https://github.com/snow-Qin
 | E06 · No task progress and agent success | [no_task_progress_and_agent_success](https://github.com/snow-QingYang/RPent/tree/no_task_progress_and_agent_success) | [412efe9c](https://github.com/snow-QingYang/RPent/commit/412efe9c32e3cac630c77138da86def960968610) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/412efe9c32e3cac630c77138da86def960968610/EXPERIMENT.md) |
 | E07 · NoMemory | [no_memory](https://github.com/snow-QingYang/RPent/tree/no_memory) | [a640f320](https://github.com/snow-QingYang/RPent/commit/a640f3202d092b0803540dff35521f7996ce0945) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/a640f3202d092b0803540dff35521f7996ce0945/EXPERIMENT.md) |
 | E08 · Combined removal · Planner pose provided | [no_privileged_info_with_planner_pose](https://github.com/snow-QingYang/RPent/tree/no_privileged_info_with_planner_pose) | [5e612e91](https://github.com/snow-QingYang/RPent/commit/5e612e916c011bcc76431efd1775040f86563fef) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/cb24eb7c8664e46e6ca50497cc9f77e23282ebea/EXPERIMENT.md) |
-| E09 · Combined removal · Planner pose withheld | [no_privileged_info_no_planner_pose](https://github.com/snow-QingYang/RPent/tree/no_privileged_info_no_planner_pose) | [f2d62d21](https://github.com/snow-QingYang/RPent/commit/f2d62d21104f412b5e020931d11d7054b6ef3818) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/f2d62d21104f412b5e020931d11d7054b6ef3818/EXPERIMENT.md) |
+| E09 · Result withheld pending review | [no_privileged_info_no_planner_pose](https://github.com/snow-QingYang/RPent/tree/no_privileged_info_no_planner_pose) | [f2d62d21](https://github.com/snow-QingYang/RPent/commit/f2d62d21104f412b5e020931d11d7054b6ef3818) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/f2d62d21104f412b5e020931d11d7054b6ef3818/EXPERIMENT.md) |
 | E11 · VLM contact feedback | [vlm_contact_feedback](https://github.com/snow-QingYang/RPent/tree/vlm_contact_feedback) | [97cb19bd](https://github.com/snow-QingYang/RPent/commit/97cb19bd55399777d9868bf44378d0c226abd64e) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/97cb19bd55399777d9868bf44378d0c226abd64e/EXPERIMENT_VLM_CONTACT.md) |
 | E12 · Pure VLA | [pure_vla base](https://github.com/snow-QingYang/RPent/tree/pure_vla) | [e2ec1c0c base](https://github.com/snow-QingYang/RPent/commit/e2ec1c0cc971b970031284fc816b60b6e8d55322) plus frozen source files | [Protocol and evaluated source](experiments/pure-vla/#protocol) |
 
@@ -286,32 +285,22 @@ Some same-seed initial conditions differ, and VLA inference samples noise; one
 batch per configuration does not establish an improvement from removing more
 information. The run completed on 2026-11-10 at 06:07 Hong Kong time.
 
-## E09 · Planner pose coordinates withheld
+## E09 · Withheld pending review
 
-E09 builds on E08 and hides robot EEF/base poses, robot-motion feedback, gripper
-width, held_apart and action execution status, steps and timing from the Planner.
-Both E08 and E09 keep RGB, task language, current-episode interaction history,
-native simulator success, native-success early stopping and internal robot
-proprioception used by VLA and the motion controllers. Withheld Planner poses do
-not mean that the VLA is deprived of its normal robot-state input.
+Withdrawn from the homepage comparison, completed checklist and experiment
+catalog on 2026-11-18. The recorded run is complete, but the experimental setting
+needs review: the Planner loses pose and execution feedback while coordinate
+primitives and related prompt instructions remain available. No runtime defect
+has been confirmed.
 
-The completed run is **27/160 (16.875%)**, with Seen **17/80** and Unseen **10/80**.
-E08 remains a separate **41/160** result (Seen 27/80, Unseen 14/80). The difference
-is 14 successes, or 8.75 percentage points; multiple feedback fields changed,
-and independent runs can have different initial states and action samples, so
-this result does not isolate the causal effect of pose coordinates. The original
-baseline is 55/160 (Seen 34/80, Unseen 21/80).
+The overview and analysis URLs now show a review notice. Original JSON, CSV,
+report, extractor, hashes, local run artifacts and the GitHub branch remain
+preserved. Do not regenerate or republish the original result pages until the
+setting has been reviewed and publication is requested. E08 remains displayed.
 
-E09 completed on **2026-11-12 at 01:57:18 Hong Kong time**. Its run identifier is
-`official_main_composite_no_planner_feedback_astra_xhigh_20261110T055737Z`.
-The public name distinguishes Planner pose exposure; the run identifier retains
-its original no_planner_feedback wording. E08 data and provenance remain intact.
-
-The final audit checked all 160 accepted episodes and 640 logs. Across 4,353
-completed MCP returns, the 43 checked hidden-feedback fields had zero occurrences;
-geometry-query, file-read and native-command calls were zero. Two saved cancellation
-markers at the planner budget limit are documented separately from completed
-returns. The audit covers recorded boundaries, not operating-system isolation.
+`project-status.json` records E09 under `under_review_experiments` and excludes
+it from displayed completed totals. Source publication remains recorded because
+the code branch has not been removed.
 
 ## Maintenance
 
@@ -327,7 +316,7 @@ Canonical detailed exports live under their experiment's `analysis/` directory.
 The legacy overview generator predates E06–E10. Do not use it to regenerate the
 current overview or project-status.json until it supports E06–E12 and partial results: it would restore
 the older five-group checklist and drop the newer entries. After adding that support,
-verify the twelve-completed-group, 1,920-episode total whenever rebuilding a detailed export
+verify the eleven-displayed-group, 1,760-episode total, with E09 withheld whenever rebuilding a detailed export
 and the overview. The E03, E04 and E05 detailed HTML and JS
 use the same table/filter layout as E02; check their displayed summaries against the
 new export when changing source runs.
@@ -390,8 +379,8 @@ The current E04 extractor reads the completed dynamic controller state and the
 original run manifest separately. The original three-GPU manifest was superseded
 by dynamic scheduling; do not infer incompletion from that historical marker.
 Never regenerate current E04 from the old filtered-progress source or old case builder.
-The completed experiment count is twelve and its valid-episode total is
-1,920. The historical E04 archive is not an additional experiment.
+The displayed completed experiment count is eleven and its episode total is
+1,760; E09 is withheld pending review. The historical E04 archive is not an additional experiment.
 
 ## E12 · Pure VLA publication
 

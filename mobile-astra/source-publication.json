@@ -170,7 +170,10 @@
       "publication_commit": "f2d62d21104f412b5e020931d11d7054b6ef3818",
       "publication_commit_url": "https://github.com/snow-QingYang/RPent/commit/f2d62d21104f412b5e020931d11d7054b6ef3818",
       "instructions_file": "EXPERIMENT.md",
-      "instructions_url": "https://github.com/snow-QingYang/RPent/blob/f2d62d21104f412b5e020931d11d7054b6ef3818/EXPERIMENT.md"
+      "instructions_url": "https://github.com/snow-QingYang/RPent/blob/f2d62d21104f412b5e020931d11d7054b6ef3818/EXPERIMENT.md",
+      "evaluation_status": "complete",
+      "result_publication_status": "withheld_pending_review",
+      "review_reason": "Experimental setting requires review before result comparison; no confirmed runtime defect."
     },
     "E10": {
       "id": "E10",

@@ -212,40 +212,6 @@
       }
     },
     {
-      "id": "E09",
-      "name": "组合信息移除 · 不提供位姿坐标",
-      "path": "experiments/no-planner-pose/",
-      "status": "complete",
-      "total": 160,
-      "success": 27,
-      "seen": {
-        "total": 80,
-        "success": 17
-      },
-      "unseen": {
-        "total": 80,
-        "success": 10
-      },
-      "source": {
-        "id": "E09",
-        "experiment_path": "experiments/no-planner-pose/",
-        "name": "组合信息移除 · 不提供位姿坐标",
-        "branch": "no_privileged_info_no_planner_pose",
-        "commit": "f2d62d21104f412b5e020931d11d7054b6ef3818",
-        "status": "published",
-        "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
-        "parent_experiment": "E08",
-        "evaluation_relationship": "Published evaluated commit. Planner pose coordinates and additional motion/gripper/execution feedback are withheld; VLA/controller proprioception remains.",
-        "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_privileged_info_no_planner_pose",
-        "commit_url": "https://github.com/snow-QingYang/RPent/commit/f2d62d21104f412b5e020931d11d7054b6ef3818",
-        "evaluated_code_commit": "f2d62d21104f412b5e020931d11d7054b6ef3818",
-        "publication_commit": "f2d62d21104f412b5e020931d11d7054b6ef3818",
-        "publication_commit_url": "https://github.com/snow-QingYang/RPent/commit/f2d62d21104f412b5e020931d11d7054b6ef3818",
-        "instructions_file": "EXPERIMENT.md",
-        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/f2d62d21104f412b5e020931d11d7054b6ef3818/EXPERIMENT.md"
-      }
-    },
-    {
       "id": "E10",
       "path": "experiments/vlm-progress-native-success/",
       "status": "complete",
@@ -487,8 +453,8 @@
       ]
     }
   ],
-  "completed_experiment_count": 12,
-  "completed_valid_episodes": 1920,
+  "completed_experiment_count": 11,
+  "completed_valid_episodes": 1760,
   "baseline": {
     "name": "GPT-6-Astra",
     "model": "gpt-6-astra",
@@ -1123,7 +1089,7 @@
     "E06 No task progress and agent success builds on No task progress, hides live success/termination/progress and removes native-success VLA early stopping. The independent evaluator scores the final state after the planner returns; geometry, contact and historical memory remain. Agent declarations are not benchmark scores.",
     "E07 removes historical task/global memory only; current-episode history and baseline feedback remain. Its 41/160 score happens to match E03, a separate setting. Task/seed matching is not proof of identical scenes or causal attribution.",
     "E08 combines geometry-query, historical-memory, progress and contact-feedback removal and blocks scoring-source access. Native success, robot proprioception and controls remain; internal depth/world maps and camera metadata remain saved. It is not an all-ground-truth-free or OS-isolated system.",
-    "E08 provides EEF/base pose coordinates to the Planner; E09 withholds them and additional motion, gripper-width, held_apart and execution feedback. Both retain VLA/controller proprioception, native simulator success and native-success early stopping. The 41 versus 27 comparison does not isolate coordinates alone.",
+    "E09 results are withheld pending review of the experimental setting. Its 160 recorded episodes and code are preserved but excluded from the displayed completed totals and comparisons; no runtime defect has been confirmed.",
     "E10 uses VLM intermediate progress and retains native success and VLA early stop. Only this 160-episode batch is added, with comparisons to the existing E01 and E03 results.",
     "E11 is complete: 160/160 valid episodes, 43 successes (28 Seen / 15 Unseen). The same 160 task/seed cells yield E01 55/160 and corrected E04 44/160. Full task_progress, native success and original memory remain; visual grasp accuracy against simulator contact has not been measured.",
     "E12 is a separate no-Planner pure-VLA baseline: 25/160 by any_success. It differs from E01 in native-action budgets, initialization and success aggregation; it is not a controlled single-variable Planner ablation."
@@ -1686,7 +1652,10 @@
         "publication_commit": "f2d62d21104f412b5e020931d11d7054b6ef3818",
         "publication_commit_url": "https://github.com/snow-QingYang/RPent/commit/f2d62d21104f412b5e020931d11d7054b6ef3818",
         "instructions_file": "EXPERIMENT.md",
-        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/f2d62d21104f412b5e020931d11d7054b6ef3818/EXPERIMENT.md"
+        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/f2d62d21104f412b5e020931d11d7054b6ef3818/EXPERIMENT.md",
+        "evaluation_status": "complete",
+        "result_publication_status": "withheld_pending_review",
+        "review_reason": "Experimental setting requires review before result comparison; no confirmed runtime defect."
       },
       "E10": {
         "id": "E10",
@@ -1873,7 +1842,7 @@
   },
   "no_planner_pose": {
     "id": "E09",
-    "status": "complete",
+    "status": "under_review",
     "valid_benchmark_result": true,
     "run": "official_main_composite_no_planner_feedback_astra_xhigh_20261110T055737Z",
     "completed_at": "2026-11-12T01:57:18+08:00",
@@ -1893,7 +1862,10 @@
       "publication_commit": "f2d62d21104f412b5e020931d11d7054b6ef3818",
       "publication_commit_url": "https://github.com/snow-QingYang/RPent/commit/f2d62d21104f412b5e020931d11d7054b6ef3818",
       "instructions_file": "EXPERIMENT.md",
-      "instructions_url": "https://github.com/snow-QingYang/RPent/blob/f2d62d21104f412b5e020931d11d7054b6ef3818/EXPERIMENT.md"
+      "instructions_url": "https://github.com/snow-QingYang/RPent/blob/f2d62d21104f412b5e020931d11d7054b6ef3818/EXPERIMENT.md",
+      "evaluation_status": "complete",
+      "result_publication_status": "withheld_pending_review",
+      "review_reason": "Experimental setting requires review before result comparison; no confirmed runtime defect."
     },
     "summary": {
       "seen": {
@@ -2132,7 +2104,10 @@
       },
       "robot_state_comparable": false,
       "scope": "Task text, initial RGB file bytes and retained camera-metadata file bytes only. E09 does not save Planner robot state. Equality of these artifacts does not establish identical simulator initial states or a causal effect."
-    }
+    },
+    "evaluation_status": "complete",
+    "publication_status": "withheld",
+    "review_reason": "Planner pose removal, world-coordinate action interfaces and combined feedback removal need review."
   },
   "vlm_progress_native_success": {
     "id": "E10",
@@ -2711,5 +2686,49 @@
       "Matching task and seed does not establish identical initial scenes.",
       "RoboCasa Counter.get_reset_regions deduplicates XML Element objects with a set; object-identity ordering may change regions and placement retries across processes even with PYTHONHASHSEED=0. No strict initial-scene equivalence is claimed."
     ]
-  }
+  },
+  "under_review_experiments": [
+    {
+      "id": "E09",
+      "name": "组合信息移除 · 不提供位姿坐标",
+      "path": "experiments/no-planner-pose/",
+      "status": "under_review",
+      "total": 160,
+      "success": 27,
+      "seen": {
+        "total": 80,
+        "success": 17
+      },
+      "unseen": {
+        "total": 80,
+        "success": 10
+      },
+      "source": {
+        "id": "E09",
+        "experiment_path": "experiments/no-planner-pose/",
+        "name": "组合信息移除 · 不提供位姿坐标",
+        "branch": "no_privileged_info_no_planner_pose",
+        "commit": "f2d62d21104f412b5e020931d11d7054b6ef3818",
+        "status": "published",
+        "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+        "parent_experiment": "E08",
+        "evaluation_relationship": "Published evaluated commit. Planner pose coordinates and additional motion/gripper/execution feedback are withheld; VLA/controller proprioception remains.",
+        "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_privileged_info_no_planner_pose",
+        "commit_url": "https://github.com/snow-QingYang/RPent/commit/f2d62d21104f412b5e020931d11d7054b6ef3818",
+        "evaluated_code_commit": "f2d62d21104f412b5e020931d11d7054b6ef3818",
+        "publication_commit": "f2d62d21104f412b5e020931d11d7054b6ef3818",
+        "publication_commit_url": "https://github.com/snow-QingYang/RPent/commit/f2d62d21104f412b5e020931d11d7054b6ef3818",
+        "instructions_file": "EXPERIMENT.md",
+        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/f2d62d21104f412b5e020931d11d7054b6ef3818/EXPERIMENT.md",
+        "evaluation_status": "complete",
+        "result_publication_status": "withheld_pending_review",
+        "review_reason": "Experimental setting requires review before result comparison; no confirmed runtime defect."
+      },
+      "evaluation_status": "complete",
+      "publication_status": "withheld",
+      "review_reason": "Planner pose removal, world-coordinate action interfaces and combined feedback removal need review.",
+      "review_requested_at": "2026-11-18"
+    }
+  ],
+  "under_review_experiment_count": 1
 }
