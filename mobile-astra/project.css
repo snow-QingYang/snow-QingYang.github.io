@@ -3,4 +3,13 @@
 @media(max-width:700px){.head-inner{padding:15px 18px;align-items:flex-start;flex-direction:column;gap:8px}.site-head nav{gap:21px}main{padding:20px 18px 35px}h1{font-size:26px}.lead{font-size:16px}.flow,.cards,.split{grid-template-columns:1fr}.flow article{padding:15px 18px}.current{padding:16px 18px}.card{padding:19px}.site-foot{margin:0 18px}.record{grid-template-columns:1fr;gap:3px}.record dd{margin-bottom:9px}.crumbs{margin-bottom:18px}.hero{margin-bottom:25px}.split{gap:26px}}
 @media print{.site-head,.links,.site-foot{display:none}main{padding:0}.table-wrap{overflow:visible}section,.card{break-inside:avoid}a{color:inherit}h1{font-size:25px}}
 .case-figure{margin:20px 0 28px}.case-figure img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:4px}.case-figure figcaption{margin-top:8px;font-size:13px;color:var(--muted)}
+#truth-list>.note:first-of-type{margin:0 0 14px}
+#truth-list table{table-layout:fixed}
+#truth-list th:nth-child(1){width:14%}
+#truth-list th:nth-child(2){width:27%}
+#truth-list th:nth-child(3){width:59%}
+#truth-list .truth-setting p{margin:0}
+#truth-list .truth-setting+.truth-setting{margin-top:13px;padding-top:13px;border-top:1px solid var(--line)}
+#truth-list .truth-rates{display:flex;flex-wrap:wrap;gap:4px 22px;margin-top:7px;font-variant-numeric:tabular-nums}
+#truth-list .truth-rates span{white-space:nowrap}
 @media(max-width:700px){.stack-small{border:0;border-radius:0;overflow:visible}.stack-small table{min-width:0}.stack-small thead{display:none}.stack-small tbody{display:grid;gap:14px}.stack-small tr{display:block;border:1px solid var(--line);border-radius:5px;overflow:hidden}.stack-small td{display:block;border:0;padding:9px 15px}.stack-small td:first-child{background:var(--soft);font-weight:650;padding:12px 15px}.stack-small td:not(:first-child)::before{content:attr(data-label);font-size:11px;color:var(--muted);display:block;margin-bottom:3px}.stack-small td:last-child{padding-bottom:14px}}
