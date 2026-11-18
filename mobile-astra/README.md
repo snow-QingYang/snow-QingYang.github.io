@@ -8,8 +8,8 @@ All pages are standalone work interfaces. Public URLs are not access control.
 
 ## Completed checklist · 2026-11-18
 
-Eleven experiments are complete: 160 valid episodes per setting, 1,760 total.
-E01–E10 use GPT-6-Astra / xhigh; E12 is a separate pure-VLA baseline with no
+Twelve experiments are complete: 160 valid episodes per setting, 1,920 total.
+E01–E11 use GPT-6-Astra / xhigh; E12 is a separate pure-VLA baseline with no
 Planner. Each setting has 80 Seen and 80 Unseen episodes. E12 uses its own
 explicit native-action budget and cumulative-success protocol.
 
@@ -25,31 +25,39 @@ explicit native-action budget and cumulative-success protocol.
 
 - [x] [E10 · VLM task progress + native success](experiments/vlm-progress-native-success/): Seen 26/80, Unseen 18/80; **44/160**.
 
+- [x] [E11 · VLM contact and grasp feedback](experiments/vlm-contact/): Seen **28/80**, Unseen **15/80**; **43/160 (26.88%)**. Completed 2026-11-18.
+
 - [x] [E12 · Pure VLA](experiments/pure-vla/): Seen **19/80**, Unseen **6/80**; **25/160 (15.625%)**. Completed 2026-11-14, published 2026-11-18.
 
-The 1,760-episode total excludes the auxiliary Sol run and interrupted smoke runs.
+The 1,920-episode total excludes the auxiliary Sol run and interrupted smoke runs.
 E05 removes the two active geometry-query tools; internal depth and other feedback
 remain. E06 completes removal of live task-progress/success/termination feedback
 and VLA native-success early stopping; the evaluator keeps independent final
-scoring. E11 visual contact estimation is in progress (Partial results); tactile replacement remains pending. E10 completes a four-view visual task-progress run with native
+scoring. E11 visual contact estimation is complete; tactile replacement remains pending. E10 completes a four-view visual task-progress run with native
 completion feedback; visual judgment reliability remains an open issue.
 E08 provides robot EEF/base pose coordinates to the Planner; E09 withholds them
 and also removes gripper-width, held_apart and action-execution statistics.
 Both retain VLA/controller proprioception and native-success early stopping.
 
-## Partial results · 2026-11-17
+## E11 · VLM contact and grasp feedback
 
-- [ ] [E11 · VLM contact and grasp feedback](experiments/vlm-contact/): **143/160 evaluated**,
-  Seen **28/80**, Unseen **13/63**; **41/143 (28.67%)**. The remaining 17 cells
-  are pending, not failures. This snapshot is separate from the eleven completed
-  settings and their 1,760 valid episodes.
+Completed **2026-11-18 06:11:11 UTC+8** (latest accepted result timestamp):
+**160/160 evaluated**, Seen **28/80**, Unseen **15/80**; **43/160 (26.88%)**.
+The full export replaces the earlier 143-cell partial snapshot.
 
 E11 replaces four explicit VLA grasp/contact fields with RGB-only estimates from
 GPT-6.1-Terra / medium. Full native task_progress (including contact-derived
 predicates), simulator success and early stopping, geometry, memory, robot pose,
 gripper width and held_apart remain. It is separate from E10 visual task progress.
-Matched completed cells: E01 **51/143**, corrected E04 **41/143**, E11 **41/143**.
+Matched full suite: E01 **55/160**, corrected E04 **44/160**, E11 **43/160**.
+Against E04, 21 cells succeed in both settings, 22 only in E11 and 23 only in E04.
+This batch does not exceed contact removal or recover baseline performance.
 These descriptive comparisons do not control scene identity or VLA randomness.
+
+All 160 scores match final saved native success, all processes exit normally,
+and all original-memory audits pass. The 2,029 available VLM judgments match
+the per-episode expected request counts; six requests recover through retries.
+Visual grasp accuracy against simulator contact has not been measured.
 
 The E11 page includes a 160-cell seed matrix, CSV, JSON, artifact hashes and a
 portable extractor. Earlier `ab24d508` and retry-enabled `97cb19bd` revisions are
@@ -71,7 +79,7 @@ Repository: [https://github.com/snow-QingYang/RPent](https://github.com/snow-Qin
 | E07 · NoMemory | [no_memory](https://github.com/snow-QingYang/RPent/tree/no_memory) | [a640f320](https://github.com/snow-QingYang/RPent/commit/a640f3202d092b0803540dff35521f7996ce0945) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/a640f3202d092b0803540dff35521f7996ce0945/EXPERIMENT.md) |
 | E08 · Combined removal · Planner pose provided | [no_privileged_info_with_planner_pose](https://github.com/snow-QingYang/RPent/tree/no_privileged_info_with_planner_pose) | [5e612e91](https://github.com/snow-QingYang/RPent/commit/5e612e916c011bcc76431efd1775040f86563fef) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/cb24eb7c8664e46e6ca50497cc9f77e23282ebea/EXPERIMENT.md) |
 | E09 · Combined removal · Planner pose withheld | [no_privileged_info_no_planner_pose](https://github.com/snow-QingYang/RPent/tree/no_privileged_info_no_planner_pose) | [f2d62d21](https://github.com/snow-QingYang/RPent/commit/f2d62d21104f412b5e020931d11d7054b6ef3818) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/f2d62d21104f412b5e020931d11d7054b6ef3818/EXPERIMENT.md) |
-| E11 · VLM contact feedback · Partial results | [vlm_contact_feedback](https://github.com/snow-QingYang/RPent/tree/vlm_contact_feedback) | [97cb19bd](https://github.com/snow-QingYang/RPent/commit/97cb19bd55399777d9868bf44378d0c226abd64e) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/97cb19bd55399777d9868bf44378d0c226abd64e/EXPERIMENT_VLM_CONTACT.md) |
+| E11 · VLM contact feedback | [vlm_contact_feedback](https://github.com/snow-QingYang/RPent/tree/vlm_contact_feedback) | [97cb19bd](https://github.com/snow-QingYang/RPent/commit/97cb19bd55399777d9868bf44378d0c226abd64e) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/97cb19bd55399777d9868bf44378d0c226abd64e/EXPERIMENT_VLM_CONTACT.md) |
 | E12 · Pure VLA | [pure_vla base](https://github.com/snow-QingYang/RPent/tree/pure_vla) | [e2ec1c0c base](https://github.com/snow-QingYang/RPent/commit/e2ec1c0cc971b970031284fc816b60b6e8d55322) plus frozen source files | [Protocol and evaluated source](experiments/pure-vla/#protocol) |
 
 E03 immutable commit `b7333814` is the evaluated snapshot: all 350 archived tracked
@@ -80,7 +88,7 @@ runtime, test, requirements and pyproject files match. All 160 episodes generate
 
 The later variant [no_task_progress](https://github.com/snow-QingYang/RPent/tree/no_task_progress), commit [26d8665d3d394dc77ce90a68d266d370d2384f98](https://github.com/snow-QingYang/RPent/commit/26d8665d3d394dc77ce90a68d266d370d2384f98), also stops generating that file. It was not used for the published E03 result.
 
-E01–E09, E11 and the E12 base have eleven published branch links; E11 is still a partial result. E08's evaluated
+E01–E09, E11 and the E12 base have eleven published branch links. E08's evaluated
 commit remains [5e612e91](https://github.com/snow-QingYang/RPent/commit/5e612e916c011bcc76431efd1775040f86563fef); publication commit
 [cb24eb7c](https://github.com/snow-QingYang/RPent/commit/cb24eb7c8664e46e6ca50497cc9f77e23282ebea) changes only `EXPERIMENT.md` to clarify
 that Planner pose coordinates are provided. Its runtime implementation is unchanged.
@@ -319,7 +327,7 @@ Canonical detailed exports live under their experiment's `analysis/` directory.
 The legacy overview generator predates E06–E10. Do not use it to regenerate the
 current overview or project-status.json until it supports E06–E12 and partial results: it would restore
 the older five-group checklist and drop the newer entries. After adding that support,
-verify the eleven-completed-group, 1,760-episode total and separate E11 partial entry whenever rebuilding a detailed export
+verify the twelve-completed-group, 1,920-episode total whenever rebuilding a detailed export
 and the overview. The E03, E04 and E05 detailed HTML and JS
 use the same table/filter layout as E02; check their displayed summaries against the
 new export when changing source runs.
@@ -372,7 +380,7 @@ against E03. This update publishes only the native-success E10 batch.
 
 E10 source is a frozen working tree based on `fee5dfac` plus recorded changes.
 The branch has not been separately published. `source-publication.json` tracks
-12 experiments and 11 published branch links; E10 and E12 have `snapshot_available` status. E12 includes frozen evaluated source files and a manifest; its branch is the base, not the complete evaluated snapshot. E11 remains tracked separately as partial.
+12 experiments and 11 published branch links; E10 and E12 have `snapshot_available` status. E12 includes frozen evaluated source files and a manifest; its branch is the base, not the complete evaluated snapshot. E11 is complete and its evaluated revisions are recorded per episode.
 Do not label the base commit as the evaluated implementation or link to a nonexistent
 published branch. Keep the 9 pre-existing experiment entries and their artifacts intact.
 
@@ -382,9 +390,8 @@ The current E04 extractor reads the completed dynamic controller state and the
 original run manifest separately. The original three-GPU manifest was superseded
 by dynamic scheduling; do not infer incompletion from that historical marker.
 Never regenerate current E04 from the old filtered-progress source or old case builder.
-The completed experiment count is eleven and its valid-episode total is
-1,760. E11 is tracked separately as a partial result; the historical E04 archive
-is not an additional experiment.
+The completed experiment count is twelve and its valid-episode total is
+1,920. The historical E04 archive is not an additional experiment.
 
 ## E12 · Pure VLA publication
 
@@ -408,4 +415,4 @@ python mobile-astra/experiments/pure-vla/extract.py \
 ```
 
 This only writes E12 artifacts. Overview, catalog and status entries are
-maintained separately. E11 remains the unchanged 143/160 partial snapshot.
+maintained separately. Regenerating E12 must preserve E11's complete 160/160 result.
