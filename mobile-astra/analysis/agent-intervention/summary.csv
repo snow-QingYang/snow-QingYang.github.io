@@ -1,0 +1,34 @@
+experiment,name,status,split,episodes,success,takeover_attempts,takeover_success,takeover_then_vla_success,takeover_then_manual_success,vla_only_success,setup_success
+E01,Baseline,verified,seen,80,34,61,18,7,11,13,3
+E01,Baseline,verified,unseen,80,21,67,14,5,9,6,1
+E01,Baseline,verified,all,160,55,128,32,12,20,19,4
+E02,DA3 深度替代,verified,seen,80,33,56,12,8,4,17,4
+E02,DA3 深度替代,verified,unseen,80,17,69,10,4,6,7,0
+E02,DA3 深度替代,verified,all,160,50,125,22,12,10,24,4
+E03,No task progress,verified,seen,80,24,64,13,9,4,10,1
+E03,No task progress,verified,unseen,80,17,73,14,5,9,3,0
+E03,No task progress,verified,all,160,41,137,27,14,13,13,1
+E04,VLA 接触反馈移除，完整任务进度,verified,seen,80,29,55,9,4,5,17,3
+E04,VLA 接触反馈移除，完整任务进度,verified,unseen,80,15,69,9,3,6,5,1
+E04,VLA 接触反馈移除，完整任务进度,verified,all,160,44,124,18,7,11,22,4
+E05,几何查询移除,verified,seen,80,22,66,13,11,2,9,0
+E05,几何查询移除,verified,unseen,80,17,62,7,1,6,10,0
+E05,几何查询移除,verified,all,160,39,128,20,12,8,19,0
+E06,No task progress and agent success,final_score_proxy,seen,80,18,61,10,1,9,8,0
+E06,No task progress and agent success,final_score_proxy,unseen,80,11,69,8,4,4,2,1
+E06,No task progress and agent success,final_score_proxy,all,160,29,130,18,5,13,10,1
+E07,NoMemory,verified,seen,80,24,62,14,7,7,9,1
+E07,NoMemory,verified,unseen,80,17,69,10,2,8,7,0
+E07,NoMemory,verified,all,160,41,131,24,9,15,16,1
+E08,移除几何查询、memory、任务进度、接触提示与评分源码访问,verified,seen,80,27,64,12,9,3,15,0
+E08,移除几何查询、memory、任务进度、接触提示与评分源码访问,verified,unseen,80,14,73,7,4,3,7,0
+E08,移除几何查询、memory、任务进度、接触提示与评分源码访问,verified,all,160,41,137,19,13,6,22,0
+E10,VLM 任务进度 + 原生成功,verified,seen,80,26,53,6,3,3,17,3
+E10,VLM 任务进度 + 原生成功,verified,unseen,80,18,73,14,4,10,4,0
+E10,VLM 任务进度 + 原生成功,verified,all,160,44,126,20,7,13,21,3
+E11,VLM 接触与抓持反馈,verified,seen,80,28,61,13,6,7,12,3
+E11,VLM 接触与抓持反馈,verified,unseen,80,15,64,8,5,3,7,0
+E11,VLM 接触与抓持反馈,verified,all,160,43,125,21,11,10,19,3
+E12,Pure VLA,not_applicable,seen,80,,,,,,,
+E12,Pure VLA,not_applicable,unseen,80,,,,,,,
+E12,Pure VLA,not_applicable,all,160,,,,,,,

@@ -21,6 +21,14 @@
         "implementation_commit": "eebdfcd79b6f292003093be5dd1ce8fe639a4f82",
         "instructions_file": "EXPERIMENT.md",
         "instructions_url": "https://github.com/snow-QingYang/RPent/blob/eebdfcd79b6f292003093be5dd1ce8fe639a4f82/EXPERIMENT.md"
+      },
+      "agent_takeover": {
+        "status": "verified",
+        "seen": 18,
+        "unseen": 14,
+        "total": 32,
+        "analysis_path": "analysis/agent-intervention/?experiment=E01",
+        "scope_note": "Physical intervention after VLA and before first native success; final native result must be successful."
       }
     },
     {
@@ -43,6 +51,14 @@
         "implementation_commit": "bc35d93728e3678404b63f9cc78e5e98764dbbb7",
         "instructions_file": "EXPERIMENT.md",
         "instructions_url": "https://github.com/snow-QingYang/RPent/blob/bc35d93728e3678404b63f9cc78e5e98764dbbb7/EXPERIMENT.md"
+      },
+      "agent_takeover": {
+        "status": "verified",
+        "seen": 12,
+        "unseen": 10,
+        "total": 22,
+        "analysis_path": "analysis/agent-intervention/?experiment=E02",
+        "scope_note": "Physical intervention after VLA and before first native success; final native result must be successful."
       }
     },
     {
@@ -79,7 +95,15 @@
         "instructions_file": "EXPERIMENT.md",
         "instructions_url": "https://github.com/snow-QingYang/RPent/blob/b7333814fcb1178442057b231e267d4dcfba4554/EXPERIMENT.md"
       },
-      "name": "No task progress"
+      "name": "No task progress",
+      "agent_takeover": {
+        "status": "verified",
+        "seen": 13,
+        "unseen": 14,
+        "total": 27,
+        "analysis_path": "analysis/agent-intervention/?experiment=E03",
+        "scope_note": "Physical intervention after VLA and before first native success; final native result must be successful."
+      }
     },
     {
       "id": "E04",
@@ -110,6 +134,14 @@
           "archive_path": "experiments/contact-feedback/archive/",
           "scope": "Also filtered contact-derived progress; not the current E04 result."
         }
+      },
+      "agent_takeover": {
+        "status": "verified",
+        "seen": 9,
+        "unseen": 9,
+        "total": 18,
+        "analysis_path": "analysis/agent-intervention/?experiment=E04",
+        "scope_note": "Physical intervention after VLA and before first native success; final native result must be successful."
       }
     },
     {
@@ -132,6 +164,14 @@
         "implementation_commit": "19a9ea934810999428715324507021db51ec06bf",
         "instructions_file": "NO_GEOMETRY_TOOLS.md",
         "instructions_url": "https://github.com/snow-QingYang/RPent/blob/19a9ea934810999428715324507021db51ec06bf/NO_GEOMETRY_TOOLS.md"
+      },
+      "agent_takeover": {
+        "status": "verified",
+        "seen": 13,
+        "unseen": 7,
+        "total": 20,
+        "analysis_path": "analysis/agent-intervention/?experiment=E05",
+        "scope_note": "Physical intervention after VLA and before first native success; final native result must be successful."
       }
     },
     {
@@ -156,6 +196,14 @@
         "instructions_file": "EXPERIMENT.md",
         "instructions_url": "https://github.com/snow-QingYang/RPent/blob/412efe9c32e3cac630c77138da86def960968610/EXPERIMENT.md",
         "publication_changes": "Only EXPERIMENT.md display naming changed from implementation_commit; runtime code and tests unchanged."
+      },
+      "agent_takeover": {
+        "status": "final_score_proxy",
+        "seen": 10,
+        "unseen": 8,
+        "total": 18,
+        "analysis_path": "analysis/agent-intervention/?experiment=E06",
+        "scope_note": "No per-step success timeline; counts physical intervention after VLA followed by final native success. Cannot establish that success had not occurred before intervention."
       }
     },
     {
@@ -181,6 +229,14 @@
         "implementation_commit": "a640f3202d092b0803540dff35521f7996ce0945",
         "instructions_file": "EXPERIMENT.md",
         "instructions_url": "https://github.com/snow-QingYang/RPent/blob/a640f3202d092b0803540dff35521f7996ce0945/EXPERIMENT.md"
+      },
+      "agent_takeover": {
+        "status": "verified",
+        "seen": 14,
+        "unseen": 10,
+        "total": 24,
+        "analysis_path": "analysis/agent-intervention/?experiment=E07",
+        "scope_note": "Physical intervention after VLA and before first native success; final native result must be successful."
       }
     },
     {
@@ -209,6 +265,14 @@
         "publication_commit_url": "https://github.com/snow-QingYang/RPent/commit/cb24eb7c8664e46e6ca50497cc9f77e23282ebea",
         "instructions_url": "https://github.com/snow-QingYang/RPent/blob/cb24eb7c8664e46e6ca50497cc9f77e23282ebea/EXPERIMENT.md",
         "publication_changes": "Only EXPERIMENT.md changed from evaluated_code_commit to publication_commit; runtime code is unchanged."
+      },
+      "agent_takeover": {
+        "status": "verified",
+        "seen": 12,
+        "unseen": 7,
+        "total": 19,
+        "analysis_path": "analysis/agent-intervention/?experiment=E08",
+        "scope_note": "Physical intervention after VLA and before first native success; final native result must be successful."
       }
     },
     {
@@ -228,6 +292,14 @@
         "snapshot_url": "experiments/vlm-progress-native-success/downloads/vlm-progress-native-success-audit-20261113.zip",
         "analysis_url": "experiments/vlm-progress-native-success/analysis/data.json",
         "evaluation_relationship": "Frozen working tree, base commit plus recorded modifications. Production source and hashes are in the downloadable audit ZIP. Branch has not been separately published."
+      },
+      "agent_takeover": {
+        "status": "verified",
+        "seen": 6,
+        "unseen": 14,
+        "total": 20,
+        "analysis_path": "analysis/agent-intervention/?experiment=E10",
+        "scope_note": "Physical intervention after VLA and before first native success; final native result must be successful."
       }
     },
     {
@@ -364,6 +436,14 @@
       "unseen": {
         "total": 80,
         "success": 15
+      },
+      "agent_takeover": {
+        "status": "verified",
+        "seen": 13,
+        "unseen": 8,
+        "total": 21,
+        "analysis_path": "analysis/agent-intervention/?experiment=E11",
+        "scope_note": "Physical intervention after VLA and before first native success; final native result must be successful."
       }
     },
     {
@@ -450,7 +530,15 @@
         "Historical RPent skill checked current success at chunk boundaries; this rollout uses any native success within the chunk.",
         "Matching task and seed does not establish identical initial scenes.",
         "RoboCasa Counter.get_reset_regions deduplicates XML Element objects with a set; object-identity ordering may change regions and placement retries across processes even with PYTHONHASHSEED=0. No strict initial-scene equivalence is claimed."
-      ]
+      ],
+      "agent_takeover": {
+        "status": "not_applicable",
+        "seen": null,
+        "unseen": null,
+        "total": null,
+        "analysis_path": "analysis/agent-intervention/?experiment=E12",
+        "scope_note": "No Planner or manual takeover. Not applicable, rather than zero successful repairs."
+      }
     }
   ],
   "completed_experiment_count": 11,
@@ -2730,5 +2818,24 @@
       "review_requested_at": "2026-11-18"
     }
   ],
-  "under_review_experiment_count": 1
+  "under_review_experiment_count": 1,
+  "agent_takeover_analysis": {
+    "metric_id": "post_vla_physical_takeover_success_v1",
+    "path": "analysis/agent-intervention/",
+    "data_path": "analysis/agent-intervention/data.json",
+    "coverage": {
+      "planner_experiments": 10,
+      "planner_episodes": 1600,
+      "native_timeline_episodes": 1440,
+      "final_score_only_episodes": 160
+    },
+    "definition": "VLA action followed by a non-VLA physical action and final native success. With a native success timeline, only actions through the first success count; intervention before the first VLA is preparation, not takeover. E06 has final scoring only and is separately marked.",
+    "limitations": [
+      "Describes an observed path, not proof that VLA alone would fail.",
+      "VLA-only paths still include Planner scheduling.",
+      "E06 lacks a per-step success timeline and is a final-score proxy.",
+      "E09 is withheld. E12 is not applicable.",
+      "Each setting is a separate batch; initial states and VLA sampling are not fully controlled."
+    ]
+  }
 }

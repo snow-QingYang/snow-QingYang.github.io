@@ -405,3 +405,32 @@ python mobile-astra/experiments/pure-vla/extract.py \
 
 This only writes E12 artifacts. Overview, catalog and status entries are
 maintained separately. Regenerating E12 must preserve E11's complete 160/160 result.
+
+## Agent takeover statistics
+
+`analysis/agent-intervention/` adds a uniform action-path metric to the homepage,
+catalog and all displayed experiment pages: VLA is followed by a non-VLA physical
+action before first native success, and the final native score is successful.
+Preparation only before VLA, read-only queries and VLA continuation are excluded.
+Seen / Unseen / total successful takeovers:
+
+| Experiment | Seen | Unseen | Total |
+|---|---:|---:|---:|
+| E01 | 18 | 14 | 32 |
+| E02 | 12 | 10 | 22 |
+| E03 | 13 | 14 | 27 |
+| E04 | 9 | 9 | 18 |
+| E05 | 13 | 7 | 20 |
+| E06 † | 10 | 8 | 18 |
+| E07 | 14 | 10 | 24 |
+| E08 | 12 | 7 | 19 |
+| E10 | 6 | 14 | 20 |
+| E11 | 13 | 8 | 21 |
+| E12 | N/A | N/A | N/A |
+
+† E06 has final scoring only, so prior transient success cannot be excluded.
+Its values are a separately marked proxy, not confirmed pre-success intervention.
+E12 has no Planner. E09 remains withheld. This extends 1600 existing Planner
+episode records without rerunning experiments or changing their success scores.
+The metric describes observed paths, not counterfactual repair benefit.
+See the analysis README for source verification, field semantics and regeneration.
