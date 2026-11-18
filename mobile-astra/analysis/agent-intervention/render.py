@@ -2,7 +2,7 @@
 """Render takeover summaries without altering existing experiment results.
 
 Run after extract.py: python mobile-astra/analysis/agent-intervention/render.py
-Only marked summary blocks and project-status metadata are updated.
+Also applies the shared thematic reading order to overview tables.
 """
 import json
 import re
@@ -12,7 +12,11 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 SITE = HERE.parent.parent
 DATA = json.loads((HERE / 'data.json').read_text())
-EXPERIMENTS = {e['id']: e for e in DATA['experiments']}
+ORDER_CONFIG = json.loads((SITE / 'experiment-order.json').read_text())
+ORDER = [e['id'] for g in ORDER_CONFIG['groups'] for e in g['experiments']]
+ROLES = {e['id']: (g, e, i == 0) for g in ORDER_CONFIG['groups'] for i, e in enumerate(g['experiments'])}
+EXPERIMENTS = {eid: next(e for e in DATA['experiments'] if e['id'] == eid) for eid in ORDER}
+ORDER_NOTE = '按信息类别排列，每类先看移除，再看替代；实验编号沿用原记录。各组设置见说明，并非依次叠加。'
 BEGIN = '<!-- agent-takeover:start -->'
 END = '<!-- agent-takeover:end -->'
 DEFINITION = 'VLA 执行后仍未成功，Agent 再调用非 VLA 的物理动作进行修正，之后由 VLA 或解析动作完成，且本局最终环境评分成功。'
@@ -80,7 +84,7 @@ def integrate():
             row, n = re.subn(f'(<td data-label="{label}">.*?)(</td>)', lambda c: c[1] + extra + c[2], row, count=1)
             assert n == 1
         return row
-    content = re.sub(r'<tr>.*?</tr>', completed_row, content, flags=re.S)
+    content = re.sub(r'<tr\b[^>]*>.*?</tr>', completed_row, content, flags=re.S)
     intro = '<p>下表每格附加的“接管成功”为本组成功局的子集：VLA 执行未完成后，Agent 调用解析动作修正，随后任务成功。首次 VLA 前的准备和单纯续调 VLA 不计入。</p><p><a class="button" href="analysis/agent-intervention/">接管成功对照表与逐局动作证据 →</a></p>'
     content = content.replace('<div class="table-wrap stack-small">', block(intro) + '<div class="table-wrap stack-small">', 1)
     content = content.replace('</section>', block(f'<p class="note">{PROXY_NOTE} E12 无 Planner，此项不适用。</p>') + '</section>', 1)
@@ -97,7 +101,7 @@ def integrate():
         if not eid or 'data-label="结果 / 内容"' not in row:
             return row
         return re.sub(r'(<td data-label="结果 / 内容">.*?)(</td>)', lambda c: c[1] + block(metric_line(EXPERIMENTS[eid.group()], '../')) + c[2], row, count=1)
-    text = re.sub(r'<tr>.*?</tr>', catalog_row, text, flags=re.S)
+    text = re.sub(r'<tr\b[^>]*>.*?</tr>', catalog_row, text, flags=re.S)
     first_end = text.index('</section>')
     text = text[:first_end] + block(f'<p class="note">{DEFINITION} 首次 VLA 前的准备和单纯续调 VLA 不计入。{PROXY_NOTE}</p><p><a href="../analysis/agent-intervention/">全部接管统计与逐局证据 →</a></p>') + text[first_end:]
     p.write_text(text)
@@ -148,7 +152,71 @@ def analysis_page():
     (HERE / 'index.html').write_text(html)
 
 
+def organize_overviews():
+    """Keep static HTML, filters and metadata in one reviewable reading order."""
+    def ordered_table(m):
+        table = m.group(0)
+        body = re.search(r'<tbody>(.*?)</tbody>', table, re.S)
+        if not body:
+            return table
+        rows = re.findall(r'<tr\b[^>]*>.*?</tr>', body[1], re.S)
+        entries = {}
+        for row in rows:
+            first = re.search(r'<td\b[^>]*>(.*?)</td>', row, re.S)
+            eid = re.search(r'\bE\d\d\b', first[1]) if first else None
+            if not eid or eid[0] not in ORDER:
+                return table
+            assert eid[0] not in entries
+            row = re.sub(r'<small class="experiment-role">.*?</small>', '', row, flags=re.S)
+            row = re.sub(r' data-(?:study-group|group-start)="[^"]*"', '', row)
+            group, setting, starts_group = ROLES[eid[0]]
+            row = row.replace('<tr', f'<tr data-study-group="{group["key"]}" data-group-start="{str(starts_group).lower()}"', 1)
+            role = escape(group['label_zh'] + ' · ' + setting['role_zh'])
+            row = re.sub(r'(<td\b[^>]*>)', lambda c: c[1] + f'<small class="experiment-role">{role}</small>', row, count=1)
+            entries[eid[0]] = row
+        if set(entries) != set(ORDER):
+            return table
+        return table[:body.start(1)] + '\n' + '\n'.join(entries[eid] for eid in ORDER) + '\n' + table[body.end(1):]
+
+    for relative in ['index.html', 'experiments/index.html', 'analysis/agent-intervention/index.html']:
+        p = SITE / relative
+        text = p.read_text()
+        text = re.sub(r'<table\b.*?</table>', ordered_table, text, flags=re.S)
+        text = re.sub(r'<p class="experiment-order-note">.*?</p>', '', text, flags=re.S)
+        title = '<h2>接管后成功局数</h2>' if relative.startswith('analysis/') else '<h2>全部已完成实验</h2>'
+        text = text.replace(title, title + f'<p class="experiment-order-note">{ORDER_NOTE}</p>', 1)
+        if relative == 'index.html':
+            truth = re.search(r'<section id="truth-list">.*?</section>', text, re.S)
+            section = truth[0]
+            # Each setting contains a rates div and one enclosing div; the next
+            # setting or cell boundary delimits it, including the metric block.
+            pattern = r'<div class="truth-setting".*?(?=<div class="truth-setting"|</td>)'
+            def order_settings(cell):
+                value = cell[0]
+                settings = re.findall(pattern, value, re.S)
+                if not settings:
+                    return value
+                settings.sort(key=lambda s: ORDER.index(re.search(r'data-experiment="(E\d\d)"', s)[1]))
+                return re.sub(pattern, '', value, flags=re.S).replace('</td>', ''.join(settings) + '</td>')
+            section = re.sub(r'<td data-label="移除／替代方式与成功率">.*?</td>', order_settings, section, flags=re.S)
+            body = re.search(r'<tbody>(.*?)</tbody>', section, re.S)
+            rows = re.findall(r'<tr\b[^>]*>.*?</tr>', body[1], re.S)
+            rows.sort(key=lambda row: ORDER.index(re.search(r'data-experiment="(E\d\d)"', row)[1]))
+            rows = [re.sub(r'(data-label="信息类别">)\d+ · ', lambda m: m[1] + f'{i} · ', row, count=1) for i, row in enumerate(rows, 1)]
+            section = section[:body.start(1)] + '\n' + '\n'.join(rows) + '\n' + section[body.end(1):]
+            text = text[:truth.start()] + section + text[truth.end():]
+        p.write_text(text)
+
+    p = SITE / 'project-status.json'
+    status = json.loads(p.read_text())
+    status['completed_experiments'].sort(key=lambda e: ORDER.index(e['id']))
+    status['experiment_display_order'] = ORDER
+    status['experiment_order_source'] = 'experiment-order.json'
+    p.write_text(json.dumps(status, ensure_ascii=False, indent=2) + '\n')
+
+
 if __name__ == '__main__':
     integrate()
     analysis_page()
+    organize_overviews()
     print('Updated homepage, catalog, 11 experiment pages, status, and takeover analysis.')

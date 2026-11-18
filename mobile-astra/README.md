@@ -6,6 +6,17 @@ Keep this deployment entirely inside `mobile-astra/`. Do not modify or link from
 personal Home, Research, Blog, shared navigation, styles, assets or templates.
 All pages are standalone work interfaces. Public URLs are not access control.
 
+## Reading order
+
+The overview, catalog, code table, takeover analysis and local slide deck share
+[experiment-order.json](experiment-order.json). Within each information category,
+removal precedes replacement; IDs, URLs, branches and recorded results stay unchanged.
+The order is E01 → E05 → E02 → E04 → E11 → E03 → E10 → E06 → E07 → E08 → E12.
+E06 is the further removal of native completion feedback, alongside Agent judgment;
+E12 uses a separate Pure VLA protocol. This order does not imply cumulative removals.
+To regenerate overview order and takeover summaries, run
+`python mobile-astra/analysis/agent-intervention/render.py` from the site repository root.
+
 ## Completed checklist · 2026-11-18
 
 Eleven completed experiments are currently displayed: 160 valid episodes per setting, 1,760 total.
@@ -15,18 +26,15 @@ Planner. Each setting has 80 Seen and 80 Unseen episodes. E12 uses its own
 explicit native-action budget and cumulative-success protocol.
 
 - [x] [E01 · Baseline](experiments/baseline/): Seen 34/80, Unseen 21/80; **55/160**.
-- [x] [E02 · DA3 depth replacement](experiments/geometry-da3/): Seen 33/80, Unseen 17/80; **50/160**.
-- [x] [E03 · No task progress](experiments/task-progress/): Seen 24/80, Unseen 17/80; **41/160**.
-- [x] [E04 · VLA contact-feedback removal, full task progress](experiments/contact-feedback/): Seen 29/80, Unseen 15/80; **44/160**.
 - [x] [E05 · Geometry-query removal](experiments/geometry-removed/): Seen 22/80, Unseen 17/80; **39/160**.
+- [x] [E02 · DA3 depth replacement](experiments/geometry-da3/): Seen 33/80, Unseen 17/80; **50/160**.
+- [x] [E04 · VLA contact-feedback removal, full task progress](experiments/contact-feedback/): Seen 29/80, Unseen 15/80; **44/160**.
+- [x] [E11 · VLM contact and grasp feedback](experiments/vlm-contact/): Seen **28/80**, Unseen **15/80**; **43/160 (26.88%)**. Completed 2026-11-18.
+- [x] [E03 · No task progress](experiments/task-progress/): Seen 24/80, Unseen 17/80; **41/160**.
+- [x] [E10 · VLM task progress + native success](experiments/vlm-progress-native-success/): Seen 26/80, Unseen 18/80; **44/160**.
 - [x] [E06 · No task progress and agent success](experiments/agent-check-success/): Seen 18/80, Unseen 11/80; **29/160**.
 - [x] [E07 · NoMemory](experiments/no-memory/): Seen 24/80, Unseen 17/80; **41/160**.
 - [x] [E08 · Combined information removal, Planner pose coordinates provided](experiments/no-privileged-info/): Seen 27/80, Unseen 14/80; **41/160**.
-
-- [x] [E10 · VLM task progress + native success](experiments/vlm-progress-native-success/): Seen 26/80, Unseen 18/80; **44/160**.
-
-- [x] [E11 · VLM contact and grasp feedback](experiments/vlm-contact/): Seen **28/80**, Unseen **15/80**; **43/160 (26.88%)**. Completed 2026-11-18.
-
 - [x] [E12 · Pure VLA](experiments/pure-vla/): Seen **19/80**, Unseen **6/80**; **25/160 (15.625%)**. Completed 2026-11-14, published 2026-11-18.
 
 The displayed 1,760-episode total excludes E09, the auxiliary Sol run and interrupted smoke runs.
@@ -70,16 +78,16 @@ Repository: [https://github.com/snow-QingYang/RPent](https://github.com/snow-Qin
 | Experiment | Branch | Immutable commit | Instructions |
 | --- | --- | --- | --- |
 | E01 · Baseline | [baseline_composite](https://github.com/snow-QingYang/RPent/tree/baseline_composite) | [eebdfcd7](https://github.com/snow-QingYang/RPent/commit/eebdfcd79b6f292003093be5dd1ce8fe639a4f82) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/eebdfcd79b6f292003093be5dd1ce8fe639a4f82/EXPERIMENT.md) |
-| E02 · DA3 深度替代 | [da3](https://github.com/snow-QingYang/RPent/tree/da3) | [bc35d937](https://github.com/snow-QingYang/RPent/commit/bc35d93728e3678404b63f9cc78e5e98764dbbb7) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/bc35d93728e3678404b63f9cc78e5e98764dbbb7/EXPERIMENT.md) |
-| E03 · No task progress | [no_task_progress](https://github.com/snow-QingYang/RPent/tree/no_task_progress) | [b7333814](https://github.com/snow-QingYang/RPent/commit/b7333814fcb1178442057b231e267d4dcfba4554) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/b7333814fcb1178442057b231e267d4dcfba4554/EXPERIMENT.md) |
-| E04 · 接触反馈移除，完整进度 | [no_contact_gt](https://github.com/snow-QingYang/RPent/tree/no_contact_gt) | [092d8b8d](https://github.com/snow-QingYang/RPent/commit/092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804/NO_CONTACT_GT.md) |
 | E05 · 几何查询移除 | [no_geometry_tools](https://github.com/snow-QingYang/RPent/tree/no_geometry_tools) | [19a9ea93](https://github.com/snow-QingYang/RPent/commit/19a9ea934810999428715324507021db51ec06bf) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/19a9ea934810999428715324507021db51ec06bf/NO_GEOMETRY_TOOLS.md) |
+| E02 · DA3 深度替代 | [da3](https://github.com/snow-QingYang/RPent/tree/da3) | [bc35d937](https://github.com/snow-QingYang/RPent/commit/bc35d93728e3678404b63f9cc78e5e98764dbbb7) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/bc35d93728e3678404b63f9cc78e5e98764dbbb7/EXPERIMENT.md) |
+| E04 · 接触反馈移除，完整进度 | [no_contact_gt](https://github.com/snow-QingYang/RPent/tree/no_contact_gt) | [092d8b8d](https://github.com/snow-QingYang/RPent/commit/092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804/NO_CONTACT_GT.md) |
+| E11 · VLM contact feedback | [vlm_contact_feedback](https://github.com/snow-QingYang/RPent/tree/vlm_contact_feedback) | [97cb19bd](https://github.com/snow-QingYang/RPent/commit/97cb19bd55399777d9868bf44378d0c226abd64e) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/97cb19bd55399777d9868bf44378d0c226abd64e/EXPERIMENT_VLM_CONTACT.md) |
+| E03 · No task progress | [no_task_progress](https://github.com/snow-QingYang/RPent/tree/no_task_progress) | [b7333814](https://github.com/snow-QingYang/RPent/commit/b7333814fcb1178442057b231e267d4dcfba4554) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/b7333814fcb1178442057b231e267d4dcfba4554/EXPERIMENT.md) |
 | E06 · No task progress and agent success | [no_task_progress_and_agent_success](https://github.com/snow-QingYang/RPent/tree/no_task_progress_and_agent_success) | [412efe9c](https://github.com/snow-QingYang/RPent/commit/412efe9c32e3cac630c77138da86def960968610) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/412efe9c32e3cac630c77138da86def960968610/EXPERIMENT.md) |
 | E07 · NoMemory | [no_memory](https://github.com/snow-QingYang/RPent/tree/no_memory) | [a640f320](https://github.com/snow-QingYang/RPent/commit/a640f3202d092b0803540dff35521f7996ce0945) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/a640f3202d092b0803540dff35521f7996ce0945/EXPERIMENT.md) |
 | E08 · Combined removal · Planner pose provided | [no_privileged_info_with_planner_pose](https://github.com/snow-QingYang/RPent/tree/no_privileged_info_with_planner_pose) | [5e612e91](https://github.com/snow-QingYang/RPent/commit/5e612e916c011bcc76431efd1775040f86563fef) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/cb24eb7c8664e46e6ca50497cc9f77e23282ebea/EXPERIMENT.md) |
-| E09 · Result withheld pending review | [no_privileged_info_no_planner_pose](https://github.com/snow-QingYang/RPent/tree/no_privileged_info_no_planner_pose) | [f2d62d21](https://github.com/snow-QingYang/RPent/commit/f2d62d21104f412b5e020931d11d7054b6ef3818) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/f2d62d21104f412b5e020931d11d7054b6ef3818/EXPERIMENT.md) |
-| E11 · VLM contact feedback | [vlm_contact_feedback](https://github.com/snow-QingYang/RPent/tree/vlm_contact_feedback) | [97cb19bd](https://github.com/snow-QingYang/RPent/commit/97cb19bd55399777d9868bf44378d0c226abd64e) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/97cb19bd55399777d9868bf44378d0c226abd64e/EXPERIMENT_VLM_CONTACT.md) |
 | E12 · Pure VLA | [pure_vla base](https://github.com/snow-QingYang/RPent/tree/pure_vla) | [e2ec1c0c base](https://github.com/snow-QingYang/RPent/commit/e2ec1c0cc971b970031284fc816b60b6e8d55322) plus frozen source files | [Protocol and evaluated source](experiments/pure-vla/#protocol) |
+| E09 · Result withheld pending review | [no_privileged_info_no_planner_pose](https://github.com/snow-QingYang/RPent/tree/no_privileged_info_no_planner_pose) | [f2d62d21](https://github.com/snow-QingYang/RPent/commit/f2d62d21104f412b5e020931d11d7054b6ef3818) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/f2d62d21104f412b5e020931d11d7054b6ef3818/EXPERIMENT.md) |
 
 E03 immutable commit `b7333814` is the evaluated snapshot: all 350 archived tracked
 runtime, test, requirements and pyproject files match. All 160 episodes generated
@@ -417,15 +425,15 @@ Seen / Unseen / total successful takeovers:
 | Experiment | Seen | Unseen | Total |
 |---|---:|---:|---:|
 | E01 | 18 | 14 | 32 |
-| E02 | 12 | 10 | 22 |
-| E03 | 13 | 14 | 27 |
-| E04 | 9 | 9 | 18 |
 | E05 | 13 | 7 | 20 |
+| E02 | 12 | 10 | 22 |
+| E04 | 9 | 9 | 18 |
+| E11 | 13 | 8 | 21 |
+| E03 | 13 | 14 | 27 |
+| E10 | 6 | 14 | 20 |
 | E06 † | 10 | 8 | 18 |
 | E07 | 14 | 10 | 24 |
 | E08 | 12 | 7 | 19 |
-| E10 | 6 | 14 | 20 |
-| E11 | 13 | 8 | 21 |
 | E12 | N/A | N/A | N/A |
 
 † E06 has final scoring only, so prior transient success cannot be excluded.

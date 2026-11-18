@@ -1,0 +1,31 @@
+{
+  "description": "Group by information source, showing removal before replacement. Experiment IDs remain stable; this is a reading order, not a sequence of cumulative interventions.",
+  "groups": [
+    {"key": "baseline", "label_zh": "Baseline", "label_en": "Baseline", "experiments": [
+      {"id": "E01", "role_zh": "参照", "role_en": "Reference"}
+    ]},
+    {"key": "geometry", "label_zh": "几何", "label_en": "Geometry", "experiments": [
+      {"id": "E05", "role_zh": "移除", "role_en": "Removal"},
+      {"id": "E02", "role_zh": "DA3 替代", "role_en": "DA3 replacement"}
+    ]},
+    {"key": "contact", "label_zh": "接触与抓持", "label_en": "Contact", "experiments": [
+      {"id": "E04", "role_zh": "移除", "role_en": "Removal"},
+      {"id": "E11", "role_zh": "VLM 替代", "role_en": "VLM replacement"}
+    ]},
+    {"key": "progress", "label_zh": "进度与完成判定", "label_en": "Progress and completion", "experiments": [
+      {"id": "E03", "role_zh": "移除进度", "role_en": "Progress removal"},
+      {"id": "E10", "role_zh": "VLM 替代进度", "role_en": "VLM progress replacement"},
+      {"id": "E06", "role_zh": "进一步移除成功反馈 · Agent 判断完成", "role_en": "Further remove native success; Agent completion"}
+    ]},
+    {"key": "memory", "label_zh": "历史 memory", "label_en": "Historical memory", "experiments": [
+      {"id": "E07", "role_zh": "移除", "role_en": "Removal"}
+    ]},
+    {"key": "combined", "label_zh": "组合移除", "label_en": "Combined removal", "experiments": [
+      {"id": "E08", "role_zh": "移除五项信息 · 保留位姿", "role_en": "Five removals; pose retained"}
+    ]},
+    {"key": "pure_vla", "label_zh": "Pure VLA", "label_en": "Pure VLA", "experiments": [
+      {"id": "E12", "role_zh": "独立协议参照", "role_en": "Separate evaluation protocol"}
+    ]}
+  ],
+  "withheld": ["E09"]
+}

@@ -91,3 +91,5 @@ python mobile-astra/analysis/agent-intervention/render.py
 The public export contains selected action names, counts, step indices and hashes.
 It does not copy raw model messages, task text, images, memory, tool arguments or
 local machine paths.
+
+Presentation order follows `../../experiment-order.json`: baseline; geometry removal / DA3; contact removal / VLM; progress removal / VLM / Agent completion; memory removal; combined removal; Pure VLA. The renderer and browser apply this order without changing the frozen episode export or its hashes. Experiment IDs remain stable.

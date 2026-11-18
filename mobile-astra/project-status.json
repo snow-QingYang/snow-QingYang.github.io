@@ -32,6 +32,36 @@
       }
     },
     {
+      "id": "E05",
+      "path": "experiments/geometry-removed/",
+      "status": "complete",
+      "total": 160,
+      "success": 39,
+      "source": {
+        "id": "E05",
+        "experiment_path": "experiments/geometry-removed/",
+        "name": "几何查询移除",
+        "branch": "no_geometry_tools",
+        "commit": "19a9ea934810999428715324507021db51ec06bf",
+        "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_geometry_tools",
+        "commit_url": "https://github.com/snow-QingYang/RPent/commit/19a9ea934810999428715324507021db51ec06bf",
+        "status": "published",
+        "evaluation_relationship": "Experiment implementation; detailed analysis retains the runtime source-file and result hashes.",
+        "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+        "implementation_commit": "19a9ea934810999428715324507021db51ec06bf",
+        "instructions_file": "NO_GEOMETRY_TOOLS.md",
+        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/19a9ea934810999428715324507021db51ec06bf/NO_GEOMETRY_TOOLS.md"
+      },
+      "agent_takeover": {
+        "status": "verified",
+        "seen": 13,
+        "unseen": 7,
+        "total": 20,
+        "analysis_path": "analysis/agent-intervention/?experiment=E05",
+        "scope_note": "Physical intervention after VLA and before first native success; final native result must be successful."
+      }
+    },
+    {
       "id": "E02",
       "path": "experiments/geometry-da3/",
       "status": "complete",
@@ -58,50 +88,6 @@
         "unseen": 10,
         "total": 22,
         "analysis_path": "analysis/agent-intervention/?experiment=E02",
-        "scope_note": "Physical intervention after VLA and before first native success; final native result must be successful."
-      }
-    },
-    {
-      "id": "E03",
-      "path": "experiments/task-progress/",
-      "status": "complete",
-      "total": 160,
-      "success": 41,
-      "source": {
-        "id": "E03",
-        "experiment_path": "experiments/task-progress/",
-        "name": "No task progress",
-        "branch": "no_task_progress",
-        "commit": "b7333814fcb1178442057b231e267d4dcfba4554",
-        "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_task_progress",
-        "commit_url": "https://github.com/snow-QingYang/RPent/commit/b7333814fcb1178442057b231e267d4dcfba4554",
-        "status": "published",
-        "evaluation_relationship": "The immutable commit is the evaluated snapshot: all 350 tracked runtime/test/requirements/pyproject files match the archived run manifest. All 160 episodes generated success_criteria.md; the restricted file tool did not expose it. The no_task_progress branch also contains a later variant that stops generating this file.",
-        "later_variant": {
-          "branch": "no_task_progress",
-          "commit": "26d8665d3d394dc77ce90a68d266d370d2384f98",
-          "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_task_progress",
-          "commit_url": "https://github.com/snow-QingYang/RPent/commit/26d8665d3d394dc77ce90a68d266d370d2384f98",
-          "note": "Later variant: stops generating success_criteria.md. Not used for the published 160-episode E03 run.",
-          "implementation_commit": "26d8665d3d394dc77ce90a68d266d370d2384f98",
-          "instructions_file": "EXPERIMENT.md",
-          "instructions_url": "https://github.com/snow-QingYang/RPent/blob/26d8665d3d394dc77ce90a68d266d370d2384f98/EXPERIMENT.md"
-        },
-        "runtime_source_files_checked": 350,
-        "runtime_source_files_matching": 350,
-        "runtime_base_commit": "0e406bb96d670d0c18a4cea9a6ea047119661d19",
-        "implementation_commit": "b7333814fcb1178442057b231e267d4dcfba4554",
-        "evaluated_code_commit": "b7333814fcb1178442057b231e267d4dcfba4554",
-        "instructions_file": "EXPERIMENT.md",
-        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/b7333814fcb1178442057b231e267d4dcfba4554/EXPERIMENT.md"
-      },
-      "name": "No task progress",
-      "agent_takeover": {
-        "status": "verified",
-        "seen": 13,
-        "unseen": 14,
-        "total": 27,
-        "analysis_path": "analysis/agent-intervention/?experiment=E03",
         "scope_note": "Physical intervention after VLA and before first native success; final native result must be successful."
       }
     },
@@ -141,164 +127,6 @@
         "unseen": 9,
         "total": 18,
         "analysis_path": "analysis/agent-intervention/?experiment=E04",
-        "scope_note": "Physical intervention after VLA and before first native success; final native result must be successful."
-      }
-    },
-    {
-      "id": "E05",
-      "path": "experiments/geometry-removed/",
-      "status": "complete",
-      "total": 160,
-      "success": 39,
-      "source": {
-        "id": "E05",
-        "experiment_path": "experiments/geometry-removed/",
-        "name": "几何查询移除",
-        "branch": "no_geometry_tools",
-        "commit": "19a9ea934810999428715324507021db51ec06bf",
-        "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_geometry_tools",
-        "commit_url": "https://github.com/snow-QingYang/RPent/commit/19a9ea934810999428715324507021db51ec06bf",
-        "status": "published",
-        "evaluation_relationship": "Experiment implementation; detailed analysis retains the runtime source-file and result hashes.",
-        "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
-        "implementation_commit": "19a9ea934810999428715324507021db51ec06bf",
-        "instructions_file": "NO_GEOMETRY_TOOLS.md",
-        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/19a9ea934810999428715324507021db51ec06bf/NO_GEOMETRY_TOOLS.md"
-      },
-      "agent_takeover": {
-        "status": "verified",
-        "seen": 13,
-        "unseen": 7,
-        "total": 20,
-        "analysis_path": "analysis/agent-intervention/?experiment=E05",
-        "scope_note": "Physical intervention after VLA and before first native success; final native result must be successful."
-      }
-    },
-    {
-      "id": "E06",
-      "name": "No task progress and agent success",
-      "path": "experiments/agent-check-success/",
-      "status": "complete",
-      "total": 160,
-      "success": 29,
-      "source": {
-        "id": "E06",
-        "experiment_path": "experiments/agent-check-success/",
-        "name": "No task progress and agent success",
-        "branch": "no_task_progress_and_agent_success",
-        "commit": "412efe9c32e3cac630c77138da86def960968610",
-        "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_task_progress_and_agent_success",
-        "commit_url": "https://github.com/snow-QingYang/RPent/commit/412efe9c32e3cac630c77138da86def960968610",
-        "status": "published",
-        "evaluation_relationship": "Experiment implementation; detailed analysis retains the runtime source-file and result hashes.",
-        "runtime_base_commit": "26d8665d3d394dc77ce90a68d266d370d2384f98",
-        "implementation_commit": "65f7e1b85eba219c28ccb75f94740d75071fca34",
-        "instructions_file": "EXPERIMENT.md",
-        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/412efe9c32e3cac630c77138da86def960968610/EXPERIMENT.md",
-        "publication_changes": "Only EXPERIMENT.md display naming changed from implementation_commit; runtime code and tests unchanged."
-      },
-      "agent_takeover": {
-        "status": "final_score_proxy",
-        "seen": 10,
-        "unseen": 8,
-        "total": 18,
-        "analysis_path": "analysis/agent-intervention/?experiment=E06",
-        "scope_note": "No per-step success timeline; counts physical intervention after VLA followed by final native success. Cannot establish that success had not occurred before intervention."
-      }
-    },
-    {
-      "id": "E07",
-      "name": "NoMemory",
-      "path": "experiments/no-memory/",
-      "status": "complete",
-      "total": 160,
-      "success": 41,
-      "source": {
-        "id": "E07",
-        "experiment_path": "experiments/no-memory/",
-        "name": "NoMemory",
-        "branch": "no_memory",
-        "commit": "a640f3202d092b0803540dff35521f7996ce0945",
-        "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_memory",
-        "commit_url": "https://github.com/snow-QingYang/RPent/commit/a640f3202d092b0803540dff35521f7996ce0945",
-        "status": "published",
-        "evaluation_relationship": "The three modified production files and all ten recorded runtime source-file hashes match the evaluated run. Added tests and experiment documentation do not alter runtime source hashes.",
-        "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
-        "runtime_source_files_checked": 10,
-        "runtime_source_files_matching": 10,
-        "implementation_commit": "a640f3202d092b0803540dff35521f7996ce0945",
-        "instructions_file": "EXPERIMENT.md",
-        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/a640f3202d092b0803540dff35521f7996ce0945/EXPERIMENT.md"
-      },
-      "agent_takeover": {
-        "status": "verified",
-        "seen": 14,
-        "unseen": 10,
-        "total": 24,
-        "analysis_path": "analysis/agent-intervention/?experiment=E07",
-        "scope_note": "Physical intervention after VLA and before first native success; final native result must be successful."
-      }
-    },
-    {
-      "id": "E08",
-      "name": "移除几何查询、memory、任务进度、接触提示与评分源码访问",
-      "path": "experiments/no-privileged-info/",
-      "status": "complete",
-      "total": 160,
-      "success": 41,
-      "source": {
-        "id": "E08",
-        "experiment_path": "experiments/no-privileged-info/",
-        "name": "移除几何查询、memory、任务进度、接触提示与评分源码访问",
-        "branch": "no_privileged_info_with_planner_pose",
-        "commit": "5e612e916c011bcc76431efd1775040f86563fef",
-        "status": "published",
-        "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
-        "evaluation_relationship": "Evaluated commit; all 109 recorded runtime/manifest hashes unchanged. The published branch adds only the EXPERIMENT.md rename clarifying that Planner pose coordinates are provided.",
-        "runtime_source_files_checked": 109,
-        "runtime_source_files_matching": 109,
-        "instructions_file": "EXPERIMENT.md",
-        "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_privileged_info_with_planner_pose",
-        "commit_url": "https://github.com/snow-QingYang/RPent/commit/5e612e916c011bcc76431efd1775040f86563fef",
-        "evaluated_code_commit": "5e612e916c011bcc76431efd1775040f86563fef",
-        "publication_commit": "cb24eb7c8664e46e6ca50497cc9f77e23282ebea",
-        "publication_commit_url": "https://github.com/snow-QingYang/RPent/commit/cb24eb7c8664e46e6ca50497cc9f77e23282ebea",
-        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/cb24eb7c8664e46e6ca50497cc9f77e23282ebea/EXPERIMENT.md",
-        "publication_changes": "Only EXPERIMENT.md changed from evaluated_code_commit to publication_commit; runtime code is unchanged."
-      },
-      "agent_takeover": {
-        "status": "verified",
-        "seen": 12,
-        "unseen": 7,
-        "total": 19,
-        "analysis_path": "analysis/agent-intervention/?experiment=E08",
-        "scope_note": "Physical intervention after VLA and before first native success; final native result must be successful."
-      }
-    },
-    {
-      "id": "E10",
-      "path": "experiments/vlm-progress-native-success/",
-      "status": "complete",
-      "total": 160,
-      "success": 44,
-      "source": {
-        "id": "E10",
-        "experiment_path": "experiments/vlm-progress-native-success/",
-        "name": "VLM 任务进度 + 原生成功",
-        "branch": "vlm_progress_native_success",
-        "status": "snapshot_available",
-        "runtime_base_commit": "fee5dfacb939ee1ca09220710d4586da9e5a5a41",
-        "evaluated_working_tree": true,
-        "snapshot_url": "experiments/vlm-progress-native-success/downloads/vlm-progress-native-success-audit-20261113.zip",
-        "analysis_url": "experiments/vlm-progress-native-success/analysis/data.json",
-        "evaluation_relationship": "Frozen working tree, base commit plus recorded modifications. Production source and hashes are in the downloadable audit ZIP. Branch has not been separately published."
-      },
-      "agent_takeover": {
-        "status": "verified",
-        "seen": 6,
-        "unseen": 14,
-        "total": 20,
-        "analysis_path": "analysis/agent-intervention/?experiment=E10",
         "scope_note": "Physical intervention after VLA and before first native success; final native result must be successful."
       }
     },
@@ -443,6 +271,178 @@
         "unseen": 8,
         "total": 21,
         "analysis_path": "analysis/agent-intervention/?experiment=E11",
+        "scope_note": "Physical intervention after VLA and before first native success; final native result must be successful."
+      }
+    },
+    {
+      "id": "E03",
+      "path": "experiments/task-progress/",
+      "status": "complete",
+      "total": 160,
+      "success": 41,
+      "source": {
+        "id": "E03",
+        "experiment_path": "experiments/task-progress/",
+        "name": "No task progress",
+        "branch": "no_task_progress",
+        "commit": "b7333814fcb1178442057b231e267d4dcfba4554",
+        "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_task_progress",
+        "commit_url": "https://github.com/snow-QingYang/RPent/commit/b7333814fcb1178442057b231e267d4dcfba4554",
+        "status": "published",
+        "evaluation_relationship": "The immutable commit is the evaluated snapshot: all 350 tracked runtime/test/requirements/pyproject files match the archived run manifest. All 160 episodes generated success_criteria.md; the restricted file tool did not expose it. The no_task_progress branch also contains a later variant that stops generating this file.",
+        "later_variant": {
+          "branch": "no_task_progress",
+          "commit": "26d8665d3d394dc77ce90a68d266d370d2384f98",
+          "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_task_progress",
+          "commit_url": "https://github.com/snow-QingYang/RPent/commit/26d8665d3d394dc77ce90a68d266d370d2384f98",
+          "note": "Later variant: stops generating success_criteria.md. Not used for the published 160-episode E03 run.",
+          "implementation_commit": "26d8665d3d394dc77ce90a68d266d370d2384f98",
+          "instructions_file": "EXPERIMENT.md",
+          "instructions_url": "https://github.com/snow-QingYang/RPent/blob/26d8665d3d394dc77ce90a68d266d370d2384f98/EXPERIMENT.md"
+        },
+        "runtime_source_files_checked": 350,
+        "runtime_source_files_matching": 350,
+        "runtime_base_commit": "0e406bb96d670d0c18a4cea9a6ea047119661d19",
+        "implementation_commit": "b7333814fcb1178442057b231e267d4dcfba4554",
+        "evaluated_code_commit": "b7333814fcb1178442057b231e267d4dcfba4554",
+        "instructions_file": "EXPERIMENT.md",
+        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/b7333814fcb1178442057b231e267d4dcfba4554/EXPERIMENT.md"
+      },
+      "name": "No task progress",
+      "agent_takeover": {
+        "status": "verified",
+        "seen": 13,
+        "unseen": 14,
+        "total": 27,
+        "analysis_path": "analysis/agent-intervention/?experiment=E03",
+        "scope_note": "Physical intervention after VLA and before first native success; final native result must be successful."
+      }
+    },
+    {
+      "id": "E10",
+      "path": "experiments/vlm-progress-native-success/",
+      "status": "complete",
+      "total": 160,
+      "success": 44,
+      "source": {
+        "id": "E10",
+        "experiment_path": "experiments/vlm-progress-native-success/",
+        "name": "VLM 任务进度 + 原生成功",
+        "branch": "vlm_progress_native_success",
+        "status": "snapshot_available",
+        "runtime_base_commit": "fee5dfacb939ee1ca09220710d4586da9e5a5a41",
+        "evaluated_working_tree": true,
+        "snapshot_url": "experiments/vlm-progress-native-success/downloads/vlm-progress-native-success-audit-20261113.zip",
+        "analysis_url": "experiments/vlm-progress-native-success/analysis/data.json",
+        "evaluation_relationship": "Frozen working tree, base commit plus recorded modifications. Production source and hashes are in the downloadable audit ZIP. Branch has not been separately published."
+      },
+      "agent_takeover": {
+        "status": "verified",
+        "seen": 6,
+        "unseen": 14,
+        "total": 20,
+        "analysis_path": "analysis/agent-intervention/?experiment=E10",
+        "scope_note": "Physical intervention after VLA and before first native success; final native result must be successful."
+      }
+    },
+    {
+      "id": "E06",
+      "name": "No task progress and agent success",
+      "path": "experiments/agent-check-success/",
+      "status": "complete",
+      "total": 160,
+      "success": 29,
+      "source": {
+        "id": "E06",
+        "experiment_path": "experiments/agent-check-success/",
+        "name": "No task progress and agent success",
+        "branch": "no_task_progress_and_agent_success",
+        "commit": "412efe9c32e3cac630c77138da86def960968610",
+        "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_task_progress_and_agent_success",
+        "commit_url": "https://github.com/snow-QingYang/RPent/commit/412efe9c32e3cac630c77138da86def960968610",
+        "status": "published",
+        "evaluation_relationship": "Experiment implementation; detailed analysis retains the runtime source-file and result hashes.",
+        "runtime_base_commit": "26d8665d3d394dc77ce90a68d266d370d2384f98",
+        "implementation_commit": "65f7e1b85eba219c28ccb75f94740d75071fca34",
+        "instructions_file": "EXPERIMENT.md",
+        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/412efe9c32e3cac630c77138da86def960968610/EXPERIMENT.md",
+        "publication_changes": "Only EXPERIMENT.md display naming changed from implementation_commit; runtime code and tests unchanged."
+      },
+      "agent_takeover": {
+        "status": "final_score_proxy",
+        "seen": 10,
+        "unseen": 8,
+        "total": 18,
+        "analysis_path": "analysis/agent-intervention/?experiment=E06",
+        "scope_note": "No per-step success timeline; counts physical intervention after VLA followed by final native success. Cannot establish that success had not occurred before intervention."
+      }
+    },
+    {
+      "id": "E07",
+      "name": "NoMemory",
+      "path": "experiments/no-memory/",
+      "status": "complete",
+      "total": 160,
+      "success": 41,
+      "source": {
+        "id": "E07",
+        "experiment_path": "experiments/no-memory/",
+        "name": "NoMemory",
+        "branch": "no_memory",
+        "commit": "a640f3202d092b0803540dff35521f7996ce0945",
+        "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_memory",
+        "commit_url": "https://github.com/snow-QingYang/RPent/commit/a640f3202d092b0803540dff35521f7996ce0945",
+        "status": "published",
+        "evaluation_relationship": "The three modified production files and all ten recorded runtime source-file hashes match the evaluated run. Added tests and experiment documentation do not alter runtime source hashes.",
+        "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+        "runtime_source_files_checked": 10,
+        "runtime_source_files_matching": 10,
+        "implementation_commit": "a640f3202d092b0803540dff35521f7996ce0945",
+        "instructions_file": "EXPERIMENT.md",
+        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/a640f3202d092b0803540dff35521f7996ce0945/EXPERIMENT.md"
+      },
+      "agent_takeover": {
+        "status": "verified",
+        "seen": 14,
+        "unseen": 10,
+        "total": 24,
+        "analysis_path": "analysis/agent-intervention/?experiment=E07",
+        "scope_note": "Physical intervention after VLA and before first native success; final native result must be successful."
+      }
+    },
+    {
+      "id": "E08",
+      "name": "移除几何查询、memory、任务进度、接触提示与评分源码访问",
+      "path": "experiments/no-privileged-info/",
+      "status": "complete",
+      "total": 160,
+      "success": 41,
+      "source": {
+        "id": "E08",
+        "experiment_path": "experiments/no-privileged-info/",
+        "name": "移除几何查询、memory、任务进度、接触提示与评分源码访问",
+        "branch": "no_privileged_info_with_planner_pose",
+        "commit": "5e612e916c011bcc76431efd1775040f86563fef",
+        "status": "published",
+        "runtime_base_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+        "evaluation_relationship": "Evaluated commit; all 109 recorded runtime/manifest hashes unchanged. The published branch adds only the EXPERIMENT.md rename clarifying that Planner pose coordinates are provided.",
+        "runtime_source_files_checked": 109,
+        "runtime_source_files_matching": 109,
+        "instructions_file": "EXPERIMENT.md",
+        "branch_url": "https://github.com/snow-QingYang/RPent/tree/no_privileged_info_with_planner_pose",
+        "commit_url": "https://github.com/snow-QingYang/RPent/commit/5e612e916c011bcc76431efd1775040f86563fef",
+        "evaluated_code_commit": "5e612e916c011bcc76431efd1775040f86563fef",
+        "publication_commit": "cb24eb7c8664e46e6ca50497cc9f77e23282ebea",
+        "publication_commit_url": "https://github.com/snow-QingYang/RPent/commit/cb24eb7c8664e46e6ca50497cc9f77e23282ebea",
+        "instructions_url": "https://github.com/snow-QingYang/RPent/blob/cb24eb7c8664e46e6ca50497cc9f77e23282ebea/EXPERIMENT.md",
+        "publication_changes": "Only EXPERIMENT.md changed from evaluated_code_commit to publication_commit; runtime code is unchanged."
+      },
+      "agent_takeover": {
+        "status": "verified",
+        "seen": 12,
+        "unseen": 7,
+        "total": 19,
+        "analysis_path": "analysis/agent-intervention/?experiment=E08",
         "scope_note": "Physical intervention after VLA and before first native success; final native result must be successful."
       }
     },
@@ -2837,5 +2837,19 @@
       "E09 is withheld. E12 is not applicable.",
       "Each setting is a separate batch; initial states and VLA sampling are not fully controlled."
     ]
-  }
+  },
+  "experiment_display_order": [
+    "E01",
+    "E05",
+    "E02",
+    "E04",
+    "E11",
+    "E03",
+    "E10",
+    "E06",
+    "E07",
+    "E08",
+    "E12"
+  ],
+  "experiment_order_source": "experiment-order.json"
 }

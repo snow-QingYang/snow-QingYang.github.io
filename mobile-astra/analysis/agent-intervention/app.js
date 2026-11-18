@@ -115,7 +115,8 @@ fetch('data.json').then(response => {
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   return response.json();
 }).then(data => {
-  allRows = data.experiments.flatMap(e => e.episodes);
+  const rank = new Map([...controls.experiment.options].map((option, index) => [option.value, index]));
+  allRows = [...data.experiments].sort((a, b) => rank.get(a.id) - rank.get(b.id)).flatMap(e => e.episodes);
   render();
 }).catch(() => {
   document.getElementById('filter-count').textContent = '逐局数据加载失败。请刷新，或下载 CSV 查看；上方汇总表不受影响。';
