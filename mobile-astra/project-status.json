@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-17",
+  "as_of": "2026-11-18",
   "completed_experiments": [
     {
       "id": "E01",
@@ -263,10 +263,96 @@
         "analysis_url": "experiments/vlm-progress-native-success/analysis/data.json",
         "evaluation_relationship": "Frozen working tree, base commit plus recorded modifications. Production source and hashes are in the downloadable audit ZIP. Branch has not been separately published."
       }
+    },
+    {
+      "id": "E12",
+      "name": "Pure VLA",
+      "path": "experiments/pure-vla/",
+      "status": "complete",
+      "total": 160,
+      "success": 25,
+      "success_rate_percent": 15.625,
+      "source": {
+        "id": "E12",
+        "experiment_path": "experiments/pure-vla/",
+        "name": "Pure VLA / no Planner",
+        "branch": "pure_vla",
+        "branch_url": "https://github.com/snow-QingYang/RPent/tree/pure_vla",
+        "status": "snapshot_available",
+        "evaluation_status": "complete",
+        "runtime_base_commit": "e2ec1c0cc971b970031284fc816b60b6e8d55322",
+        "runtime_base_commit_url": "https://github.com/snow-QingYang/RPent/commit/e2ec1c0cc971b970031284fc816b60b6e8d55322",
+        "evaluation_relationship": "Base commit plus frozen local source files and manifest; the branch alone is not the evaluated snapshot.",
+        "snapshot_path": "experiments/pure-vla/source/",
+        "manifest_path": "experiments/pure-vla/manifest.json",
+        "data_path": "experiments/pure-vla/data.json",
+        "source_file_sha256": {
+          "pure_vla.py": "4ef32c4cdb6d0b5aa4cd3253b87e77720237c383fee9066dba4d118397a8cc64",
+          "run_pure_vla_suite.py": "c18022f844cb2766e911d80e02d0352848ff739c48b62c74f6264cbc328114a2",
+          "summarize_pure_vla.py": "410a2c513d40e6b5ebc961f950bd01b290989fe8b2338d559613b7b5fbe09618"
+        },
+        "protocol_sha256": "acfb0276fd47a5f2b75720639745acd49334fe11d7d548dbb3b5ec4375ee4c53",
+        "instructions_url": "https://snow-qingyang.github.io/mobile-astra/experiments/pure-vla/#protocol"
+      },
+      "summary": {
+        "seen": {
+          "planned": 80,
+          "completed": 80,
+          "pending": 0,
+          "success": 19,
+          "failure": 61,
+          "success_rate_percent": 23.75,
+          "final_state_success": 19,
+          "final_state_success_rate_percent": 23.75,
+          "baseline_success": 34,
+          "native_steps": 169452,
+          "policy_calls": 21197,
+          "elapsed_s": 18484.31
+        },
+        "unseen": {
+          "planned": 80,
+          "completed": 80,
+          "pending": 0,
+          "success": 6,
+          "failure": 74,
+          "success_rate_percent": 7.5,
+          "final_state_success": 5,
+          "final_state_success_rate_percent": 6.25,
+          "baseline_success": 21,
+          "native_steps": 200180,
+          "policy_calls": 25052,
+          "elapsed_s": 22255.026
+        },
+        "all": {
+          "planned": 160,
+          "completed": 160,
+          "pending": 0,
+          "success": 25,
+          "failure": 135,
+          "success_rate_percent": 15.625,
+          "final_state_success": 24,
+          "final_state_success_rate_percent": 15.0,
+          "baseline_success": 55,
+          "native_steps": 369632,
+          "policy_calls": 46249,
+          "elapsed_s": 40739.336
+        }
+      },
+      "completed_at": "2026-11-14T04:28:50+08:00",
+      "published_at": "2026-11-18",
+      "data_path": "experiments/pure-vla/data.json",
+      "scoring": "any_success",
+      "planner": null,
+      "comparison_limits": [
+        "Historical HarnessVLA used a Planner turn limit rather than these task horizons.",
+        "Historical RPent skill checked current success at chunk boundaries; this rollout uses any native success within the chunk.",
+        "Matching task and seed does not establish identical initial scenes.",
+        "RoboCasa Counter.get_reset_regions deduplicates XML Element objects with a set; object-identity ordering may change regions and placement retries across processes even with PYTHONHASHSEED=0. No strict initial-scene equivalence is claimed."
+      ]
     }
   ],
-  "completed_experiment_count": 10,
-  "completed_valid_episodes": 1600,
+  "completed_experiment_count": 11,
+  "completed_valid_episodes": 1760,
   "baseline": {
     "name": "GPT-6-Astra",
     "model": "gpt-6-astra",
@@ -903,86 +989,93 @@
     "E08 combines geometry-query, historical-memory, progress and contact-feedback removal and blocks scoring-source access. Native success, robot proprioception and controls remain; internal depth/world maps and camera metadata remain saved. It is not an all-ground-truth-free or OS-isolated system.",
     "E08 provides EEF/base pose coordinates to the Planner; E09 withholds them and additional motion, gripper-width, held_apart and execution feedback. Both retain VLA/controller proprioception, native simulator success and native-success early stopping. The 41 versus 27 comparison does not isolate coordinates alone.",
     "E10 uses VLM intermediate progress and retains native success and VLA early stop. Only this 160-episode batch is added, with comparisons to the existing E01 and E03 results.",
-    "E11 is partial: 143/160 valid episodes, 41 successes (28 Seen / 13 Unseen). Pending episodes are excluded from the rate denominator. References use the same completed cells; the ten completed experiments and their 1,600-episode total are unchanged."
+    "E11 is partial: 143/160 valid episodes, 41 successes (28 Seen / 13 Unseen). Pending episodes are excluded from the rate denominator. References use the same completed cells; the ten completed experiments and their 1,600-episode total are unchanged.",
+    "E12 is a separate no-Planner pure-VLA baseline: 25/160 by any_success. It differs from E01 in native-action budgets, initialization and success aggregation; it is not a controlled single-variable Planner ablation."
   ],
   "latest_result": {
-    "id": "E11",
-    "name": "VLM 接触与抓持反馈",
-    "path": "experiments/vlm-contact/",
-    "status": "partial",
-    "snapshot_at": "2026-11-17T22:42:53+08:00",
-    "planned_total": 160,
-    "completed_valid_episodes": 143,
-    "remaining_episodes": 17,
-    "success": 41,
-    "success_rate_percent": 28.67,
+    "id": "E12",
+    "name": "Pure VLA",
+    "path": "experiments/pure-vla/",
+    "status": "complete",
+    "total": 160,
+    "success": 25,
+    "success_rate_percent": 15.625,
+    "source": {
+      "id": "E12",
+      "experiment_path": "experiments/pure-vla/",
+      "name": "Pure VLA / no Planner",
+      "branch": "pure_vla",
+      "branch_url": "https://github.com/snow-QingYang/RPent/tree/pure_vla",
+      "status": "snapshot_available",
+      "evaluation_status": "complete",
+      "runtime_base_commit": "e2ec1c0cc971b970031284fc816b60b6e8d55322",
+      "runtime_base_commit_url": "https://github.com/snow-QingYang/RPent/commit/e2ec1c0cc971b970031284fc816b60b6e8d55322",
+      "evaluation_relationship": "Base commit plus frozen local source files and manifest; the branch alone is not the evaluated snapshot.",
+      "snapshot_path": "experiments/pure-vla/source/",
+      "manifest_path": "experiments/pure-vla/manifest.json",
+      "data_path": "experiments/pure-vla/data.json",
+      "source_file_sha256": {
+        "pure_vla.py": "4ef32c4cdb6d0b5aa4cd3253b87e77720237c383fee9066dba4d118397a8cc64",
+        "run_pure_vla_suite.py": "c18022f844cb2766e911d80e02d0352848ff739c48b62c74f6264cbc328114a2",
+        "summarize_pure_vla.py": "410a2c513d40e6b5ebc961f950bd01b290989fe8b2338d559613b7b5fbe09618"
+      },
+      "protocol_sha256": "acfb0276fd47a5f2b75720639745acd49334fe11d7d548dbb3b5ec4375ee4c53",
+      "instructions_url": "https://snow-qingyang.github.io/mobile-astra/experiments/pure-vla/#protocol"
+    },
     "summary": {
       "seen": {
         "planned": 80,
         "completed": 80,
         "pending": 0,
-        "success": 28,
-        "success_rate_percent": 35.0,
-        "matched_baseline_success": 34,
-        "matched_no_contact_success": 29
+        "success": 19,
+        "failure": 61,
+        "success_rate_percent": 23.75,
+        "final_state_success": 19,
+        "final_state_success_rate_percent": 23.75,
+        "baseline_success": 34,
+        "native_steps": 169452,
+        "policy_calls": 21197,
+        "elapsed_s": 18484.31
       },
       "unseen": {
         "planned": 80,
-        "completed": 63,
-        "pending": 17,
-        "success": 13,
-        "success_rate_percent": 20.63,
-        "matched_baseline_success": 17,
-        "matched_no_contact_success": 12
+        "completed": 80,
+        "pending": 0,
+        "success": 6,
+        "failure": 74,
+        "success_rate_percent": 7.5,
+        "final_state_success": 5,
+        "final_state_success_rate_percent": 6.25,
+        "baseline_success": 21,
+        "native_steps": 200180,
+        "policy_calls": 25052,
+        "elapsed_s": 22255.026
       },
       "all": {
         "planned": 160,
-        "completed": 143,
-        "pending": 17,
-        "success": 41,
-        "success_rate_percent": 28.67,
-        "matched_baseline_success": 51,
-        "matched_no_contact_success": 41
+        "completed": 160,
+        "pending": 0,
+        "success": 25,
+        "failure": 135,
+        "success_rate_percent": 15.625,
+        "final_state_success": 24,
+        "final_state_success_rate_percent": 15.0,
+        "baseline_success": 55,
+        "native_steps": 369632,
+        "policy_calls": 46249,
+        "elapsed_s": 40739.336
       }
     },
-    "source": {
-      "id": "E11",
-      "experiment_path": "experiments/vlm-contact/",
-      "name": "VLM 接触与抓持反馈",
-      "branch": "vlm_contact_feedback",
-      "commit": "97cb19bd55399777d9868bf44378d0c226abd64e",
-      "branch_url": "https://github.com/snow-QingYang/RPent/tree/vlm_contact_feedback",
-      "commit_url": "https://github.com/snow-QingYang/RPent/commit/97cb19bd55399777d9868bf44378d0c226abd64e",
-      "status": "published",
-      "evaluation_status": "partial",
-      "runtime_base_commit": "092d8b8d344a7a0b2f8b6d5dd3bfae6a81342804",
-      "evaluated_commits": [
-        "ab24d50809b6c860c69f118bf4d20bacfb2cb2a6",
-        "97cb19bd55399777d9868bf44378d0c226abd64e"
-      ],
-      "evaluation_relationship": "Partial snapshot. Adds RGB grasp feedback on corrected E04 with full task_progress. Earlier ab24d508 and 97cb19bd (transient-request retries) are recorded per episode. Model, images, prompt and scoring protocol are unchanged by the retry fix.",
-      "instructions_file": "EXPERIMENT_VLM_CONTACT.md",
-      "instructions_url": "https://github.com/snow-QingYang/RPent/blob/97cb19bd55399777d9868bf44378d0c226abd64e/EXPERIMENT_VLM_CONTACT.md"
-    },
-    "run": "composite_vlm_contact_astra_xhigh_20261115T162926Z",
-    "analysis_path": "experiments/vlm-contact/",
-    "data_path": "experiments/vlm-contact/data.json",
-    "success_rate_denominator": "valid completed episodes only",
-    "retained": [
-      "full native task_progress",
-      "native success and early stopping",
-      "geometry queries",
-      "memory",
-      "robot pose",
-      "gripper width",
-      "held_apart",
-      "success-criteria source access"
-    ],
-    "replaced": [
-      "grasp_contact",
-      "grasped",
-      "grasp_detected",
-      "grasp_obj"
+    "completed_at": "2026-11-14T04:28:50+08:00",
+    "published_at": "2026-11-18",
+    "data_path": "experiments/pure-vla/data.json",
+    "scoring": "any_success",
+    "planner": null,
+    "comparison_limits": [
+      "Historical HarnessVLA used a Planner turn limit rather than these task horizons.",
+      "Historical RPent skill checked current success at chunk boundaries; this rollout uses any native success within the chunk.",
+      "Matching task and seed does not establish identical initial scenes.",
+      "RoboCasa Counter.get_reset_regions deduplicates XML Element objects with a set; object-identity ordering may change regions and placement retries across processes even with PYTHONHASHSEED=0. No strict initial-scene equivalence is claimed."
     ]
   },
   "agent_check_success": {
@@ -1237,7 +1330,7 @@
   },
   "source_publication": {
     "schema_version": 1,
-    "as_of": "2026-11-17",
+    "as_of": "2026-11-18",
     "repository": "https://github.com/snow-QingYang/RPent",
     "note": "Published source revisions are separate from runtime result, source-file and artifact hashes. Branches may advance; evaluated commit links are immutable. E08 publication commit only renames the experiment documentation; its evaluated runtime commit is unchanged.",
     "experiments": {
@@ -1439,11 +1532,33 @@
         "evaluation_relationship": "Partial snapshot. Adds RGB grasp feedback on corrected E04 with full task_progress. Earlier ab24d508 and 97cb19bd (transient-request retries) are recorded per episode. Model, images, prompt and scoring protocol are unchanged by the retry fix.",
         "instructions_file": "EXPERIMENT_VLM_CONTACT.md",
         "instructions_url": "https://github.com/snow-QingYang/RPent/blob/97cb19bd55399777d9868bf44378d0c226abd64e/EXPERIMENT_VLM_CONTACT.md"
+      },
+      "E12": {
+        "id": "E12",
+        "experiment_path": "experiments/pure-vla/",
+        "name": "Pure VLA / no Planner",
+        "branch": "pure_vla",
+        "branch_url": "https://github.com/snow-QingYang/RPent/tree/pure_vla",
+        "status": "snapshot_available",
+        "evaluation_status": "complete",
+        "runtime_base_commit": "e2ec1c0cc971b970031284fc816b60b6e8d55322",
+        "runtime_base_commit_url": "https://github.com/snow-QingYang/RPent/commit/e2ec1c0cc971b970031284fc816b60b6e8d55322",
+        "evaluation_relationship": "Base commit plus frozen local source files and manifest; the branch alone is not the evaluated snapshot.",
+        "snapshot_path": "experiments/pure-vla/source/",
+        "manifest_path": "experiments/pure-vla/manifest.json",
+        "data_path": "experiments/pure-vla/data.json",
+        "source_file_sha256": {
+          "pure_vla.py": "4ef32c4cdb6d0b5aa4cd3253b87e77720237c383fee9066dba4d118397a8cc64",
+          "run_pure_vla_suite.py": "c18022f844cb2766e911d80e02d0352848ff739c48b62c74f6264cbc328114a2",
+          "summarize_pure_vla.py": "410a2c513d40e6b5ebc961f950bd01b290989fe8b2338d559613b7b5fbe09618"
+        },
+        "protocol_sha256": "acfb0276fd47a5f2b75720639745acd49334fe11d7d548dbb3b5ec4375ee4c53",
+        "instructions_url": "https://snow-qingyang.github.io/mobile-astra/experiments/pure-vla/#protocol"
       }
     },
     "published_experiment_count": 10,
-    "published_branch_count": 10,
-    "tracked_experiment_count": 11
+    "published_branch_count": 11,
+    "tracked_experiment_count": 12
   },
   "no_privileged_info": {
     "status": "complete",
@@ -2051,14 +2166,90 @@
     "analysis_path": "experiments/vlm-progress-native-success/analysis/"
   },
   "latest_completed_result": {
-    "id": "E04",
-    "name": "VLA 接触反馈移除，完整任务进度",
-    "path": "experiments/contact-feedback/",
-    "analysis_path": "experiments/contact-feedback/analysis/",
-    "completed_at": "2026-11-14T10:58:09+08:00",
+    "id": "E12",
+    "name": "Pure VLA",
+    "path": "experiments/pure-vla/",
+    "status": "complete",
     "total": 160,
-    "success": 44,
-    "success_rate_percent": 27.5
+    "success": 25,
+    "success_rate_percent": 15.625,
+    "source": {
+      "id": "E12",
+      "experiment_path": "experiments/pure-vla/",
+      "name": "Pure VLA / no Planner",
+      "branch": "pure_vla",
+      "branch_url": "https://github.com/snow-QingYang/RPent/tree/pure_vla",
+      "status": "snapshot_available",
+      "evaluation_status": "complete",
+      "runtime_base_commit": "e2ec1c0cc971b970031284fc816b60b6e8d55322",
+      "runtime_base_commit_url": "https://github.com/snow-QingYang/RPent/commit/e2ec1c0cc971b970031284fc816b60b6e8d55322",
+      "evaluation_relationship": "Base commit plus frozen local source files and manifest; the branch alone is not the evaluated snapshot.",
+      "snapshot_path": "experiments/pure-vla/source/",
+      "manifest_path": "experiments/pure-vla/manifest.json",
+      "data_path": "experiments/pure-vla/data.json",
+      "source_file_sha256": {
+        "pure_vla.py": "4ef32c4cdb6d0b5aa4cd3253b87e77720237c383fee9066dba4d118397a8cc64",
+        "run_pure_vla_suite.py": "c18022f844cb2766e911d80e02d0352848ff739c48b62c74f6264cbc328114a2",
+        "summarize_pure_vla.py": "410a2c513d40e6b5ebc961f950bd01b290989fe8b2338d559613b7b5fbe09618"
+      },
+      "protocol_sha256": "acfb0276fd47a5f2b75720639745acd49334fe11d7d548dbb3b5ec4375ee4c53",
+      "instructions_url": "https://snow-qingyang.github.io/mobile-astra/experiments/pure-vla/#protocol"
+    },
+    "summary": {
+      "seen": {
+        "planned": 80,
+        "completed": 80,
+        "pending": 0,
+        "success": 19,
+        "failure": 61,
+        "success_rate_percent": 23.75,
+        "final_state_success": 19,
+        "final_state_success_rate_percent": 23.75,
+        "baseline_success": 34,
+        "native_steps": 169452,
+        "policy_calls": 21197,
+        "elapsed_s": 18484.31
+      },
+      "unseen": {
+        "planned": 80,
+        "completed": 80,
+        "pending": 0,
+        "success": 6,
+        "failure": 74,
+        "success_rate_percent": 7.5,
+        "final_state_success": 5,
+        "final_state_success_rate_percent": 6.25,
+        "baseline_success": 21,
+        "native_steps": 200180,
+        "policy_calls": 25052,
+        "elapsed_s": 22255.026
+      },
+      "all": {
+        "planned": 160,
+        "completed": 160,
+        "pending": 0,
+        "success": 25,
+        "failure": 135,
+        "success_rate_percent": 15.625,
+        "final_state_success": 24,
+        "final_state_success_rate_percent": 15.0,
+        "baseline_success": 55,
+        "native_steps": 369632,
+        "policy_calls": 46249,
+        "elapsed_s": 40739.336
+      }
+    },
+    "completed_at": "2026-11-14T04:28:50+08:00",
+    "published_at": "2026-11-18",
+    "data_path": "experiments/pure-vla/data.json",
+    "scoring": "any_success",
+    "planner": null,
+    "comparison_limits": [
+      "Historical HarnessVLA used a Planner turn limit rather than these task horizons.",
+      "Historical RPent skill checked current success at chunk boundaries; this rollout uses any native success within the chunk.",
+      "Matching task and seed does not establish identical initial scenes.",
+      "RoboCasa Counter.get_reset_regions deduplicates XML Element objects with a set; object-identity ordering may change regions and placement retries across processes even with PYTHONHASHSEED=0. No strict initial-scene equivalence is claimed."
+    ]
   },
   "partial_experiments": [
     {
@@ -2222,6 +2413,92 @@
       "grasped",
       "grasp_detected",
       "grasp_obj"
+    ]
+  },
+  "pure_vla": {
+    "id": "E12",
+    "name": "Pure VLA",
+    "path": "experiments/pure-vla/",
+    "status": "complete",
+    "total": 160,
+    "success": 25,
+    "success_rate_percent": 15.625,
+    "source": {
+      "id": "E12",
+      "experiment_path": "experiments/pure-vla/",
+      "name": "Pure VLA / no Planner",
+      "branch": "pure_vla",
+      "branch_url": "https://github.com/snow-QingYang/RPent/tree/pure_vla",
+      "status": "snapshot_available",
+      "evaluation_status": "complete",
+      "runtime_base_commit": "e2ec1c0cc971b970031284fc816b60b6e8d55322",
+      "runtime_base_commit_url": "https://github.com/snow-QingYang/RPent/commit/e2ec1c0cc971b970031284fc816b60b6e8d55322",
+      "evaluation_relationship": "Base commit plus frozen local source files and manifest; the branch alone is not the evaluated snapshot.",
+      "snapshot_path": "experiments/pure-vla/source/",
+      "manifest_path": "experiments/pure-vla/manifest.json",
+      "data_path": "experiments/pure-vla/data.json",
+      "source_file_sha256": {
+        "pure_vla.py": "4ef32c4cdb6d0b5aa4cd3253b87e77720237c383fee9066dba4d118397a8cc64",
+        "run_pure_vla_suite.py": "c18022f844cb2766e911d80e02d0352848ff739c48b62c74f6264cbc328114a2",
+        "summarize_pure_vla.py": "410a2c513d40e6b5ebc961f950bd01b290989fe8b2338d559613b7b5fbe09618"
+      },
+      "protocol_sha256": "acfb0276fd47a5f2b75720639745acd49334fe11d7d548dbb3b5ec4375ee4c53",
+      "instructions_url": "https://snow-qingyang.github.io/mobile-astra/experiments/pure-vla/#protocol"
+    },
+    "summary": {
+      "seen": {
+        "planned": 80,
+        "completed": 80,
+        "pending": 0,
+        "success": 19,
+        "failure": 61,
+        "success_rate_percent": 23.75,
+        "final_state_success": 19,
+        "final_state_success_rate_percent": 23.75,
+        "baseline_success": 34,
+        "native_steps": 169452,
+        "policy_calls": 21197,
+        "elapsed_s": 18484.31
+      },
+      "unseen": {
+        "planned": 80,
+        "completed": 80,
+        "pending": 0,
+        "success": 6,
+        "failure": 74,
+        "success_rate_percent": 7.5,
+        "final_state_success": 5,
+        "final_state_success_rate_percent": 6.25,
+        "baseline_success": 21,
+        "native_steps": 200180,
+        "policy_calls": 25052,
+        "elapsed_s": 22255.026
+      },
+      "all": {
+        "planned": 160,
+        "completed": 160,
+        "pending": 0,
+        "success": 25,
+        "failure": 135,
+        "success_rate_percent": 15.625,
+        "final_state_success": 24,
+        "final_state_success_rate_percent": 15.0,
+        "baseline_success": 55,
+        "native_steps": 369632,
+        "policy_calls": 46249,
+        "elapsed_s": 40739.336
+      }
+    },
+    "completed_at": "2026-11-14T04:28:50+08:00",
+    "published_at": "2026-11-18",
+    "data_path": "experiments/pure-vla/data.json",
+    "scoring": "any_success",
+    "planner": null,
+    "comparison_limits": [
+      "Historical HarnessVLA used a Planner turn limit rather than these task horizons.",
+      "Historical RPent skill checked current success at chunk boundaries; this rollout uses any native success within the chunk.",
+      "Matching task and seed does not establish identical initial scenes.",
+      "RoboCasa Counter.get_reset_regions deduplicates XML Element objects with a set; object-identity ordering may change regions and placement retries across processes even with PYTHONHASHSEED=0. No strict initial-scene equivalence is claimed."
     ]
   }
 }

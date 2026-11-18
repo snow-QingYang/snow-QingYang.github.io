@@ -6,10 +6,12 @@ Keep this deployment entirely inside `mobile-astra/`. Do not modify or link from
 personal Home, Research, Blog, shared navigation, styles, assets or templates.
 All pages are standalone work interfaces. Public URLs are not access control.
 
-## Completed checklist · 2026-11-14
+## Completed checklist · 2026-11-18
 
-Ten primary GPT-6-Astra / xhigh experiments are complete: 160 valid episodes
-per setting, 1,600 total. Each setting has 80 Seen and 80 Unseen episodes.
+Eleven experiments are complete: 160 valid episodes per setting, 1,760 total.
+E01–E10 use GPT-6-Astra / xhigh; E12 is a separate pure-VLA baseline with no
+Planner. Each setting has 80 Seen and 80 Unseen episodes. E12 uses its own
+explicit native-action budget and cumulative-success protocol.
 
 - [x] [E01 · Baseline](experiments/baseline/): Seen 34/80, Unseen 21/80; **55/160**.
 - [x] [E02 · DA3 depth replacement](experiments/geometry-da3/): Seen 33/80, Unseen 17/80; **50/160**.
@@ -23,7 +25,9 @@ per setting, 1,600 total. Each setting has 80 Seen and 80 Unseen episodes.
 
 - [x] [E10 · VLM task progress + native success](experiments/vlm-progress-native-success/): Seen 26/80, Unseen 18/80; **44/160**.
 
-The 1,600-episode total excludes the auxiliary Sol run and interrupted smoke runs.
+- [x] [E12 · Pure VLA](experiments/pure-vla/): Seen **19/80**, Unseen **6/80**; **25/160 (15.625%)**. Completed 2026-11-14, published 2026-11-18.
+
+The 1,760-episode total excludes the auxiliary Sol run and interrupted smoke runs.
 E05 removes the two active geometry-query tools; internal depth and other feedback
 remain. E06 completes removal of live task-progress/success/termination feedback
 and VLA native-success early stopping; the evaluator keeps independent final
@@ -37,8 +41,8 @@ Both retain VLA/controller proprioception and native-success early stopping.
 
 - [ ] [E11 · VLM contact and grasp feedback](experiments/vlm-contact/): **143/160 evaluated**,
   Seen **28/80**, Unseen **13/63**; **41/143 (28.67%)**. The remaining 17 cells
-  are pending, not failures. This snapshot is separate from the ten completed
-  settings and their 1,600 valid episodes.
+  are pending, not failures. This snapshot is separate from the eleven completed
+  settings and their 1,760 valid episodes.
 
 E11 replaces four explicit VLA grasp/contact fields with RGB-only estimates from
 GPT-6.1-Terra / medium. Full native task_progress (including contact-derived
@@ -68,6 +72,7 @@ Repository: [https://github.com/snow-QingYang/RPent](https://github.com/snow-Qin
 | E08 · Combined removal · Planner pose provided | [no_privileged_info_with_planner_pose](https://github.com/snow-QingYang/RPent/tree/no_privileged_info_with_planner_pose) | [5e612e91](https://github.com/snow-QingYang/RPent/commit/5e612e916c011bcc76431efd1775040f86563fef) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/cb24eb7c8664e46e6ca50497cc9f77e23282ebea/EXPERIMENT.md) |
 | E09 · Combined removal · Planner pose withheld | [no_privileged_info_no_planner_pose](https://github.com/snow-QingYang/RPent/tree/no_privileged_info_no_planner_pose) | [f2d62d21](https://github.com/snow-QingYang/RPent/commit/f2d62d21104f412b5e020931d11d7054b6ef3818) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/f2d62d21104f412b5e020931d11d7054b6ef3818/EXPERIMENT.md) |
 | E11 · VLM contact feedback · Partial results | [vlm_contact_feedback](https://github.com/snow-QingYang/RPent/tree/vlm_contact_feedback) | [97cb19bd](https://github.com/snow-QingYang/RPent/commit/97cb19bd55399777d9868bf44378d0c226abd64e) | [Run instructions](https://github.com/snow-QingYang/RPent/blob/97cb19bd55399777d9868bf44378d0c226abd64e/EXPERIMENT_VLM_CONTACT.md) |
+| E12 · Pure VLA | [pure_vla base](https://github.com/snow-QingYang/RPent/tree/pure_vla) | [e2ec1c0c base](https://github.com/snow-QingYang/RPent/commit/e2ec1c0cc971b970031284fc816b60b6e8d55322) plus frozen source files | [Protocol and evaluated source](experiments/pure-vla/#protocol) |
 
 E03 immutable commit `b7333814` is the evaluated snapshot: all 350 archived tracked
 runtime, test, requirements and pyproject files match. All 160 episodes generated
@@ -75,7 +80,7 @@ runtime, test, requirements and pyproject files match. All 160 episodes generate
 
 The later variant [no_task_progress](https://github.com/snow-QingYang/RPent/tree/no_task_progress), commit [26d8665d3d394dc77ce90a68d266d370d2384f98](https://github.com/snow-QingYang/RPent/commit/26d8665d3d394dc77ce90a68d266d370d2384f98), also stops generating that file. It was not used for the published E03 result.
 
-E01–E09 and E11 have ten published branch links; E11 is still a partial result. E08's evaluated
+E01–E09, E11 and the E12 base have eleven published branch links; E11 is still a partial result. E08's evaluated
 commit remains [5e612e91](https://github.com/snow-QingYang/RPent/commit/5e612e916c011bcc76431efd1775040f86563fef); publication commit
 [cb24eb7c](https://github.com/snow-QingYang/RPent/commit/cb24eb7c8664e46e6ca50497cc9f77e23282ebea) changes only `EXPERIMENT.md` to clarify
 that Planner pose coordinates are provided. Its runtime implementation is unchanged.
@@ -312,9 +317,9 @@ compatibility pages. It uses the existing detailed exports and the original loca
 smoke audit. Its assertions intentionally require review if source results change.
 Canonical detailed exports live under their experiment's `analysis/` directory.
 The legacy overview generator predates E06–E10. Do not use it to regenerate the
-current overview or project-status.json until it supports E06–E11 and partial results: it would restore
+current overview or project-status.json until it supports E06–E12 and partial results: it would restore
 the older five-group checklist and drop the newer entries. After adding that support,
-verify the ten-completed-group, 1,600-episode total and separate E11 partial entry whenever rebuilding a detailed export
+verify the eleven-completed-group, 1,760-episode total and separate E11 partial entry whenever rebuilding a detailed export
 and the overview. The E03, E04 and E05 detailed HTML and JS
 use the same table/filter layout as E02; check their displayed summaries against the
 new export when changing source runs.
@@ -367,7 +372,7 @@ against E03. This update publishes only the native-success E10 batch.
 
 E10 source is a frozen working tree based on `fee5dfac` plus recorded changes.
 The branch has not been separately published. `source-publication.json` tracks
-11 experiments and 10 published branches; E10 has `snapshot_available` status. E11 adds a tenth published branch and is tracked separately as partial; there are eleven tracked settings.
+12 experiments and 11 published branch links; E10 and E12 have `snapshot_available` status. E12 includes frozen evaluated source files and a manifest; its branch is the base, not the complete evaluated snapshot. E11 remains tracked separately as partial.
 Do not label the base commit as the evaluated implementation or link to a nonexistent
 published branch. Keep the 9 pre-existing experiment entries and their artifacts intact.
 
@@ -377,6 +382,30 @@ The current E04 extractor reads the completed dynamic controller state and the
 original run manifest separately. The original three-GPU manifest was superseded
 by dynamic scheduling; do not infer incompletion from that historical marker.
 Never regenerate current E04 from the old filtered-progress source or old case builder.
-The completed experiment count remains ten and its valid-episode total remains
-1,600. E11 is tracked separately as a partial result; the historical E04 archive
+The completed experiment count is eleven and its valid-episode total is
+1,760. E11 is tracked separately as a partial result; the historical E04 archive
 is not an additional experiment.
+
+## E12 · Pure VLA publication
+
+`experiments/pure-vla/` follows the E11 standalone layout: final split scores,
+settings, scoring, a descriptive E01 reference, all 32 tasks × seeds 1–5, CSV,
+JSON, the frozen manifest and three runtime source files. `extract.py` reuses
+the run's frozen validator and checks all 160 environment seed protocols.
+
+The definitive result is **25/160 (15.625%)**, including MakeIceLemonade seed1.
+Success is latched within an action chunk and stopping occurs at its boundary.
+The final-state field is diagnostic only and does not change that score.
+The actual checkpoint has `use_memory=false` and RTC disabled; video history
+`[-6,-4,-2,0]` is preserved. Comparisons with E01 must retain the differences in
+action budgets, initialization and success aggregation.
+
+Regenerate from the original run archive using:
+
+```bash
+python mobile-astra/experiments/pure-vla/extract.py \
+  --run /path/to/pure_vla_official_32x5 --published-at 2026-11-18
+```
+
+This only writes E12 artifacts. Overview, catalog and status entries are
+maintained separately. E11 remains the unchanged 143/160 partial snapshot.

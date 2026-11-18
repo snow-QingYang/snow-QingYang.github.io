@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "as_of": "2026-11-17",
+  "as_of": "2026-11-18",
   "repository": "https://github.com/snow-QingYang/RPent",
   "note": "Published source revisions are separate from runtime result, source-file and artifact hashes. Branches may advance; evaluated commit links are immutable. E08 publication commit only renames the experiment documentation; its evaluated runtime commit is unchanged.",
   "experiments": {
@@ -202,9 +202,31 @@
       "evaluation_relationship": "Partial snapshot. Adds RGB grasp feedback on corrected E04 with full task_progress. Earlier ab24d508 and 97cb19bd (transient-request retries) are recorded per episode. Model, images, prompt and scoring protocol are unchanged by the retry fix.",
       "instructions_file": "EXPERIMENT_VLM_CONTACT.md",
       "instructions_url": "https://github.com/snow-QingYang/RPent/blob/97cb19bd55399777d9868bf44378d0c226abd64e/EXPERIMENT_VLM_CONTACT.md"
+    },
+    "E12": {
+      "id": "E12",
+      "experiment_path": "experiments/pure-vla/",
+      "name": "Pure VLA / no Planner",
+      "branch": "pure_vla",
+      "branch_url": "https://github.com/snow-QingYang/RPent/tree/pure_vla",
+      "status": "snapshot_available",
+      "evaluation_status": "complete",
+      "runtime_base_commit": "e2ec1c0cc971b970031284fc816b60b6e8d55322",
+      "runtime_base_commit_url": "https://github.com/snow-QingYang/RPent/commit/e2ec1c0cc971b970031284fc816b60b6e8d55322",
+      "evaluation_relationship": "Base commit plus frozen local source files and manifest; the branch alone is not the evaluated snapshot.",
+      "snapshot_path": "experiments/pure-vla/source/",
+      "manifest_path": "experiments/pure-vla/manifest.json",
+      "data_path": "experiments/pure-vla/data.json",
+      "source_file_sha256": {
+        "pure_vla.py": "4ef32c4cdb6d0b5aa4cd3253b87e77720237c383fee9066dba4d118397a8cc64",
+        "run_pure_vla_suite.py": "c18022f844cb2766e911d80e02d0352848ff739c48b62c74f6264cbc328114a2",
+        "summarize_pure_vla.py": "410a2c513d40e6b5ebc961f950bd01b290989fe8b2338d559613b7b5fbe09618"
+      },
+      "protocol_sha256": "acfb0276fd47a5f2b75720639745acd49334fe11d7d548dbb3b5ec4375ee4c53",
+      "instructions_url": "https://snow-qingyang.github.io/mobile-astra/experiments/pure-vla/#protocol"
     }
   },
   "published_experiment_count": 10,
-  "published_branch_count": 10,
-  "tracked_experiment_count": 11
+  "published_branch_count": 11,
+  "tracked_experiment_count": 12
 }

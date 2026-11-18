@@ -1,0 +1,51 @@
+{
+  "complete": true,
+  "errors": [],
+  "experiment_id": "pure_vla",
+  "overall": {
+    "any_success": 25,
+    "any_success_rate": 0.15625,
+    "elapsed_s": 40739.336,
+    "expected": 160,
+    "failure": 135,
+    "final_state_success": 24,
+    "final_state_success_rate": 0.15,
+    "native_steps": 369632,
+    "policy_calls": 46249,
+    "transient_success": 1,
+    "valid": 160
+  },
+  "protocol_sha256": "acfb0276fd47a5f2b75720639745acd49334fe11d7d548dbb3b5ec4375ee4c53",
+  "splits": {
+    "composite_seen": {
+      "any_success": 19,
+      "any_success_rate": 0.2375,
+      "elapsed_s": 18484.31,
+      "expected": 80,
+      "failure": 61,
+      "final_state_success": 19,
+      "final_state_success_rate": 0.2375,
+      "missing": [],
+      "native_steps": 169452,
+      "policy_calls": 21197,
+      "rejected": [],
+      "transient_success": 0,
+      "valid": 80
+    },
+    "composite_unseen": {
+      "any_success": 6,
+      "any_success_rate": 0.075,
+      "elapsed_s": 22255.026,
+      "expected": 80,
+      "failure": 74,
+      "final_state_success": 5,
+      "final_state_success_rate": 0.0625,
+      "missing": [],
+      "native_steps": 200180,
+      "policy_calls": 25052,
+      "rejected": [],
+      "transient_success": 1,
+      "valid": 80
+    }
+  }
+}
